@@ -13,7 +13,13 @@ link_directories( ${GTKMM_LIBRARY_DIRS}  )
 
 include_directories( ${GTKMM_INCLUDE_DIRS}  )
 
-set(SOURCE_FILES main.cpp)
-add_executable(Megaman ${SOURCE_FILES})
+set(SOURCE_FILES editor/main.cpp)
+add_executable(Editor ${SOURCE_FILES})
 
-target_link_libraries(Megaman ${GTKMM_LIBRARIES} )
+set(SOURCE_FILES client/main.cpp)
+add_executable(Client ${SOURCE_FILES})
+
+set(SOURCE_FILES server/main.cpp)
+add_executable(server ${SOURCE_FILES})
+
+target_link_libraries(Editor ${GTKMM_LIBRARIES} )
