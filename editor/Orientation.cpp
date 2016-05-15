@@ -49,6 +49,12 @@ Orientation::Orientation(string orient) {
     }
 }
 
+string Orientation::getOrientation() {
+    return orientation;
+}
+
+
+
 
 
 

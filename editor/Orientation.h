@@ -18,7 +18,7 @@ public:
     Orientation();
     Orientation(string orientation);
     void rotate(string direction);
-    string getOrientation() {return orientation;}
+    string getOrientation();
 private:
     string orientation;
     map<string, vector<string> > rotations;

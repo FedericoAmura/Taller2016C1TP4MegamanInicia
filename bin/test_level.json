@@ -1,0 +1,15 @@
+{
+	"length":50,
+	"width":15,
+	"background":"false background",
+	"entities":[
+		{"x":1,
+		"y":2,
+		"id":3004,
+		"orientation":"up"},
+		{"x":3,
+		"y":5,
+		"id":2002,
+		"orientation":"up"}
+		]
+}

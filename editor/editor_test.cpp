@@ -9,6 +9,9 @@
 #include "../entities.h"
 
 #define SMALL 50
+#define BACKGROUND "false background"
+#define NO_INDENT 0
+#define INDENT 1
 
 using std::string;
 using std::cout;
@@ -49,12 +52,21 @@ void orientationTest(){
 
 void levelTest(){
     printTitle("Level Test");
-    Level level = Level(SMALL);
+    Level level = Level(SMALL, BACKGROUND);
     printTest("Adds entity", level.addEntity(0, 0, SPIKE));
     printTest("Removes entity", level.removeEntity(0,0));
+}
+
+void jsonTest(){
+    printTitle("JSON Test");
+    Level level = Level(SMALL, BACKGROUND);
+    level.addEntity(3, 5, SPARKMAN);
+    level.addEntity(1, 2, LADDER);
+    level.writeJsonFile("test_level.json");
 }
 
 int main(){
     orientationTest();
     levelTest();
+    jsonTest();
 }
