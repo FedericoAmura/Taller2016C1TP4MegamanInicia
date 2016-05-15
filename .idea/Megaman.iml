@@ -6,7 +6,14 @@
       <sourceFolder url="file://$MODULE_DIR$/server/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/entities.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/editor/editor_test.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/editor/Orientation.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/editor/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/editor/Entity.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/editor/Level.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/editor/Orientation.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/editor/Level.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/editor/Entity.cpp" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">

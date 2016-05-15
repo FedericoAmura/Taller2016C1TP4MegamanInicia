@@ -16,7 +16,7 @@ link_directories( ${GTKMM_LIBRARY_DIRS}  )
 include_directories( ${GTKMM_INCLUDE_DIRS}  )
 
 #Dependencias, agregar archivos en el ejecutable pertinente solamente
-set(SOURCE_FILES editor/main.cpp entities.h)
+set(SOURCE_FILES editor/main.cpp entities.h editor/Level.cpp editor/Level.h editor/Entity.cpp editor/Entity.h editor/Orientation.cpp editor/Orientation.h)
 add_executable(editor ${SOURCE_FILES})
 
 set(SOURCE_FILES client/main.cpp)
@@ -25,5 +25,8 @@ add_executable(client ${SOURCE_FILES})
 set(SOURCE_FILES server/main.cpp)
 add_executable(server ${SOURCE_FILES})
 
-#fin de la magia
+set(SOURCE_FILES editor/editor_test.cpp editor/Orientation.cpp editor/Orientation.h editor/Entity.cpp editor/Entity.h editor/Level.h editor/Level.cpp)
+add_executable(editor_test ${SOURCE_FILES})
+
+#linkeos
 target_link_libraries(editor ${GTKMM_LIBRARIES} )
