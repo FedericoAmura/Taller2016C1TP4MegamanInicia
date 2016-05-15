@@ -15,6 +15,7 @@ typedef unsigned int uint;
 class Level {
 public:
     Level(unsigned int length, string background_name);
+    ~Level();
     bool addEntity(uint x, uint y, size_t id, string orientation = "up");
     bool removeEntity(uint x, uint y);
     void writeJsonFile(string file_name);

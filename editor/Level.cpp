@@ -4,6 +4,7 @@
 
 #include <sstream>
 #include <fstream>
+#include <iostream>
 #include "Level.h"
 
 #define WIDTH 15
@@ -24,7 +25,7 @@ Level::Level(unsigned int length, string background_name)
 }
 
 bool Level::isEmpty(unsigned int x, unsigned int y) {
-    return entities[x][y] == NULL;
+    return entities[x][y] == 0;
 }
 
 bool Level::addEntity(uint x, uint y, size_t id, string orientation) {
@@ -75,6 +76,20 @@ void Level::writeJsonFile(string file_name) {
     file << this->asJson();
     file.close();
 }
+
+Level::~Level() {
+    Entity* current_entity;
+    for(unsigned int i = 0; i != length; ++i){
+        for(unsigned int j = 0; j != width; ++j){
+            current_entity = entities[i][j];
+            if(current_entity != NULL){
+                delete current_entity;
+            }
+        }
+    }
+}
+
+
 
 
 

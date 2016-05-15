@@ -7,6 +7,7 @@
 #include "Orientation.h"
 #include "Level.h"
 #include "../entities.h"
+#include "JsonReader.h"
 
 #define SMALL 50
 #define BACKGROUND "false background"
@@ -54,15 +55,22 @@ void levelTest(){
     printTitle("Level Test");
     Level level = Level(SMALL, BACKGROUND);
     printTest("Adds entity", level.addEntity(0, 0, SPIKE));
+    printTest("Does not add entity on top of existing one", !level.addEntity(0, 0, SPIKE));
+    printTest("Does not remove non-existing entity", !level.removeEntity(1, 1));
     printTest("Removes entity", level.removeEntity(0,0));
 }
 
 void jsonTest(){
     printTitle("JSON Test");
+    string file_name = "test_level.json";
     Level level = Level(SMALL, BACKGROUND);
     level.addEntity(3, 5, SPARKMAN);
     level.addEntity(1, 2, LADDER);
-    level.writeJsonFile("test_level.json");
+    level.writeJsonFile(file_name);
+    JsonReader reader = JsonReader();
+    Level read = reader.read(file_name);
+    printTest("Reader did not write garbage", !read.removeEntity(0,0));
+    printTest("Reader included entity correctly", read.removeEntity(3,5));
 }
 
 int main(){
