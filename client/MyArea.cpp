@@ -1,16 +1,16 @@
 #include "MyArea.h"
 
-#include <cairomm/context.h>
 #include <gdkmm/general.h> // set_source_pixbuf()
-#include <glibmm/fileutils.h>
-#include <iostream>
 
 Drawing::Drawing() {
 }
 
 void Drawing::setImage(const std::string &rutaImagen, const int width, const int height) {
 	image = Gdk::Pixbuf::create_from_file(rutaImagen,width,height,1);
-	if (image) set_size_request(width, height);
+	if (image) {
+		image = image->add_alpha(true,240,255,0);	//Saco ese amarillo horrible de fondo
+		set_size_request(width, height);
+	}
 }
 
 Drawing::~Drawing() {
