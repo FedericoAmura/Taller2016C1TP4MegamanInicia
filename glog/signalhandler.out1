@@ -1,0 +1,5 @@
+*** Aborted at 1462829263 (unix time) try "date -d @1462829263" if you are using GNU date ***
+PC: @  0x8048aff main
+*** SIGSEGV (@0xdead) received by PID 10098 (TID 0x403830c0) from PID 57005; stack trace: ***
+    @ 0x726f6241 (unknown)
+Segmentation fault (core dumped)

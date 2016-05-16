@@ -1,0 +1,5 @@
+Log file created at: 2016/05/09 18:27:43
+Running on machine: nicolas-VirtualBox32
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I0509 18:27:43.885076 10098 signalhandler_unittest.cc:81] create the log file
+I0509 18:27:43.885555 10098 signalhandler_unittest.cc:82] a message before segv

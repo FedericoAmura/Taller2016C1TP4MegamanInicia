@@ -1,0 +1,4 @@
+*** Aborted at 1462829264 (unix time) try "date -d @1462829264" if you are using GNU date ***
+PC: @ 0x40024cb0 ([vdso]+0xcaf)
+*** SIGABRT (@0x278b) received by PID 10123 (TID 0x403830c0) from PID 10123; stack trace: ***
+    @ 0x726f6241 (unknown)

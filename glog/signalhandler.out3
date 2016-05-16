@@ -1,0 +1,6 @@
+0x40585b40 is dying
+*** Aborted at 1462829264 (unix time) try "date -d @1462829264" if you are using GNU date ***
+PC: @  0x8048d6b DieInThread()
+*** SIGFPE (@0x8048d6b) received by PID 10115 (TID 0x40585b40) from PID 134516075; stack trace: ***
+    @ 0x726f6241 (unknown)
+Floating point exception (core dumped)

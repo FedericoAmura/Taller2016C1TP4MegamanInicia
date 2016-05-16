@@ -1,0 +1,5 @@
+looping
+*** Aborted at 1462829264 (unix time) try "date -d @1462829264" if you are using GNU date ***
+PC: @  0x8048bb2 main
+*** SIGTERM (@0x276e) received by PID 10106 (TID 0x403830c0) from PID 10094; stack trace: ***
+    @ 0x726f6241 (unknown)
