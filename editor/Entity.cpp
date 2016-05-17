@@ -30,6 +30,7 @@ string indentate(size_t indent){
     return s.str();
 }
 
+/*
 string Entity::asJson(size_t x, size_t y, size_t indent) {
     stringstream s;
     s << indentate(indent) << "{\"x\":" << x << ",\n";
@@ -39,7 +40,7 @@ string Entity::asJson(size_t x, size_t y, size_t indent) {
     s << "\"" << this->getOrientation() << "\"}";
     return s.str();
 }
-
+*/
 
 
 

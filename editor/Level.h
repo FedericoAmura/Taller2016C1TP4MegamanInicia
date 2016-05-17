@@ -7,25 +7,34 @@
 
 #include <vector>
 #include "Entity.h"
+#include "Layer.h"
 
 using std::vector;
 
 typedef unsigned int uint;
+typedef unsigned char color_t;
+typedef struct rgb {
+    color_t r;
+    color_t g;
+    color_t b;
+} rgb_t;
+
 
 class Level {
-public:
-    Level(unsigned int length, string background_name);
-    ~Level();
-    bool addEntity(uint x, uint y, size_t id, string orientation = "up");
-    bool removeEntity(uint x, uint y);
-    void writeJsonFile(string file_name);
 private:
-    bool isEmpty(uint x, uint y);
-    string asJson();
-    unsigned int width;
     unsigned int length;
-    string background_name;
-    vector<vector <Entity*> > entities;
+    map<string, Layer> layers;
+    rgb_t background_color;
+    Layer& getLayer(string which_layer);
+
+public:
+    //Level(string json_file);
+    Level(uint len);
+    void setBackgroundColor(color_t r, color_t g, color_t b);
+    //void toJson(string file_name);
+    bool addEntity(prototype_t prototype, string layer);
+    bool removeEntity(uint x, uint y, string layer);
+
 };
 
 

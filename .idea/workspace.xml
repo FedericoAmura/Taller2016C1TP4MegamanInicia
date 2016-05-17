@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/editor/editor_test.cpp" line="68" mnemonic="8" />
+  </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" assignedExecutableTargets="true" buildAllGenerated="true">
     <generated>
       <config projectName="Megaman" targetName="runEditorTests" />
@@ -22,271 +25,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="78facafb-c43c-4518-9b37-8fb62b8325df" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/bombman/bombman_cast_attack.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/bombman/bombman_cast_attack.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/bombman/bombman_cast_attack1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/bombman/bombman_cast_attack1.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/bombman/bombman_idle.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/bombman/bombman_idle.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/bombman/bombman_juggle.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/bombman/bombman_juggle.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/bombman/bombman_jump.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/bombman/bombman_jump.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/bombman/bombman_jump_ahead.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/bombman/bombman_jump_ahead.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/bombman/bombman_jump_back.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/bombman/bombman_jump_back.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/fireman/fireman_cast0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/fireman/fireman_cast0.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/fireman/fireman_cast1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/fireman/fireman_cast1.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/fireman/fireman_idle.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/fireman/fireman_idle.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/fireman/fireman_idle1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/fireman/fireman_idle1.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/fireman/fireman_jump.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/fireman/fireman_jump.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/fireman/fireman_run0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/fireman/fireman_run0.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/fireman/fireman_run1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/fireman/fireman_run1.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/fireman/fireman_run2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/fireman/fireman_run2.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/fireman/fireman_run3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/fireman/fireman_run3.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/magnetman/magnetman_attack.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/magnetman/magnetman_attack.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/magnetman/magnetman_celebrate.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/magnetman/magnetman_celebrate.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/magnetman/magnetman_defend0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/magnetman/magnetman_defend0.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/magnetman/magnetman_defend1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/magnetman/magnetman_defend1.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/magnetman/magnetman_defend2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/magnetman/magnetman_defend2.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/magnetman/magnetman_idle.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/magnetman/magnetman_idle.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/magnetman/magnetman_jump0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/magnetman/magnetman_jump0.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/magnetman/magnetman_jump1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/magnetman/magnetman_jump1.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/magnetman/magnetman_prepared.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/magnetman/magnetman_prepared.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/ringman/ringman_cast_standing.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/ringman/ringman_cast_standing.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/ringman/ringman_idle.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/ringman/ringman_idle.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/ringman/ringman_jump.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/ringman/ringman_jump.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/ringman/ringman_prepare_jumping0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/ringman/ringman_prepare_jumping0.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/ringman/ringman_prepare_jumping1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/ringman/ringman_prepare_jumping1.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/ringman/ringman_prepare_standing0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/ringman/ringman_prepare_standing0.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/ringman/ringman_prepare_standing1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/ringman/ringman_prepare_standing1.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/ringman/ringman_run0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/ringman/ringman_run0.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/ringman/ringman_run1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/ringman/ringman_run1.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/ringman/ringman_run2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/ringman/ringman_run2.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/ringman/ringman_run3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/ringman/ringman_run3.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/sparkman/sparkman_cast_attack1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/sparkman/sparkman_cast_attack1.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/sparkman/sparkman_cast_attack2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/sparkman/sparkman_cast_attack2.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/sparkman/sparkman_idle.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/sparkman/sparkman_idle.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/sparkman/sparkman_jump.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/sparkman/sparkman_jump.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/sparkman/sparkman_prepare0_attack1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/sparkman/sparkman_prepare0_attack1.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/sparkman/sparkman_prepare0_attack2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/sparkman/sparkman_prepare0_attack2.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/sparkman/sparkman_prepare1_attack1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/sparkman/sparkman_prepare1_attack1.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/sparkman/sparkman_prepare1_attack2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/sparkman/sparkman_prepare1_attack2.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/sparkman/sparkman_prepare2_attack1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/sparkman/sparkman_prepare2_attack1.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/sparkman/sparkman_prepare2_attack2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/bosses/sparkman/sparkman_prepare2_attack2.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/items/big_energy_capsule.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/items/big_energy_capsule.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/items/big_plasma_capsule.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/items/big_plasma_capsule.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/items/life.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/items/life.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/items/small_energy_capsule.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/items/small_energy_capsule.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/items/small_plasma_capsule.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/items/small_plasma_capsule.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/NES - Mega Man - Bomb Man Stage.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/NES - Mega Man - Fire Man Stage.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/NES - Mega Man 3 - Magnet Man Stage.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/NES - Mega Man 4 - Ring Man Stage.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/background/cave_b.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/background/cave_b.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/background/cave_edge_b.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/background/cave_edge_b.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/background/cloud_b.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/background/cloud_b.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/background/cloud_edge_b.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/background/cloud_edge_b.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/background/moss_stone_b.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/background/moss_stone_b.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/background/planet_b.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/background/planet_b.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/boss_door.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/boss_door.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/cable_edge0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/cable_edge0.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/cable_edge1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/cable_edge1.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/cable_floor0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/cable_floor0.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/cable_floor1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/cable_floor1.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/cable_frame.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/cable_frame0.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/cable_frame1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/cable_frame1.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/cable_intersection.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/cable_intersection.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/ceramic_edge.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/ceramic_edge.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/ceramic_floor.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/ceramic_floor.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/glass_floor0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/glass_floor0.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/glass_floor1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/glass_floor1.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/glass_wall0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/glass_wall0.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/glass_wall1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/glass_wall1.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/metallic_ladder.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/metallic_ladder.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/metallic_platform.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/metallic_platform.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/metallic_wall.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/metallic_wall.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/sky_ladder.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/sky_ladder.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/sky_platform.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/sky_platform.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/stone_edge.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/stone_edge.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/stone_floor.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/stone_floor.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/stone_ladder.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/stone_ladder.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/stone_spike.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/stone_spike.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/stone_wall.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/level/tiles/stone_wall.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_attack0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_attack0.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_attack_climbing.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_attack_climbing.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_attack_jumping.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_attack_jumping.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_attack_running.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_attack_running.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_attack_running1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_attack_running1.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_attack_running2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_attack_running2.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_bomb_throw.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_bomb_throw.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_climb.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_climb.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_climb_ontop.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_climb_ontop.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_fall.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_fall.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_idle.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_idle.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_idle1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_idle1.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_idle2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_idle2.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_jump.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_jump.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_run0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_run0.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_run1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_run1.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_run2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_run2.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_swipe.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/megaman_swipe.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/megaman pc/mmsprites.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/mobs/bumby0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/mobs/bumby0.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/mobs/bumby1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/mobs/bumby1.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/mobs/met_hidden.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/mobs/met_hidden.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/mobs/met_transition.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/mobs/met_transition.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/mobs/met_vulnerable.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/mobs/met_vulnerable.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/mobs/sniper_attacking.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/mobs/sniper_attacking.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/mobs/sniper_defended.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/mobs/sniper_defended.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/mobs/sniper_jumping.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/mobs/sniper_jumping.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/mobs/sniper_vulnerable.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/mobs/sniper_vulnerable.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/NES - Mega Man - Weapons.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/bomb_explosion0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/bomb_explosion0.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/bomb_explosion1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/bomb_explosion1.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/bomb_explosion2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/bomb_explosion2.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/bomb_explosion3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/bomb_explosion3.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/bombman_weapon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/bombman_weapon.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/fireman_fallout0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/fireman_fallout0.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/fireman_fallout1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/fireman_fallout1.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/fireman_weapon0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/fireman_weapon0.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/fireman_weapon1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/fireman_weapon1.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/magnetman_weapon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/magnetman_weapon.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/megaman_weapon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/megaman_weapon.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/met_weapon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/met_weapon.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/ringman_weapon0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/ringman_weapon0.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/ringman_weapon1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/ringman_weapon1.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/ringman_weapon2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/ringman_weapon2.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/ringman_weapon3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/ringman_weapon3.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/sniper_weapon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/sniper_weapon.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/sparkman_weapon2_0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/sparkman_weapon2_0.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/sparkman_weapon2_1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/sparkman_weapon2_1.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/weapon1_0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/weapon1_0.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/weapon1_1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sprites/weapons/weapon1_1.xcf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/editor/Layer.cpp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/editor/Layer.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/editor" afterPath="$PROJECT_DIR$/bin/editor" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/editor_test" afterPath="$PROJECT_DIR$/bin/editor_test" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Megaman.iml" afterPath="$PROJECT_DIR$/.idea/Megaman.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/editor/Entity.cpp" afterPath="$PROJECT_DIR$/editor/Entity.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/editor/Entity.h" afterPath="$PROJECT_DIR$/editor/Entity.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/editor/Level.cpp" afterPath="$PROJECT_DIR$/editor/Level.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/editor/Level.h" afterPath="$PROJECT_DIR$/editor/Level.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/editor/editor_test.cpp" afterPath="$PROJECT_DIR$/editor/editor_test.cpp" />
     </list>
     <ignored path="Megaman.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -307,11 +57,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+            <state relative-caret-position="534">
+              <caret line="31" column="181" selection-start-line="31" selection-start-column="181" selection-end-line="31" selection-end-column="181" />
               <folding />
             </state>
           </provider>
@@ -320,8 +70,8 @@
       <file leaf-file-name="editor_test.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/editor/editor_test.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1278">
-              <caret line="71" column="47" selection-start-line="71" selection-start-column="47" selection-end-line="71" selection-end-column="47" />
+            <state relative-caret-position="198">
+              <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
               <folding>
                 <element signature="e#41#58#0" expanded="true" />
               </folding>
@@ -329,13 +79,89 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JsonReader.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/editor/JsonReader.cpp">
+      <file leaf-file-name="Layer.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/editor/Layer.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1566">
-              <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+            <state relative-caret-position="165">
+              <caret line="23" column="3" selection-start-line="23" selection-start-column="3" selection-end-line="23" selection-end-column="3" />
               <folding>
                 <element signature="e#41#59#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="stl_vector.h" pinned="false" current-in-tab="false">
+        <entry file="file:///usr/include/c++/4.8/bits/stl_vector.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="254">
+              <caret line="770" column="0" selection-start-line="770" selection-start-column="0" selection-end-line="770" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Entity.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/editor/Entity.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="207">
+              <caret line="18" column="6" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
+              <folding>
+                <marker date="1463507006947" expanded="true" signature="169:431" placeholder="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Layer.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/editor/Layer.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="20" column="7" selection-start-line="20" selection-start-column="7" selection-end-line="21" selection-end-column="44" />
+              <folding>
+                <element signature="e#91#110#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Orientation.cpp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/editor/Orientation.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1080">
+              <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Orientation.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/editor/Orientation.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Level.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/editor/Level.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="19" column="58" selection-start-line="19" selection-start-column="58" selection-end-line="19" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Level.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/editor/Level.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="147">
+              <caret line="27" column="10" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="10" />
+              <folding>
+                <element signature="e#90#107#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -359,15 +185,19 @@
         <option value="$PROJECT_DIR$/editor/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/editor/Orientation.h" />
         <option value="$PROJECT_DIR$/editor/Orientation.cpp" />
-        <option value="$PROJECT_DIR$/editor/Entity.h" />
-        <option value="$PROJECT_DIR$/editor/Entity.cpp" />
-        <option value="$PROJECT_DIR$/editor/Level.h" />
         <option value="$PROJECT_DIR$/editor/JsonReader.h" />
         <option value="$PROJECT_DIR$/bin/test_level.json" />
         <option value="$PROJECT_DIR$/editor/JsonReader.cpp" />
+        <option value="$PROJECT_DIR$/editor/Square.h" />
+        <option value="$PROJECT_DIR$/editor/Square.cpp" />
+        <option value="$PROJECT_DIR$/editor/Layer.cpp" />
+        <option value="$PROJECT_DIR$/editor/Entity.cpp" />
+        <option value="$PROJECT_DIR$/editor/Entity.h" />
+        <option value="$PROJECT_DIR$/editor/Level.h" />
         <option value="$PROJECT_DIR$/editor/editor_test.cpp" />
-        <option value="$PROJECT_DIR$/editor/Level.cpp" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/editor/Level.cpp" />
+        <option value="$PROJECT_DIR$/editor/Layer.h" />
       </list>
     </option>
   </component>
@@ -434,7 +264,21 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="server" />
+              <option name="myItemId" value="editor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Megaman" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Megaman" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="common" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -453,453 +297,6 @@
       <recent name="$PROJECT_DIR$/editor" />
       <recent name="$PROJECT_DIR$" />
     </key>
-  </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/CMakeLists.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/ClientWindow.cpp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/ClientWindow.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/MyArea.cpp</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.gitignore</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/ConnectionScreen.cpp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/ConnectionScreen.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/CreditsScreen.cpp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/CreditsScreen.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/LevelScreen.cpp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/LevelScreen.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/LevelSelectorScreen.cpp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/LevelSelectorScreen.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/common/common_ClientSocket.cpp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/common/common_ClientSocket.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/common/common_Evento.cpp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/common/common_Evento.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/common/common_Handler.cpp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/common/common_Handler.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/common/common_HandlerCoordinator.cpp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/common/common_HandlerCoordinator.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/common/common_Juego.cpp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/common/common_Juego.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/common/common_Observador.cpp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/common/common_Observador.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/common/common_SendRecvThread.cpp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/common/common_SendRecvThread.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/common/common_Socket.cpp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/common/common_Socket.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/common/common_Thread.cpp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/common/common_Thread.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/.gitignore</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/.libs/demangle_unittest</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/.libs/libglog.so.0</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/.libs/libglog.so.0.0.0</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/.libs/logging_striptest0</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/.libs/logging_striptest10</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/.libs/logging_striptest2</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/.libs/logging_unittest</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/.libs/lt-demangle_unittest</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/.libs/lt-logging_striptest0</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/.libs/lt-logging_striptest10</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/.libs/lt-logging_striptest2</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/.libs/lt-signalhandler_unittest</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/.libs/signalhandler_unittest</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/.libs/stacktrace_unittest</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/.libs/stl_logging_unittest</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/.libs/symbolize_unittest</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/.libs/utilities_unittest</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/AUTHORS</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/3.5.2/CMakeCCompiler.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/3.5.2/CMakeCXXCompiler.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/3.5.2/CMakeDetermineCompilerABI_C.bin</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/3.5.2/CMakeDetermineCompilerABI_CXX.bin</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/3.5.2/CMakeSystem.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/3.5.2/CompilerIdC/CMakeCCompilerId.c</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/3.5.2/CompilerIdCXX/CMakeCXXCompilerId.cpp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/CMakeDirectoryInformation.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/CMakeError.log</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/CMakeOutput.log</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/CheckTypeSize/HAVE_UINT16_T.bin</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/CheckTypeSize/HAVE_UINT16_T.c</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/CheckTypeSize/HAVE_U_INT16_T.bin</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/CheckTypeSize/HAVE_U_INT16_T.c</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/CheckTypeSize/HAVE___UINT16.c</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/Export/lib/cmake/glog/glog-targets-noconfig.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/Export/lib/cmake/glog/glog-targets.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/Makefile.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/Makefile2</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/TargetDirectories.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/cmake.check_cache</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/demangle_unittest.dir/CXX.includecache</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/demangle_unittest.dir/DependInfo.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/demangle_unittest.dir/build.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/demangle_unittest.dir/cmake_clean.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/demangle_unittest.dir/depend.internal</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/demangle_unittest.dir/depend.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/demangle_unittest.dir/flags.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/demangle_unittest.dir/link.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/demangle_unittest.dir/progress.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/feature_tests.bin</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/feature_tests.c</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/feature_tests.cxx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/glog.dir/CXX.includecache</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/glog.dir/DependInfo.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/glog.dir/build.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/glog.dir/cmake_clean.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/glog.dir/cmake_clean_target.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/glog.dir/depend.internal</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/glog.dir/depend.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/glog.dir/flags.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/glog.dir/link.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/glog.dir/progress.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/logging_unittest.dir/CXX.includecache</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/logging_unittest.dir/DependInfo.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/logging_unittest.dir/build.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/logging_unittest.dir/cmake_clean.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/logging_unittest.dir/depend.internal</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/logging_unittest.dir/depend.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/logging_unittest.dir/flags.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/logging_unittest.dir/link.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/logging_unittest.dir/progress.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/progress.marks</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/signalhandler_unittest.dir/CXX.includecache</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/signalhandler_unittest.dir/DependInfo.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/signalhandler_unittest.dir/build.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/signalhandler_unittest.dir/cmake_clean.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/signalhandler_unittest.dir/depend.internal</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/signalhandler_unittest.dir/depend.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/signalhandler_unittest.dir/flags.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/signalhandler_unittest.dir/link.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/signalhandler_unittest.dir/progress.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/stacktrace_unittest.dir/CXX.includecache</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/stacktrace_unittest.dir/DependInfo.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/stacktrace_unittest.dir/build.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/stacktrace_unittest.dir/cmake_clean.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/stacktrace_unittest.dir/depend.internal</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/stacktrace_unittest.dir/depend.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/stacktrace_unittest.dir/flags.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/stacktrace_unittest.dir/link.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/stacktrace_unittest.dir/progress.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/stl_logging_unittest.dir/CXX.includecache</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/stl_logging_unittest.dir/DependInfo.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/stl_logging_unittest.dir/build.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/stl_logging_unittest.dir/cmake_clean.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/stl_logging_unittest.dir/depend.internal</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/stl_logging_unittest.dir/depend.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/stl_logging_unittest.dir/flags.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/stl_logging_unittest.dir/link.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/stl_logging_unittest.dir/progress.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/symbolize_unittest.dir/CXX.includecache</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/symbolize_unittest.dir/DependInfo.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/symbolize_unittest.dir/build.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/symbolize_unittest.dir/cmake_clean.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/symbolize_unittest.dir/depend.internal</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/symbolize_unittest.dir/depend.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/symbolize_unittest.dir/flags.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/symbolize_unittest.dir/link.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/symbolize_unittest.dir/progress.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/utilities_unittest.dir/CXX.includecache</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/utilities_unittest.dir/DependInfo.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/utilities_unittest.dir/build.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/utilities_unittest.dir/cmake_clean.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/utilities_unittest.dir/depend.internal</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/utilities_unittest.dir/depend.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/utilities_unittest.dir/flags.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/utilities_unittest.dir/link.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeFiles/utilities_unittest.dir/progress.make</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CMakeLists.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CONTRIBUTING.md</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CONTRIBUTORS</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/COPYING</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CPackConfig.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CPackSourceConfig.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/CTestTestfile.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/ChangeLog</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/INSTALL</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/Makefile</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/Makefile.am</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/Makefile.in</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/NEWS</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/README</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/README.windows</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/aclocal.m4</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/cmake/DetermineGflagsNamespace.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/cmake/INSTALL.md</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/cmake_install.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/compile</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/config.guess</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/config.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/config.log</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/config.status</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/config.sub</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/configure</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/configure.ac</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/demangle.dm</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/demangle.nm</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/demangle_unittest</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/depcomp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/doc/designstyle.css</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/doc/glog.html</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/glog-config-version.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/glog-config.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/glog-config.cmake.in</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/glog-targets.cmake</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/glog/logging.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/glog/raw_logging.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/glog/stl_logging.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/glog/vlog_is_on.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/google-glog.sln</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/install-sh</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/libglog.pc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/libglog.pc.in</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/libtool</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/logging_striptest0</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/logging_striptest10</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/logging_striptest2</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/logging_unittest</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/ltmain.sh</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/m4/ac_have_attribute.m4</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/m4/ac_have_builtin_expect.m4</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/m4/ac_have_sync_val_compare_and_swap.m4</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/m4/ac_rwlock.m4</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/m4/acx_pthread.m4</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/m4/google_namespace.m4</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/m4/libtool.m4</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/m4/ltoptions.m4</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/m4/ltsugar.m4</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/m4/ltversion.m4</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/m4/lt~obsolete.m4</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/m4/namespaces.m4</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/m4/pc_from_ucontext.m4</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/m4/stl_namespace.m4</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/m4/using_operator.m4</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/missing</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/mkinstalldirs</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/packages/deb.sh</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/packages/deb/README</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/packages/deb/changelog</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/packages/deb/compat</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/packages/deb/control</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/packages/deb/copyright</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/packages/deb/docs</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/packages/deb/libgoogle-glog-dev.dirs</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/packages/deb/libgoogle-glog-dev.install</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/packages/deb/libgoogle-glog0.dirs</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/packages/deb/libgoogle-glog0.install</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/packages/deb/rules</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/packages/rpm.sh</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/packages/rpm/rpm.spec</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/signalhandler.out1</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/signalhandler.out2</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/signalhandler.out3</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/signalhandler.out4</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/signalhandler_unittest</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/signalhandler_unittest.nicolas-VirtualBox32.nicolas.log.INFO.20160509-182743.10098</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/.deps/.dirstamp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/.deps/demangle_unittest-demangle_unittest.Po</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/.deps/libglog_la-demangle.Plo</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/.deps/libglog_la-logging.Plo</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/.deps/libglog_la-raw_logging.Plo</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/.deps/libglog_la-signalhandler.Plo</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/.deps/libglog_la-symbolize.Plo</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/.deps/libglog_la-utilities.Plo</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/.deps/libglog_la-vlog_is_on.Plo</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/.deps/logging_striptest0-logging_striptest_main.Po</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/.deps/logging_striptest10-logging_striptest10.Po</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/.deps/logging_striptest2-logging_striptest2.Po</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/.deps/logging_unittest-logging_unittest.Po</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/.deps/mock_log_test-mock-log_test.Po</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/.deps/signalhandler_unittest-signalhandler_unittest.Po</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/.deps/stacktrace_unittest-stacktrace_unittest.Po</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/.deps/stl_logging_unittest-stl_logging_unittest.Po</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/.deps/symbolize_unittest-symbolize_unittest.Po</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/.deps/utilities_unittest-utilities_unittest.Po</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/.dirstamp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/base/commandlineflags.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/base/googleinit.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/base/mutex.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/config.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/config.h.cmake.in</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/config.h.in</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/config_for_unittests.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/demangle.cc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/demangle.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/demangle_unittest.cc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/demangle_unittest.sh</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/demangle_unittest.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/glog/log_severity.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/glog/logging.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/glog/logging.h.in</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/glog/raw_logging.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/glog/raw_logging.h.in</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/glog/stl_logging.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/glog/stl_logging.h.in</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/glog/vlog_is_on.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/glog/vlog_is_on.h.in</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/googletest.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/logging.cc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/logging_striplog_test.sh</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/logging_striptest10.cc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/logging_striptest2.cc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/logging_striptest_main.cc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/logging_unittest.cc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/logging_unittest.err</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/mock-log.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/mock-log_test.cc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/raw_logging.cc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/signalhandler.cc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/signalhandler_unittest.cc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/signalhandler_unittest.sh</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/stacktrace.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/stacktrace_generic-inl.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/stacktrace_libunwind-inl.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/stacktrace_powerpc-inl.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/stacktrace_unittest.cc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/stacktrace_x86-inl.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/stacktrace_x86_64-inl.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/stamp-h1</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/stl_logging_unittest.cc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/symbolize.cc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/symbolize.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/symbolize_unittest.cc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/utilities.cc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/utilities.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/utilities_unittest.cc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/vlog_is_on.cc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/windows/config.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/windows/glog/log_severity.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/windows/glog/logging.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/windows/glog/raw_logging.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/windows/glog/stl_logging.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/windows/glog/vlog_is_on.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/windows/port.cc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/windows/port.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/src/windows/preprocess.sh</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/stacktrace_unittest</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/stl_logging_unittest</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/symbolize_unittest</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/test-driver</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/utilities_unittest</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/vsprojects/libglog/libglog.vcproj</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/vsprojects/libglog_static/libglog_static.vcproj</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/vsprojects/logging_unittest/logging_unittest.vcproj</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/glog/vsprojects/logging_unittest_static/logging_unittest_static.vcproj</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/images/background1.jpg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/images/megaman1.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/images/megaman2.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/server/CMakeLists.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/server/server_AcceptConnections.cpp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/server/server_AcceptConnections.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/server/server_Server.cpp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/server/server_Server.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/server/server_ServerSocket.cpp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/server/server_ServerSocket.h</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/server/server_main.cpp</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/server/main.cpp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/server/main.cpp~</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
   </component>
   <component name="RunManager" selected="Application.editor_test">
     <configuration default="true" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Megaman" TARGET_NAME="Megaman" CONFIG_NAME="Debug" TEST_MODE="SUITE_TEST">
@@ -1147,7 +544,14 @@
       <option name="project" value="LOCAL" />
       <updated>1463350560376</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Sprites">
+      <created>1463431553001</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1463431553002</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1171,24 +575,24 @@
     <frame x="0" y="-4" width="1440" height="904" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26323217" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26323217" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32948717" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39615384" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32948717" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32948717" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32948717" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24982357" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32948717" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39660493" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32948717" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32948717" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1208,83 +612,23 @@
     <MESSAGE value="Un poco de logica del editor y pruebas" />
     <MESSAGE value="Level escribe JSON" />
     <MESSAGE value="Lectura de mapas formato JSON" />
-    <option name="LAST_COMMIT_MESSAGE" value="Lectura de mapas formato JSON" />
+    <MESSAGE value="Sprites" />
+    <option name="LAST_COMMIT_MESSAGE" value="Sprites" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="17" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/editor/editor_test.cpp</url>
+          <line>56</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="26" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/images/hardMan.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/images/introbackground.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="27" column="191" selection-start-line="27" selection-start-column="191" selection-end-line="27" selection-end-column="191" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/images/creditsbackground.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/images/geminiMan.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/images/shadowMan.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/images/snakeMan.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/images/sparkMan.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/editor_test.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#41#58#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/JsonReader.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1566">
-          <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
-          <folding>
-            <element signature="e#41#59#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/images/hardMan.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/images/introbackground.jpg">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -1312,13 +656,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/server/main.cpp" />
     <entry file="file://$PROJECT_DIR$/editor/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="666">
@@ -1354,13 +692,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/server/main.cpp" />
     <entry file="file://$PROJECT_DIR$/bin/editor_main_window.glade">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1373,20 +705,6 @@
     <entry file="file://$PROJECT_DIR$/tests/CMakeLists.txt" />
     <entry file="file://$PROJECT_DIR$/tests/editor_tests/orientation_check.cpp" />
     <entry file="file://$PROJECT_DIR$/editor/CMakeLists.txt" />
-    <entry file="file://$PROJECT_DIR$/editor/Orientation.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/Orientation.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/entities.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="468">
@@ -1408,31 +726,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/include/c++/4.8/bits/stl_vector.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="770" column="0" selection-start-line="770" selection-start-column="0" selection-end-line="770" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/editor/JsonReader.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="277">
           <caret line="18" column="30" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/Entity.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="39" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/Entity.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="18" column="51" selection-start-line="18" selection-start-column="51" selection-end-line="18" selection-end-column="51" />
         </state>
       </provider>
     </entry>
@@ -1447,20 +744,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="402">
           <caret line="37" column="13" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/Level.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/Level.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-479">
-          <caret line="26" column="53" selection-start-line="26" selection-start-column="53" selection-end-line="26" selection-end-column="53" />
         </state>
       </provider>
     </entry>
@@ -1504,25 +787,177 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/images/creditsbackground.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/server_AcceptConnections.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-263">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/server_AcceptConnections.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/server_main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-245">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/server_Server.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-569">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/server_Server.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-65">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/server_ServerSocket.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-569">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/server_ServerSocket.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/Square.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="7" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/Square.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="34" column="17" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/Entity.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="42" column="2" selection-start-line="42" selection-start-column="2" selection-end-line="42" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/Entity.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="18" column="6" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
+          <folding>
+            <marker date="1463507006947" expanded="true" signature="169:431" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/Level.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="27" column="10" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="10" />
+          <folding>
+            <element signature="e#90#107#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="534">
+          <caret line="31" column="181" selection-start-line="31" selection-start-column="181" selection-end-line="31" selection-end-column="181" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/editor/editor_test.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1278">
-          <caret line="71" column="47" selection-start-line="71" selection-start-column="47" selection-end-line="71" selection-end-column="47" />
+        <state relative-caret-position="198">
+          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
           <folding>
             <element signature="e#41#58#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/images/creditsbackground.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
+    <entry file="file:///usr/include/c++/4.8/bits/stl_vector.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="254">
+          <caret line="770" column="0" selection-start-line="770" selection-start-column="0" selection-end-line="770" selection-end-column="0" />
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+    <entry file="file://$PROJECT_DIR$/editor/Layer.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+        <state relative-caret-position="165">
+          <caret line="23" column="3" selection-start-line="23" selection-start-column="3" selection-end-line="23" selection-end-column="3" />
+          <folding>
+            <element signature="e#41#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/Level.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="19" column="58" selection-start-line="19" selection-start-column="58" selection-end-line="19" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/Layer.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="20" column="7" selection-start-line="20" selection-start-column="7" selection-end-line="21" selection-end-column="44" />
+          <folding>
+            <element signature="e#91#110#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/Orientation.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/Orientation.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1080">
+          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
           <folding />
         </state>
       </provider>
