@@ -10,6 +10,7 @@
 
 #include <gtkmm/stack.h>
 #include <gtkmm/window.h>
+#include <cstdbool>
 
 #include "ConnectionScreen.h"
 #include "CreditsScreen.h"
@@ -31,8 +32,12 @@ public:
 	void showCredits();
 	void showLevelSelector();
 	void showLevel();
+	void cleanLevelScreen();
 
 	virtual ~ClientWindow();
+
+private:
+	bool on_key_press_event(GdkEventKey* key_event) override;
 };
 
 #endif /* SRC_CLIENTWINDOW_H_ */

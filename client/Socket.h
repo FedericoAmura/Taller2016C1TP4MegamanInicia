@@ -24,6 +24,8 @@ private:
 	const std::string puerto;
 
 public:
+	Socket();
+
 	//Crea un objeto socket desde un socket fd
 	explicit Socket(const socket_t socket);
 

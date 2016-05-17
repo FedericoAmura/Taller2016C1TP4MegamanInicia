@@ -9,6 +9,9 @@
 #define SRC_LEVELSCREEN_H_
 
 #include <gtkmm/fixed.h>
+#include <glibmm/main.h>
+#include <gdkmm/event.h>
+#include <cstdbool>
 
 #include "MyArea.h"
 #include "Socket.h"
@@ -18,9 +21,15 @@ private:
 	Drawing levelBackground;
 	Drawing megaman1;
 	Drawing megaman2;
+	sigc::connection serverConn;
+	Socket* serverProxy;
 
 public:
 	LevelScreen();
+	void startLevel();
+	void stopLevel();
+	bool update();
+	bool keyPress();
 	virtual ~LevelScreen();
 };
 
