@@ -28,6 +28,7 @@ public:
     bool removeEntity(uint x, uint y);
     bool isEmpty(uint x, uint y);
     Json::Value toJson();
+    void visualize(); //para trabajo interno: borrar
 private:
     uint length;
     uint width;

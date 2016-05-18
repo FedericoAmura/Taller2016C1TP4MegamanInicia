@@ -45,7 +45,12 @@ void jsonTest(prototype_t p0, prototype_t p1, prototype_t b0){
     level.addEntity(p0, "foreground");
     level.addEntity(p1, "foreground");
     level.addEntity(b0, "background");
-    level.toJson("test_level.json");
+    level.toJson(file_name);
+    level.visualize();
+    Level loaded(file_name);
+    loaded.visualize();
+    printTest("Entity successfully recovered from loaded level", loaded.removeEntity(5,5,"foreground"));
+    printTest("Loaded level does not recover non-existent entity", !loaded.removeEntity(5,6,"foreground"));
 }
 
 int main(){

@@ -30,13 +30,13 @@ private:
     Layer& getLayer(string which_layer);
 
 public:
-    //Level(string json_file);
+    Level(string json_file);
     explicit Level(uint len);
     void setBackgroundColor(color_t r, color_t g, color_t b);
     void toJson(string file_name);
     bool addEntity(prototype_t prototype, string layer);
     bool removeEntity(uint x, uint y, string layer);
-
+    void visualize(); //borrar en el futuro
 };
 
 

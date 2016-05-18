@@ -11,9 +11,12 @@
 #define WIDTH 15
 
 using std::stringstream;
+using std::ifstream;
 using std::ofstream;
 using std::make_pair;
 using std::runtime_error;
+
+typedef Json::Value::iterator v_iter;
 
 Level::Level(uint len) : length(len) {
     layers.insert(make_pair("background", Layer(length)));
@@ -21,6 +24,44 @@ Level::Level(uint len) : length(len) {
     background_color.r = 0;
     background_color.g = 255;
     background_color.b = 255;
+}
+
+Level::Level(string json_file) {
+    //Open File
+    ifstream in(json_file);
+    Json::Value level_json;
+    in >> level_json;
+    //Length
+    this->length = level_json["length"].asUInt();
+    //Background color
+    Json::Value b_color = level_json["background color"];
+    color_t r = (color_t) b_color["r"].asUInt();
+    color_t g = (color_t) b_color["g"].asUInt();
+    color_t b = (color_t) b_color["b"].asUInt();
+    this->setBackgroundColor(r, g, b);
+    //Background tiles
+    Json::Value background = level_json["background"];
+    Layer background_layer(this->length);
+    for (v_iter it = background.begin(); it != background.end(); ++it) {
+        prototype_t p;
+        p.x = (*it)["x"].asUInt();
+        p.y = (*it)["y"].asUInt();
+        p.id = (*it)["id"].asUInt();
+        background_layer.addEntity(p);
+    }
+    this->layers["background"] = background_layer;
+    //Foreground tiles
+    Json::Value foreground = level_json["foreground"];
+    Layer foreground_layer(this->length);
+    for (v_iter it = foreground.begin(); it != foreground.end(); ++it) {
+        prototype_t p;
+        p.x = (*it)["x"].asUInt();
+        p.y = (*it)["y"].asUInt();
+        p.id = (*it)["id"].asUInt();
+        foreground_layer.addEntity(p);
+    }
+    this->layers["foreground"] = foreground_layer;
+    in.close();
 }
 
 void Level::setBackgroundColor(color_t r, color_t g, color_t b) {
@@ -48,6 +89,7 @@ Layer& Level::getLayer(string which_layer) {
 
 void Level::toJson(string file_name) {
     Json::Value level(Json::objectValue);
+    level["valid"] = true; //TODO: por ahora hardcodeo esto, despues va a depender de los chequeos del editor
     level["length"] = length;
     level["width"] = WIDTH;
     Json::Value color(Json::objectValue);
@@ -61,6 +103,19 @@ void Level::toJson(string file_name) {
     out << level;
     out.close();
 }
+
+void Level::visualize() {
+    std::cout << "BACKGROUND" << std::endl;
+    layers["background"].visualize();
+    std::cout << "FOREGROUND" << std::endl;
+    layers["foreground"].visualize();
+}
+
+
+
+
+
+
 
 
 

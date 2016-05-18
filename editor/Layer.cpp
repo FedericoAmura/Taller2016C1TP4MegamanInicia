@@ -2,6 +2,7 @@
 // Created by marcos on 17/05/16.
 //
 
+#include <iostream>
 #include "Layer.h"
 #include "Level.h"
 
@@ -9,13 +10,13 @@
 
 using std::runtime_error;
 
-typedef vector<vector < Entity* >>::iterator m_iter;
+typedef vector<vector<Entity*> >::iterator m_iter;
 typedef vector<Entity*>::iterator v_iter;
 
 Layer::Layer(unsigned int length) : length(length), width(WIDTH) {
-    entities = vector<vector<Entity*> >(length, std::vector<Entity*>(width));
-    for (unsigned int i = 0; i != length; ++i){
-        for (unsigned int j = 0; j != width; ++j){
+    entities = vector<vector<Entity*> >(width, std::vector<Entity*>(length));
+    for (unsigned int i = 0; i != width; ++i){
+        for (unsigned int j = 0; j != length; ++j){
             entities[i][j] = NULL;
         }
     }
@@ -52,11 +53,11 @@ bool Layer::removeEntity(uint x, uint y) {
 
 Layer::~Layer() {
     Entity* current_entity;
-    for(unsigned int i = 0; i != length; ++i){
-        for(unsigned int j = 0; j != width; ++j){
+    for(unsigned int i = 0; i != width; ++i){
+        for(unsigned int j = 0; j != length; ++j){
             current_entity = entities[i][j];
             if(current_entity != NULL){
-                delete current_entity;
+                //delete current_entity;
             }
         }
     }
@@ -64,8 +65,8 @@ Layer::~Layer() {
 
 Json::Value Layer::toJson() {
     Json::Value array(Json::arrayValue);
-    for(uint i = 0; i != entities.size(); ++i){
-        for(uint j = 0; j != width; ++j){
+    for (uint i = 0; i != width; ++i){
+        for (uint j = 0; j != length; ++j){
             if (entities[i][j] != NULL){
                 Json::Value entity_value(Json::objectValue);
                 entity_value["x"] = i;
@@ -78,6 +79,21 @@ Json::Value Layer::toJson() {
     }
     return array;
 }
+
+void Layer::visualize() {
+    for (uint i = 0; i != width; ++i){
+        for (uint j = 0; j != length; ++j){
+            if (entities[i][j] != NULL){
+                std::cout << "X";
+            } else {
+                std::cout << "0";
+            }
+        }
+        std::cout << std::endl;
+    }
+}
+
+
 
 
 
