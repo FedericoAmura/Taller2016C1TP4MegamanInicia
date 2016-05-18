@@ -302,3 +302,307 @@ Source file was:
 #include <vector>
 vector<int> t; int main() { }
 
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_9082e/fast"
+/usr/bin/make -f CMakeFiles/cmTC_9082e.dir/build.make CMakeFiles/cmTC_9082e.dir/build
+make[1]: Entering directory `/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_9082e.dir/CheckSymbolExists.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_9082e.dir/CheckSymbolExists.c.o   -c /home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_9082e
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9082e.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_9082e.dir/CheckSymbolExists.c.o  -o cmTC_9082e -rdynamic 
+CMakeFiles/cmTC_9082e.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x16): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+make[1]: *** [cmTC_9082e] Error 1
+make[1]: Leaving directory `/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp'
+make: *** [cmTC_9082e/fast] Error 2
+
+File /home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_d5497/fast"
+/usr/bin/make -f CMakeFiles/cmTC_d5497.dir/build.make CMakeFiles/cmTC_d5497.dir/build
+make[1]: Entering directory `/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d5497.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_d5497.dir/CheckFunctionExists.c.o   -c /usr/local/share/cmake-3.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_d5497
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d5497.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_d5497.dir/CheckFunctionExists.c.o  -o cmTC_d5497 -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: *** [cmTC_d5497] Error 1
+make[1]: Leaving directory `/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp'
+make: *** [cmTC_d5497/fast] Error 2
+
+
+Determining if the include file libunwind.h exists failed with the following output:
+Change Dir: /home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_cc237/fast"
+/usr/bin/make -f CMakeFiles/cmTC_cc237.dir/build.make CMakeFiles/cmTC_cc237.dir/build
+make[1]: Entering directory `/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_cc237.dir/CheckIncludeFile.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_cc237.dir/CheckIncludeFile.c.o   -c /home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:23: fatal error: libunwind.h: No such file or directory
+ #include <libunwind.h>
+                       ^
+compilation terminated.
+make[1]: *** [CMakeFiles/cmTC_cc237.dir/CheckIncludeFile.c.o] Error 1
+make[1]: Leaving directory `/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp'
+make: *** [cmTC_cc237/fast] Error 2
+
+
+Determining if the include file unordered_map exists failed with the following output:
+Change Dir: /home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_dfce8/fast"
+/usr/bin/make -f CMakeFiles/cmTC_dfce8.dir/build.make CMakeFiles/cmTC_dfce8.dir/build
+make[1]: Entering directory `/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_dfce8.dir/CheckIncludeFile.cxx.o
+/usr/bin/c++      -o CMakeFiles/cmTC_dfce8.dir/CheckIncludeFile.cxx.o -c /home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp/CheckIncludeFile.cxx
+In file included from /usr/include/c++/4.8/unordered_map:35:0,
+                 from /home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp/CheckIncludeFile.cxx:1:
+/usr/include/c++/4.8/bits/c++0x_warning.h:32:2: error: #error This file requires compiler and library support for the ISO C++ 2011 standard. This support is currently experimental, and must be enabled with the -std=c++11 or -std=gnu++11 compiler options.
+ #error This file requires compiler and library support for the \
+  ^
+make[1]: *** [CMakeFiles/cmTC_dfce8.dir/CheckIncludeFile.cxx.o] Error 1
+make[1]: Leaving directory `/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp'
+make: *** [cmTC_dfce8/fast] Error 2
+
+
+Determining if the include file unordered_set exists failed with the following output:
+Change Dir: /home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_152e4/fast"
+/usr/bin/make -f CMakeFiles/cmTC_152e4.dir/build.make CMakeFiles/cmTC_152e4.dir/build
+make[1]: Entering directory `/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_152e4.dir/CheckIncludeFile.cxx.o
+/usr/bin/c++      -o CMakeFiles/cmTC_152e4.dir/CheckIncludeFile.cxx.o -c /home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp/CheckIncludeFile.cxx
+In file included from /usr/include/c++/4.8/unordered_set:35:0,
+                 from /home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp/CheckIncludeFile.cxx:1:
+/usr/include/c++/4.8/bits/c++0x_warning.h:32:2: error: #error This file requires compiler and library support for the ISO C++ 2011 standard. This support is currently experimental, and must be enabled with the -std=c++11 or -std=gnu++11 compiler options.
+ #error This file requires compiler and library support for the \
+  ^
+make[1]: *** [CMakeFiles/cmTC_152e4.dir/CheckIncludeFile.cxx.o] Error 1
+make[1]: Leaving directory `/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp'
+make: *** [cmTC_152e4/fast] Error 2
+
+
+Determining size of unsigned __int16 failed with the following output:
+Change Dir: /home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_4109e/fast"
+/usr/bin/make -f CMakeFiles/cmTC_4109e.dir/build.make CMakeFiles/cmTC_4109e.dir/build
+make[1]: Entering directory `/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_4109e.dir/HAVE___UINT16.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_4109e.dir/HAVE___UINT16.c.o   -c /home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CheckTypeSize/HAVE___UINT16.c
+/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:17:31: error: expected ‘)’ before ‘__int16’
+ #define SIZE (sizeof(unsigned __int16))
+                               ^
+/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:19:12: note: in expansion of macro ‘SIZE’
+   ('0' + ((SIZE / 10000)%10)),
+            ^
+/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:17:31: error: expected ‘)’ before ‘__int16’
+ #define SIZE (sizeof(unsigned __int16))
+                               ^
+/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:20:12: note: in expansion of macro ‘SIZE’
+   ('0' + ((SIZE / 1000)%10)),
+            ^
+/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:17:31: error: expected ‘)’ before ‘__int16’
+ #define SIZE (sizeof(unsigned __int16))
+                               ^
+/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:21:12: note: in expansion of macro ‘SIZE’
+   ('0' + ((SIZE / 100)%10)),
+            ^
+/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:17:31: error: expected ‘)’ before ‘__int16’
+ #define SIZE (sizeof(unsigned __int16))
+                               ^
+/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:22:12: note: in expansion of macro ‘SIZE’
+   ('0' + ((SIZE / 10)%10)),
+            ^
+/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:17:31: error: expected ‘)’ before ‘__int16’
+ #define SIZE (sizeof(unsigned __int16))
+                               ^
+/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:23:12: note: in expansion of macro ‘SIZE’
+   ('0' +  (SIZE    % 10)),
+            ^
+make[1]: *** [CMakeFiles/cmTC_4109e.dir/HAVE___UINT16.c.o] Error 1
+make[1]: Leaving directory `/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp'
+make: *** [cmTC_4109e/fast] Error 2
+
+/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:
+#include <sys/types.h>
+#include <stdint.h>
+#include <stddef.h>
+
+
+#undef KEY
+#if defined(__i386)
+# define KEY '_','_','i','3','8','6'
+#elif defined(__x86_64)
+# define KEY '_','_','x','8','6','_','6','4'
+#elif defined(__ppc__)
+# define KEY '_','_','p','p','c','_','_'
+#elif defined(__ppc64__)
+# define KEY '_','_','p','p','c','6','4','_','_'
+#endif
+
+#define SIZE (sizeof(unsigned __int16))
+char info_size[] =  {'I', 'N', 'F', 'O', ':', 's','i','z','e','[',
+  ('0' + ((SIZE / 10000)%10)),
+  ('0' + ((SIZE / 1000)%10)),
+  ('0' + ((SIZE / 100)%10)),
+  ('0' + ((SIZE / 10)%10)),
+  ('0' +  (SIZE    % 10)),
+  ']',
+#ifdef KEY
+  ' ','k','e','y','[', KEY, ']',
+#endif
+  '\0'};
+
+#ifdef __CLASSIC_C__
+int main(argc, argv) int argc; char *argv[];
+#else
+int main(int argc, char *argv[])
+#endif
+{
+  int require = 0;
+  require += info_size[argc];
+  (void)argv;
+  return require;
+}
+
+
+Determining if the function dladdr exists failed with the following output:
+Change Dir: /home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_3c622/fast"
+/usr/bin/make -f CMakeFiles/cmTC_3c622.dir/build.make CMakeFiles/cmTC_3c622.dir/build
+make[1]: Entering directory `/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_3c622.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=dladdr   -o CMakeFiles/cmTC_3c622.dir/CheckFunctionExists.c.o   -c /usr/local/share/cmake-3.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_3c622
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3c622.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=dladdr    CMakeFiles/cmTC_3c622.dir/CheckFunctionExists.c.o  -o cmTC_3c622 -rdynamic 
+CMakeFiles/cmTC_3c622.dir/CheckFunctionExists.c.o: In function `main':
+CheckFunctionExists.c:(.text+0x15): undefined reference to `dladdr'
+collect2: error: ld returned 1 exit status
+make[1]: *** [cmTC_3c622] Error 1
+make[1]: Leaving directory `/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp'
+make: *** [cmTC_3c622/fast] Error 2
+
+
+Determining if the function get_static_proc_name exists in the unwind failed with the following output:
+Change Dir: /home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_b722c/fast"
+/usr/bin/make -f CMakeFiles/cmTC_b722c.dir/build.make CMakeFiles/cmTC_b722c.dir/build
+make[1]: Entering directory `/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_b722c.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=get_static_proc_name   -o CMakeFiles/cmTC_b722c.dir/CheckFunctionExists.c.o   -c /usr/local/share/cmake-3.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_b722c
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b722c.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=get_static_proc_name    CMakeFiles/cmTC_b722c.dir/CheckFunctionExists.c.o  -o cmTC_b722c -rdynamic -lunwind 
+/usr/bin/ld: cannot find -lunwind
+collect2: error: ld returned 1 exit status
+make[1]: *** [cmTC_b722c] Error 1
+make[1]: Leaving directory `/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp'
+make: *** [cmTC_b722c/fast] Error 2
+
+
+Performing C SOURCE FILE Test HAVE_RWLOCK failed with the following output:
+Change Dir: /home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_262db/fast"
+/usr/bin/make -f CMakeFiles/cmTC_262db.dir/build.make CMakeFiles/cmTC_262db.dir/build
+make[1]: Entering directory `/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_262db.dir/src.c.o
+/usr/bin/cc    -DHAVE_RWLOCK   -o CMakeFiles/cmTC_262db.dir/src.c.o   -c /home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_262db
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_262db.dir/link.txt --verbose=1
+/usr/bin/cc   -DHAVE_RWLOCK    CMakeFiles/cmTC_262db.dir/src.c.o  -o cmTC_262db -rdynamic 
+CMakeFiles/cmTC_262db.dir/src.c.o: In function `main':
+src.c:(.text+0x24): undefined reference to `pthread_rwlock_init'
+src.c:(.text+0x30): undefined reference to `pthread_rwlock_rdlock'
+collect2: error: ld returned 1 exit status
+make[1]: *** [cmTC_262db] Error 1
+make[1]: Leaving directory `/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp'
+make: *** [cmTC_262db/fast] Error 2
+
+Source file was:
+
+#define _XOPEN_SOURCE 500
+#include <pthread.h>
+int main(void)
+{
+  pthread_rwlock_t l;
+  pthread_rwlock_init(&l, NULL);
+  pthread_rwlock_rdlock(&l);
+  return 0;
+}
+
+Performing C SOURCE FILE Test HAVE___DECLSPEC failed with the following output:
+Change Dir: /home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_167db/fast"
+/usr/bin/make -f CMakeFiles/cmTC_167db.dir/build.make CMakeFiles/cmTC_167db.dir/build
+make[1]: Entering directory `/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_167db.dir/src.c.o
+/usr/bin/cc    -DHAVE___DECLSPEC   -o CMakeFiles/cmTC_167db.dir/src.c.o   -c /home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp/src.c
+/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp/src.c: In function ‘__declspec’:
+/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp/src.c:3:16: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘{’ token
+ int main(void) { return 0; }
+                ^
+/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp/src.c:2:27: error: declaration for parameter ‘a’ but no such parameter
+ __declspec(selectany) int a;
+                           ^
+/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp/src.c:3:16: error: expected ‘{’ at end of input
+ int main(void) { return 0; }
+                ^
+make[1]: *** [CMakeFiles/cmTC_167db.dir/src.c.o] Error 1
+make[1]: Leaving directory `/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp'
+make: *** [cmTC_167db/fast] Error 2
+
+Source file was:
+
+__declspec(selectany) int a;
+int main(void) { return 0; }
+
+Performing C++ SOURCE FILE Test STL_NO_NAMESPACE failed with the following output:
+Change Dir: /home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_9d635/fast"
+/usr/bin/make -f CMakeFiles/cmTC_9d635.dir/build.make CMakeFiles/cmTC_9d635.dir/build
+make[1]: Entering directory `/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_9d635.dir/src.cxx.o
+/usr/bin/c++     -DSTL_NO_NAMESPACE   -o CMakeFiles/cmTC_9d635.dir/src.cxx.o -c /home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp/src.cxx
+/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp/src.cxx:3:1: error: ‘vector’ does not name a type
+ vector<int> t; int main() { }
+ ^
+make[1]: *** [CMakeFiles/cmTC_9d635.dir/src.cxx.o] Error 1
+make[1]: Leaving directory `/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/CMakeTmp'
+make: *** [cmTC_9d635/fast] Error 2
+
+Source file was:
+
+#include <vector>
+vector<int> t; int main() { }
+

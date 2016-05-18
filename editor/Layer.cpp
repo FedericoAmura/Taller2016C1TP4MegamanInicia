@@ -7,10 +7,15 @@
 
 #define WIDTH 15
 
-Layer::Layer(unsigned int length) : length(length) {
-    entities = vector<vector<Entity*> >(length, std::vector<Entity*>(WIDTH));
+using std::runtime_error;
+
+typedef vector<vector < Entity* >>::iterator m_iter;
+typedef vector<Entity*>::iterator v_iter;
+
+Layer::Layer(unsigned int length) : length(length), width(WIDTH) {
+    entities = vector<vector<Entity*> >(length, std::vector<Entity*>(width));
     for (unsigned int i = 0; i != length; ++i){
-        for (unsigned int j = 0; j != WIDTH; ++j){
+        for (unsigned int j = 0; j != width; ++j){
             entities[i][j] = NULL;
         }
     }
@@ -23,6 +28,9 @@ bool Layer::isEmpty(unsigned int x, unsigned int y) {
 bool Layer::addEntity(prototype_t prototype) {
     uint x = prototype.x;
     uint y = prototype.y;
+    if (x >= length || y >= width) {
+        throw runtime_error("Insertion out of bounds");
+    }
     size_t id = prototype.id;
     string orientation = prototype.orientation;
     if (!isEmpty(x, y)){
@@ -46,7 +54,7 @@ bool Layer::removeEntity(uint x, uint y) {
 Layer::~Layer() {
     Entity* current_entity;
     for(unsigned int i = 0; i != length; ++i){
-        for(unsigned int j = 0; j != WIDTH; ++j){
+        for(unsigned int j = 0; j != width; ++j){
             current_entity = entities[i][j];
             if(current_entity != NULL){
                 delete current_entity;
@@ -54,4 +62,23 @@ Layer::~Layer() {
         }
     }
 }
+
+Json::Value Layer::toJson() {
+    Json::Value array(Json::arrayValue);
+    for(uint i = 0; i != entities.size(); ++i){
+        for(uint j = 0; j != width; ++j){
+            if (entities[i][j] != NULL){
+                Json::Value entity_value(Json::objectValue);
+                entity_value["x"] = i;
+                entity_value["y"] = j;
+                entity_value["id"] = (uint) entities[i][j]->getId();
+                array.append(entity_value);
+            }
+
+        }
+    }
+    return array;
+}
+
+
 

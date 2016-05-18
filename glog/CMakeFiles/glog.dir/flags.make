@@ -6,5 +6,5 @@ CXX_FLAGS = -fvisibility=default -fvisibility-inlines-hidden   -Wno-unnamed-type
 
 CXX_DEFINES = -DGOOGLE_GLOG_DLL_DECL=""
 
-CXX_INCLUDES = -I"/home/nicolas/workspace/Copy of TpFinal/glog/src" -I"/home/nicolas/workspace/Copy of TpFinal/glog" 
+CXX_INCLUDES = -I/home/marcos/ClionProjects/Megaman/glog/src -I/home/marcos/ClionProjects/Megaman/glog 
 

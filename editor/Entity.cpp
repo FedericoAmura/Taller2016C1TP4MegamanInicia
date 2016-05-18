@@ -30,18 +30,6 @@ string indentate(size_t indent){
     return s.str();
 }
 
-/*
-string Entity::asJson(size_t x, size_t y, size_t indent) {
-    stringstream s;
-    s << indentate(indent) << "{\"x\":" << x << ",\n";
-    s << indentate(indent) << "\"y\":" << y << ",\n";
-    s << indentate(indent) << "\"id\":" << id << ",\n";
-    s << indentate(indent) << "\"orientation\":" ;
-    s << "\"" << this->getOrientation() << "\"}";
-    return s.str();
-}
-*/
-
 
 
 

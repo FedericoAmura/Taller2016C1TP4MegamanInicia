@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/nicolas/workspace/Copy of TpFinal/glog/src/base/commandlineflags.h
+/home/marcos/ClionProjects/Megaman/glog/src/base/commandlineflags.h
 config.h
-/home/nicolas/workspace/Copy of TpFinal/glog/src/base/config.h
+/home/marcos/ClionProjects/Megaman/glog/src/base/config.h
 string
 -
 string.h
@@ -18,11 +18,11 @@ stdlib.h
 gflags/gflags.h
 -
 glog/logging.h
-/home/nicolas/workspace/Copy of TpFinal/glog/src/base/glog/logging.h
+/home/marcos/ClionProjects/Megaman/glog/src/base/glog/logging.h
 
-/home/nicolas/workspace/Copy of TpFinal/glog/src/base/mutex.h
+/home/marcos/ClionProjects/Megaman/glog/src/base/mutex.h
 config.h
-/home/nicolas/workspace/Copy of TpFinal/glog/src/base/config.h
+/home/marcos/ClionProjects/Megaman/glog/src/base/config.h
 windows.h
 -
 pthread.h
@@ -34,9 +34,9 @@ assert.h
 stdlib.h
 -
 
-/home/nicolas/workspace/Copy of TpFinal/glog/src/config.h
+/home/marcos/ClionProjects/Megaman/glog/src/config.h
 
-/home/nicolas/workspace/Copy of TpFinal/glog/src/glog/logging.h
+/home/marcos/ClionProjects/Megaman/glog/src/glog/logging.h
 errno.h
 -
 string.h
@@ -64,43 +64,43 @@ inttypes.h
 gflags/gflags.h
 -
 glog/log_severity.h
-/home/nicolas/workspace/Copy of TpFinal/glog/src/glog/glog/log_severity.h
+/home/marcos/ClionProjects/Megaman/glog/src/glog/glog/log_severity.h
 glog/vlog_is_on.h
-/home/nicolas/workspace/Copy of TpFinal/glog/src/glog/glog/vlog_is_on.h
+/home/marcos/ClionProjects/Megaman/glog/src/glog/glog/vlog_is_on.h
 
-/home/nicolas/workspace/Copy of TpFinal/glog/src/stacktrace.h
+/home/marcos/ClionProjects/Megaman/glog/src/stacktrace.h
 config.h
-/home/nicolas/workspace/Copy of TpFinal/glog/src/config.h
+/home/marcos/ClionProjects/Megaman/glog/src/config.h
 
-/home/nicolas/workspace/Copy of TpFinal/glog/src/stacktrace_unittest.cc
+/home/marcos/ClionProjects/Megaman/glog/src/stacktrace_unittest.cc
 utilities.h
-/home/nicolas/workspace/Copy of TpFinal/glog/src/utilities.h
+/home/marcos/ClionProjects/Megaman/glog/src/utilities.h
 stdio.h
 -
 stdlib.h
 -
 config.h
-/home/nicolas/workspace/Copy of TpFinal/glog/src/config.h
+/home/marcos/ClionProjects/Megaman/glog/src/config.h
 base/commandlineflags.h
-/home/nicolas/workspace/Copy of TpFinal/glog/src/base/commandlineflags.h
+/home/marcos/ClionProjects/Megaman/glog/src/base/commandlineflags.h
 glog/logging.h
-/home/nicolas/workspace/Copy of TpFinal/glog/src/glog/logging.h
+/home/marcos/ClionProjects/Megaman/glog/src/glog/logging.h
 stacktrace.h
-/home/nicolas/workspace/Copy of TpFinal/glog/src/stacktrace.h
+/home/marcos/ClionProjects/Megaman/glog/src/stacktrace.h
 execinfo.h
 -
 
-/home/nicolas/workspace/Copy of TpFinal/glog/src/utilities.h
+/home/marcos/ClionProjects/Megaman/glog/src/utilities.h
 base/mutex.h
-/home/nicolas/workspace/Copy of TpFinal/glog/src/base/mutex.h
+/home/marcos/ClionProjects/Megaman/glog/src/base/mutex.h
 string
 -
 port.h
-/home/nicolas/workspace/Copy of TpFinal/glog/src/port.h
+/home/marcos/ClionProjects/Megaman/glog/src/port.h
 config.h
-/home/nicolas/workspace/Copy of TpFinal/glog/src/config.h
+/home/marcos/ClionProjects/Megaman/glog/src/config.h
 glog/logging.h
-/home/nicolas/workspace/Copy of TpFinal/glog/src/glog/logging.h
+/home/marcos/ClionProjects/Megaman/glog/src/glog/logging.h
 
 glog/vlog_is_on.h
 glog/log_severity.h

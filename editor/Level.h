@@ -8,6 +8,7 @@
 #include <vector>
 #include "Entity.h"
 #include "Layer.h"
+//#include <../json/json.h>
 
 using std::vector;
 
@@ -29,9 +30,9 @@ private:
 
 public:
     //Level(string json_file);
-    explicit Level(uint len);//TODO Nico: meti explicit aca
+    explicit Level(uint len);
     void setBackgroundColor(color_t r, color_t g, color_t b);
-    //void toJson(string file_name);
+    void toJson(string file_name);
     bool addEntity(prototype_t prototype, string layer);
     bool removeEntity(uint x, uint y, string layer);
 

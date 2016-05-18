@@ -163,7 +163,7 @@
 /* #undef PTHREAD_CREATE_JOINABLE */
 
 /* The size of `void *', as computed by sizeof. */
-#define SIZEOF_VOID_P 4
+#define SIZEOF_VOID_P 8
 
 /* Define to 1 if you have the ANSI C header files. */
 /* #undef STDC_HEADERS */
@@ -172,7 +172,7 @@
 #define STL_NAMESPACE std
 
 /* location of source code */
-#define TEST_SRC_DIR "/home/nicolas/workspace/Copy of TpFinal/glog"
+#define TEST_SRC_DIR "/home/marcos/ClionProjects/Megaman/glog"
 
 /* Version number of package */
 /* #undef VERSION */

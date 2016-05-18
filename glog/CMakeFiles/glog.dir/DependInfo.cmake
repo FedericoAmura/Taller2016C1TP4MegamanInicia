@@ -4,13 +4,13 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/nicolas/workspace/Copy of TpFinal/glog/src/demangle.cc" "/home/nicolas/workspace/Copy of TpFinal/glog/CMakeFiles/glog.dir/src/demangle.cc.o"
-  "/home/nicolas/workspace/Copy of TpFinal/glog/src/logging.cc" "/home/nicolas/workspace/Copy of TpFinal/glog/CMakeFiles/glog.dir/src/logging.cc.o"
-  "/home/nicolas/workspace/Copy of TpFinal/glog/src/raw_logging.cc" "/home/nicolas/workspace/Copy of TpFinal/glog/CMakeFiles/glog.dir/src/raw_logging.cc.o"
-  "/home/nicolas/workspace/Copy of TpFinal/glog/src/signalhandler.cc" "/home/nicolas/workspace/Copy of TpFinal/glog/CMakeFiles/glog.dir/src/signalhandler.cc.o"
-  "/home/nicolas/workspace/Copy of TpFinal/glog/src/symbolize.cc" "/home/nicolas/workspace/Copy of TpFinal/glog/CMakeFiles/glog.dir/src/symbolize.cc.o"
-  "/home/nicolas/workspace/Copy of TpFinal/glog/src/utilities.cc" "/home/nicolas/workspace/Copy of TpFinal/glog/CMakeFiles/glog.dir/src/utilities.cc.o"
-  "/home/nicolas/workspace/Copy of TpFinal/glog/src/vlog_is_on.cc" "/home/nicolas/workspace/Copy of TpFinal/glog/CMakeFiles/glog.dir/src/vlog_is_on.cc.o"
+  "/home/marcos/ClionProjects/Megaman/glog/src/demangle.cc" "/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/glog.dir/src/demangle.cc.o"
+  "/home/marcos/ClionProjects/Megaman/glog/src/logging.cc" "/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/glog.dir/src/logging.cc.o"
+  "/home/marcos/ClionProjects/Megaman/glog/src/raw_logging.cc" "/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/glog.dir/src/raw_logging.cc.o"
+  "/home/marcos/ClionProjects/Megaman/glog/src/signalhandler.cc" "/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/glog.dir/src/signalhandler.cc.o"
+  "/home/marcos/ClionProjects/Megaman/glog/src/symbolize.cc" "/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/glog.dir/src/symbolize.cc.o"
+  "/home/marcos/ClionProjects/Megaman/glog/src/utilities.cc" "/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/glog.dir/src/utilities.cc.o"
+  "/home/marcos/ClionProjects/Megaman/glog/src/vlog_is_on.cc" "/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/glog.dir/src/vlog_is_on.cc.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

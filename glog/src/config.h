@@ -153,14 +153,14 @@
 #define PACKAGE_VERSION "0.3.4"
 
 /* How to access the PC from a struct ucontext */
-#define PC_FROM_UCONTEXT uc_mcontext.gregs[REG_EIP]
+#define PC_FROM_UCONTEXT uc_mcontext.gregs[REG_RIP]
 
 /* Define to necessary symbol if this constant uses a non-standard name on
    your system. */
 /* #undef PTHREAD_CREATE_JOINABLE */
 
 /* The size of `void *', as computed by sizeof. */
-#define SIZEOF_VOID_P 4
+#define SIZEOF_VOID_P 8
 
 /* Define to 1 if you have the ANSI C header files. */
 /* #undef STDC_HEADERS */
@@ -179,12 +179,3 @@
 
 /* Puts following code inside the Google namespace */
 #define _START_GOOGLE_NAMESPACE_ namespace google {
-
-// Annoying stuff for windows -- makes sure clients can import these functions
-#ifndef GOOGLE_GLOG_DLL_DECL
-# if defined(_WIN32) && !defined(__CYGWIN__)
-#   define GOOGLE_GLOG_DLL_DECL  __declspec(dllimport)
-# else
-#   define GOOGLE_GLOG_DLL_DECL
-# endif
-#endif

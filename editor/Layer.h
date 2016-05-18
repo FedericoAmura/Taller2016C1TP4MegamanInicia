@@ -7,6 +7,7 @@
 
 
 #include "Entity.h"
+#include "../json/json.h"
 #include <vector>
 
 typedef unsigned int uint;
@@ -19,15 +20,17 @@ typedef struct prototype {
 
 class Layer {
 public:
-    Layer(){}; //TODO: Consultar sobre esto. (explicit al de abajo? Nico)
-    Layer(unsigned int length);
+    Layer(){} //TODO: Consultar sobre esto. (explicit al de abajo? Nico) No, no funciona. Marko
+    explicit Layer(uint length);
     ~Layer();
     bool addEntity(prototype_t prototype);
     bool removeEntity(uint x, uint y);
-    bool isEmpty(unsigned int x, unsigned int y);
+    bool isEmpty(uint x, uint y);
+    Json::Value toJson();
 private:
-    vector<vector <Entity*> >entities;
     uint length;
+    uint width;
+    vector<vector <Entity*> >entities;
 };
 
 

@@ -15,8 +15,9 @@ public:
     Entity(size_t id) : id(id) {};
     Entity(size_t id, string orientation);
     void rotate(string direction);
+    size_t getId() {return id;};
     string getOrientation();
-    //string asJson(size_t x, size_t y, size_t indent);
+    string toJson();
 private:
     size_t id;
     Orientation orientation;

@@ -48,10 +48,10 @@ RM = /usr/local/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/home/nicolas/workspace/Copy of TpFinal/glog"
+CMAKE_SOURCE_DIR = /home/marcos/ClionProjects/Megaman/glog
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/home/nicolas/workspace/Copy of TpFinal/glog"
+CMAKE_BINARY_DIR = /home/marcos/ClionProjects/Megaman/glog
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -78,70 +78,16 @@ test/fast: test
 
 .PHONY : test/fast
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/local/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/local/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: install/local
-
-.PHONY : install/local/fast
-
 # Special rule for the target package_source
 package_source:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool for source..."
-	/usr/local/bin/cpack --config ./CPackSourceConfig.cmake /home/nicolas/workspace/Copy\ of\ TpFinal/glog/CPackSourceConfig.cmake
+	/usr/local/bin/cpack --config ./CPackSourceConfig.cmake /home/marcos/ClionProjects/Megaman/glog/CPackSourceConfig.cmake
 .PHONY : package_source
 
 # Special rule for the target package_source
 package_source/fast: package_source
 
 .PHONY : package_source/fast
-
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
-
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/local/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/local/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: install/strip
-
-.PHONY : install/strip/fast
 
 # Special rule for the target install
 install: preinstall
@@ -155,11 +101,65 @@ install/fast: preinstall/fast
 	/usr/local/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/local/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/local/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/local/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: install/strip
+
+.PHONY : install/strip/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/local/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: install/local
+
+.PHONY : install/local/fast
+
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/nicolas/workspace/Copy of TpFinal/glog/CMakeFiles" "/home/nicolas/workspace/Copy of TpFinal/glog/CMakeFiles/progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/marcos/ClionProjects/Megaman/glog/CMakeFiles /home/marcos/ClionProjects/Megaman/glog/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/nicolas/workspace/Copy of TpFinal/glog/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/marcos/ClionProjects/Megaman/glog/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -188,19 +188,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named glog
-
-# Build rule for target.
-glog: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 glog
-.PHONY : glog
-
-# fast build rule for target.
-glog/fast:
-	$(MAKE) -f CMakeFiles/glog.dir/build.make CMakeFiles/glog.dir/build
-.PHONY : glog/fast
-
-#=============================================================================
 # Target rules for targets named logging_unittest
 
 # Build rule for target.
@@ -227,6 +214,19 @@ stl_logging_unittest/fast:
 .PHONY : stl_logging_unittest/fast
 
 #=============================================================================
+# Target rules for targets named utilities_unittest
+
+# Build rule for target.
+utilities_unittest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 utilities_unittest
+.PHONY : utilities_unittest
+
+# fast build rule for target.
+utilities_unittest/fast:
+	$(MAKE) -f CMakeFiles/utilities_unittest.dir/build.make CMakeFiles/utilities_unittest.dir/build
+.PHONY : utilities_unittest/fast
+
+#=============================================================================
 # Target rules for targets named symbolize_unittest
 
 # Build rule for target.
@@ -240,17 +240,17 @@ symbolize_unittest/fast:
 .PHONY : symbolize_unittest/fast
 
 #=============================================================================
-# Target rules for targets named utilities_unittest
+# Target rules for targets named demangle_unittest
 
 # Build rule for target.
-utilities_unittest: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 utilities_unittest
-.PHONY : utilities_unittest
+demangle_unittest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 demangle_unittest
+.PHONY : demangle_unittest
 
 # fast build rule for target.
-utilities_unittest/fast:
-	$(MAKE) -f CMakeFiles/utilities_unittest.dir/build.make CMakeFiles/utilities_unittest.dir/build
-.PHONY : utilities_unittest/fast
+demangle_unittest/fast:
+	$(MAKE) -f CMakeFiles/demangle_unittest.dir/build.make CMakeFiles/demangle_unittest.dir/build
+.PHONY : demangle_unittest/fast
 
 #=============================================================================
 # Target rules for targets named stacktrace_unittest
@@ -279,17 +279,17 @@ signalhandler_unittest/fast:
 .PHONY : signalhandler_unittest/fast
 
 #=============================================================================
-# Target rules for targets named demangle_unittest
+# Target rules for targets named glog
 
 # Build rule for target.
-demangle_unittest: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 demangle_unittest
-.PHONY : demangle_unittest
+glog: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 glog
+.PHONY : glog
 
 # fast build rule for target.
-demangle_unittest/fast:
-	$(MAKE) -f CMakeFiles/demangle_unittest.dir/build.make CMakeFiles/demangle_unittest.dir/build
-.PHONY : demangle_unittest/fast
+glog/fast:
+	$(MAKE) -f CMakeFiles/glog.dir/build.make CMakeFiles/glog.dir/build
+.PHONY : glog/fast
 
 src/demangle.o: src/demangle.cc.o
 
@@ -677,21 +677,21 @@ help:
 	@echo "... depend"
 	@echo "... package"
 	@echo "... test"
-	@echo "... edit_cache"
-	@echo "... glog"
+	@echo "... package_source"
+	@echo "... install"
 	@echo "... logging_unittest"
 	@echo "... stl_logging_unittest"
-	@echo "... install/local"
-	@echo "... package_source"
-	@echo "... symbolize_unittest"
-	@echo "... list_install_components"
 	@echo "... utilities_unittest"
+	@echo "... edit_cache"
+	@echo "... symbolize_unittest"
+	@echo "... demangle_unittest"
 	@echo "... stacktrace_unittest"
 	@echo "... rebuild_cache"
 	@echo "... signalhandler_unittest"
+	@echo "... list_install_components"
 	@echo "... install/strip"
-	@echo "... demangle_unittest"
-	@echo "... install"
+	@echo "... glog"
+	@echo "... install/local"
 	@echo "... src/demangle.o"
 	@echo "... src/demangle.i"
 	@echo "... src/demangle.s"

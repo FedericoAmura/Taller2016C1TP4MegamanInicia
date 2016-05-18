@@ -1,4 +1,4 @@
-# Install script for directory: /home/nicolas/workspace/Copy of TpFinal/glog
+# Install script for directory: /home/marcos/ClionProjects/Megaman/glog
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -33,24 +33,24 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "/home/nicolas/workspace/Copy of TpFinal/glog/libglog.a")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "/home/marcos/ClionProjects/Megaman/glog/libglog.a")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/glog" TYPE FILE FILES
-    "/home/nicolas/workspace/Copy of TpFinal/glog/config.h"
-    "/home/nicolas/workspace/Copy of TpFinal/glog/glog/logging.h"
-    "/home/nicolas/workspace/Copy of TpFinal/glog/glog/raw_logging.h"
-    "/home/nicolas/workspace/Copy of TpFinal/glog/glog/stl_logging.h"
-    "/home/nicolas/workspace/Copy of TpFinal/glog/glog/vlog_is_on.h"
-    "/home/nicolas/workspace/Copy of TpFinal/glog/src/glog/log_severity.h"
+    "/home/marcos/ClionProjects/Megaman/glog/config.h"
+    "/home/marcos/ClionProjects/Megaman/glog/glog/logging.h"
+    "/home/marcos/ClionProjects/Megaman/glog/glog/raw_logging.h"
+    "/home/marcos/ClionProjects/Megaman/glog/glog/stl_logging.h"
+    "/home/marcos/ClionProjects/Megaman/glog/glog/vlog_is_on.h"
+    "/home/marcos/ClionProjects/Megaman/glog/src/glog/log_severity.h"
     )
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/glog" TYPE FILE FILES
-    "/home/nicolas/workspace/Copy of TpFinal/glog/glog-config.cmake"
-    "/home/nicolas/workspace/Copy of TpFinal/glog/glog-config-version.cmake"
+    "/home/marcos/ClionProjects/Megaman/glog/glog-config.cmake"
+    "/home/marcos/ClionProjects/Megaman/glog/glog-config-version.cmake"
     )
 endif()
 
@@ -58,7 +58,7 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/glog/glog-targets.cmake")
     file(DIFFERENT EXPORT_FILE_CHANGED FILES
          "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/glog/glog-targets.cmake"
-         "/home/nicolas/workspace/Copy of TpFinal/glog/CMakeFiles/Export/lib/cmake/glog/glog-targets.cmake")
+         "/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/Export/lib/cmake/glog/glog-targets.cmake")
     if(EXPORT_FILE_CHANGED)
       file(GLOB OLD_CONFIG_FILES "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/glog/glog-targets-*.cmake")
       if(OLD_CONFIG_FILES)
@@ -67,9 +67,9 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
       endif()
     endif()
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/glog" TYPE FILE FILES "/home/nicolas/workspace/Copy of TpFinal/glog/CMakeFiles/Export/lib/cmake/glog/glog-targets.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/glog" TYPE FILE FILES "/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/Export/lib/cmake/glog/glog-targets.cmake")
   if("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^()$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/glog" TYPE FILE FILES "/home/nicolas/workspace/Copy of TpFinal/glog/CMakeFiles/Export/lib/cmake/glog/glog-targets-noconfig.cmake")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/glog" TYPE FILE FILES "/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/Export/lib/cmake/glog/glog-targets-noconfig.cmake")
   endif()
 endif()
 
@@ -81,5 +81,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/nicolas/workspace/Copy of TpFinal/glog/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/marcos/ClionProjects/Megaman/glog/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

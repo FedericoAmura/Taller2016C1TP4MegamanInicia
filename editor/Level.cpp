@@ -9,11 +9,11 @@
 #include "Level.h"
 
 #define WIDTH 15
-#define INDENT 1
 
 using std::stringstream;
 using std::ofstream;
 using std::make_pair;
+using std::runtime_error;
 
 Level::Level(uint len) : length(len) {
     layers.insert(make_pair("background", Layer(length)));
@@ -41,9 +41,25 @@ bool Level::removeEntity(uint x, uint y, string which_layer) {
 Layer& Level::getLayer(string which_layer) {
     Layer* layer = &layers[which_layer];
     if (layer == NULL){
-        throw std::runtime_error("Requested non-existent layer");
+        throw runtime_error("Requested non-existent layer");
     }
     return *layer;
+}
+
+void Level::toJson(string file_name) {
+    Json::Value level(Json::objectValue);
+    level["length"] = length;
+    level["width"] = WIDTH;
+    Json::Value color(Json::objectValue);
+    color["r"] = background_color.r;
+    color["g"] = background_color.g;
+    color["b"] = background_color.b;
+    level["background color"] = color;
+    level["background"] = layers["background"].toJson();
+    level["foreground"] = layers["foreground"].toJson();
+    ofstream out(file_name, ofstream::out);
+    out << level;
+    out.close();
 }
 
 

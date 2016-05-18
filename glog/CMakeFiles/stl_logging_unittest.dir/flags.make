@@ -6,5 +6,5 @@ CXX_FLAGS = -fvisibility=default -fvisibility-inlines-hidden   -Wno-deprecated -
 
 CXX_DEFINES = -DGLOG_STL_LOGGING_FOR_EXT_HASH -DGLOG_STL_LOGGING_FOR_EXT_SLIST -DGLOG_STL_LOGGING_FOR_TR1_UNORDERED -DGOOGLE_GLOG_DLL_DECL=""
 
-CXX_INCLUDES = -I"/home/nicolas/workspace/Copy of TpFinal/glog" -I"/home/nicolas/workspace/Copy of TpFinal/glog/src" 
+CXX_INCLUDES = -I/home/marcos/ClionProjects/Megaman/glog -I/home/marcos/ClionProjects/Megaman/glog/src 
 

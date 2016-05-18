@@ -1,12 +1,12 @@
 # CMake generated Testfile for 
-# Source directory: /home/nicolas/workspace/Copy of TpFinal/glog
-# Build directory: /home/nicolas/workspace/Copy of TpFinal/glog
+# Source directory: /home/marcos/ClionProjects/Megaman/glog
+# Build directory: /home/marcos/ClionProjects/Megaman/glog
 # 
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.
-add_test(demangle "/home/nicolas/workspace/Copy of TpFinal/glog/demangle_unittest")
-add_test(logging "/home/nicolas/workspace/Copy of TpFinal/glog/logging_unittest")
-add_test(signalhandler "/home/nicolas/workspace/Copy of TpFinal/glog/signalhandler_unittest")
-add_test(stacktrace "/home/nicolas/workspace/Copy of TpFinal/glog/stacktrace_unittest")
-add_test(stl_logging "/home/nicolas/workspace/Copy of TpFinal/glog/stl_logging_unittest")
-add_test(symbolize "/home/nicolas/workspace/Copy of TpFinal/glog/symbolize_unittest")
+add_test(demangle "/home/marcos/ClionProjects/Megaman/glog/demangle_unittest")
+add_test(logging "/home/marcos/ClionProjects/Megaman/glog/logging_unittest")
+add_test(signalhandler "/home/marcos/ClionProjects/Megaman/glog/signalhandler_unittest")
+add_test(stacktrace "/home/marcos/ClionProjects/Megaman/glog/stacktrace_unittest")
+add_test(stl_logging "/home/marcos/ClionProjects/Megaman/glog/stl_logging_unittest")
+add_test(symbolize "/home/marcos/ClionProjects/Megaman/glog/symbolize_unittest")

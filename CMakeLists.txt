@@ -22,10 +22,14 @@ include_directories( ${GTKMM_INCLUDE_DIRS}  )
 
 #Dependencias, agregar archivos en el ejecutable pertinente solamente
 #O usar un ejecutable por carpeta y usar FILE(GLOB var dir/*) (uno solo o hay choque de mains)
-set(SOURCE_FILES editor/main.cpp entities.h editor/Level.cpp editor/Level.h editor/Entity.cpp editor/Entity.h editor/Orientation.cpp editor/Orientation.h editor/Layer.cpp editor/Layer.h)
+set(SOURCE_FILES editor/main.cpp entities.h editor/Level.cpp editor/Level.h editor/Entity.cpp editor/Entity.h
+        editor/Orientation.cpp editor/Orientation.h editor/Layer.cpp editor/Layer.h jsoncpp.cpp
+        json/json-forwards.h json/json.h)
 add_executable(editor ${SOURCE_FILES})
 
-set(SOURCE_FILES editor/editor_test.cpp editor/Orientation.cpp editor/Orientation.h editor/Entity.cpp editor/Entity.h editor/Level.h editor/Level.cpp editor/Layer.cpp editor/Layer.h)
+set(SOURCE_FILES editor/editor_test.cpp editor/Orientation.cpp editor/Orientation.h editor/Entity.cpp editor/Entity.h
+        editor/Level.h editor/Level.cpp editor/Layer.cpp editor/Layer.h jsoncpp.cpp json/json-forwards.h
+        json/json.h)
 add_executable(editor_test ${SOURCE_FILES})
 
 FILE(GLOB CLIENT_SOURCE_FILES client/*)
@@ -33,8 +37,6 @@ add_executable(client ${CLIENT_SOURCE_FILES})
 
 FILE(GLOB SERVER_SOURCE_FILES server/*)
 add_executable(server ${SERVER_SOURCE_FILES})
-
-
 
 #linkeos
 target_link_libraries(editor_test ${GTKMM_LIBRARIES} )

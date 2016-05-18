@@ -8,7 +8,6 @@
 #include "Level.h"
 #include "Layer.h"
 #include "../entities.h"
-#include "JsonReader.h"
 
 #define SMALL 50
 #define BACKGROUND "false background"
@@ -52,36 +51,43 @@ void orientationTest(){
     printTest("Left of right is up", orientation.getOrientation() == "up");
 }
 
-void levelTest(){
+void levelTest(prototype_t p0){
     printTitle("Level Test");
     Level level = Level(SMALL);
-    prototype_t entity0;
-    entity0.x = entity0.y = 0;
-    entity0.id = SPIKE;
-    entity0.orientation = "up";
-    printTest("Adds entity", level.addEntity(entity0, "foreground"));
-    printTest("Does not add entity on top of existing one", !level.addEntity(entity0, "foreground"));
+
+    printTest("Adds entity", level.addEntity(p0, "foreground"));
+    printTest("Does not add entity on top of existing one", !level.addEntity(p0, "foreground"));
     printTest("Does not remove non-existing entity", !level.removeEntity(1, 1, "foreground"));
     printTest("Removes entity", level.removeEntity(0,0, "foreground"));
 }
 
-void jsonTest(){
-    /*
+void jsonTest(prototype_t p0, prototype_t p1, prototype_t b0){
     printTitle("JSON Test");
     string file_name = "test_level.json";
-    Level level = Level(SMALL, BACKGROUND);
-    level.addEntity(3, 5, SPARKMAN);
-    level.addEntity(1, 2, LADDER);
-    level.writeJsonFile(file_name);
-    JsonReader reader = JsonReader();
-    Level read = reader.read(file_name);
-    printTest("Reader did not write garbage", !read.removeEntity(0,0));
-    printTest("Reader included entity correctly", read.removeEntity(3,5));
-     */
+    Level level(SMALL);
+    level.addEntity(p0, "foreground");
+    level.addEntity(p1, "foreground");
+    level.addEntity(b0, "background");
+    level.toJson("test_level.json");
 }
 
 int main(){
+    prototype_t spike;
+    spike.x = spike.y = 0;
+    spike.id = SPIKE;
+    spike.orientation = "up";
+
+    prototype_t sparkman;
+    sparkman.x = sparkman.y = 5;
+    sparkman.id = SPARKMAN;
+    sparkman.orientation = "up";
+
+    prototype_t cave;
+    cave.x = cave.y = 5;
+    cave.id = SPARKMAN;
+    cave.orientation = "up";
+
     orientationTest();
-    levelTest();
-    jsonTest();
+    levelTest(spike);
+    jsonTest(spike, sparkman, cave);
 }

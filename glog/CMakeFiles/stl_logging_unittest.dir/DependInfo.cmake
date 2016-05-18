@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/nicolas/workspace/Copy of TpFinal/glog/src/stl_logging_unittest.cc" "/home/nicolas/workspace/Copy of TpFinal/glog/CMakeFiles/stl_logging_unittest.dir/src/stl_logging_unittest.cc.o"
+  "/home/marcos/ClionProjects/Megaman/glog/src/stl_logging_unittest.cc" "/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/stl_logging_unittest.dir/src/stl_logging_unittest.cc.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -24,7 +24,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/nicolas/workspace/Copy of TpFinal/glog/CMakeFiles/glog.dir/DependInfo.cmake"
+  "/home/marcos/ClionProjects/Megaman/glog/CMakeFiles/glog.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.
