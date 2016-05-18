@@ -5,7 +5,7 @@
  *      Author: nicolas
  */
 
-#include "../common/common_Thread.h"
+#include "Thread.h"
 
 #include <pthread.h>
 #include <stdexcept>

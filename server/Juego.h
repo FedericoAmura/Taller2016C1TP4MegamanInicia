@@ -5,19 +5,19 @@
  *      Author: nicolas
  */
 
-#ifndef COMMON_COMMON_JUEGO_H_
-#define COMMON_COMMON_JUEGO_H_
+#ifndef SERVER_JUEGO_H_
+#define SERVER_JUEGO_H_
 
 #include <queue>
 
 #include <map>
 #include <string>
 
-#include "../common/common_Evento.h"
-#include "../common/common_HandlerCoordinator.h"
-#include "../common/common_Observador.h"
-#include "../common/common_Socket.h"
-#include "../common/common_Thread.h"
+#include "Evento.h"
+#include "HandlerCoordinator.h"
+#include "Observador.h"
+#include "Socket.h"
+#include "Thread.h"
 class Server;//forward declaration
 
 
@@ -45,4 +45,4 @@ private:
 	bool seguirCorriendo();
 };
 
-#endif /* COMMON_COMMON_JUEGO_H_ */
+#endif /* SERVER_JUEGO_H_ */

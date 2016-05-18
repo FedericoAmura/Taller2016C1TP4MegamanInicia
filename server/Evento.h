@@ -5,8 +5,8 @@
  *      Author: nicolas
  */
 
-#ifndef COMMON_COMMON_EVENTO_H_
-#define COMMON_COMMON_EVENTO_H_
+#ifndef SERVER_EVENTO_H_
+#define SERVER_EVENTO_H_
 
 #include <string>
 
@@ -54,4 +54,4 @@ public:
 	std::string getMensaje();
 	int getDestino();
 };
-#endif /* COMMON_COMMON_EVENTO_H_ */
+#endif /* SERVER_EVENTO_H_ */

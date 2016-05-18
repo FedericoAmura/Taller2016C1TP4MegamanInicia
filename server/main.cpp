@@ -10,7 +10,7 @@
 #include <exception>
 #include <glog/logging.h>
 
-#include "../server/server_Server.h"
+#include "Server.h"
 
 #define POS_PUERTO 1
 

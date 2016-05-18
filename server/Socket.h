@@ -5,13 +5,13 @@
  *      Author: nicolas
  */
 
-#ifndef COMMON_COMMON_SOCKET_H_
-#define COMMON_COMMON_SOCKET_H_
+#ifndef SERVER_SOCKET_H_
+#define SERVER_SOCKET_H_
 
 #include <stdint.h>
 
-#include "../common/common_Observador.h"
-#include "../common/common_SendRecvThread.h"
+#include "Observador.h"
+#include "SendRecvThread.h"
 
 /*version concurrente de client socket*/
 class Socket :public Observador{
@@ -42,4 +42,4 @@ protected:
 	int descriptor;
 };
 
-#endif /* COMMON_COMMON_SOCKET_H_ */
+#endif /* SERVER_SOCKET_H_ */

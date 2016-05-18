@@ -5,7 +5,7 @@
  *      Author: nicolas
  */
 
-#include "../server/server_ServerSocket.h"
+#include "ServerSocket.h"
 
 #include <sys/socket.h>
 #include <arpa/inet.h>

@@ -5,14 +5,13 @@
  *      Author: nicolas
  */
 
-#include "../server/server_Server.h"
-
 #include <iostream>
 #include <string>
 #include <queue>
 #include <glog/logging.h>
 
-#include "../server/server_AcceptConnections.h"
+#include "Server.h"
+#include "AcceptConnections.h"
 
 /*pre: puerto es int comun, no hace falta aplicarle htons antes.
  *post: crea el server y lo deja listo para aceptar.

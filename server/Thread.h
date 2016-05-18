@@ -5,8 +5,8 @@
  *      Author: nicolas
  */
 
-#ifndef COMMON_COMMON_THREAD_H_
-#define COMMON_COMMON_THREAD_H_
+#ifndef SERVER_THREAD_H_
+#define SERVER_THREAD_H_
 #include <pthread.h>
 
 class Thread {

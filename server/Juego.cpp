@@ -7,12 +7,12 @@
 
 
 
-#include "../common/common_Juego.h"
+#include "Juego.h"
 
 #include <glog/logging.h>
 #include <map>
 #include <string>
-#include "../common/common_Handler.h"
+#include "Handler.h"
 
 #define TIMEOUT 10000
 

@@ -5,7 +5,7 @@
  *      Author: nicolas
  */
 
-#include "../common/common_HandlerCoordinator.h"
+#include "HandlerCoordinator.h"
 
 #include <map>
 #include <vector>

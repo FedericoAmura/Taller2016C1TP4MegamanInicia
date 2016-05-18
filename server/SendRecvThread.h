@@ -5,13 +5,13 @@
  *      Author: nicolas
  */
 
-#ifndef COMMON_COMMON_SENDRECVTHREAD_H_
-#define COMMON_COMMON_SENDRECVTHREAD_H_
+#ifndef SERVER_SENDRECVTHREAD_H_
+#define SERVER_SENDRECVTHREAD_H_
 
 #include <queue>
 #include <string>
-#include "../common/common_Observador.h"
-#include "../common/common_Thread.h"
+#include "Observador.h"
+#include "../server/Thread.h"
 
 class Socket;//forward declaration
 
@@ -35,4 +35,4 @@ public:
 	virtual ~RecvThread();
 	virtual void run();
 };
-#endif /* COMMON_COMMON_SENDRECVTHREAD_H_ */
+#endif /* SERVER_SENDRECVTHREAD_H_ */

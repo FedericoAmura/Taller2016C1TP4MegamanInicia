@@ -5,12 +5,12 @@
  *      Author: nicolas
  */
 
-#ifndef SERVER_SERVER_ACCEPTCONNECTIONS_H_
-#define SERVER_SERVER_ACCEPTCONNECTIONS_H_
+#ifndef SERVER_ACCEPTCONNECTIONS_H_
+#define SERVER_ACCEPTCONNECTIONS_H_
 
-#include "../common/common_Observador.h"
-#include "../common/common_Thread.h"
-#include "../server/server_ServerSocket.h"
+#include "Observador.h"
+#include "ServerSocket.h"
+#include "Thread.h"
 
 
 class AcceptConnections: public Thread {
@@ -24,4 +24,4 @@ private:
 	Observador* juego;
 };
 
-#endif /* SERVER_SERVER_ACCEPTCONNECTIONS_H_ */
+#endif /* SERVER_ACCEPTCONNECTIONS_H_ */

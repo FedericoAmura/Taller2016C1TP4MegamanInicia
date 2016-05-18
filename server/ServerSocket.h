@@ -5,8 +5,8 @@
  *      Author: nicolas
  */
 
-#ifndef SERVER_SERVER_SERVERSOCKET_H_
-#define SERVER_SERVER_SERVERSOCKET_H_
+#ifndef SERVER_SERVERSOCKET_H_
+#define SERVER_SERVERSOCKET_H_
 
 #include<arpa/inet.h>
 
@@ -24,4 +24,4 @@ private:
 	struct sockaddr_in server;
 };
 
-#endif /* SERVER_SERVER_SERVERSOCKET_H_ */
+#endif /* SERVER_SERVERSOCKET_H_ */

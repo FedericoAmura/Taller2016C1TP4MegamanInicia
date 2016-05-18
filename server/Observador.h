@@ -5,10 +5,10 @@
  *      Author: nicolas
  */
 
-#ifndef COMMON_COMMON_OBSERVADOR_H_
-#define COMMON_COMMON_OBSERVADOR_H_
+#ifndef SERVER_OBSERVADOR_H_
+#define SERVER_OBSERVADOR_H_
 
-#include "../common/common_Evento.h"
+#include "Evento.h"
 
 class Observador {
 public:
@@ -17,4 +17,4 @@ public:
 	virtual void notificar(Evento* e)=0;
 };
 
-#endif /* COMMON_COMMON_OBSERVADOR_H_ */
+#endif /* SERVER_OBSERVADOR_H_ */

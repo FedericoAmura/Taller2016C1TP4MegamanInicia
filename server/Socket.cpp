@@ -5,7 +5,7 @@
  *      Author: nicolas
  */
 
-#include "../common/common_Socket.h"
+#include "Socket.h"
 
 #include <sys/socket.h>
 #include <arpa/inet.h>

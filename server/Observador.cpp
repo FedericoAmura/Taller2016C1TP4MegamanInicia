@@ -5,7 +5,7 @@
  *      Author: nicolas
  */
 
-#include "../common/common_Observador.h"
+#include "Observador.h"
 
 Observador::Observador() {
 	// TODO Auto-generated constructor stub

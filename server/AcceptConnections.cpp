@@ -5,11 +5,11 @@
  *      Author: nicolas
  */
 
-#include "../server/server_AcceptConnections.h"
-
-#include <iostream>
-#include <vector>
 #include <glog/logging.h>
+#include <iostream>
+
+#include "AcceptConnections.h"
+#include "Evento.h"
 
 AcceptConnections::AcceptConnections(ServerSocket* server,Observador* juego) :
 server(server),juego(juego){}

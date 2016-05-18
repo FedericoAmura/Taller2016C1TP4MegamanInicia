@@ -5,16 +5,16 @@
  *      Author: nicolas
  */
 
-#ifndef COMMON_COMMON_HANDLERCOORDINATOR_H_
-#define COMMON_COMMON_HANDLERCOORDINATOR_H_
+#ifndef SERVER_HANDLERCOORDINATOR_H_
+#define SERVER_HANDLERCOORDINATOR_H_
 
 #include <map>
 #include <vector>
 
-#include "../common/common_Evento.h"
-#include "../common/common_Handler.h"
-#include "../common/common_Observador.h"
-#include "../common/common_Thread.h"
+#include "Evento.h"
+#include "Observador.h"
+#include "Thread.h"
+#include "Handler.h"
 
 class Handler;//forward declaration
 
@@ -40,4 +40,4 @@ public:
 	virtual ~HandlerThread();
 	virtual void run();
 };
-#endif /* COMMON_COMMON_HANDLERCOORDINATOR_H_ */
+#endif /* SERVER_HANDLERCOORDINATOR_H_ */

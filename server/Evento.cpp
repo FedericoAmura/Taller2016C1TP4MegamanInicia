@@ -5,7 +5,7 @@
  *      Author: nicolas
  */
 
-#include "../common/common_Evento.h"
+#include "Evento.h"
 
 #include <string>
 

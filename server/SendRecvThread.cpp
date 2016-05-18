@@ -5,15 +5,15 @@
  *      Author: nicolas
  */
 
-#include "../common/common_SendRecvThread.h"
+#include "../server/SendRecvThread.h"
 
 #include <string>
 #include <unistd.h>
 #include <glog/logging.h>
 #include <sstream>
 
-#include "../common/common_Evento.h"
-#include "../common/common_Socket.h"
+#include "Evento.h"
+#include "Socket.h"
 
 #define TIMEOUT 10000
 

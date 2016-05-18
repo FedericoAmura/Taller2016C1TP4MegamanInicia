@@ -5,12 +5,12 @@
  *      Author: nicolas
  */
 
-#ifndef SERVER_SERVER_SERVER_H_
-#define SERVER_SERVER_SERVER_H_
+#ifndef SERVER_SERVER_H_
+#define SERVER_SERVER_H_
 
-#include "../common/common_Juego.h"
-#include "../server/server_AcceptConnections.h"
-#include "../server/server_ServerSocket.h"
+#include "AcceptConnections.h"
+#include "ServerSocket.h"
+#include "Juego.h"
 
 class Server {
 public:
@@ -24,4 +24,4 @@ private:
 	AcceptConnections aceptador;
 };
 
-#endif /* SERVER_SERVER_SERVER_H_ */
+#endif /* SERVER_SERVER_H_ */

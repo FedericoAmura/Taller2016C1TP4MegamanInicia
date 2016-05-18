@@ -5,10 +5,10 @@
  *      Author: nicolas
  */
 
-#ifndef COMMON_COMMON_HANDLER_H_
-#define COMMON_COMMON_HANDLER_H_
+#ifndef SERVER_HANDLER_H_
+#define SERVER_HANDLER_H_
 
-#include "../common/common_Evento.h"
+#include "Evento.h"
 
 class Juego;//forward declaration
 
@@ -46,4 +46,4 @@ public:
 	virtual ~EnviarMensaje();
 	void handle(Evento* e);
 };
-#endif /* COMMON_COMMON_HANDLER_H_ */
+#endif /* SERVER_HANDLER_H_ */

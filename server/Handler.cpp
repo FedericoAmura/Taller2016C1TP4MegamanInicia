@@ -5,13 +5,13 @@
  *      Author: nicolas
  */
 
-#include "../common/common_Handler.h"
+#include "Handler.h"
 
 #include <sstream>
 #include <string>
 #include <glog/logging.h>
-#include "../common/common_Evento.h"
-#include "../common/common_Juego.h"
+#include "Evento.h"
+#include "Juego.h"
 
 Handler::Handler(Juego* j):juego(j){}
 
