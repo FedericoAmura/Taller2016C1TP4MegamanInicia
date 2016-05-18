@@ -11,6 +11,7 @@
 //#include <../json/json.h>
 
 using std::vector;
+using std::map;
 
 typedef unsigned int uint;
 typedef unsigned char color_t;

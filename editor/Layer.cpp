@@ -32,11 +32,10 @@ bool Layer::addEntity(prototype_t prototype) {
         throw runtime_error("Insertion out of bounds");
     }
     size_t id = prototype.id;
-    string orientation = prototype.orientation;
     if (!isEmpty(x, y)){
         return false;
     }
-    Entity* new_entity = new Entity(id, orientation);
+    Entity* new_entity = new Entity(id);
     entities[x][y] = new_entity;
     return true;
 }

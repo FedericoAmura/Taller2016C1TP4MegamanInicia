@@ -6,21 +6,15 @@
 #define MEGAMAN_ENTITY_H
 
 #include <string>
-#include "Orientation.h"
 
 using std::string;
 
 class Entity {
 public:
     Entity(size_t id) : id(id) {};
-    Entity(size_t id, string orientation);
-    void rotate(string direction);
     size_t getId() {return id;};
-    string getOrientation();
-    string toJson();
 private:
     size_t id;
-    Orientation orientation;
 };
 
 #endif //MEGAMAN_ENTITY_H

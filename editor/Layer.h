@@ -10,12 +10,13 @@
 #include "../json/json.h"
 #include <vector>
 
+using std::vector;
+
 typedef unsigned int uint;
 typedef struct prototype {
     uint x;
     uint y;
     size_t id;
-    string orientation;
 } prototype_t;
 
 class Layer {

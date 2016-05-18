@@ -23,11 +23,11 @@ include_directories( ${GTKMM_INCLUDE_DIRS}  )
 #Dependencias, agregar archivos en el ejecutable pertinente solamente
 #O usar un ejecutable por carpeta y usar FILE(GLOB var dir/*) (uno solo o hay choque de mains)
 set(SOURCE_FILES editor/main.cpp entities.h editor/Level.cpp editor/Level.h editor/Entity.cpp editor/Entity.h
-        editor/Orientation.cpp editor/Orientation.h editor/Layer.cpp editor/Layer.h jsoncpp.cpp
+        editor/Layer.cpp editor/Layer.h jsoncpp.cpp
         json/json-forwards.h json/json.h)
 add_executable(editor ${SOURCE_FILES})
 
-set(SOURCE_FILES editor/editor_test.cpp editor/Orientation.cpp editor/Orientation.h editor/Entity.cpp editor/Entity.h
+set(SOURCE_FILES editor/editor_test.cpp editor/Entity.cpp editor/Entity.h
         editor/Level.h editor/Level.cpp editor/Layer.cpp editor/Layer.h jsoncpp.cpp json/json-forwards.h
         json/json.h)
 add_executable(editor_test ${SOURCE_FILES})
