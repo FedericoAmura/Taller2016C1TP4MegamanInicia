@@ -19,7 +19,7 @@ typedef struct prototype {
 
 class Layer {
 public:
-    Layer(){}; //TODO: Consultar sobre esto.
+    Layer(){}; //TODO: Consultar sobre esto. (explicit al de abajo? Nico)
     Layer(unsigned int length);
     ~Layer();
     bool addEntity(prototype_t prototype);

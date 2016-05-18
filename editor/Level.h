@@ -29,7 +29,7 @@ private:
 
 public:
     //Level(string json_file);
-    Level(uint len);
+    explicit Level(uint len);//TODO Nico: meti explicit aca
     void setBackgroundColor(color_t r, color_t g, color_t b);
     //void toJson(string file_name);
     bool addEntity(prototype_t prototype, string layer);

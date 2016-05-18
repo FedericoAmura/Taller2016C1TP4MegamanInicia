@@ -56,7 +56,8 @@ Level JsonReader::levelInit(ifstream& file) {
     if (length == 0 || background_name == ""){
         //TODO: error
     }
-    return Level(length, background_name);
+    //return Level(length, background_name);//TODO comente para que compile: Nico
+    return Level(length);//TODO cambiar por lo de arriba (o asi estaba)
 }
 
 
@@ -83,7 +84,14 @@ void JsonReader::addEntities(ifstream& file, Level& level) {
         id = atoi(getValue(line).c_str());
         getline(file, line);
         orientation = getValue(line);
-        level.addEntity((uint) x, (uint) y, (size_t) id, orientation);
+	//TODO Nico: comente la 1er linea aniadi el resto aca abajo para que compile
+        //level.addEntity((uint) x, (uint) y, (size_t) id, orientation);
+	//a partir de aca meti yo, sacalo o saca mis comentarios, como te valla, #include "Level.h"?
+	prototype_t p;
+	p.x=(uint)x;
+	p.y=(uint)y;
+	p.id=(size_t)id;
+	level.addEntity(p,orientation);
     }
 }
 
