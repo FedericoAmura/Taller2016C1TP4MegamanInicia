@@ -74,7 +74,7 @@ void jsonTest(prototype_t p0, prototype_t p1, prototype_t b0){
 int main(){
     prototype_t spike;
     spike.x = spike.y = 0;
-    spike.id = SPIKE;
+    spike.id = STONE_SPIKE;
     spike.orientation = "up";
 
     prototype_t sparkman;
