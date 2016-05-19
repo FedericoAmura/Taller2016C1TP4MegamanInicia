@@ -22,7 +22,7 @@ int main(int argc, char* argv[]){
 	google::SetLogDestination(google::FATAL,"log/server.FATAL");
 	FLAGS_logbuflevel=-1;//escribe los mensajes al instante
 	google::InitGoogleLogging(argv[0]);//inicializa logger
-	try{
+	if(argc==2)try{
 		Server server(strtol(argv[POS_PUERTO], NULL, 10));
 		server.correrServer();
 	}catch(std::exception& e){

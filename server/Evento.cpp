@@ -43,6 +43,8 @@ int MensajeRecibido::getReceptor(){
 	return receptor;
 }
 /***************************************************/
+/*dest es el numero descriptor del cliente.
+ * data es string no terminado en \n con caracteres comunes nada mas*/
 EnvioMensaje::EnvioMensaje(std::string data,int dest):data(data),destino(dest){
 	id=3;
 }

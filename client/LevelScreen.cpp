@@ -11,6 +11,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
+#include <cstdlib>
 
 
 LevelScreen::LevelScreen() {
@@ -29,9 +30,9 @@ LevelScreen::LevelScreen() {
 	std::cout << "Creamos el socket" << std::endl;
 	serverProxy = new Socket("127.0.0.1","4321");
 	std::cout << "mandamos primer mensaje" << std::endl;
-	serverProxy->enviar("nos conectamos en el juego");
+	serverProxy->enviar("nos conectamos en el juego\n");
 	std::cout << "mandamos segundo mensaje" << std::endl;
-	serverProxy->enviar("mando mensajes de prueba");
+	serverProxy->enviar("mando mensajes de prueba\n");
 	std::cout << "terminamos de construir la pantalla" << std::endl;
 }
 
@@ -88,7 +89,7 @@ void LevelScreen::stopLevel() {
 }
 
 bool LevelScreen::keyPress() {
-	serverProxy->enviar("FIREEEEEE\n");
+	serverProxy->enviar("FIRE\n");
 	return true;
 }
 

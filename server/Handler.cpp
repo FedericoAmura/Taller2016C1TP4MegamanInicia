@@ -9,9 +9,9 @@
 
 #include <sstream>
 #include <string>
-#include <glog/logging.h>
 #include "Evento.h"
 #include "Juego.h"
+#include <glog/logging.h>
 
 Handler::Handler(Juego* j):juego(j){}
 
@@ -33,15 +33,39 @@ RecibirMensaje::RecibirMensaje(Juego* j):Handler(j){}
 
 RecibirMensaje::~RecibirMensaje() {}
 
+#define ARRIBA 1
+#define DERECHA 2
+#define ABAJO 3
+#define IZQUIERDA 4
+
+template <typename T>
+std::string numeroATexto(T numero) {
+	std::stringstream ss;
+	ss << numero;
+	return ss.str();
+}
+
+void moverPersonaje(int direccion, int* px, int* py){
+	if ((ARRIBA == direccion) && (*py < 100)) *py = *py + 1;
+	if ((DERECHA == direccion) && (*px < 100)) *px = *px + 1;
+	if ((ABAJO == direccion) && (*py > 0)) *py = *py - 1;
+	if ((IZQUIERDA == direccion) && (*px > 0)) *px = *px - 1;
+}
+
 void RecibirMensaje::handle(Evento* e){
 	MensajeRecibido* evento= (MensajeRecibido*) e;
 	int procedencia= evento->getReceptor();
-	LOG(INFO)<<"mensaje recibido: "<< evento->getMensaje() <<" de: "<<procedencia;
+	LOG(INFO)<<"mensaje recibido: "<< evento->getMensaje() <<"	desde: "<<procedencia;
 
-	/*test*/
-	std::stringstream ss2;
-	ss2<<"hola_cliente!_para_mi_sos_ "<<procedencia;
-	juego->notificar(new EnvioMensaje(ss2.str(),procedencia));
+	//todo hacer que funcione
+	int p1x = 25;
+	int p1y = 25;
+	int p2x = 50;
+	int p2y = 50;
+	moverPersonaje(1+rand()%4,&p2x,&p2y);
+	std::string posp1 = "X1:" + numeroATexto(p1x) + "-Y1:" + numeroATexto(p1y);
+	std::string posp2 = "X2:" + numeroATexto(p2x) + "-Y2:" + numeroATexto(p2y);
+	juego->notificar(new EnvioMensaje(posp1+"/"+posp2,procedencia));
 }
 
 /*************************************************/
