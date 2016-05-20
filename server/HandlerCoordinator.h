@@ -10,6 +10,7 @@
 
 #include <map>
 #include <vector>
+#include <queue>
 
 #include "Evento.h"
 #include "Observador.h"
@@ -17,25 +18,50 @@
 #include "Handler.h"
 
 class Handler;//forward declaration
+class HandlerCoordinator;//forward declaration
 
+class JoinerThread: public Thread{
+	Mutex queueMutex;
+	std::queue<Thread*> queue;
+	HandlerCoordinator* coordinator;
+	Mutex stoppedMutex;
+	bool stopped;
+	bool proceed();
+
+public:
+	JoinerThread(HandlerCoordinator* h);
+	virtual ~JoinerThread();
+	virtual void run();
+	void stop();
+	void push(Thread* t);
+};
+
+/*********************************************************/
 class HandlerCoordinator {
 	std::map<int,Handler*> handlers;
-	Observador* juego;
+	Observador* game;
+	Mutex threadsMutex;
 	std::vector<Thread*> threads;
+	JoinerThread joiner;
 
 public:
 	explicit HandlerCoordinator(Observador* juego);
 	virtual ~HandlerCoordinator();
-	//todo considearar poder setear con un evento y handler
-	void setearHandler(int id, Handler* handler);
+	//todo consider set by event
+	void setHandler(int id, Handler* handler);
 	void handle(Evento* e);
+	void killThread(Thread* t);
 };
 
 /*********************************************************/
 class HandlerThread: public Thread{
-	Evento* evento;
+	static JoinerThread* joiner;
+	Evento* event;
 	Handler* handler;
+	void killMe();
+
 public:
+	static void setJoiner(JoinerThread* j);
 	HandlerThread(Handler* h,Evento* e);
 	virtual ~HandlerThread();
 	virtual void run();

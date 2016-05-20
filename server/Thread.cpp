@@ -9,8 +9,8 @@
 
 #include <pthread.h>
 #include <stdexcept>
-
-
+#include <cstring>
+#include <cerrno>
 
 void* Thread::runner(void *data) {
 	Thread *self = (Thread*)data;
@@ -24,8 +24,10 @@ Thread::Thread() {
 }
 
 void Thread::start() {
-	if(pthread_create(&thread, NULL, Thread::runner, this)!=0)
-		throw std::runtime_error("Error: creacion thread");
+	if(pthread_create(&thread, NULL, Thread::runner, this)!=0){
+		std::string s= strerror(errno);
+		throw std::runtime_error("Error: creacion thread - "+s);
+	}
 }
 
 void Thread::join() {

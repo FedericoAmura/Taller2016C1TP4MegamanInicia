@@ -13,13 +13,14 @@
 #include <map>
 #include <string>
 #include "Handler.h"
+#include "HandlerCoordinator.h"
 
 #define TIMEOUT 10000
 
 Juego::Juego(Server* server):continuar(true),server(server),manager(this) {
-	manager.setearHandler(1,new AceptarConeccion(this));
-	manager.setearHandler(2,new RecibirMensaje(this));
-	manager.setearHandler(3,new EnviarMensaje(this));
+	manager.setHandler(1,new AceptarConeccion(this));
+	manager.setHandler(2,new RecibirMensaje(this));
+	manager.setHandler(3,new EnviarMensaje(this));
 }
 
 Juego::~Juego() {

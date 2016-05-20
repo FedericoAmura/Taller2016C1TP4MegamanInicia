@@ -12,7 +12,7 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
-
+#include <glog/logging.h>
 
 LevelScreen::LevelScreen() {
 	const int width = Gdk::screen_width();
@@ -27,48 +27,49 @@ LevelScreen::LevelScreen() {
 	put(megaman1,width/4,height/4);
 	put(megaman2,width/2,height/2);
 
-	std::cout << "Creamos el socket" << std::endl;
+	LOG(INFO) << "Creamos el socket";
 	serverProxy = new Socket("127.0.0.1","4321");
-	std::cout << "mandamos primer mensaje" << std::endl;
+	LOG(INFO) << "mandamos primer mensaje";
 	serverProxy->enviar("nos conectamos en el juego\n");
-	std::cout << "mandamos segundo mensaje" << std::endl;
+	LOG(INFO) << "mandamos segundo mensaje";
 	serverProxy->enviar("mando mensajes de prueba\n");
-	std::cout << "terminamos de construir la pantalla" << std::endl;
+	LOG(INFO) << "terminamos de construir la pantalla";
 }
 
 void LevelScreen::startLevel() {
-	serverConn = Glib::signal_timeout().connect(sigc::mem_fun(*this,&LevelScreen::update),1000);
+	serverConn = Glib::signal_timeout().connect(sigc::mem_fun(*this,&LevelScreen::update),100);
 }
 
 bool LevelScreen::update() {
+	LOG(INFO)<<"empezo rutina update";
 	const int width = Gdk::screen_width();
 	const int height = Gdk::screen_height();
 
 	int start, end;
 	std::string aux = serverProxy->recibirHasta('\n');
-	std::cout << "Recibimos: " << aux << std::endl;
+	LOG(INFO) << "Recibimos: " << aux;
 
 	//Consigo las nuevas ubicaciones para los megamanes
 	//X1
 	start = 3;
 	end = aux.find("-Y1");
 	std::string posX1 = aux.substr(start,end-start);
-	std::cout << "posX1: " << posX1 << std::endl;
+	LOG(INFO) << "posX1: " << posX1;
 	//Y1
 	start = end+4;
 	end = aux.find("/X2",start);
 	std::string posY1 = aux.substr(start,end-start);
-	std::cout << "posY1: " << posY1 << std::endl;
+	LOG(INFO) << "posY1: " << posY1;
 	//X2
 	start = end+4;
 	end = aux.find("-Y2",start);
 	std::string posX2 = aux.substr(start,end-start);
-	std::cout << "posX2: " << posX2 << std::endl;
+	LOG(INFO)<< "posX2: " << posX2;
 	//Y2
 	start = end+4;
 	end = aux.length();
 	std::string posY2 = aux.substr(start,end-start);
-	std::cout << "posY2: " << posY2 << std::endl << std::endl;
+	LOG(INFO) << "posY2: " << posY2 ;
 
 
 	//Muevo el primer megaman
@@ -79,7 +80,7 @@ bool LevelScreen::update() {
 	//Mando mi velocidad segun las teclas que aprete
 
 	serverProxy->enviar("Tic\n");
-
+	LOG(INFO)<<"termino rutina update";
 	return true;
 }
 
