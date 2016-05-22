@@ -15,18 +15,13 @@
 #include "Drawables.h"
 
 LevelScreen::LevelScreen(MegamanClientModel& model) :
-	model(model) {
+model(model) {
 	const int width = Gdk::screen_width();
 	const int height = Gdk::screen_height();
 
 	//Dibujamos el fondo del nivel, igual despues se va a pasar al modelo como el fondo
 	levelBackground.setImage("../images/background1.jpg",width,height);
 	put(levelBackground,0,0);
-
-	Drawable* megamanUser = model.getDrawables().getDrawable(1);
-	put(megamanUser->getImage(),megamanUser->getX()*(width/100),megamanUser->getY()*(height/100));
-	Drawable* megamanRandom = model.getDrawables().getDrawable(0);
-	put(megamanRandom->getImage(),megamanRandom->getX()*(width/100),megamanRandom->getY()*(height/100));
 }
 
 void LevelScreen::startLevel() {
@@ -39,9 +34,22 @@ bool LevelScreen::update() {
 	const int height = Gdk::screen_height();
 
 	Drawable* megamanRandom = model.getDrawables().getDrawable(0);
-	move(megamanRandom->getImage(),megamanRandom->getX()*(width/100),megamanRandom->getY()*(height/100));
+	if (megamanRandom->isDrawed()) {
+		move(megamanRandom->getImage(),megamanRandom->getX()*(width/100),megamanRandom->getY()*(height/100));
+	} else {
+		put(megamanRandom->getImage(),megamanRandom->getX()*(width/100),megamanRandom->getY()*(height/100));
+		megamanRandom->setIsDrawed(true);
+		megamanRandom->getImage().show();
+	}
+
 	Drawable* megamanUser = model.getDrawables().getDrawable(1);
-	move(megamanUser->getImage(),megamanUser->getX()*(width/100),megamanUser->getY()*(height/100));
+	if (megamanUser->isDrawed()) {
+		move(megamanUser->getImage(),megamanUser->getX()*(width/100),megamanUser->getY()*(height/100));
+	} else {
+		put(megamanUser->getImage(),megamanUser->getX()*(width/100),megamanUser->getY()*(height/100));
+		megamanUser->setIsDrawed(true);
+		megamanUser->getImage().show();
+	}
 
 	return true;
 }

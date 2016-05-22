@@ -10,25 +10,25 @@
 
 #include <cstdbool>
 #include <string>
-#include <glibmm/main.h>
 
 #include "Socket.h"
 #include "Drawable.h"
 #include "Drawables.h"
 #include "MyArea.h"
+#include "Thread.h"
 
-class MegamanClientModel {
+class MegamanClientModel : public Thread {
 private:
-	sigc::connection serverReceiver;
 	Socket* serverProxy;
 	Drawables drawables;
+	bool recibirServer;
 
 public:
 	MegamanClientModel();
 	virtual ~MegamanClientModel();
 
 	Drawables& getDrawables();
-	bool updateDrawables();
+	void run();	//updateFromServer();
 
 	void connectServer(std::string ip, std::string port);
 	void disconnectServer();

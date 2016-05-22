@@ -13,6 +13,7 @@
 
 MegamanClientModel::MegamanClientModel() :
 serverProxy(nullptr) {
+	recibirServer = false;
 
 	//Pongo 2 megamanes para probar
 	Drawable* megamanRandom = new Drawable();
@@ -27,52 +28,56 @@ serverProxy(nullptr) {
 }
 
 MegamanClientModel::~MegamanClientModel() {
-	serverReceiver.disconnect();
-	serverProxy->cerrar();
-	if (serverProxy!=nullptr) delete(serverProxy);
-	serverProxy = nullptr;
+	if (serverProxy!=nullptr) {
+		//Dejo de recibir del server y me desconecto de el
+		recibirServer = false;
+		this->join();
+		serverProxy->cerrar();
+		delete(serverProxy);
+		serverProxy = nullptr;
+	}
 }
 
 Drawables& MegamanClientModel::getDrawables() {
 	return drawables;
 }
 
-bool MegamanClientModel::updateDrawables() {
-	int start, end;
-	serverProxy->enviar("Update\n");
-	std::string aux = serverProxy->recibirHasta('\n');
-	std::cout << aux << std::endl;
+void MegamanClientModel::run() {
+	//Este metodo recibe el mensaje del server, lo interpreta y afecta al modelo
+	//de manera acorde
+	//TODO Por ahora solo actualiza los 2 megamanes dibujados con el mensaje que le pusimos
+	while (recibirServer) {
+		int start, end;
+		serverProxy->enviar("Update\n");
+		std::string aux = serverProxy->recibirHasta('\n');
+		std::cout << aux << std::endl;
 
-	//Consigo las nuevas ubicaciones para los megamanes
-	//X1
-	start = 3;
-	end = aux.find("-Y1");
-	std::string posX1 = aux.substr(start,end-start);
-	//std::cout << "posX1: " << posX1 << std::endl;
-	//Y1
-	start = end+4;
-	end = aux.find("/X2",start);
-	std::string posY1 = aux.substr(start,end-start);
-	//std::cout << "posY1: " << posY1 << std::endl;
-	//X2
-	start = end+4;
-	end = aux.find("-Y2",start);
-	std::string posX2 = aux.substr(start,end-start);
-	//std::cout << "posX2: " << posX2 << std::endl;
-	//Y2
-	start = end+4;
-	end = aux.length();
-	std::string posY2 = aux.substr(start,end-start);
-	//std::cout << "posY2: " << posY2 << std::endl;
+		//X1
+		start = 3;
+		end = aux.find("-Y1");
+		std::string posX1 = aux.substr(start,end-start);
+		//Y1
+		start = end+4;
+		end = aux.find("/X2",start);
+		std::string posY1 = aux.substr(start,end-start);
+		//X2
+		start = end+4;
+		end = aux.find("-Y2",start);
+		std::string posX2 = aux.substr(start,end-start);
+		//Y2
+		start = end+4;
+		end = aux.length();
+		std::string posY2 = aux.substr(start,end-start);
 
-	drawables.getDrawable(1)->setCoordinates(posX1, posY1);
-	drawables.getDrawable(0)->setCoordinates(posX2, posY2);
-	return true;
+		drawables.getDrawable(1)->setCoordinates(posX1, posY1);
+		drawables.getDrawable(0)->setCoordinates(posX2, posY2);
+	}
 }
 
 void MegamanClientModel::connectServer(std::string ip, std::string port) {
 	serverProxy = new Socket(ip, port);
-	serverReceiver = Glib::signal_timeout().connect(sigc::mem_fun(*this,&MegamanClientModel::updateDrawables),15);
+	recibirServer = true;
+	this->start();
 }
 
 void MegamanClientModel::disconnectServer() {
