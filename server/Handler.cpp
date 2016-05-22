@@ -67,7 +67,7 @@ void RecibirMensaje::handle(Evento* e){
 	}
 
 	//todo hacer que funcione
-	moverPersonaje(1+rand()%4,&p2x,&p2y);
+	moverPersonaje(2+rand()%4,&p2x,&p2y);
 	std::string posp1 = "X1:" + numeroATexto(p1x) + "-Y1:" + numeroATexto(p1y);
 	std::string posp2 = "X2:" + numeroATexto(p2x) + "-Y2:" + numeroATexto(p2y);
 	juego->notificar(new EnvioMensaje(posp1+"/"+posp2,procedencia));
