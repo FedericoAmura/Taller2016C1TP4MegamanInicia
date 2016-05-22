@@ -9,7 +9,7 @@
 
 #include <iostream>
 
-#include "ClientKeyCodes.h"
+#include "CommunicationCodes.h"
 
 MegamanClientModel::MegamanClientModel() :
 serverProxy(nullptr) {

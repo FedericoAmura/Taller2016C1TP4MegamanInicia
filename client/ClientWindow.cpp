@@ -12,7 +12,7 @@
 #include <gtkmm/button.h>
 #include <iostream>
 
-#include "ClientKeyCodes.h"
+#include "CommunicationCodes.h"
 
 ClientWindow::ClientWindow() :
 	connectionWindow(model),

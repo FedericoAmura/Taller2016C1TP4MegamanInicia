@@ -33,6 +33,11 @@ public:
 
 /*************************************************/
 class RecibirMensaje: public Handler{
+private:
+	int p1x;
+	int p1y;
+	int p2x;
+	int p2y;
 public:
 	explicit RecibirMensaje(Juego* j);
 	virtual ~RecibirMensaje();

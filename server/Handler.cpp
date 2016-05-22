@@ -12,6 +12,7 @@
 #include "Evento.h"
 #include "Juego.h"
 #include <glog/logging.h>
+#include "CommunicationCodes.h"
 
 Handler::Handler(Juego* j):juego(j){}
 
@@ -29,7 +30,11 @@ void AceptarConeccion::handle(Evento* e){
 }
 
 /*************************************************/
-RecibirMensaje::RecibirMensaje(Juego* j):Handler(j){}
+RecibirMensaje::RecibirMensaje(Juego* j):Handler(j),
+		p1x(25),
+		p1y(25),
+		p2x(50),
+		p2y(50){}
 
 RecibirMensaje::~RecibirMensaje() {}
 
@@ -46,10 +51,10 @@ std::string numeroATexto(T numero) {
 }
 
 void moverPersonaje(int direccion, int* px, int* py){
-	if ((ARRIBA == direccion) && (*py < 100)) *py = *py + 1;
-	if ((DERECHA == direccion) && (*px < 100)) *px = *px + 1;
-	if ((ABAJO == direccion) && (*py > 0)) *py = *py - 1;
-	if ((IZQUIERDA == direccion) && (*px > 0)) *px = *px - 1;
+	if ((KEY_UP == direccion) && (*py > 0)) *py = *py - 1;
+	if ((KEY_RIGHT == direccion) && (*px < 100)) *px = *px + 1;
+	if ((KEY_DOWN == direccion) && (*py < 100)) *py = *py + 1;
+	if ((KEY_LEFT == direccion) && (*px > 0)) *px = *px - 1;
 }
 
 void RecibirMensaje::handle(Evento* e){
@@ -57,11 +62,11 @@ void RecibirMensaje::handle(Evento* e){
 	int procedencia= evento->getReceptor();
 	LOG(INFO)<<"mensaje recibido: "<< evento->getMensaje() <<"	desde: "<<procedencia;
 
+	if (evento->getMensaje().substr(0,1).compare("1") == 0){
+		moverPersonaje(atoi(evento->getMensaje().substr(2,1).c_str()),&p1x,&p1y);
+	}
+
 	//todo hacer que funcione
-	int p1x = 25;
-	int p1y = 25;
-	int p2x = 50;
-	int p2y = 50;
 	moverPersonaje(1+rand()%4,&p2x,&p2y);
 	std::string posp1 = "X1:" + numeroATexto(p1x) + "-Y1:" + numeroATexto(p1y);
 	std::string posp2 = "X2:" + numeroATexto(p2x) + "-Y2:" + numeroATexto(p2y);
