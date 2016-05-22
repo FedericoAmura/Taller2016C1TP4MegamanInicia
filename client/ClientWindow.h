@@ -10,34 +10,38 @@
 
 #include <gtkmm/stack.h>
 #include <gtkmm/window.h>
+#include <gdkmm/event.h>
+#include <gdkmm.h>
+#include <gdk/gdk.h>
 #include <cstdbool>
 
 #include "ConnectionScreen.h"
 #include "CreditsScreen.h"
 #include "LevelScreen.h"
 #include "LevelSelectorScreen.h"
+#include "MegamanClientModel.h"
 
 class ClientWindow : public Gtk::Window {
 private:
+	MegamanClientModel model;
 	Gtk::Stack screenContainer;
 	ConnectionScreen connectionWindow;
 	CreditsScreen creditsScreen;
 	LevelSelectorScreen levelSelectorScreen;
-	LevelScreen level;
+	LevelScreen levelScreen;
 
 public:
 	ClientWindow();
+	virtual ~ClientWindow();
 
-	void showStart();
-	void showCredits();
-	void showLevelSelector();
+	void showStartScreen();
+	void showCreditsScreen();
+	void startGameAndShowLevelSelector();
 	void showLevel();
 	void cleanLevelScreen();
 
-	virtual ~ClientWindow();
-
 private:
-	bool on_key_press_event(GdkEventKey* key_event) override;
+	bool on_key_press_event(GdkEventKey* key_event);
 };
 
 #endif /* SRC_CLIENTWINDOW_H_ */

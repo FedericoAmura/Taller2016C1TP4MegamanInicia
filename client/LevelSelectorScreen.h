@@ -12,10 +12,12 @@
 #include <gtkmm/grid.h>
 #include <gtkmm/label.h>
 
+#include "MegamanClientModel.h"
 #include "MyArea.h"
 
 class LevelSelectorScreen : public Gtk::Grid {
 private:
+	MegamanClientModel& model;
 	Gtk::Label messages;
 	Drawing sparkManIcon;
 	Gtk::Button sparkManButton;
@@ -37,7 +39,7 @@ private:
 	Gtk::Button shadowManButton;
 
 public:
-	LevelSelectorScreen();
+	LevelSelectorScreen(MegamanClientModel& model);
 	Gtk::Button& getMegamanButton();
 	virtual ~LevelSelectorScreen();
 };

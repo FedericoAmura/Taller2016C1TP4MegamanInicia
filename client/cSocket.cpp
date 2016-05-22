@@ -40,7 +40,7 @@ int socket_init_client(socket_t* skt,const char* protocol,const char* hostname){
 	}
 
 	//trato de crear el socket y conectar al servidor
-	for (ptr = result; ptr != NULL && are_we_connected == false;
+	for (ptr = result; ptr != NULL && !are_we_connected;
 			ptr = ptr->ai_next) {
 		aux = socket(ptr->ai_family, ptr->ai_socktype, ptr->ai_protocol);
 		if (aux == -1) {
@@ -57,7 +57,7 @@ int socket_init_client(socket_t* skt,const char* protocol,const char* hostname){
 	}
 	freeaddrinfo(result);
 
-	if (are_we_connected == false) {
+	if (!are_we_connected) {
 		return SOCKET_ERROR_CREANDO; // nos quedamos sin direcciones
 	}
 
@@ -144,8 +144,8 @@ int socket_send(socket_t* skt, const char* buffer, const unsigned int size){
 	bool is_the_remote_socket_closed = false;
 
 	while (bytes_sent < size &&
-			is_there_a_socket_error == false &&
-			is_the_remote_socket_closed == false) {
+			!is_there_a_socket_error &&
+			!is_the_remote_socket_closed) {
 		aux = send(skt->socketfd, &buffer[bytes_sent],
 				size - bytes_sent, MSG_NOSIGNAL);
 
@@ -173,8 +173,8 @@ int socket_receive(socket_t* skt, char* buffer, const unsigned int size){
 	bool is_the_remote_socket_closed = false;
 
 	while (bytes_received < size &&
-			is_there_a_socket_error == false &&
-			is_the_remote_socket_closed == false) {
+			!is_there_a_socket_error &&
+			!is_the_remote_socket_closed) {
 		aux = recv(skt->socketfd, &buffer[bytes_received],
 				size - bytes_received, MSG_NOSIGNAL);
 

@@ -14,24 +14,28 @@
 #include <gtkmm/fixed.h>
 #include <gtkmm/label.h>
 
+#include "MegamanClientModel.h"
 #include "MyArea.h"
 
 class ConnectionScreen : public Gtk::Fixed {
 private:
+	MegamanClientModel& model;
 	Drawing connectionBackground;
 	Gtk::Box connectionContainer;
-	Gtk::Label serverLabel;
 	Gtk::Entry serverAddress;
+	Gtk::Entry serverPort;
 	Gtk::Button serverButton;
 	Gtk::Box buttons;
 	Gtk::Button creditsButton;
 	Gtk::Button exitButton;
 
 public:
-	ConnectionScreen();
+	ConnectionScreen(MegamanClientModel& model);
 	Gtk::Button& getServerButton();
 	Gtk::Button& getCreditsButton();
 	Gtk::Button& getExitButton();
+	std::string getServerIP();
+	std::string getServerPort();
 	virtual ~ConnectionScreen();
 };
 

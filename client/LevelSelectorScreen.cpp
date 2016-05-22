@@ -10,7 +10,8 @@
 #include <gdkmm/general.h>
 #include <gtkmm/enums.h>
 
-LevelSelectorScreen::LevelSelectorScreen() {
+LevelSelectorScreen::LevelSelectorScreen(MegamanClientModel& model) :
+	model(model) {
 	const int width = Gdk::screen_width();
 	const int height = Gdk::screen_height();
 

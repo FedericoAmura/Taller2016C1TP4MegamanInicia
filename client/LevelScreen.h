@@ -13,19 +13,19 @@
 #include <gdkmm/event.h>
 #include <cstdbool>
 
+#include "MegamanClientModel.h"
+#include "Drawable.h"
 #include "MyArea.h"
 #include "Socket.h"
 
 class LevelScreen : public Gtk::Fixed {
 private:
+	MegamanClientModel& model;
+	sigc::connection updateScreenConn;
 	Drawing levelBackground;
-	Drawing megaman1;
-	Drawing megaman2;
-	sigc::connection serverConn;
-	Socket* serverProxy;
 
 public:
-	LevelScreen();
+	LevelScreen(MegamanClientModel& model);
 	void startLevel();
 	void stopLevel();
 	bool update();
