@@ -74,7 +74,6 @@ Json::Value Layer::toJson() {
                 entity_value["id"] = (uint) entities[i][j]->getId();
                 array.append(entity_value);
             }
-
         }
     }
     return array;
@@ -92,8 +91,3 @@ void Layer::visualize() {
         std::cout << std::endl;
     }
 }
-
-
-
-
-

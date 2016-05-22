@@ -11,8 +11,8 @@ using std::string;
 
 class Entity {
 public:
-    Entity(size_t id) : id(id) {};
-    size_t getId() {return id;};
+    Entity(size_t id) : id(id) {}
+    size_t getId() {return id;}
 private:
     size_t id;
 };

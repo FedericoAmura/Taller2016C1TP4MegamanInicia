@@ -16,7 +16,7 @@ typedef unsigned int uint;
 typedef struct prototype {
     uint x;
     uint y;
-    size_t id;
+    uint id;
 } prototype_t;
 
 class Layer {
