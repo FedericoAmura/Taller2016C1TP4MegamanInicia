@@ -16,9 +16,9 @@
 #include "Event.h"
 #include "HandlerCoordinator.h"
 #include "Socket.h"
-#include "Thread.h"
 #include "Model/MyLevel.h"
 #include "Observer.h"
+#include "Thread.h"
 class Server;//forward declaration
 
 class Game:public Thread,public Observer{

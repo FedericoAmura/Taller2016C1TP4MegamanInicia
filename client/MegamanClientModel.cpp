@@ -8,8 +8,9 @@
 #include "MegamanClientModel.h"
 
 #include <iostream>
+#include <string>
 
-#include "CommunicationCodes.h"
+#include "../common/CommunicationCodes.h"
 
 MegamanClientModel::MegamanClientModel() :
 serverProxy(nullptr) {

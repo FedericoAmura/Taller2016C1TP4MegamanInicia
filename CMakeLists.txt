@@ -35,11 +35,18 @@ set(SOURCE_FILES editor/editor_test.cpp editor/Entity.cpp editor/Entity.h
         json/json.h)
 add_executable(editor_test ${SOURCE_FILES})
 
-FILE(GLOB CLIENT_SOURCE_FILES client/*)
-add_executable(client ${CLIENT_SOURCE_FILES})
+#files comunes
+FILE(GLOB COMMON_SOURCE_FILES common/*)
 
+#files client en carpeta client
+FILE(GLOB CLIENT_SOURCE_FILES client/*)
+#ejecutable client
+add_executable(client ${CLIENT_SOURCE_FILES} ${COMMON_SOURCE_FILES})
+
+#files en carpeta server, de forma recursiva(incluye archivos de carpetas adentro de la carpeta)
 FILE(GLOB_RECURSE SERVER_SOURCE_FILES server/*)
-add_executable(server ${SERVER_SOURCE_FILES})
+#ejecutable server
+add_executable(server ${SERVER_SOURCE_FILES} ${COMMON_SOURCE_FILES})
 
 #linkeos
 target_link_libraries(editor_test ${GTKMM_LIBRARIES} )

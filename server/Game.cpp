@@ -1,12 +1,3 @@
-/*
- * server_Juego1.cpp
- *
- *  Created on: May 10, 2016
- *      Author: nicolas
- */
-
-
-
 #include <glog/logging.h>
 #include <map>
 #include <string>

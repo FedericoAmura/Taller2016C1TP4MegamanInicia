@@ -10,8 +10,9 @@
 
 #include <queue>
 #include <string>
-#include "../server/Thread.h"
+
 #include "Observer.h"
+#include "Thread.h"
 
 class Socket;//forward declaration
 

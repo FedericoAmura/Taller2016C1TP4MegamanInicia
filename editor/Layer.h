@@ -21,7 +21,7 @@ typedef struct prototype {
 
 class Layer {
 public:
-    Layer(){} //TODO: Consultar sobre esto. (explicit al de abajo? Nico) No, no funciona. Marko
+    Layer(){} //TODO: Consultar sobre esto.
     explicit Layer(uint length);
     ~Layer();
     bool addEntity(prototype_t prototype);

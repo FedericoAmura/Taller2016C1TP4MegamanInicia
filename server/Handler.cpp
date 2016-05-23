@@ -10,7 +10,7 @@
 #include <sstream>
 #include <string>
 #include <glog/logging.h>
-#include "CommunicationCodes.h"
+#include "../common/CommunicationCodes.h"
 #include "Event.h"
 #include "Game.h"
 

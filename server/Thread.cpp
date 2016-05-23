@@ -5,7 +5,7 @@
  *      Author: nicolas
  */
 
-#include "Thread.h"
+#include "../server/Thread.h"
 
 #include <pthread.h>
 #include <stdexcept>

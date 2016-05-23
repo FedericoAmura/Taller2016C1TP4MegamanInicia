@@ -9,8 +9,9 @@
 #define SERVER_MODEL_MYLEVEL_H_
 
 #include <Box2D/Box2D.h>
-#include "../Thread.h"
 #include <string>
+
+#include "../Thread.h"
 
 class Game;
 
