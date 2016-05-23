@@ -102,9 +102,8 @@ void Game::addClient(int descriptor){
 		//todo 1era coneccion especial
 		nuevoCliente->iniciarComunicaciones();
 		if(clients.size()==0){
-			//std::string msjPrimero= "sos el primer jugador";
-			//this->notify(new MessageSent(msjPrimero,descriptor));
-
+			std::string msjPrimero= "sos el primer jugador";
+			this->notify(new MessageSent(msjPrimero,descriptor));
 		}
 		clients[descriptor]=nuevoCliente;
 		LOG(INFO)<<"Cliente conectado nro: "
