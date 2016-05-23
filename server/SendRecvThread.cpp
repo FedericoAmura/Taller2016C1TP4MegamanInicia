@@ -30,7 +30,7 @@ void SendThread::run(){
 			aEnviar.pop();
 			mensaje.append("\n");
 			socket->send((char*)mensaje.c_str(),mensaje.size());
-			LOG(INFO)<<"enviado msg: "<<mensaje;
+			//LOG(INFO)<<"enviado msg: "<<mensaje;
 		}else{
 			usleep(TIMEOUT);
 		}

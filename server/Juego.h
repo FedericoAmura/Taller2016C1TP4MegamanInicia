@@ -18,6 +18,7 @@
 #include "Observador.h"
 #include "Socket.h"
 #include "Thread.h"
+#include "Model/MyLevel.h"
 class Server;//forward declaration
 
 
@@ -28,6 +29,7 @@ class Juego:public Thread,public Observador{
 	Mutex queueMutex;
 	std::queue<Evento*> eventQueue;
 	HandlerCoordinator manager;
+	MyLevel level;
 
 	/*candidato a extraer*/
 	Mutex clientesMutex;
@@ -38,6 +40,8 @@ public:
 	virtual void run();
 	void notificar(Evento* e);
 	void cerrar();
+
+	MyLevel* getLevel();
 
 	void aniadirCliente(int descriptor);
 	void enviarA(std::string data, int destino);

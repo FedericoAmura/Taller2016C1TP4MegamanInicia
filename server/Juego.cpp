@@ -12,18 +12,29 @@
 #include <glog/logging.h>
 #include <map>
 #include <string>
+#include <unistd.h>
 #include "Handler.h"
 #include "HandlerCoordinator.h"
+#include "Model/MyLevel.h"
 
 #define TIMEOUT 10000
 
-Juego::Juego(Server* server):continuar(true),server(server),manager(this) {
+Juego::Juego(Server* server):continuar(true),server(server),
+manager(this),level(this) {
 	manager.setHandler(1,new AceptarConeccion(this));
 	manager.setHandler(2,new RecibirMensaje(this));
 	manager.setHandler(3,new EnviarMensaje(this));
+	level.start();
 }
 
 Juego::~Juego() {
+	/*join level thread*/
+	if(level.isRunning()){
+		level.stop();
+		level.join();
+	}
+
+	/*free event queue resources*/
 	while(!eventQueue.empty()){
 		delete eventQueue.front();
 		eventQueue.pop();
@@ -46,9 +57,13 @@ void Juego::run(){
 		if(eventQueue.empty()){
 			usleep(TIMEOUT);
 		}else{
-			Lock l(queueMutex);
-			manager.handle(eventQueue.front());
-			eventQueue.pop();
+			Evento* e;
+			{
+				Lock l(queueMutex);
+				e=eventQueue.front();
+				eventQueue.pop();
+			}
+			manager.handle(e);
 		}
 	}
 	LOG(INFO)<<"loop eventos juego finalizado";
@@ -104,4 +119,8 @@ void Juego::enviarA(std::string data, int destino){
 			(clientes[destino])->enviar((char*)data.c_str());
 		}
 	}
+}
+
+MyLevel* Juego::getLevel(){
+	return &level;
 }

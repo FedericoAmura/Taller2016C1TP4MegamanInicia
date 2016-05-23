@@ -28,8 +28,6 @@ int main(int argc, char* argv[]){
 		server.correrServer();
 	}catch(std::exception& e){
 		LOG(FATAL) << e.what();
-	}catch(std::runtime_error& e){
-		LOG(FATAL) << e.what();
 	}
 	LOG(INFO)<<"programa server finalizado";
 }

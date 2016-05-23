@@ -11,7 +11,10 @@ pkg_check_modules(GTKMM gtkmm-3.0)
 #glog
 #set(glog_DIR "${CMAKE_CURRENT_SOURCE_DIR}/glog" )
 find_package (glog 0.3.4 REQUIRED)
-#pkg_check_modules(glog 0.3.4)
+
+#box2d
+add_subdirectory(Box2D)
+include_directories (${Box2D_SOURCE_DIR})
 
 #Aca van todos los flags del compilador
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pedantic -Wall -g -O0 -pthread " )
@@ -35,7 +38,7 @@ add_executable(editor_test ${SOURCE_FILES})
 FILE(GLOB CLIENT_SOURCE_FILES client/*)
 add_executable(client ${CLIENT_SOURCE_FILES})
 
-FILE(GLOB SERVER_SOURCE_FILES server/*)
+FILE(GLOB_RECURSE SERVER_SOURCE_FILES server/*)
 add_executable(server ${SERVER_SOURCE_FILES})
 
 #linkeos
@@ -44,3 +47,4 @@ target_link_libraries(editor ${GTKMM_LIBRARIES} )
 target_link_libraries(client ${GTKMM_LIBRARIES} )
 target_link_libraries (client glog::glog)
 target_link_libraries (server glog::glog)
+target_link_libraries (server Box2D)
