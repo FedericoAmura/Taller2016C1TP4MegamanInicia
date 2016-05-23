@@ -10,15 +10,15 @@
 
 #include <stdint.h>
 
-#include "Observador.h"
+#include "Observer.h"
 #include "SendRecvThread.h"
 
 /*version concurrente de client socket*/
-class Socket :public Observador{
+class Socket :public Observer{
 	friend class SendThread;
 	friend class RecvThread;
 
-	Observador* modelo;
+	Observer* modelo;
 	SendThread sendThr;
 	RecvThread recvThr;
 	bool comunicandose;
@@ -30,13 +30,13 @@ class Socket :public Observador{
 	void shutdown();
 
 public:
-	explicit Socket(Observador* modelo);
-	Socket(int descriptor,Observador* modelo);
+	explicit Socket(Observer* modelo);
+	Socket(int descriptor,Observer* modelo);
 	virtual ~Socket();
 	void iniciarComunicaciones();
 
 	void enviar(char* mensaje);
-	virtual void notificar(Evento* e);
+	virtual void notify(Event* e);
 
 protected:
 	int descriptor;

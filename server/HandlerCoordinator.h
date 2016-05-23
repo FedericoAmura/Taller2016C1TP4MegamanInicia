@@ -10,21 +10,21 @@
 
 #include <map>
 
-#include "Evento.h"
-#include "Observador.h"
+#include "Event.h"
 #include "Handler.h"
+#include "Observer.h"
 
 class Handler;//forward declaration
 
 class HandlerCoordinator {
 	std::map<int,Handler*> handlers;
-	Observador* game;
+	Observer* game;
 
 public:
-	explicit HandlerCoordinator(Observador* juego);
+	explicit HandlerCoordinator(Observer* juego);
 	virtual ~HandlerCoordinator();
 	//todo consider set by event
 	void setHandler(int id, Handler* handler);
-	void handle(Evento* e);
+	void handle(Event* e);
 };
 #endif /* SERVER_HANDLERCOORDINATOR_H_ */

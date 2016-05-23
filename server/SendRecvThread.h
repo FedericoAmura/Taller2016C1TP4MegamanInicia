@@ -10,8 +10,8 @@
 
 #include <queue>
 #include <string>
-#include "Observador.h"
 #include "../server/Thread.h"
+#include "Observer.h"
 
 class Socket;//forward declaration
 
@@ -28,10 +28,10 @@ public:
 
 class RecvThread: public Thread {
 	Socket* socket;
-	Observador* observador;
+	Observer* observador;
 
 public:
-	RecvThread(Socket* s, Observador* o);
+	RecvThread(Socket* s, Observer* o);
 	virtual ~RecvThread();
 	virtual void run();
 };

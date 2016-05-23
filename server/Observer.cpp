@@ -5,13 +5,13 @@
  *      Author: nicolas
  */
 
-#include "Observador.h"
+#include "Observer.h"
 
-Observador::Observador() {
+Observer::Observer() {
 	// TODO Auto-generated constructor stub
 }
 
-Observador::~Observador() {
+Observer::~Observer() {
 	// TODO Auto-generated destructor stub
 }
 

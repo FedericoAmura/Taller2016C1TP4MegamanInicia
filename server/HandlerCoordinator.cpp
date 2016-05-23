@@ -12,7 +12,7 @@
 #include <stdexcept>
 #include <glog/logging.h>
 
-HandlerCoordinator::HandlerCoordinator(Observador* juego):game(juego){
+HandlerCoordinator::HandlerCoordinator(Observer* juego):game(juego){
 }
 
 HandlerCoordinator::~HandlerCoordinator() {}
@@ -29,7 +29,7 @@ void HandlerCoordinator::setHandler(int id, Handler* handler){
 }
 
 /*assigns handler to event, then starts thread to handle it*/
-void HandlerCoordinator::handle(Evento*e){
+void HandlerCoordinator::handle(Event*e){
 	std::map<int,Handler*>::iterator handler= handlers.find(e->getId());
 	if(handler!=handlers.end()){
 		try{

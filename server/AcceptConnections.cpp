@@ -9,9 +9,10 @@
 #include <iostream>
 
 #include "AcceptConnections.h"
-#include "Evento.h"
 
-AcceptConnections::AcceptConnections(ServerSocket* server,Observador* juego) :
+#include "Event.h"
+
+AcceptConnections::AcceptConnections(ServerSocket* server,Observer* juego) :
 server(server),juego(juego){}
 
 
@@ -29,7 +30,7 @@ void AcceptConnections::run(){
 			continuar = false;
 		} else {
 			LOG(INFO)<<"coneccion entrante";
-			juego->notificar(new NuevaConeccion(descriptor));
+			juego->notify(new NewConnection(descriptor));
 		}
 	}
 	LOG(INFO)<<"fin thread de aceptar conecciones";

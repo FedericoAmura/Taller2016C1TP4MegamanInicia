@@ -8,43 +8,43 @@
 #ifndef SERVER_HANDLER_H_
 #define SERVER_HANDLER_H_
 
-#include "Evento.h"
+#include "Event.h"
 
-class Juego;//forward declaration
+class Game;//forward declaration
 
 /*clase abstracta, deben ser functors*/
 class Handler {
 public:
-	explicit Handler(Juego* j);
+	explicit Handler(Game* j);
 	virtual ~Handler();
-	virtual void handle(Evento* e)=0;
+	virtual void handle(Event* e)=0;
 
 protected:
-	Juego* juego;
+	Game* juego;
 };
 
 /*************************************************/
 class AceptarConeccion: public Handler{
 public:
-	explicit AceptarConeccion(Juego* j);
+	explicit AceptarConeccion(Game* j);
 	virtual ~AceptarConeccion();
-	void handle(Evento* e);
+	void handle(Event* e);
 };
 
 /*************************************************/
 class RecibirMensaje: public Handler{
 public:
-	explicit RecibirMensaje(Juego* j);
+	explicit RecibirMensaje(Game* j);
 	virtual ~RecibirMensaje();
-	void handle(Evento* e);
+	void handle(Event* e);
 	void moverPersonaje(int direccion);
 };
 
 /*************************************************/
 class EnviarMensaje: public Handler{
 public:
-	explicit EnviarMensaje(Juego* j);
+	explicit EnviarMensaje(Game* j);
 	virtual ~EnviarMensaje();
-	void handle(Evento* e);
+	void handle(Event* e);
 };
 #endif /* SERVER_HANDLER_H_ */

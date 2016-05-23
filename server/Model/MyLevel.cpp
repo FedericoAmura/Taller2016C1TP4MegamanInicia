@@ -8,20 +8,24 @@
 #include "MyLevel.h"
 
 #include <Box2D/Box2D.h>
-#include "../Juego.h"
-#include "../Evento.h"
 #include <string>
 #include <sstream>
 #include <glog/logging.h>
-#include <unistd.h>
+#include <unistd.h>//usleep
+#include <iomanip>//setprecision
+#include <iostream>//fixed
 
-#define STEPS_PER_SECOND 30.0
+#include "../Event.h"
+#include "../Game.h"
+
+#define STEPS_PER_SECOND 45.0
 #define SCALE 1
 
 #define ANCHO_SIM 100
 #define ALTO_SIM 100
 
-MyLevel::MyLevel(Juego* j):world(b2Vec2(-0.0f,-100),true),running(false),game(j) {
+MyLevel::MyLevel(Game* j)
+:world(b2Vec2(-0.0f,-100),true),running(false),game(j) {
 	world.SetContinuousPhysics(true);
 	world.SetContactListener(this);
 
@@ -75,19 +79,18 @@ bool MyLevel::isRunning(){
 	return running;
 }
 
-template <typename T>
-std::string numeroATexto(T numero) {
+std::string numeroATexto(float numero) {
 	std::stringstream ss;
-	ss << numero;
+	ss << std::fixed << std::setprecision(2)<< numero;
 	return ss.str();
 }
 
 /*transforms box2d position to client position format*/
 std::string MyLevel::posToString(b2Vec2 pos){
-	int p1x = 5;
-	int p1y = 5;
-	int p2x = pos.x *SCALE;
-	int p2y = (ALTO_SIM-pos.y) *SCALE;
+	float p1x = 5;
+	float p1y = 5;
+	float p2x = pos.x *SCALE;
+	float p2y = (ALTO_SIM-pos.y) *SCALE;
 	std::string pos1 = "X1:" + numeroATexto(p1x) + "-Y1:" + numeroATexto(p1y);
 	std::string pos2 = "X2:" + numeroATexto(p2x) + "-Y2:" + numeroATexto(p2y);
 	std::string final= pos1+"/"+pos2;
@@ -103,14 +106,17 @@ void MyLevel::run(){
 	float32 timeStep = 1.0f / STEPS_PER_SECOND;
 	int32 velocityIterations = 6;
 	int32 positionIterations = 2;
+	LOG(INFO)<<"physics simulation of level started";
+
 	while(isRunning()){
 		world.Step(timeStep, velocityIterations, positionIterations);
 		//todo si jugadores pasan mitad pantalla mover
 		//todo informar de todos los cambios
 		std::string msj=posToString(getPosMegaman());
-		game->notificar(new EnvioMensaje(msj,0));
+		game->notify(new MessageSent(msj,0));
 		usleep(timeStep* 1000000 );
 	}
+	LOG(INFO)<<"physics simulation of level stopped";
 }
 
 /*stops physics simulation after current frames is proccessed*/

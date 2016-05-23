@@ -9,8 +9,8 @@
 #define SERVER_SERVER_H_
 
 #include "AcceptConnections.h"
+#include "Game.h"
 #include "ServerSocket.h"
-#include "Juego.h"
 
 class Server {
 public:
@@ -20,7 +20,7 @@ public:
 
 private:
 	ServerSocket socket;
-	Juego juego;
+	Game juego;
 	AcceptConnections aceptador;
 };
 

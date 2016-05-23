@@ -12,7 +12,7 @@
 #include "../Thread.h"
 #include <string>
 
-class Juego;
+class Game;
 
 enum _moveState {
     MS_STOP,
@@ -24,12 +24,12 @@ class MyLevel: public Thread, public b2ContactListener {
 	b2World world;
 	Mutex runningMutex;
 	bool running;
-	Juego* game;
+	Game* game;
 	b2Body* megaman;
 	std::string posToString(b2Vec2 pos);
 
 public:
-	explicit MyLevel(Juego* j);
+	explicit MyLevel(Game* j);
 	virtual ~MyLevel();
 	void run();
 	void stop();

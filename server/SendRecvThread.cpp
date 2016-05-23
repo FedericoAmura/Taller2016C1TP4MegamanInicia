@@ -12,7 +12,7 @@
 #include <glog/logging.h>
 #include <sstream>
 
-#include "Evento.h"
+#include "Event.h"
 #include "Socket.h"
 
 #define TIMEOUT 10000
@@ -45,7 +45,7 @@ void SendThread::enviar(char* data){
 }
 
 /******************************************************************************/
-RecvThread::RecvThread(Socket* s, Observador* o):socket(s), observador(o) {}
+RecvThread::RecvThread(Socket* s, Observer* o):socket(s), observador(o) {}
 
 RecvThread::~RecvThread() {}
 
@@ -72,7 +72,7 @@ void RecvThread::run(){
 		}while(continuar);
 		if(recibi){
 			std::string recvStr=recibido.str();
-			observador->notificar(new MensajeRecibido(recvStr,socket->descriptor));
+			observador->notify(new MessageRecieved(recvStr,socket->descriptor));
 		}else{
 			usleep(TIMEOUT);
 		}

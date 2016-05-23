@@ -8,20 +8,20 @@
 #ifndef SERVER_ACCEPTCONNECTIONS_H_
 #define SERVER_ACCEPTCONNECTIONS_H_
 
-#include "Observador.h"
+#include "Observer.h"
 #include "ServerSocket.h"
 #include "Thread.h"
 
 
 class AcceptConnections: public Thread {
 public:
-	explicit AcceptConnections(ServerSocket* server,Observador* juego);
+	explicit AcceptConnections(ServerSocket* server,Observer* juego);
 	virtual ~AcceptConnections();
 	virtual void run();
 
 private:
 	ServerSocket* server;
-	Observador* juego;
+	Observer* juego;
 };
 
 #endif /* SERVER_ACCEPTCONNECTIONS_H_ */

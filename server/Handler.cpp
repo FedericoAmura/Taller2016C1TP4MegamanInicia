@@ -9,28 +9,28 @@
 
 #include <sstream>
 #include <string>
-#include "Evento.h"
-#include "Juego.h"
 #include <glog/logging.h>
 #include "CommunicationCodes.h"
+#include "Event.h"
+#include "Game.h"
 
-Handler::Handler(Juego* j):juego(j){}
+Handler::Handler(Game* j):juego(j){}
 
 Handler::~Handler() {}
 
 /*************************************************/
 /*constructor por herencia*/
-AceptarConeccion::AceptarConeccion(Juego* j):Handler(j){}
+AceptarConeccion::AceptarConeccion(Game* j):Handler(j){}
 
 AceptarConeccion::~AceptarConeccion() {}
 
-void AceptarConeccion::handle(Evento* e){
-	NuevaConeccion* evento=static_cast<NuevaConeccion*>(e);//todo error si no es
-	juego->aniadirCliente(evento->getDescriptor());
+void AceptarConeccion::handle(Event* e){
+	NewConnection* evento=static_cast<NewConnection*>(e);//todo error si no es
+	juego->addClient(evento->getDescriptor());
 }
 
 /*************************************************/
-RecibirMensaje::RecibirMensaje(Juego* j):Handler(j){}
+RecibirMensaje::RecibirMensaje(Game* j):Handler(j){}
 
 RecibirMensaje::~RecibirMensaje() {}
 
@@ -41,24 +41,28 @@ void RecibirMensaje::moverPersonaje(int direccion){
 	if (KEY_LEFT == direccion) juego->getLevel()->moveMegaman('a');
 }
 
-void RecibirMensaje::handle(Evento* e){
-	MensajeRecibido* evento= (MensajeRecibido*) e;
+void RecibirMensaje::handle(Event* e){
+	MessageRecieved* evento= (MessageRecieved*) e;
 	int procedencia= evento->getReceptor();
 
-	if (evento->getMensaje().substr(0,1).compare("1") == 0){
-		LOG(INFO)<<"mensaje recibido: "<< evento->getMensaje() <<"	desde: "<<procedencia;
-		moverPersonaje(atoi(evento->getMensaje().substr(2,1).c_str()));
+	if (evento->getMessage().substr(0,1).compare("1") == 0){
+		LOG(INFO)<<"mensaje recibido: "<< evento->getMessage() <<"	desde: "<<procedencia;
+		int keyPressed = atoi(evento->getMessage().substr(2, 1).c_str());
+		if(keyPressed==7)
+			juego->stopLevel();
+		else
+			moverPersonaje(keyPressed);
 	}
 }
 
 /*************************************************/
-EnviarMensaje::EnviarMensaje(Juego* j):Handler(j){}
+EnviarMensaje::EnviarMensaje(Game* j):Handler(j){}
 
 EnviarMensaje::~EnviarMensaje() {}
 
-void EnviarMensaje::handle(Evento* e){
-	EnvioMensaje* evento= (EnvioMensaje*) e;
-	std::string mensaje=evento->getMensaje();
-	int destino=evento->getDestino();
-	juego->enviarA(mensaje,destino);
+void EnviarMensaje::handle(Event* e){
+	MessageSent* evento= (MessageSent*) e;
+	std::string mensaje=evento->getMessage();
+	int destino=evento->getDestination();
+	juego->sendTo(mensaje,destino);
 }

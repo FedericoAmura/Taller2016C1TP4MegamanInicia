@@ -44,9 +44,9 @@ void Server::correrServer() {
 			continuar=false;
 	}while(continuar);
 	/*informe de cierre a clientes*/
-	juego.notificar(new EnvioMensaje("chau",0));
+	juego.notify(new MessageSent("chau",0));
 	sleep(1);
 	/*cierre*/
-	juego.cerrar();
+	juego.stop();
 	LOG(INFO)<<"server finalizado";
 }

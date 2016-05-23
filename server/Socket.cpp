@@ -14,7 +14,7 @@
 #include <glog/logging.h>
 
 /*crea un nuevo socket*/
-Socket::Socket(Observador* modelo):modelo(modelo),sendThr(this),
+Socket::Socket(Observer* modelo):modelo(modelo),sendThr(this),
 recvThr(this,modelo),comunicandose(false),abierto(true){
 	descriptor=socket(AF_INET,SOCK_STREAM,0);
 	if(descriptor<0){
@@ -23,7 +23,7 @@ recvThr(this,modelo),comunicandose(false),abierto(true){
 }
 
 /*arma el socket a partir de un descriptor*/
-Socket::Socket(int descriptor,Observador* modelo):modelo(modelo),
+Socket::Socket(int descriptor,Observer* modelo):modelo(modelo),
 		sendThr(this),recvThr(this,modelo),comunicandose(false),
 		abierto(true),descriptor(descriptor){
 }
@@ -90,8 +90,8 @@ bool Socket::recieve(char* data,int largo){
 }
 
 /*pasa el evento al modelo*/
-void Socket::notificar(Evento* e){
-	modelo->notificar(e);
+void Socket::notify(Event* e){
+	modelo->notify(e);
 }
 
 /*aniade mensaje a la cola de envio*/
