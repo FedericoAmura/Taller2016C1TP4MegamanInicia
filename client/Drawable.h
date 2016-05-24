@@ -10,7 +10,7 @@
 
 #include <string>
 
-#include "Mutex.h"
+#include "Thread.h"
 #include "MyArea.h"
 
 class Drawable {
@@ -29,8 +29,8 @@ public:
 	void setImage(std::string ruta, int width, int height);
 	void setCoordinates(const std::string &x, const std::string &y);
 	Drawing& getImage();
-	int getX();
-	int getY();
+	float getX();
+	float getY();
 	virtual ~Drawable();
 
 private:

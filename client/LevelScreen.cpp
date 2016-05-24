@@ -30,14 +30,14 @@ void LevelScreen::startLevel() {
 }
 
 bool LevelScreen::update() {
-	const int width = Gdk::screen_width();
-	const int height = Gdk::screen_height();
+	const float width = (float) Gdk::screen_width();
+	const float height = (float) Gdk::screen_height();
 
 	Drawable* megamanRandom = model.getDrawables().getDrawable(0);
 	if (megamanRandom->isDrawed()) {
-		move(megamanRandom->getImage(),megamanRandom->getX()*(width/100),megamanRandom->getY()*(height/100));
+		move(megamanRandom->getImage(),megamanRandom->getX()*(width/100.0),megamanRandom->getY()*(height/100));
 	} else {
-		put(megamanRandom->getImage(),megamanRandom->getX()*(width/100),megamanRandom->getY()*(height/100));
+		put(megamanRandom->getImage(),megamanRandom->getX()*(width/100.0),megamanRandom->getY()*(height/100));
 		megamanRandom->setIsDrawed(true);
 		megamanRandom->getImage().show();
 	}

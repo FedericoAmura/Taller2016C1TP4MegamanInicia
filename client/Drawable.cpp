@@ -7,8 +7,6 @@
 
 #include "Drawable.h"
 
-#include "Lock.h"
-
 Drawable::Drawable() :
 	dibujado(false),
 	isForeGround(true) {
@@ -41,13 +39,13 @@ Drawing& Drawable::getImage() {
 	return drawing;
 }
 
-int Drawable::getX() {
+float Drawable::getX() {
 	Lock l(m);
-	return atoi(posX.c_str());
+	return atof(posX.c_str());
 }
 
-int Drawable::getY() {
+float Drawable::getY() {
 	Lock l(m);
-	return atoi(posY.c_str());
+	return atof(posY.c_str());
 }
 

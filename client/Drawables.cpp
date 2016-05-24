@@ -7,8 +7,6 @@
 
 #include "Drawables.h"
 
-#include "Lock.h"
-
 Drawables::Drawables() {
 }
 
