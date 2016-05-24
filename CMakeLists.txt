@@ -9,7 +9,6 @@ find_package(PkgConfig)
 pkg_check_modules(GTKMM gtkmm-3.0)
 
 #glog
-#set(glog_DIR "${CMAKE_CURRENT_SOURCE_DIR}/glog" )
 find_package (glog 0.3.4 REQUIRED)
 
 #box2d
@@ -46,7 +45,7 @@ add_executable(client ${CLIENT_SOURCE_FILES} ${COMMON_SOURCE_FILES})
 #files en carpeta server, de forma recursiva(incluye archivos de carpetas adentro de la carpeta)
 FILE(GLOB_RECURSE SERVER_SOURCE_FILES server/*)
 #ejecutable server
-add_executable(server ${SERVER_SOURCE_FILES} ${COMMON_SOURCE_FILES})
+add_executable(server ${SERVER_SOURCE_FILES} ${COMMON_SOURCE_FILES} jsoncpp.cpp json/json-forwards.h json/json.h)
 
 #linkeos
 target_link_libraries(editor_test ${GTKMM_LIBRARIES} )

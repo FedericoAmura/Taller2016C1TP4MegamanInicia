@@ -15,12 +15,6 @@
 
 class Game;
 
-enum _moveState {
-    MS_STOP,
-    MS_LEFT,
-    MS_RIGHT,
-  };
-
 class MyLevel: public Thread, public b2ContactListener {
 	b2World world;
 	Mutex runningMutex;
@@ -28,9 +22,13 @@ class MyLevel: public Thread, public b2ContactListener {
 	Game* game;
 	b2Body* megaman;
 	std::string posToString(b2Vec2 pos);
+	float stepsPerSecond;
+	float scale;
+	float w_width;
+	float w_height;
 
 public:
-	explicit MyLevel(Game* j);
+	explicit MyLevel(Game* j,std::string lvlFileName);
 	virtual ~MyLevel();
 	void run();
 	void stop();

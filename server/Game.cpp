@@ -125,8 +125,8 @@ void Game::sendTo(std::string data, int destino){
 void Game::selectLevel(int levelId){
 	/*TODO default level for now*/
 	if(level==nullptr){
-		level= new MyLevel(this);
 		LOG(INFO)<<"level seleccionado: "<<levelId;
+		level= new MyLevel(this,"../server/Model/nivel_test.json");
 		level->start();
 	}
 }

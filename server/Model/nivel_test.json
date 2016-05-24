@@ -1,0 +1,20 @@
+{
+	"world":
+	{
+		"gravity": -100.0,
+		"width" : 95.0,
+		"height" : 95.0,
+		"scale" : 1.0,
+		"steps/second" : 60.0
+	},
+
+	"megaman":
+	{
+		"posX": 50.0,
+		"posY": 50.0,
+		"width" : 3.0,
+		"height" : 3.0,
+		"HSpeed" : 10.0,
+		"JFactor" : 0.5
+	}
+}

@@ -14,21 +14,34 @@
 #include <unistd.h>//usleep
 #include <iomanip>//setprecision
 #include <iostream>//fixed
+#include <fstream>//ifstream
 
 #include "../Event.h"
 #include "../Game.h"
+#include "../json/json.h"
 
-#define STEPS_PER_SECOND 45.0
-#define SCALE 1
-
-#define ANCHO_SIM 100
-#define ALTO_SIM 100
-
-MyLevel::MyLevel(Game* j)
-:world(b2Vec2(-0.0f,-100),true),running(false),game(j) {
+MyLevel::MyLevel(Game* j,std::string lvlFileName)
+:world(b2Vec2(0,-10),true),running(false),game(j) {
 	world.SetContinuousPhysics(true);
 	world.SetContactListener(this);
-
+	/*abro archivo json*/
+	std::ifstream in(lvlFileName);
+	LOG(INFO)<<"abierto archivo: "<<lvlFileName;
+	Json::Value level_json;
+	in >> level_json;
+	LOG(INFO)<<"levantado con Json exitoso";
+	/*seteo variables mundo*/
+	Json::Value world_json=level_json["world"];
+	this->w_height=world_json["height"].asFloat();
+	this->w_width=world_json["width"].asFloat();
+	this->stepsPerSecond=world_json["steps/second"].asFloat();
+	this->scale=world_json["scale"].asFloat();
+	LOG(INFO)<<"w_height: "<<w_height;
+	LOG(INFO)<<"w_width: "<<w_width;
+	LOG(INFO)<<"stepsPerSecond: "<<stepsPerSecond;
+	LOG(INFO)<<"scale: "<<scale;
+	world.SetGravity(b2Vec2(0,world_json["gravity"].asFloat()));
+	LOG(INFO)<<"gravity: "<<world.GetGravity().y;
 	//creo piso
 	b2BodyDef groundBodyDef;
 	groundBodyDef.position.Set(0, -1);
@@ -38,26 +51,29 @@ MyLevel::MyLevel(Game* j)
 	b2FixtureDef myFixtureDef;
 	myFixtureDef.shape = &polygonShape;
 
-	polygonShape.SetAsBox( ANCHO_SIM/2, 1, b2Vec2(ANCHO_SIM/2, 0), 0);//ground
+	polygonShape.SetAsBox( w_width/2, 1, b2Vec2(w_width/2, 0), 0);//ground
 	groundBody->CreateFixture(&myFixtureDef);
-	polygonShape.SetAsBox( ANCHO_SIM/2, 1, b2Vec2(ANCHO_SIM/2, ALTO_SIM), 0);//ceiling
+	polygonShape.SetAsBox( w_width/2, 1, b2Vec2(w_width/2, w_height), 0);//ceiling
 	groundBody->CreateFixture(&myFixtureDef);
-	polygonShape.SetAsBox( 1, ALTO_SIM/2, b2Vec2(0-1, ALTO_SIM/2), 0);//left wall
+	polygonShape.SetAsBox( 1, w_height/2, b2Vec2(0-1, w_height/2), 0);//left wall
 	groundBody->CreateFixture(&myFixtureDef);
-	polygonShape.SetAsBox( 1, ALTO_SIM/2, b2Vec2(ANCHO_SIM+1, ALTO_SIM/2), 0);//right wall
+	polygonShape.SetAsBox( 1, w_height/2, b2Vec2(w_width+1, w_height/2), 0);//right wall
 	groundBody->CreateFixture(&myFixtureDef);
 
 	//creo megaman, por ahora caja
+	Json::Value megaman_json=level_json["megaman"];
 	//body
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(ANCHO_SIM/2, ALTO_SIM/2);
+	bodyDef.position.Set(megaman_json["posX"].asFloat(),
+			megaman_json["posY"].asFloat());
 	bodyDef.fixedRotation=true;
 	bodyDef.bullet = true;
 	b2Body* body = world.CreateBody(&bodyDef);
 	//shape
 	b2PolygonShape dynamicBox;
-	dynamicBox.SetAsBox(3, 3);
+	dynamicBox.SetAsBox(megaman_json["width"].asFloat(),
+			megaman_json["height"].asFloat());
 	//fixture
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &dynamicBox;
@@ -81,7 +97,7 @@ bool MyLevel::isRunning(){
 
 std::string numeroATexto(float numero) {
 	std::stringstream ss;
-	ss << std::fixed << std::setprecision(2)<< numero;
+	ss << std::fixed << std::setprecision(3)<< numero;
 	return ss.str();
 }
 
@@ -89,8 +105,8 @@ std::string numeroATexto(float numero) {
 std::string MyLevel::posToString(b2Vec2 pos){
 	float p1x = 5;
 	float p1y = 5;
-	float p2x = pos.x *SCALE;
-	float p2y = (ALTO_SIM-pos.y) *SCALE;
+	float p2x = pos.x *scale;
+	float p2y = (w_height-pos.y) *scale;
 	std::string pos1 = "X1:" + numeroATexto(p1x) + "-Y1:" + numeroATexto(p1y);
 	std::string pos2 = "X2:" + numeroATexto(p2x) + "-Y2:" + numeroATexto(p2y);
 	std::string final= pos1+"/"+pos2;
@@ -103,7 +119,7 @@ void MyLevel::run(){
 		Lock l(runningMutex);
 		running=true;
 	}
-	float32 timeStep = 1.0f / STEPS_PER_SECOND;
+	float32 timeStep = 1.0f / stepsPerSecond;
 	int32 velocityIterations = 6;
 	int32 positionIterations = 2;
 	LOG(INFO)<<"physics simulation of level started";
