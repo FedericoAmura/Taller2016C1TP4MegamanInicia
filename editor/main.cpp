@@ -3,6 +3,7 @@
 #include "EntitySet.h"
 #include "../entities.h"
 #include "SpriteDispenser.h"
+#include "Workspace.h"
 
 #define ICON_WIDTH 62
 
@@ -10,6 +11,7 @@ typedef Glib::RefPtr<Gtk::Builder> Builder;
 typedef Glib::RefPtr<Gtk::Application> App;
 typedef Glib::RefPtr<Gtk::ListStore> ListStore;
 typedef Glib::RefPtr<Gdk::Pixbuf> Pixbuf;
+typedef Glib::RefPtr<Gtk::Layout> Layout;
 
 using std::cerr;
 using std::endl;
@@ -21,16 +23,13 @@ int main(int argc, char *argv[]) {
     Gtk::ApplicationWindow* appWindow = NULL;
     try {
         refBuilder->add_from_file("editor_main_window.glade");
-    }
-    catch(const Glib::FileError& ex) {
+    } catch(const Glib::FileError& ex) {
         cerr << "FileError: " << ex.what() << endl;
         return 1;
-    }
-    catch(const Glib::MarkupError& ex) {
+    } catch(const Glib::MarkupError& ex) {
         cerr << "MarkupError: " << ex.what() << endl;
         return 1;
-    }
-    catch(const Gtk::BuilderError& ex) {
+    } catch(const Gtk::BuilderError& ex) {
         cerr << "BuilderError: " << ex.what() << endl;
         return 1;
     }
@@ -78,10 +77,20 @@ int main(int argc, char *argv[]) {
     tiles.fill(tile_entries);
     mobs.fill(mob_entries);
     background.fill(background_entries);
+
+    //Workspace grid
+    Gtk::ScrolledWindow* m_WorkspaceCanvas = NULL;
+    refBuilder->get_widget("ScrollableWorkspace", m_WorkspaceCanvas);
+    Level level(50);
+    Workspace workspace(level);
+    workspace.set_vexpand(true);
+    m_WorkspaceCanvas->add(workspace);
+    workspace.show();
+
+    //Run
     if(appWindow) {
         app->run(*appWindow);
     }
-
     delete appWindow;
     return 0;
 }

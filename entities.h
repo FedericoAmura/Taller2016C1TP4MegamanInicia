@@ -99,4 +99,7 @@
 #define MOSS_STONE 6004
 #define PLANET 6005
 
+//Others
+#define EMPTY 0000
+
 #endif //MEGAMAN_ENTITIES_H

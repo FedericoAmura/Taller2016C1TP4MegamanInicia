@@ -8,6 +8,7 @@
 #define IMG_PATH "../sprites"
 #define MOB_PATH (string) IMG_PATH + "/mobs/"
 #define BSS_PATH (string) IMG_PATH + "/bosses/"
+#define LVL_PATH (string) IMG_PATH + "/level/"
 #define BCK_PATH (string) IMG_PATH + "/level/background/"
 #define TLE_PATH (string) IMG_PATH + "/level/tiles/"
 
@@ -34,6 +35,8 @@ SpriteDispenser::SpriteDispenser() {
     paths[MOSS_STONE] = BCK_PATH + "moss_stone_b.png";
     paths[CLOUD] = BCK_PATH + "cloud_b.png";
     paths[CLOUD_EDGE] = BCK_PATH + "cloud_edge_b.png";
+    //others
+    paths[EMPTY] = LVL_PATH + "empty.png";
 }
 
 string SpriteDispenser::get(uint id) {

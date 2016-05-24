@@ -35,7 +35,7 @@ void levelTest(prototype_t p0){
     printTest("Adds entity", level.addEntity(p0, "foreground"));
     printTest("Does not add entity on top of existing one", !level.addEntity(p0, "foreground"));
     printTest("Does not remove non-existing entity", !level.removeEntity(1, 1, "foreground"));
-    printTest("Removes entity", level.removeEntity(0,0, "foreground"));
+    printTest("Removes entity", level.removeEntity(0, 0, "foreground"));
 }
 
 void jsonTest(prototype_t p0, prototype_t p1, prototype_t b0){

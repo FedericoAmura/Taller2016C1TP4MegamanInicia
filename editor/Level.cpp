@@ -19,6 +19,7 @@ using std::runtime_error;
 typedef Json::Value::iterator v_iter;
 
 Level::Level(uint len) : length(len) {
+    width = WIDTH;
     layers.insert(make_pair("background", Layer(length)));
     layers.insert(make_pair("foreground", Layer(length)));
     background_color.r = 0;
@@ -110,6 +111,8 @@ void Level::visualize() {
     std::cout << "FOREGROUND" << std::endl;
     layers["foreground"].visualize();
 }
+
+
 
 
 

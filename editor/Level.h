@@ -24,14 +24,18 @@ typedef struct rgb {
 
 class Level {
 private:
-    unsigned int length;
+    uint length;
+    uint width;
     map<string, Layer> layers;
     rgb_t background_color;
     Layer& getLayer(string which_layer);
 
 public:
     Level(string json_file);
+    rgb_t getColor() {return background_color;}
     explicit Level(uint len);
+    uint getLength() {return length;}
+    uint getWidth() {return width;}
     void setBackgroundColor(color_t r, color_t g, color_t b);
     void toJson(string file_name);
     bool addEntity(prototype_t prototype, string layer);
