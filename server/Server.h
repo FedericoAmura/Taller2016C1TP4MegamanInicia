@@ -16,12 +16,12 @@ class Server {
 public:
 	explicit Server(int port);
 	virtual ~Server();
-	void correrServer();
+	void runServer();
 
 private:
 	ServerSocket socket;
-	Game juego;
-	AcceptConnections aceptador;
+	Game game;
+	AcceptConnections acceptor;
 };
 
 #endif /* SERVER_SERVER_H_ */

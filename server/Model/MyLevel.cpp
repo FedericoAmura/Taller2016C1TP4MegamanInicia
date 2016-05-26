@@ -19,6 +19,7 @@
 #include "../Event.h"
 #include "../Game.h"
 #include "../json/json.h"
+#include "LevelObject.h"
 
 MyLevel::MyLevel(Game* j,std::string lvlFileName)
 :world(b2Vec2(0,-10),true),running(false),game(j) {
@@ -61,32 +62,11 @@ MyLevel::MyLevel(Game* j,std::string lvlFileName)
 	groundBody->CreateFixture(&myFixtureDef);
 
 	//creo megaman, por ahora caja
-	Json::Value megaman_json=level_json["megaman"];
-	//body
-	b2BodyDef bodyDef;
-	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(megaman_json["posX"].asFloat(),
-			megaman_json["posY"].asFloat());
-	bodyDef.fixedRotation=true;
-	bodyDef.bullet = true;
-	b2Body* body = world.CreateBody(&bodyDef);
-	//shape
-	b2PolygonShape dynamicBox;
-	dynamicBox.SetAsBox(megaman_json["width"].asFloat(),
-			megaman_json["height"].asFloat());
-	//fixture
-	b2FixtureDef fixtureDef;
-	fixtureDef.shape = &dynamicBox;
-	fixtureDef.density = 1;
-	fixtureDef.friction=0;
-	fixtureDef.restitution=0;
-	body->CreateFixture(&fixtureDef);
-
-	megaman=body;
+	megaman= new LevelObject(&world,level_json["megaman"],b2Vec2(50,50));
 }
 
 MyLevel::~MyLevel() {
-	// TODO Auto-generated destructor stub
+	delete megaman;
 }
 
 /*informs whether the thread is(should be) running*/
@@ -143,41 +123,10 @@ void MyLevel::stop(){
 
 /*makes the megaman move according to the input*/
 void MyLevel::moveMegaman(char boton){
-	switch(boton){
-	case 'a':{
-		LOG(INFO)<<"moviendo megaman con: "<<boton;
-		b2Vec2 vel = megaman->GetLinearVelocity();
-		vel.x=-10;
-		megaman->SetLinearVelocity(vel);
-		break;
-	}
-	case 'w':{
-		LOG(INFO)<<"moviendo megaman con: "<<boton;
-		b2Vec2 vel = megaman->GetLinearVelocity();
-
-		vel.y =0.50* (-world.GetGravity().y);//upwards - don't change x velocity
-		megaman->SetLinearVelocity( vel );
-		break;
-	}
-	case 'd':{
-		LOG(INFO)<<"moviendo megaman con: "<<boton;
-		b2Vec2 vel = megaman->GetLinearVelocity();
-		vel.x=10;
-		megaman->SetLinearVelocity(vel);
-		break;
-	}
-	case 's':{
-		LOG(INFO)<<"moviendo megaman con: "<<boton;
-		b2Vec2 vel = megaman->GetLinearVelocity();
-		vel.x=0;//stop moving sideways
-		megaman->SetLinearVelocity(vel);
-		break;
-	}
-	default: break;
-	}
+	megaman->move(boton);
 }
 
 /*returns the vector postition of megaman according to box2d simulation*/
 b2Vec2 MyLevel::getPosMegaman(){
-	return megaman->GetPosition();
+	return megaman->getPos();
 }

@@ -27,7 +27,7 @@ Level::Level(uint len) : length(len) {
     background_color.b = 255;
 }
 
-Level::Level(string json_file) {
+Level::Level(string json_file) : width(WIDTH) {
     //Open File
     ifstream in(json_file);
     Json::Value level_json;

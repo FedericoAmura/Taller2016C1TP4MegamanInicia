@@ -25,7 +25,7 @@ int main(int argc, char* argv[]){
 	google::InitGoogleLogging(argv[0]);//inicializa logger
 	if(argc==2)try{
 		Server server(strtol(argv[POS_PUERTO], NULL, 10));
-		server.correrServer();
+		server.runServer();
 	}catch(std::exception& e){
 		LOG(FATAL) << e.what();
 	}

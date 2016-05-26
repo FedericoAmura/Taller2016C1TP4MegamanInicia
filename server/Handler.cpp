@@ -34,6 +34,7 @@ RecibirMensaje::RecibirMensaje(Game* j):Handler(j){}
 
 RecibirMensaje::~RecibirMensaje() {}
 
+/*todo move to megaman class*/
 void RecibirMensaje::moverPersonaje(int direccion){
 	if (KEY_UP == direccion) juego->getLevel()->moveMegaman('w');
 	if (KEY_RIGHT == direccion) juego->getLevel()->moveMegaman('d');

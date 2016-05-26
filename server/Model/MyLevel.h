@@ -12,6 +12,7 @@
 #include <string>
 
 #include "../Thread.h"
+#include "LevelObject.h"
 
 class Game;
 
@@ -20,7 +21,7 @@ class MyLevel: public Thread, public b2ContactListener {
 	Mutex runningMutex;
 	bool running;
 	Game* game;
-	b2Body* megaman;
+	LevelObject* megaman;
 	std::string posToString(b2Vec2 pos);
 	float stepsPerSecond;
 	float scale;

@@ -16,12 +16,12 @@
 /*pre: puerto es int comun, no hace falta aplicarle htons antes.
  *post: crea el server y lo deja listo para aceptar.
  * En caso que el socket aceptor no se cree lanza excepcion SocketCreacion*/
-Server::Server(int port): socket(port),juego(this),aceptador(&socket,&juego){
+Server::Server(int port): socket(port),game(this),acceptor(&socket,&game){
 	socket.bind();
 	socket.listen();
 
-	aceptador.start();
-	juego.start();
+	acceptor.start();
+	game.start();
 }
 
 /*libera los recursos de los threads
@@ -29,12 +29,12 @@ Server::Server(int port): socket(port),juego(this),aceptador(&socket,&juego){
 Server::~Server() {
 	socket.shutdown();
 
-	aceptador.join();
-	juego.join();
+	acceptor.join();
+	game.join();
 }
 
 /*acepta clientes y maneja datos hasta ingresar q por entrada*/
-void Server::correrServer() {
+void Server::runServer() {
 	LOG(INFO)<<"server iniciado";
 	bool continuar=true;
 	do{
@@ -44,9 +44,9 @@ void Server::correrServer() {
 			continuar=false;
 	}while(continuar);
 	/*informe de cierre a clientes*/
-	juego.notify(new MessageSent("chau",0));
+	game.notify(new MessageSent("chau",0));
 	sleep(1);
 	/*cierre*/
-	juego.stop();
+	game.stop();
 	LOG(INFO)<<"server finalizado";
 }

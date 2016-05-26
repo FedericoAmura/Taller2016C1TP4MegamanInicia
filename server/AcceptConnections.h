@@ -8,9 +8,9 @@
 #ifndef SERVER_ACCEPTCONNECTIONS_H_
 #define SERVER_ACCEPTCONNECTIONS_H_
 
+#include "Thread.h"
 #include "Observer.h"
 #include "ServerSocket.h"
-#include "Thread.h"
 
 
 class AcceptConnections: public Thread {

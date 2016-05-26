@@ -142,6 +142,7 @@ MyLevel* Game::getLevel(){
 /*stops,joins, and destroys level.
  * post:level is set to null*/
 void Game::stopLevel(){
+	//todo send lost,won,exited
 	if(level->isRunning()){
 		level->stop();
 		level->join();
