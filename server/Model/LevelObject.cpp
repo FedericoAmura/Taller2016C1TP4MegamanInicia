@@ -8,8 +8,12 @@
 #include "LevelObject.h"
 #include <Box2D/Box2D.h>
 #include "../json/json.h"
+#include <string>
 
-LevelObject::LevelObject(b2World* w,Json::Value& json,const b2Vec2& pos):world(w){
+int LevelObject::uniqueId=0;
+
+LevelObject::LevelObject(b2World* w,Json::Value& json,const b2Vec2& pos,int id)
+:world(w),objectId(uniqueId++),spriteId(id){
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set(pos.x,pos.y);
@@ -70,4 +74,12 @@ void LevelObject::move(char key){
 
 const b2Vec2& LevelObject::getPos() {
 	return body->GetPosition();
+}
+
+int LevelObject::getId(){
+	return objectId;
+}
+
+int LevelObject::getSpriteId() {
+	return spriteId;
 }

@@ -66,7 +66,11 @@ MyLevel::MyLevel(Game* j,std::string lvlFileName)
 	//creo megaman, por ahora caja
 	Json::Value obj_json=level_json["megaman"];
 	b2Vec2 pos(obj_json["posX"].asFloat(), obj_json["posY"].asFloat());
-	megaman = new LevelObject(&world, obj_json, pos);
+	megaman = new LevelObject(&world, obj_json, pos, 9000);
+	std::stringstream msj;
+	msj<<"1 "<<megaman->getId()<<megaman->getSpriteId();
+	msj<<"0 "<<posToString(megaman->getPos());
+	game->notify(new MessageSent(msj.str(),0));
 }
 
 MyLevel::~MyLevel() {
@@ -79,22 +83,14 @@ bool MyLevel::isRunning(){
 	return running;
 }
 
-std::string numeroATexto(float numero) {
-	std::stringstream ss;
-	ss << std::fixed << std::setprecision(3)<< numero;
-	return ss.str();
-}
-
 /*transforms box2d position to client position format*/
 std::string MyLevel::posToString(b2Vec2 pos){
-	float p1x = 5;
-	float p1y = 5;
-	float p2x = pos.x *scale;
-	float p2y = (w_height-pos.y) *scale;
-	std::string pos1 = "X1:" + numeroATexto(p1x) + "-Y1:" + numeroATexto(p1y);
-	std::string pos2 = "X2:" + numeroATexto(p2x) + "-Y2:" + numeroATexto(p2y);
-	std::string final= pos1+"/"+pos2;
-	return final;
+	float px = pos.x *scale;
+	float py = (w_height-pos.y) *scale;
+	std::stringstream positionString;
+	positionString.precision(2);
+	positionString<<std::fixed<<px<<" "<<py;
+	return positionString.str();
 }
 
 /*runs the physics simulation until it is stopped*/
@@ -111,9 +107,11 @@ void MyLevel::run(){
 	while(isRunning()){
 		world.Step(timeStep, velocityIterations, positionIterations);
 		//todo si jugadores pasan mitad pantalla mover
-		//todo informar de todos los cambios
-		std::string msj=posToString(getPosMegaman());
-		game->notify(new MessageSent(msj,0));
+		//informar de todos los cambios, mediante move code
+		std::stringstream msj;
+		msj<<"3 "<<megaman->getId()<<" "<<posToString(megaman->getPos());
+		game->notify(new MessageSent(msj.str(),0));
+
 		usleep(timeStep* 1000000 );
 	}
 	LOG(INFO)<<"physics simulation of level stopped";
@@ -130,7 +128,3 @@ void MyLevel::moveMegaman(char boton){
 	megaman->move(boton);
 }
 
-/*returns the vector postition of megaman according to box2d simulation*/
-b2Vec2 MyLevel::getPosMegaman(){
-	return megaman->getPos();
-}

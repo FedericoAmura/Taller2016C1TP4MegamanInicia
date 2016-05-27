@@ -57,3 +57,14 @@ std::string MessageSent::getMessage(){
 int MessageSent::getDestination(){
 	return destination;
 }
+
+/***************************************************/
+ConnectionEnded::ConnectionEnded(int client):descriptor(client) {
+	id=4;
+}
+
+ConnectionEnded::~ConnectionEnded() {}
+
+int ConnectionEnded::getClient() {
+	return descriptor;
+}

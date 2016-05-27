@@ -29,7 +29,12 @@ void SendThread::run(){
 			std::string mensaje=aEnviar.front();
 			aEnviar.pop();
 			mensaje.append("\n");
-			socket->send((char*)mensaje.c_str(),mensaje.size());
+			try{
+				socket->send((char*)mensaje.c_str(),mensaje.size());
+			}catch(std::exception& e){
+				LOG(FATAL) << e.what();
+				socket->shutdown();
+			}
 			//LOG(INFO)<<"enviado msg: "<<mensaje;
 		}else{
 			usleep(TIMEOUT);
@@ -59,13 +64,19 @@ void RecvThread::run(){
 		bool continuar=true;
 		bool recibi=false;
 		do{
-			if(socket->recieve(&caracter,1)){
-				recibi=true;
-				if(caracter!=10)
-					recibido<<caracter;
-				else
+			try{
+				if(socket->recieve(&caracter,1)){
+					recibi=true;
+					if(caracter!=10)
+						recibido<<caracter;
+					else
+						continuar=false;
+				}else{
 					continuar=false;
-			}else{
+					socket->shutdown();
+				}
+			}catch(std::exception& e){
+				LOG(FATAL) << e.what();
 				continuar=false;
 				socket->shutdown();
 			}
@@ -77,4 +88,5 @@ void RecvThread::run(){
 			usleep(TIMEOUT);
 		}
 	}
+	observador->notify(new ConnectionEnded(socket->descriptor));
 }

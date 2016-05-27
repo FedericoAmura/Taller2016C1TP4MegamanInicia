@@ -7,17 +7,17 @@
 #include "Handler.h"
 #include "HandlerCoordinator.h"
 #include "Model/MyLevel.h"
+#include "../common/CommunicationCodes.h"
 
 #define TIMEOUT 10000
 
 /*creates game with server as communications*/
 Game::Game(Server* server):goOn(true),server(server),
-manager(this),level(nullptr),firstClient(0) {
-	manager.setHandler(1,new AceptarConeccion(this));
-	manager.setHandler(2,new RecibirMensaje(this));
-	manager.setHandler(3,new EnviarMensaje(this));
-	//todo select level from client
-	this->selectLevel(1234);
+manager(this),level(nullptr),firstClient(-1) {
+	manager.setHandler(1,new AcceptConnection(this));
+	manager.setHandler(2,new RecvMessage(this));
+	manager.setHandler(3,new SendMessage(this));
+	manager.setHandler(4,new DisconnectClient(this));
 }
 
 Game::~Game() {
@@ -90,11 +90,11 @@ void Game::addClient(int descriptor){
 		LOG(INFO)<<"Cliente rechazado";
 		delete nuevoCliente;
 	}else{
-		//todo 1era coneccion especial
 		nuevoCliente->iniciarComunicaciones();
 		if(clients.size()==0){
 			std::string msjPrimero= "sos el primer jugador";
 			this->notify(new MessageSent(msjPrimero,descriptor));
+			firstClient=descriptor;
 		}
 		clients[descriptor]=nuevoCliente;
 		LOG(INFO)<<"Cliente conectado nro: "
@@ -118,22 +118,32 @@ void Game::sendTo(std::string data, int destino){
 	}
 }
 
+void Game::removeClient(int descriptor) {
+	Lock l(clientsMutex);
+	std::map<int,Socket*>::iterator it=clients.find(descriptor);
+	if(it!=clients.end()){
+		delete it->second;
+		clients.erase(it);
+		LOG(INFO)<<"cliente desconectado, id:"<<descriptor;
+	}
+}
 /****************************************************/
 
 /*chooses and creates the level selected, if no level is currently running
  * post: level is initialized*/
-void Game::selectLevel(int levelId){
+void Game::selectLevel(int levelId, int client){
 	/*TODO default level for now*/
-	if(level==nullptr){
+	if((!levelChosen())&&(client==firstClient)){
 		LOG(INFO)<<"level seleccionado: "<<levelId;
 		level= new MyLevel(this,"../server/Model/nivel_test.json");
 		level->start();
+		notify(new MessageSent("6",0));
 	}
 }
 
 /*returns the current level, or null if no level is running*/
 MyLevel* Game::getLevel(){
-	if(level!=nullptr)
+	if(levelChosen())
 		return level;
 	else
 		return nullptr;
@@ -143,12 +153,35 @@ MyLevel* Game::getLevel(){
  * post:level is set to null*/
 void Game::stopLevel(){
 	//todo send lost,won,exited
-	if(level->isRunning()){
-		level->stop();
-		level->join();
+	if(levelChosen()){
+		if(level->isRunning()){
+			level->stop();
+			level->join();
+		}
+		delete level;
+		level=nullptr;
+		std::string levelExitMsg="7";
+		this->notify(new MessageSent(levelExitMsg,0));
 	}
-	delete level;
-	level=nullptr;
-	std::string levelExitMsg="6 (back to level selection pls)";
-	this->notify(new MessageSent(levelExitMsg,0));
 }
+
+/*moves the corresponding player*/
+//todo move more than one megaman
+void Game::movePlayer(int keyPressed, int source) {
+	if(levelChosen()){
+		if (KEY_UP == keyPressed) getLevel()->moveMegaman('w');
+		if (KEY_RIGHT == keyPressed) getLevel()->moveMegaman('d');
+		if (KEY_DOWN == keyPressed) getLevel()->moveMegaman('s');
+		if (KEY_LEFT == keyPressed) getLevel()->moveMegaman('a');
+	}
+}
+
+/*returns true if a level has alredy started*/
+bool Game::levelChosen() {
+	if(level==nullptr)
+		return false;
+	else
+		return true;
+}
+
+

@@ -30,7 +30,6 @@ class Game:public Thread,public Observer{
 	HandlerCoordinator manager;
 	MyLevel* level;
 
-	/*candidato a extraer*/
 	Mutex clientsMutex;
 	std::map<int,Socket*> clients;
 	int firstClient;
@@ -42,12 +41,15 @@ public:
 	void notify(Event* e);
 	void stop();
 
-	MyLevel* getLevel();
-	void selectLevel(int levelId);
+	bool levelChosen();
+	void selectLevel(int levelId,int client);
 	void stopLevel();
+	MyLevel* getLevel();
+	void movePlayer(int keyPressed,int source);
 
 	void addClient(int descriptor);
 	void sendTo(std::string data, int destino);
+	void removeClient(int descriptor);
 private:
 	bool isntStopped();
 };

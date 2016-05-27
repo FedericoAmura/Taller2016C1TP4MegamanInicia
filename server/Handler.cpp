@@ -14,56 +14,67 @@
 #include "Event.h"
 #include "Game.h"
 
-Handler::Handler(Game* j):juego(j){}
+Handler::Handler(Game* j):game(j){}
 
 Handler::~Handler() {}
 
 /*************************************************/
 /*constructor por herencia*/
-AceptarConeccion::AceptarConeccion(Game* j):Handler(j){}
+AcceptConnection::AcceptConnection(Game* j):Handler(j){}
 
-AceptarConeccion::~AceptarConeccion() {}
+AcceptConnection::~AcceptConnection() {}
 
-void AceptarConeccion::handle(Event* e){
+void AcceptConnection::handle(Event* e){
 	NewConnection* evento=static_cast<NewConnection*>(e);//todo error si no es
-	juego->addClient(evento->getDescriptor());
+	game->addClient(evento->getDescriptor());
 }
 
 /*************************************************/
-RecibirMensaje::RecibirMensaje(Game* j):Handler(j){}
+RecvMessage::RecvMessage(Game* j):Handler(j){}
 
-RecibirMensaje::~RecibirMensaje() {}
+RecvMessage::~RecvMessage() {}
 
-/*todo move to megaman class*/
-void RecibirMensaje::moverPersonaje(int direccion){
-	if (KEY_UP == direccion) juego->getLevel()->moveMegaman('w');
-	if (KEY_RIGHT == direccion) juego->getLevel()->moveMegaman('d');
-	if (KEY_DOWN == direccion) juego->getLevel()->moveMegaman('s');
-	if (KEY_LEFT == direccion) juego->getLevel()->moveMegaman('a');
-}
-
-void RecibirMensaje::handle(Event* e){
+void RecvMessage::handle(Event* e){
 	MessageRecieved* evento= (MessageRecieved*) e;
 	int procedencia= evento->getReceptor();
-
-	if (evento->getMessage().substr(0,1).compare("1") == 0){
-		LOG(INFO)<<"mensaje recibido: "<< evento->getMessage() <<"	desde: "<<procedencia;
-		int keyPressed = atoi(evento->getMessage().substr(2, 1).c_str());
+	std::stringstream msj(evento->getMessage());
+	int cod;
+	msj>>cod;
+	LOG(INFO)<<"mensaje recibido: "<< evento->getMessage() <<"	desde: "<<procedencia;
+	switch(cod){
+	case 1:/*key presed*/
+		int keyPressed;
+		msj>>keyPressed;
 		if(keyPressed==7)
-			juego->stopLevel();
+			game->stopLevel();
 		else
-			moverPersonaje(keyPressed);
+			game->movePlayer(keyPressed,procedencia);
+		break;
+	case 2:/*select level*/
+		int levelId;
+		msj>>levelId;
+		game->selectLevel(levelId,procedencia);
+		break;
 	}
 }
 
 /*************************************************/
-EnviarMensaje::EnviarMensaje(Game* j):Handler(j){}
+SendMessage::SendMessage(Game* j):Handler(j){}
 
-EnviarMensaje::~EnviarMensaje() {}
+SendMessage::~SendMessage() {}
 
-void EnviarMensaje::handle(Event* e){
+void SendMessage::handle(Event* e){
 	MessageSent* evento= (MessageSent*) e;
 	std::string mensaje=evento->getMessage();
 	int destino=evento->getDestination();
-	juego->sendTo(mensaje,destino);
+	game->sendTo(mensaje,destino);
+}
+
+DisconnectClient::DisconnectClient(Game* j):Handler(j) {}
+
+DisconnectClient::~DisconnectClient() {}
+
+void DisconnectClient::handle(Event* e) {
+	ConnectionEnded* event= (ConnectionEnded*)e;
+	game->removeClient(event->getClient());
 }

@@ -37,7 +37,7 @@ class MessageRecieved:public Event {
 	int receptor;
 
 public:
-	explicit MessageRecieved(std::string data,int receptor);
+	MessageRecieved(std::string data,int receptor);
 	virtual ~MessageRecieved();
 	std::string getMessage();
 	int getReceptor();
@@ -49,9 +49,19 @@ class MessageSent:public Event {
 	int destination;
 
 public:
-	explicit MessageSent(std::string data,int destino);
+	MessageSent(std::string data,int destino);
 	virtual ~MessageSent();
 	std::string getMessage();
 	int getDestination();
+};
+
+/******************************************************/
+class ConnectionEnded: public Event{
+	int descriptor;
+
+public:
+	explicit ConnectionEnded(int client);
+	virtual ~ConnectionEnded();
+	int getClient();
 };
 #endif /* SERVER_EVENT_H_ */

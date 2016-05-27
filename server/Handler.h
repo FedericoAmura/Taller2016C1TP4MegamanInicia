@@ -20,31 +20,38 @@ public:
 	virtual void handle(Event* e)=0;
 
 protected:
-	Game* juego;
+	Game* game;
 };
 
 /*************************************************/
-class AceptarConeccion: public Handler{
+class AcceptConnection: public Handler{
 public:
-	explicit AceptarConeccion(Game* j);
-	virtual ~AceptarConeccion();
+	explicit AcceptConnection(Game* j);
+	virtual ~AcceptConnection();
 	void handle(Event* e);
 };
 
 /*************************************************/
-class RecibirMensaje: public Handler{
+class RecvMessage: public Handler{
 public:
-	explicit RecibirMensaje(Game* j);
-	virtual ~RecibirMensaje();
+	explicit RecvMessage(Game* j);
+	virtual ~RecvMessage();
 	void handle(Event* e);
-	void moverPersonaje(int direccion);
 };
 
 /*************************************************/
-class EnviarMensaje: public Handler{
+class SendMessage: public Handler{
 public:
-	explicit EnviarMensaje(Game* j);
-	virtual ~EnviarMensaje();
+	explicit SendMessage(Game* j);
+	virtual ~SendMessage();
+	void handle(Event* e);
+};
+
+/************************************************/
+class DisconnectClient: public Handler{
+public:
+	explicit DisconnectClient(Game* j);
+	virtual ~DisconnectClient();
 	void handle(Event* e);
 };
 #endif /* SERVER_HANDLER_H_ */
