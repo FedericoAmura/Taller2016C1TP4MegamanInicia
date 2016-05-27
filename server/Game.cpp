@@ -85,7 +85,7 @@ bool Game::isntStopped(){
 void Game::addClient(int descriptor){
 	Socket* nuevoCliente= new Socket(descriptor,this);
 	Lock l(clientsMutex);
-	if(clients.size()>=4){
+	if(clients.size()>=4 || levelChosen()){
 		//rechazar
 		LOG(INFO)<<"Cliente rechazado";
 		delete nuevoCliente;
