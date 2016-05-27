@@ -17,15 +17,20 @@ LevelObject::LevelObject(b2World* w,Json::Value& json,const b2Vec2& pos):world(w
 	bodyDef.bullet = true;
 	body = world->CreateBody(&bodyDef);
 	//shape
-	b2PolygonShape dynamicBox;
-	dynamicBox.SetAsBox(json["width"].asFloat(),json["height"].asFloat());
-	//fixture
-	b2FixtureDef fixtureDef;
-	fixtureDef.shape = &dynamicBox;
-	fixtureDef.density = 1;
-	fixtureDef.friction=0;
-	fixtureDef.restitution=0;
-	body->CreateFixture(&fixtureDef);
+	b2PolygonShape shape;
+	Json::Value shapes=json["shapes"];
+	Json::ValueIterator it=shapes.begin();
+	for(; it!=shapes.end(); it++){
+		shape.SetAsBox((*it)["width"].asFloat(),(*it)["height"].asFloat(),
+				b2Vec2((*it)["X"].asFloat(),(*it)["Y"].asFloat()),0);
+		//fixture
+		b2FixtureDef fixtureDef;
+		fixtureDef.shape = &shape;
+		fixtureDef.density = 1;
+		fixtureDef.friction=0;
+		fixtureDef.restitution=0;
+		body->CreateFixture(&fixtureDef);
+	}
 }
 
 LevelObject::~LevelObject() {

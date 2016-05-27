@@ -23,6 +23,8 @@ class MyLevel: public Thread, public b2ContactListener {
 	Game* game;
 	LevelObject* megaman;
 	std::string posToString(b2Vec2 pos);
+	void createBoundaries();
+
 	float stepsPerSecond;
 	float scale;
 	float w_width;

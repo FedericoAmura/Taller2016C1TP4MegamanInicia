@@ -7,13 +7,34 @@
 		"scale" : 1.0,
 		"steps/second" : 60.0
 	},
-
+	
+	"wconstraints":
+	{
+		"posX": 50.0,
+		"posY": 50.0,
+		"shapes":
+		[
+			{
+				"width" : 3.0,
+				"height" : 3.0,
+				"X":0.0,
+				"Y":0.0
+			}
+		],
 	"megaman":
 	{
 		"posX": 50.0,
 		"posY": 50.0,
-		"width" : 3.0,
-		"height" : 3.0,
+		"shapes":
+		[
+			{
+				"width" : 3.0,
+				"height" : 3.0,
+				"X":0.0,
+				"Y":0.0
+			}
+		],
+		
 		"HSpeed" : 10.0,
 		"JFactor" : 0.5
 	}

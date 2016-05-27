@@ -21,6 +21,24 @@
 #include "../json/json.h"
 #include "LevelObject.h"
 
+void MyLevel::createBoundaries() {
+	//window borders
+	b2BodyDef bordersBodyDef;
+	bordersBodyDef.position.Set(0, -1);
+	b2Body* bordersBody = world.CreateBody(&bordersBodyDef);
+	b2PolygonShape borderShape;
+	b2FixtureDef myFixtureDef;
+	myFixtureDef.shape = &borderShape;
+	borderShape.SetAsBox(w_width / 2, 1, b2Vec2(w_width / 2, 0), 0); //ground
+	bordersBody->CreateFixture(&myFixtureDef);
+	borderShape.SetAsBox(w_width / 2, 1, b2Vec2(w_width / 2, w_height), 0); //ceiling
+	bordersBody->CreateFixture(&myFixtureDef);
+	borderShape.SetAsBox(1, w_height / 2, b2Vec2(0 - 1, w_height / 2), 0); //left wall
+	bordersBody->CreateFixture(&myFixtureDef);
+	borderShape.SetAsBox(1, w_height / 2, b2Vec2(w_width + 1, w_height / 2), 0); //right wall
+	bordersBody->CreateFixture(&myFixtureDef);
+}
+
 MyLevel::MyLevel(Game* j,std::string lvlFileName)
 :world(b2Vec2(0,-10),true),running(false),game(j) {
 	world.SetContinuousPhysics(true);
@@ -43,26 +61,12 @@ MyLevel::MyLevel(Game* j,std::string lvlFileName)
 	LOG(INFO)<<"scale: "<<scale;
 	world.SetGravity(b2Vec2(0,world_json["gravity"].asFloat()));
 	LOG(INFO)<<"gravity: "<<world.GetGravity().y;
-	//creo piso
-	b2BodyDef groundBodyDef;
-	groundBodyDef.position.Set(0, -1);
-	b2Body* groundBody = world.CreateBody(&groundBodyDef);
-
-	b2PolygonShape polygonShape;
-	b2FixtureDef myFixtureDef;
-	myFixtureDef.shape = &polygonShape;
-
-	polygonShape.SetAsBox( w_width/2, 1, b2Vec2(w_width/2, 0), 0);//ground
-	groundBody->CreateFixture(&myFixtureDef);
-	polygonShape.SetAsBox( w_width/2, 1, b2Vec2(w_width/2, w_height), 0);//ceiling
-	groundBody->CreateFixture(&myFixtureDef);
-	polygonShape.SetAsBox( 1, w_height/2, b2Vec2(0-1, w_height/2), 0);//left wall
-	groundBody->CreateFixture(&myFixtureDef);
-	polygonShape.SetAsBox( 1, w_height/2, b2Vec2(w_width+1, w_height/2), 0);//right wall
-	groundBody->CreateFixture(&myFixtureDef);
-
+	//window borders
+	createBoundaries();
 	//creo megaman, por ahora caja
-	megaman= new LevelObject(&world,level_json["megaman"],b2Vec2(50,50));
+	Json::Value obj_json=level_json["megaman"];
+	b2Vec2 pos(obj_json["posX"].asFloat(), obj_json["posY"].asFloat());
+	megaman = new LevelObject(&world, obj_json, pos);
 }
 
 MyLevel::~MyLevel() {

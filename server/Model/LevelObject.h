@@ -14,6 +14,7 @@
 class LevelObject {
 	b2World* world;
 	b2Body* body;
+	//todo obj id
 public:
 	LevelObject(b2World* w,Json::Value& json,const b2Vec2& pos);
 	virtual ~LevelObject();
