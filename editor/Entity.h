@@ -11,10 +11,10 @@ using std::string;
 
 class Entity {
 public:
-    Entity(size_t id) : id(id) {}
-    size_t getId() {return id;}
+    Entity(uint id) : id(id) {}
+    uint getId() {return id;}
 private:
-    size_t id;
+    uint id;
 };
 
 #endif //MEGAMAN_ENTITY_H

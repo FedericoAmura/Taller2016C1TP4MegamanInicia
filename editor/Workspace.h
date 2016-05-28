@@ -4,23 +4,40 @@
 
 #ifndef MEGAMAN_WORKSPACE_H
 #define MEGAMAN_WORKSPACE_H
-
-#include <gtkmm/grid.h>
 #include "Level.h"
-#include "CellDrawer.h"
+#include "SpriteDispenser.h"
+#include "../client/MyArea.h"
 #include <vector>
+#include <map>
+#include <gtkmm/drawingarea.h>
+#include <gtkmm/fixed.h>
 
 using std::vector;
+using std::pair;
 
 typedef unsigned int uint;
+typedef std::map<pair<uint, uint>, Drawing* > drawing_map_t;
 
-class Workspace : public Gtk::Grid {
+class Workspace : public Gtk::Fixed {
 public:
     Workspace(Level& level);
-
+    ~Workspace();
+    bool addElement(uint x, uint y, uint id);
+    bool removeEntity(uint x, uint y);
+    uint getId(uint x, uint y);
+    void on_button_clicked(GdkEventButton* button_event);
 private:
     Level& level;
-    vector<vector<CellDrawer*> > cells;
+    drawing_map_t drawings;
+    SpriteDispenser sprites;
+    Glib::RefPtr<Gdk::Pixbuf> background;
+    void resize();
+
+    //callbacks
+
+
+
+protected:
 
 };
 

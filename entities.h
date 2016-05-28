@@ -89,15 +89,7 @@
 #define METALLIC_LADDER 5000
 #define SKY_LADDER 5001
 #define STONE_LADDER 5002
-#define STONE_SPIKE 5003
-
-//Backgrounds
-#define CAVE 6000
-#define CAVE_EDGE 6001
-#define CLOUD 6002
-#define CLOUD_EDGE 6003
-#define MOSS_STONE 6004
-#define PLANET 6005
+#define SPIKE 5003
 
 //Others
 #define EMPTY 0000

@@ -1,18 +1,4 @@
 {
-	"background" : 
-	[
-		{
-			"id" : 1006,
-			"x" : 5,
-			"y" : 5
-		}
-	],
-	"background color" : 
-	{
-		"b" : 255,
-		"g" : 255,
-		"r" : 0
-	},
 	"foreground" : 
 	[
 		{

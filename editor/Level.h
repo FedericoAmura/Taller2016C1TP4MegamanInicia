@@ -15,32 +15,26 @@ using std::map;
 
 typedef unsigned int uint;
 typedef unsigned char color_t;
-typedef struct rgb {
-    color_t r;
-    color_t g;
-    color_t b;
-} rgb_t;
 
 
 class Level {
 private:
     uint length;
     uint width;
-    map<string, Layer> layers;
-    rgb_t background_color;
-    Layer& getLayer(string which_layer);
+    Layer entities;
+    string background_file;
 
 public:
     Level(string json_file);
-    rgb_t getColor() {return background_color;}
     explicit Level(uint len);
+    void setBackgroundFile(string path);
+    string getBackgroundFile() {return background_file;};
     uint getLength() {return length;}
     uint getWidth() {return width;}
-    void setBackgroundColor(color_t r, color_t g, color_t b);
     void toJson(string file_name);
-    bool addEntity(prototype_t prototype, string layer);
-    bool removeEntity(uint x, uint y, string layer);
-    void visualize(); //borrar en el futuro
+    bool addEntity(prototype_t prototype);
+    bool removeEntity(uint x, uint y);
+    uint getEntity(uint x, uint y);
 };
 
 

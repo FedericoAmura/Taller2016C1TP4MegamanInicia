@@ -9,15 +9,19 @@
 #define MOB_PATH (string) IMG_PATH + "/mobs/"
 #define BSS_PATH (string) IMG_PATH + "/bosses/"
 #define LVL_PATH (string) IMG_PATH + "/level/"
-#define BCK_PATH (string) IMG_PATH + "/level/background/"
 #define TLE_PATH (string) IMG_PATH + "/level/tiles/"
 
 SpriteDispenser::SpriteDispenser() {
+    //megaman
+    paths[MEGAMAN] = (string) IMG_PATH + "/pc/megaman_idle.png";
     //tiles
     paths[BOSS_DOOR] = TLE_PATH + "boss_door.png";
     paths[CABLE_EDGE_0] = TLE_PATH + "cable_edge0.png";
     paths[CABLE_EDGE_1] = TLE_PATH + "cable_edge1.png";
     paths[CABLE_FLOOR_0] = TLE_PATH + "cable_floor0.png";
+    paths[STONE_WALL] = TLE_PATH + "stone_wall.png";
+    paths[STONE_LADDER] = TLE_PATH + "stone_ladder.png";
+    paths[SPIKE] = TLE_PATH + "stone_spike.png";
     //Mobs
     paths[BUMBY] = MOB_PATH + "bumby0.png";
     paths[MET] = MOB_PATH + "met_vulnerable.png";
@@ -28,13 +32,6 @@ SpriteDispenser::SpriteDispenser() {
     paths[MAGNETMAN] = BSS_PATH + "magnetman/magnetman_idle.png";
     paths[RINGMAN] = BSS_PATH + "ringman/ringman_idle.png";
     paths[SPARKMAN] = BSS_PATH + "sparkman/sparkman_idle.png";
-    //Backgrounds
-    paths[CAVE] = BCK_PATH + "cave_b.png";
-    paths[CAVE_EDGE] = BCK_PATH + "cave_edge_b.png";
-    paths[PLANET] = BCK_PATH + "planet_b.png";
-    paths[MOSS_STONE] = BCK_PATH + "moss_stone_b.png";
-    paths[CLOUD] = BCK_PATH + "cloud_b.png";
-    paths[CLOUD_EDGE] = BCK_PATH + "cloud_edge_b.png";
     //others
     paths[EMPTY] = LVL_PATH + "empty.png";
 }

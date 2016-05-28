@@ -46,9 +46,17 @@ bool Layer::removeEntity(uint x, uint y) {
         return false;
     }
     Entity* erase = entities[x][y];
-    entities[x].erase(entities[x].begin() + y);
     delete erase;
+    entities[x][y] = NULL;
     return true;
+}
+
+uint Layer::getEntity(uint x, uint y) {
+    if (isEmpty(x, y)){
+        return 0;
+    } else {
+        return entities[x][y]->getId();
+    }
 }
 
 Layer::~Layer() {
@@ -79,15 +87,6 @@ Json::Value Layer::toJson() {
     return array;
 }
 
-void Layer::visualize() {
-    for (uint i = 0; i != width; ++i){
-        for (uint j = 0; j != length; ++j){
-            if (entities[i][j] != NULL){
-                std::cout << "X";
-            } else {
-                std::cout << "0";
-            }
-        }
-        std::cout << std::endl;
-    }
-}
+
+
+
