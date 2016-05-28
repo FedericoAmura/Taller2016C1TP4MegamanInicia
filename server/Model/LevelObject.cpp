@@ -15,10 +15,8 @@ int LevelObject::uniqueId=0;
 LevelObject::LevelObject(b2World* w,Json::Value& json,const b2Vec2& pos,int id)
 :world(w),objectId(uniqueId++),spriteId(id){
 	b2BodyDef bodyDef;
-	bodyDef.type = b2_dynamicBody;
+	bodyDef.type = b2_staticBody;
 	bodyDef.position.Set(pos.x,pos.y);
-	bodyDef.fixedRotation=true;
-	bodyDef.bullet = true;
 	body = world->CreateBody(&bodyDef);
 	//shape
 	b2PolygonShape shape;
@@ -37,40 +35,7 @@ LevelObject::LevelObject(b2World* w,Json::Value& json,const b2Vec2& pos,int id)
 	}
 }
 
-LevelObject::~LevelObject() {
-	// TODO Auto-generated destructor stub
-}
-
-void LevelObject::move(char key){
-	switch(key){
-	case 'a':{
-		b2Vec2 vel = body->GetLinearVelocity();
-		vel.x=-10;
-		body->SetLinearVelocity(vel);
-		break;
-	}
-	case 'w':{
-		b2Vec2 vel = body->GetLinearVelocity();
-
-		vel.y =0.50* (-world->GetGravity().y);//upwards - don't change x velocity
-		body->SetLinearVelocity( vel );
-		break;
-	}
-	case 'd':{
-		b2Vec2 vel = body->GetLinearVelocity();
-		vel.x=10;
-		body->SetLinearVelocity(vel);
-		break;
-	}
-	case 's':{
-		b2Vec2 vel = body->GetLinearVelocity();
-		vel.x=0;//stop moving sideways
-		body->SetLinearVelocity(vel);
-		break;
-	}
-	default: break;
-	}
-}
+LevelObject::~LevelObject() {}
 
 const b2Vec2& LevelObject::getPos() {
 	return body->GetPosition();
@@ -82,4 +47,8 @@ int LevelObject::getId(){
 
 int LevelObject::getSpriteId() {
 	return spriteId;
+}
+
+bool LevelObject::changed() {
+	return body->IsAwake();
 }

@@ -4,7 +4,7 @@
 		"gravity": -100.0,
 		"width" : 95.0,
 		"height" : 95.0,
-		"steps/second" : 60.0
+		"steps/second" : 15.0
 	},
 
 	"megaman":
@@ -14,11 +14,23 @@
 		"shapes":
 		[
 			{
-				"width" : 3.0,
-				"height" : 3.0,
+				"width" : 0.5,
+				"height" : 0.5,
 				"X":0.0,
 				"Y":0.0
 			}
+		]
+	},
+	"wall":
+	{
+		"shapes":
+		[
+				{
+					"width" : 0.5,
+					"height" : 0.5,
+					"X":0.0,
+					"Y":0.0
+				}
 		]
 	}
 }

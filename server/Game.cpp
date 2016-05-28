@@ -135,9 +135,9 @@ void Game::selectLevel(int levelId, int client){
 	/*TODO default level for now*/
 	if((!levelChosen())&&(client==firstClient)){
 		LOG(INFO)<<"level seleccionado: "<<levelId;
-		level= new MyLevel(this,"../server/Model/nivel_test.json");
-		level->start();
 		notify(new MessageSent("6",0));
+		level= new MyLevel(this,"../server/Model/simplex.json");
+		level->start();
 	}
 }
 
@@ -153,12 +153,16 @@ MyLevel* Game::getLevel(){
  * post:level is set to null*/
 void Game::stopLevel(){
 	//todo send lost,won,exited
+	LOG(INFO)<<"cerrando nivel";
 	if(levelChosen()){
 		if(level->isRunning()){
 			level->stop();
 			level->join();
 		}
+
+		LOG(INFO)<<"destruyendo nivel";
 		delete level;
+		LOG(INFO)<<"nivel destruido";
 		level=nullptr;
 		std::string levelExitMsg="7";
 		this->notify(new MessageSent(levelExitMsg,0));

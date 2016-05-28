@@ -13,20 +13,20 @@
 #include <string>
 
 class LevelObject {
+protected:
 	static int uniqueId;
 	b2World* world;
 	b2Body* body;
-	int spriteId;
 	const int objectId;
+	int spriteId;
 
-	//todo obj id
 public:
 	LevelObject(b2World* w,Json::Value& json,const b2Vec2& pos,int id);
 	virtual ~LevelObject();
-	void move(char key);
 	const b2Vec2& getPos();
 	int getId();
 	int getSpriteId();
+	virtual bool changed();
 };
 
 #endif /* SERVER_MODEL_LEVELOBJECT_H_ */
