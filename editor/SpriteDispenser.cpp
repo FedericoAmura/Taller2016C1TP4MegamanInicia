@@ -32,8 +32,6 @@ SpriteDispenser::SpriteDispenser() {
     paths[MAGNETMAN] = BSS_PATH + "magnetman/magnetman_idle.png";
     paths[RINGMAN] = BSS_PATH + "ringman/ringman_idle.png";
     paths[SPARKMAN] = BSS_PATH + "sparkman/sparkman_idle.png";
-    //others
-    paths[EMPTY] = LVL_PATH + "empty.png";
 }
 
 string SpriteDispenser::get(uint id) {

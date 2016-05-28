@@ -79,10 +79,6 @@ bool Workspace::removeEntity(uint x, uint y) {
 
 }
 
-void Workspace::on_button_clicked(GdkEventButton* button_event) {
-    std::cout << "Hello world" << std::endl;
-}
-
 uint Workspace::getId(uint x, uint y) {
     return level.getEntity(x, y);
 }
