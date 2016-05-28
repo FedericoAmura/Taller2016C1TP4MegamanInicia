@@ -2,7 +2,6 @@
 <!-- Generated with glade 3.16.1 -->
 <interface>
   <requires lib="gtk+" version="3.10"/>
-  <object class="GtkListStore" id="liststore1"/>
   <object class="GtkApplicationWindow" id="EditorWindow">
     <property name="can_focus">False</property>
     <property name="default_width">800</property>
@@ -176,70 +175,6 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
-              <object class="GtkNotebook" id="Selector">
-                <property name="width_request">300</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="hexpand">False</property>
-                <property name="resize_mode">immediate</property>
-                <child>
-                  <object class="GtkIconView" id="TileIcons">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="margin">6</property>
-                    <property name="vexpand">True</property>
-                    <property name="model">liststore1</property>
-                  </object>
-                  <packing>
-                    <property name="reorderable">True</property>
-                  </packing>
-                </child>
-                <child type="tab">
-                  <object class="GtkLabel" id="label1">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Tiles</property>
-                  </object>
-                  <packing>
-                    <property name="tab_fill">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkIconView" id="MobIcons">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="margin">6</property>
-                  </object>
-                  <packing>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child type="tab">
-                  <object class="GtkLabel" id="label2">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Mobs</property>
-                  </object>
-                  <packing>
-                    <property name="position">1</property>
-                    <property name="tab_fill">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <placeholder/>
-                </child>
-                <child type="tab">
-                  <placeholder/>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="pack_type">end</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkBox" id="Drawer">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -346,8 +281,11 @@
               <packing>
                 <property name="expand">True</property>
                 <property name="fill">True</property>
-                <property name="position">1</property>
+                <property name="position">0</property>
               </packing>
+            </child>
+            <child>
+              <placeholder/>
             </child>
           </object>
           <packing>
@@ -357,6 +295,63 @@
           </packing>
         </child>
       </object>
+    </child>
+  </object>
+  <object class="GtkListStore" id="liststore1"/>
+  <object class="GtkNotebook" id="Selector">
+    <property name="width_request">300</property>
+    <property name="visible">True</property>
+    <property name="can_focus">True</property>
+    <property name="hexpand">False</property>
+    <property name="resize_mode">immediate</property>
+    <child>
+      <object class="GtkIconView" id="TileIcons">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="margin">6</property>
+        <property name="vexpand">True</property>
+        <property name="model">liststore1</property>
+      </object>
+      <packing>
+        <property name="reorderable">True</property>
+      </packing>
+    </child>
+    <child type="tab">
+      <object class="GtkLabel" id="TilesLabel">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Tiles</property>
+      </object>
+      <packing>
+        <property name="tab_fill">False</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkIconView" id="MobIcons">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="margin">6</property>
+      </object>
+      <packing>
+        <property name="position">1</property>
+      </packing>
+    </child>
+    <child type="tab">
+      <object class="GtkLabel" id="MobsLabel">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Mobs</property>
+      </object>
+      <packing>
+        <property name="position">1</property>
+        <property name="tab_fill">False</property>
+      </packing>
+    </child>
+    <child>
+      <placeholder/>
+    </child>
+    <child type="tab">
+      <placeholder/>
     </child>
   </object>
 </interface>

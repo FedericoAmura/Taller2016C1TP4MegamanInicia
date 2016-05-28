@@ -8,14 +8,12 @@
 #include "SelectionLabel.h"
 #include "SelectionDrawing.h"
 #include "ButtonDeleteSelection.h"
-
-#define ICON_WIDTH 62
+#include "Selector.h"
 
 typedef Glib::RefPtr<Gtk::Builder> Builder;
 typedef Glib::RefPtr<Gtk::Application> App;
 typedef Glib::RefPtr<Gtk::ListStore> ListStore;
 typedef Glib::RefPtr<Gdk::Pixbuf> Pixbuf;
-typedef Glib::RefPtr<Gtk::Layout> Layout;
 
 using std::cerr;
 using std::endl;
@@ -41,39 +39,14 @@ int main(int argc, char *argv[]) {
     refBuilder->get_widget("EditorWindow", appWindow);
 
     //Toolbox display
-    SpriteDispenser sprites;
-    Gtk::IconView* m_TilesView = NULL;
-    Gtk::IconView* m_MobsView = NULL;
-    refBuilder->get_widget("TileIcons", m_TilesView);
-    refBuilder->get_widget("MobIcons", m_MobsView);
-    m_TilesView->set_item_width(ICON_WIDTH);
-    m_MobsView->set_item_width(ICON_WIDTH);
-    m_TilesView->enable_model_drag_source(std::vector<Gtk::TargetEntry>());
-    m_MobsView->enable_model_drag_source(std::vector<Gtk::TargetEntry>());
-    EntitySet tiles(m_TilesView);
-    EntitySet mobs(m_MobsView);
-    vector<IconEntry> tile_entries = {
-            IconEntry(STONE_WALL, sprites.get(STONE_WALL), "Wall"),
-            IconEntry(SPIKE, sprites.get(SPIKE), "Spike"),
-            IconEntry(STONE_LADDER, sprites.get(STONE_LADDER), "Ladder")
-    };
-    vector<IconEntry> mob_entries = {
-            IconEntry(BUMBY, sprites.get(BUMBY), "Bumby"),
-            IconEntry(MET, sprites.get(MET), "Met"),
-            IconEntry(SNIPER, sprites.get(SNIPER), "Sniper"),
-            IconEntry(JUMPING_SNIPER, sprites.get(JUMPING_SNIPER), "Jumping Sniper"),
-            IconEntry(BOMBMAN, sprites.get(BOMBMAN), "Bombman"),
-            IconEntry(FIREMAN, sprites.get(FIREMAN), "Fireman"),
-            IconEntry(MAGNETMAN, sprites.get(MAGNETMAN), "Magnetman"),
-            IconEntry(SPARKMAN, sprites.get(SPARKMAN), "Sparkman")
-    };
-    tiles.fill(tile_entries);
-    mobs.fill(mob_entries);
+    Gtk::Box* m_EditingArea = NULL;
+    refBuilder->get_widget("Workspace", m_EditingArea);
+    Selector selector;
+    m_EditingArea->pack_end(selector, false, true);
 
     //Workspace grid
     Gtk::Viewport* m_Viewport = NULL;
     refBuilder->get_widget("WorkspaceView", m_Viewport);
-
     Level level("simplex.json");
     Workspace workspace(level);
     WorkspaceEventManager manager(workspace);
@@ -96,10 +69,6 @@ int main(int argc, char *argv[]) {
     manager.signal_selection().connect(sigc::mem_fun(s_button, &ButtonDeleteSelection::on_selection));
     s_button.signal_clicked().connect(sigc::mem_fun(manager, &WorkspaceEventManager::on_delete));
     m_Box->pack_start(s_button);
-
-
-
-
 
     //Run
     if(appWindow) {
