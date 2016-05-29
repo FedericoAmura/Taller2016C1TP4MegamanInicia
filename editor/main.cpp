@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
     //Workspace grid
     Gtk::Viewport* m_Viewport = NULL;
     refBuilder->get_widget("WorkspaceView", m_Viewport);
-    Level level("simplex.json");
+    Level level(20);
     Workspace workspace(level);
     WorkspaceEventManager manager(workspace);
     workspace.set_vexpand(true);

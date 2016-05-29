@@ -22,7 +22,7 @@ typedef Json::Value::iterator v_iter;
 
 Level::Level(uint len) : length(len) {
     width = WIDTH;
-    entities = Layer(DEFAULT_LEN);
+    entities = Layer(len);
 }
 
 Level::Level(string json_file) : width(WIDTH) {

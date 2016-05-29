@@ -10,13 +10,12 @@
 
 using std::runtime_error;
 
-typedef vector<vector<Entity*> >::iterator m_iter;
 typedef vector<Entity*>::iterator v_iter;
 
 Layer::Layer(unsigned int length) : length(length), width(WIDTH) {
-    entities = vector<vector<Entity*> >(width, std::vector<Entity*>(length));
-    for (unsigned int i = 0; i != width; ++i){
-        for (unsigned int j = 0; j != length; ++j){
+    entities = vector<vector<Entity*> >(length, std::vector<Entity*>(width));
+    for (unsigned int i = 0; i != length; ++i){
+        for (unsigned int j = 0; j != width; ++j){
             entities[i][j] = NULL;
         }
     }
@@ -61,11 +60,11 @@ uint Layer::getEntity(uint x, uint y) {
 
 Layer::~Layer() {
     Entity* current_entity;
-    for(unsigned int i = 0; i != width; ++i){
-        for(unsigned int j = 0; j != length; ++j){
+    for(unsigned int i = 0; i != length; ++i){
+        for(unsigned int j = 0; j != width; ++j){
             current_entity = entities[i][j];
             if(current_entity != NULL){
-                //delete current_entity;
+                delete current_entity;
             }
         }
     }
@@ -73,8 +72,8 @@ Layer::~Layer() {
 
 Json::Value Layer::toJson() {
     Json::Value array(Json::arrayValue);
-    for (uint i = 0; i != width; ++i){
-        for (uint j = 0; j != length; ++j){
+    for (uint i = 0; i != length; ++i){
+        for (uint j = 0; j != width; ++j){
             if (entities[i][j] != NULL){
                 Json::Value entity_value(Json::objectValue);
                 entity_value["x"] = i;

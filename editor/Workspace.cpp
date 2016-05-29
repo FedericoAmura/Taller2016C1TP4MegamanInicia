@@ -14,8 +14,8 @@ typedef drawing_map_t::iterator p_iter;
 
 Workspace::Workspace(Level& level) : level(level) {
     resize();
-    for (uint i = 0; i < level.getWidth() ; ++i){
-        for (uint j = 0; j < level.getLength() ; ++j){
+    for (uint i = 0; i < level.getLength() ; ++i){
+        for (uint j = 0; j < level.getWidth() ; ++j){
             uint id = level.getEntity(i, j);
             if (id != 0) {
                 pair<uint, uint> position = std::make_pair(i, j);
