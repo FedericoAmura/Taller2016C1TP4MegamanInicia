@@ -23,6 +23,7 @@
 #include "LevelObject.h"
 #include "Megaman.h"
 #include "Obstacle.h"
+#include "MyContactListener.h"
 
 #define W_WIDTH 100
 #define W_HEIGHT 100
@@ -30,7 +31,7 @@
 MyLevel::MyLevel(Game* j,std::string lvlFileName)
 :world(b2Vec2(0,-10),true),running(false),game(j) {
 	world.SetContinuousPhysics(true);
-	world.SetContactListener(this);
+	world.SetContactListener(&contactListener);
 	/*abro configuraciones*/
 	Json::Value config_json;
 	fileToJson("../server/Model/config.json",config_json);
@@ -80,29 +81,43 @@ MyLevel::~MyLevel() {
 /*retruns new object if id has config, nullptr if not*/
 LevelObject* MyLevel::createObject(Json::Value objectJson,Json::Value config) {
 	int id=objectJson["id"].asInt();
+	int objectType=(int)id/1000;
+	std::string idAsString=objectJson["id"].asString();//for mets
 	bool creado=false;
 	LevelObject* objetoNuevo;
+	b2Vec2 pos=jsonPosToWorldPos(objectJson["x"].asInt(),
+			objectJson["y"].asInt());
 	//todo cambiar switch por algo automatico, implica cambios en config.json
-	switch(id){
-	case 9000:{
+	switch(objectType){
+	case 9:{
 		//create megaman
 		if (megaman==nullptr){
 			creado=true;
-			b2Vec2 pos=jsonPosToWorldPos(objectJson["x"].asInt(),
-					objectJson["y"].asInt());
 			megaman = new Megaman(&world, config["megaman"], pos);
 			objetoNuevo=megaman;
 		}
 		break;
 	}
-	case 4119:{
-		//create wall
+	case 1:
+		//todo create npc
+		break;
+	case 2:
+		//todo create weapon???
+		break;
+	case 3:
+		//todo create item
+		break;
+	case 4:{
+		//create obstacle
 		creado=true;
-		b2Vec2 pos=jsonPosToWorldPos(objectJson["x"].asInt(),
-				objectJson["y"].asInt());
-		objetoNuevo = new Obstacle(&world,config["wall"],pos,4119);
+		objetoNuevo = new Obstacle(&world,config[idAsString],pos,id);
 		break;
 	}
+	case 5:
+		//todo create special obstacle
+		creado=true;
+		objetoNuevo = new Obstacle(&world,config[idAsString],pos,id);
+		break;
 	default:
 		break;
 	}
@@ -161,7 +176,6 @@ std::string MyLevel::posToString(b2Vec2 pos){
 /*devuelve la pos correspondiente al centro del tile pasado*/
 b2Vec2 MyLevel::jsonPosToWorldPos(int x, int y) {
 	float posX,posY;
-
 	posX=x+0.5;//desfaso centro medio tile
 	posY= y+0.5;//desfaso centro medio tile
 	posY=w_height-posY;//corrijo por diferente centro de coordenadas
@@ -183,8 +197,6 @@ void MyLevel::run(){
 	while(isRunning()){
 		world.Step(timeStep, velocityIterations, positionIterations);
 		//todo si jugadores pasan mitad pantalla mover
-
-		//todo loop sobre objetos
 		//informar de todos los cambios, mediante move code
 		std::map<int,LevelObject*>::iterator it=objects.begin();
 		for(;it!=objects.end();it++){
@@ -195,8 +207,6 @@ void MyLevel::run(){
 				game->notify(new MessageSent(msj.str(),0));
 			}
 		}
-
-
 		usleep(timeStep* 1000000 );
 	}
 	LOG(INFO)<<"physics simulation of level stopped";

@@ -11,6 +11,13 @@
 	{
 		"HSpeed" : 10.0,
 		"JFactor" : 0.5,
+		"jumpSensor":
+		{
+			"x": 0.0,
+			"y": -0.5,
+			"width": 0.4,
+			"height": 0.1
+		},
 		"shapes":
 		[
 			{
@@ -21,6 +28,7 @@
 			}
 		]
 	},
+	
 	"wall":
 	{
 		"shapes":

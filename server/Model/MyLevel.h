@@ -15,16 +15,18 @@
 #include "../Thread.h"
 #include "LevelObject.h"
 #include "Megaman.h"
+#include "MyContactListener.h"
 
 class Game;
 
-class MyLevel: public Thread, public b2ContactListener {
+class MyLevel: public Thread{
 	b2World world;
 	Mutex runningMutex;
 	bool running;
 	Game* game;
 	std::map<int,LevelObject*> objects;
 	Megaman* megaman;
+	MyContactListener contactListener;
 	std::string posToString(b2Vec2 pos);
 	b2Vec2 jsonPosToWorldPos(int x, int y);
 	void createBoundaries();
