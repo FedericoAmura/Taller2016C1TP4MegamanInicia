@@ -37,6 +37,9 @@ bool Layer::addEntity(prototype_t prototype) {
     }
     Entity* new_entity = new Entity(id);
     entities[x][y] = new_entity;
+    if (length - x == 1) {
+        addLength();
+    }
     return true;
 }
 
@@ -85,6 +88,17 @@ Json::Value Layer::toJson() {
     }
     return array;
 }
+
+void Layer::addLength() {
+    vector<Entity*> new_row(width);
+    for (uint j = 0; j != width; ++j){
+        new_row[j] = NULL;
+    }
+    entities.push_back(new_row);
+    ++length;
+}
+
+
 
 
 

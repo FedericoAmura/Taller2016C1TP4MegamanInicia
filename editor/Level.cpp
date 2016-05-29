@@ -10,7 +10,6 @@
 #include "Level.h"
 
 #define WIDTH 15
-#define DEFAULT_LEN 30
 
 using std::stringstream;
 using std::ifstream;
@@ -49,6 +48,7 @@ Level::Level(string json_file) : width(WIDTH) {
 }
 
 bool Level::addEntity(prototype_t prototype) {
+    if (length - prototype.x == 1) ++length;
     return entities.addEntity(prototype);
 
 }
@@ -56,8 +56,6 @@ bool Level::addEntity(prototype_t prototype) {
 bool Level::removeEntity(uint x, uint y) {
     return entities.removeEntity(x, y);
 }
-
-
 
 void Level::toJson(string file_name) {
     Json::Value level(Json::objectValue);
@@ -82,26 +80,3 @@ void Level::setBackgroundFile(string path) {
 uint Level::getEntity(uint x, uint y) {
     return entities.getEntity(x, y);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -33,6 +33,7 @@ private:
     uint length;
     uint width;
     vector<vector <Entity*> >entities;
+    void addLength();
 };
 
 

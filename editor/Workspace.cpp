@@ -8,6 +8,7 @@
 #include "../entities.h"
 
 #define TILE_PXL 32
+#define EDGE 2
 
 typedef Glib::RefPtr<Gdk::Pixbuf> Pixbuf;
 typedef drawing_map_t::iterator p_iter;
@@ -57,6 +58,9 @@ bool Workspace::addElement(uint x, uint y, uint id) {
             std::get<0>(position) * TILE_PXL,
             std::get<1>(position) * TILE_PXL);
         drawing->show();
+        if (level.getLength() - x == EDGE){
+            resize();
+        }
         return true;
     } else {
         return false;

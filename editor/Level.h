@@ -16,7 +16,6 @@ using std::map;
 typedef unsigned int uint;
 typedef unsigned char color_t;
 
-
 class Level {
 private:
     uint length;
