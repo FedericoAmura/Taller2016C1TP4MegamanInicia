@@ -5,17 +5,23 @@
 #ifndef MEGAMAN_SELECTOR_H
 #define MEGAMAN_SELECTOR_H
 
-
+#include <vector>
 #include <gtkmm/notebook.h>
+#include "EntityIconView.h"
+
+using std::vector;
 
 class Selector : public Gtk::Notebook {
 public:
     Selector();
+    void setDraggable(vector<Gtk::TargetEntry>& list_targets);
+
 private:
     Gtk::Label m_TilesLabel;
     Gtk::Label m_MobsLabel;
-    Gtk::IconView m_TilesView;
-    Gtk::IconView m_MobsView;
+    EntityIconView m_TilesView;
+    EntityIconView m_MobsView;
+    vector<Gtk::TargetEntry> list_targets;
 };
 
 

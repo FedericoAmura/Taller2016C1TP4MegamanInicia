@@ -3,6 +3,7 @@
 //
 
 #include <gtkmm/iconview.h>
+#include <iostream>
 #include "Selector.h"
 #include "SpriteDispenser.h"
 #include "EntitySet.h"
@@ -17,8 +18,6 @@ Selector::Selector() {
     m_MobsLabel.set_text("Mobs");
     m_TilesView.set_item_width(ICON_WIDTH);
     m_MobsView.set_item_width(ICON_WIDTH);
-    m_TilesView.enable_model_drag_source(std::vector<Gtk::TargetEntry>());
-    m_MobsView.enable_model_drag_source(std::vector<Gtk::TargetEntry>());
     EntitySet tiles(&m_TilesView);
     EntitySet mobs(&m_MobsView);
     vector<IconEntry> tile_entries = {
@@ -43,4 +42,14 @@ Selector::Selector() {
     show();
     show_all_children(true);
 }
+
+void Selector::setDraggable(vector<Gtk::TargetEntry>& list_targets) {
+    this->list_targets = list_targets;
+    m_TilesView.enable_model_drag_source(list_targets);
+    m_MobsView.enable_model_drag_source(list_targets);
+
+}
+
+
+
 

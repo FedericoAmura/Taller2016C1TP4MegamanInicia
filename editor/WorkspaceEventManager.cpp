@@ -38,24 +38,32 @@ type_signal_selection WorkspaceEventManager::signal_selection() {
 }
 
 void WorkspaceEventManager::on_delete() {
-    if (!something_selected) {
-        throw std::runtime_error("Nothing to delete");
-    } else {
-        if (!workspace.removeEntity(
+    if (!something_selected || !workspace.removeEntity(
                 std::get<0>(selection),
                 std::get<1>(selection))){
-            throw std::runtime_error("Nothing to remove");
-        }
-        m_signal_selection.emit(NO_SELECTION);
+        throw std::runtime_error("Nothing to delete");
     }
+    m_signal_selection.emit(NO_SELECTION);
+
 }
 
 void WorkspaceEventManager::on_drag_data_received(const Glib::RefPtr<Gdk::DragContext> &context,
                                                   int x, int y,
-                                                  const Gtk::SelectionData &selection_data,
+                                                  const Gtk::SelectionData& selection_data,
                                                   guint info, guint time) {
-    return;
+    uint xint = ((uint) x) / TILE_PXL;
+    uint yint = ((uint) y) / TILE_PXL;
+    uint id = (uint) atoi(selection_data.get_text().c_str());
+    workspace.addElement(xint, yint, id);
 }
+
+void WorkspaceEventManager::setDroppable(std::vector<Gtk::TargetEntry>& list_targets) {
+    this->list_targets = list_targets;
+    drag_dest_set(list_targets);
+
+}
+
+
 
 
 

@@ -32,7 +32,7 @@ bool Layer::addEntity(prototype_t prototype) {
     if (x >= length || y >= width) {
         throw runtime_error("Insertion out of bounds");
     }
-    size_t id = prototype.id;
+    uint id = prototype.id;
     if (!isEmpty(x, y)){
         return false;
     }

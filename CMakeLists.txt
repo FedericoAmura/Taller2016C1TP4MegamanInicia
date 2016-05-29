@@ -28,7 +28,10 @@ set(SOURCE_FILES editor/main.cpp entities.h editor/Level.cpp editor/Level.h edit
         editor/Layer.cpp editor/Layer.h jsoncpp.cpp editor/Workspace.cpp editor/Workspace.h
         json/json-forwards.h json/json.h editor/ToolboxModelColumns.cpp editor/ToolboxModelColumns.h editor/EntitySet.cpp
         editor/EntitySet.h editor/SpriteDispenser.cpp editor/SpriteDispenser.h client/MyArea.cpp client/MyArea.h
-        editor/WorkspaceEventManager.cpp editor/WorkspaceEventManager.cpp editor/WorkspaceEventManager.h editor/SelectionLabel.cpp editor/SelectionLabel.cpp editor/SelectionLabel.h editor/SelectionDrawing.cpp editor/SelectionDrawing.h editor/ButtonDeleteSelection.cpp editor/ButtonDeleteSelection.h editor/Selector.cpp editor/Selector.h)
+        editor/WorkspaceEventManager.cpp editor/WorkspaceEventManager.cpp editor/WorkspaceEventManager.h
+        editor/SelectionLabel.cpp editor/SelectionLabel.cpp editor/SelectionLabel.h editor/SelectionDrawing.cpp
+        editor/SelectionDrawing.h editor/ButtonDeleteSelection.cpp editor/ButtonDeleteSelection.h editor/Selector.cpp
+        editor/Selector.h editor/EntityIconView.cpp editor/EntityIconView.h)
 add_executable(editor ${SOURCE_FILES})
 
 set(SOURCE_FILES editor/editor_test.cpp editor/Entity.cpp editor/Entity.h

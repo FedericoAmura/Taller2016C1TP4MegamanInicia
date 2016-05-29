@@ -70,6 +70,13 @@ int main(int argc, char *argv[]) {
     s_button.signal_clicked().connect(sigc::mem_fun(manager, &WorkspaceEventManager::on_delete));
     m_Box->pack_start(s_button);
 
+    //Drag and drop activation
+    std::vector<Gtk::TargetEntry> list_targets;
+    list_targets.push_back(Gtk::TargetEntry("STRING"));
+    manager.setDroppable(list_targets);
+    selector.setDraggable(list_targets);
+
+
     //Run
     if(appWindow) {
         app->run(*appWindow);
