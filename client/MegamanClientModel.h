@@ -17,11 +17,14 @@
 #include "MyArea.h"
 #include "Thread.h"
 
+typedef sigc::signal<void,std::string> StringSignal;
+
 class MegamanClientModel : public Thread {
 private:
 	Socket* serverProxy;
 	Drawables drawables;
 	bool recibirServer;
+	StringSignal windowChangeSignal;
 
 public:
 	MegamanClientModel();
@@ -30,9 +33,12 @@ public:
 	Drawables& getDrawables();
 	void run();	//updateFromServer();
 
+	StringSignal changeScreenSignal();
+
 	void connectServer(std::string ip, std::string port);
 	void disconnectServer();
 
+	void serverSendLevelSelected(int levelCode);
 	void serverSendKey(int keyCode);
 };
 

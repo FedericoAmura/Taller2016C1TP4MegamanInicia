@@ -15,15 +15,14 @@
 
 class Drawables {
 private:
-	std::map<int,Drawable*> background;
-	Mutex backgroundMutex;
-	std::map<int,Drawable*> foreground;
-	Mutex foregroundMutex;
+	std::map<int,Drawable*> drawableContainer;
+	Mutex m;
 
 public:
 	Drawables();
 	void setDrawable(int ID, Drawable* drawable);
 	bool hasDrawable(int ID);
+	int size();
 	Drawable* getDrawable(int ID);
 	virtual ~Drawables();
 };

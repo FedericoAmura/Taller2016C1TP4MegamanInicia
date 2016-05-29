@@ -14,17 +14,21 @@ Drawables::~Drawables() {
 }
 
 void Drawables::setDrawable(int ID, Drawable* drawable) {
-	Lock l(foregroundMutex);
-	foreground[ID] = drawable;
+	Lock l(m);
+	drawableContainer[ID] = drawable;
 }
 
 bool Drawables::hasDrawable(int ID) {
-	if (foreground[ID] != 0)
+	if (drawableContainer[ID] != 0)
 		return true;
 	return false;
 }
 
+int Drawables::size() {
+	return drawableContainer.size();
+}
+
 Drawable* Drawables::getDrawable(int ID) {
-	return foreground[ID];
+	return drawableContainer[ID];
 }
 

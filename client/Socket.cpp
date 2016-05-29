@@ -1,13 +1,14 @@
 /*
- * common_Socket.cpp
+ * Socket.cpp
  *
  *  Created on: May 7, 2016
  *      Author: freddy
  */
 
-#include <string>
-
 #include "Socket.h"
+
+#include <exception>
+#include <sstream>
 
 Socket::Socket(socket_t socket)
 	: socket(socket) {
@@ -52,6 +53,12 @@ void Socket::enviar(const std::string &mensaje){
 	}
 }
 
+void Socket::enviar(const int &mensaje){
+	std::string aux;
+	aux = numeroATexto(mensaje);
+	enviar(aux);
+}
+
 std::string Socket::recibirHasta(const char separador){
 	std::string linea;
 	char letter = '\n';
@@ -68,5 +75,12 @@ void Socket::cerrar() {
 }
 
 Socket::~Socket() {
+}
+
+template <typename T>
+std::string Socket::numeroATexto(T numero) {
+	std::stringstream ss;
+	ss << numero;
+	return ss.str();
 }
 

@@ -15,9 +15,9 @@
 #include "../common/CommunicationCodes.h"
 
 ClientWindow::ClientWindow() :
-	connectionWindow(model),
-	levelSelectorScreen(model),
-	levelScreen(model) {
+connectionScreen(model),
+levelSelectorScreen(model),
+levelScreen(model) {
 	set_title("Megaman Begins");
 	fullscreen();
 	add(screenContainer);
@@ -25,55 +25,55 @@ ClientWindow::ClientWindow() :
 	add_events(Gdk::KEY_PRESS_MASK);
 
 	//Conecto senales de la pantalla de coneccion
-	Gtk::Button &connServerButton = connectionWindow.getServerButton();
-	connServerButton.signal_clicked().connect(sigc::mem_fun(*this,&ClientWindow::startGameAndShowLevelSelector));
-	Gtk::Button &connCreditsButton = connectionWindow.getCreditsButton();
-	connCreditsButton.signal_clicked().connect(sigc::mem_fun(*this,&ClientWindow::showCreditsScreen));
-	Gtk::Button &connExitButton = connectionWindow.getExitButton();
+	Gtk::Button &connServerButton = connectionScreen.getServerButton();
+	connServerButton.signal_clicked().connect(sigc::mem_fun(*this,&ClientWindow::connectModel));
+	Gtk::Button &connCreditsButton = connectionScreen.getCreditsButton();
+	connCreditsButton.signal_clicked().connect(sigc::bind<std::string>(sigc::mem_fun(*this,&ClientWindow::showScreen),CREDITS_SCREEN_NAME));
+	Gtk::Button &connExitButton = connectionScreen.getExitButton();
 	connExitButton.signal_clicked().connect(sigc::mem_fun(*this,&Gtk::Window::hide));
 
 	//Conecto senales de la pantalla de creditos
 	Gtk::Button &credBackButton = creditsScreen.getBackButton();
-	credBackButton.signal_clicked().connect(sigc::mem_fun(*this,&ClientWindow::showStartScreen));
+	credBackButton.signal_clicked().connect(sigc::bind<std::string>(sigc::mem_fun(*this,&ClientWindow::showScreen),CONNECTION_SCREEN_NAME));
 
-	//Conecto senales para ir a nivel
-	Gtk::Button &megamanButton = levelSelectorScreen.getMegamanButton();
-	megamanButton.signal_clicked().connect(sigc::mem_fun(*this,&ClientWindow::showLevel));
+	//Conecto senales para notificar al server de eleccion del nivel
+	Gtk::Button &magnetManButton = levelSelectorScreen.getMagnetManButton();
+	magnetManButton.signal_clicked().connect(sigc::bind<int>(sigc::mem_fun(model,&MegamanClientModel::serverSendLevelSelected),MAGNETMAN));
+	Gtk::Button &sparkManButton = levelSelectorScreen.getSparkManButton();
+	sparkManButton.signal_clicked().connect(sigc::bind<int>(sigc::mem_fun(model,&MegamanClientModel::serverSendLevelSelected),SPARKMAN));
+	Gtk::Button &ringManButton = levelSelectorScreen.getRingManButton();
+	ringManButton.signal_clicked().connect(sigc::bind<int>(sigc::mem_fun(model,&MegamanClientModel::serverSendLevelSelected),RINGMAN));
+	Gtk::Button &fireManButton = levelSelectorScreen.getFireManButton();
+	fireManButton.signal_clicked().connect(sigc::bind<int>(sigc::mem_fun(model,&MegamanClientModel::serverSendLevelSelected),FIREMAN));
+	Gtk::Button &bombManButton = levelSelectorScreen.getBombManButton();
+	bombManButton.signal_clicked().connect(sigc::bind<int>(sigc::mem_fun(model,&MegamanClientModel::serverSendLevelSelected),BOMBMAN));
+
+	//Conecto senal del modelo para cambiar las ventanas
+	model.changeScreenSignal().connect(sigc::mem_fun(*this,&ClientWindow::showScreen));
 
 	//Agrego las pantallas y activo la de coneccion
-	screenContainer.add(connectionWindow,"connectionScreen");
-	screenContainer.add(creditsScreen,"creditsScreen");
-	screenContainer.add(levelSelectorScreen,"levelSelectorScreen");
-	screenContainer.add(levelScreen,"levelScreen");
-	screenContainer.set_visible_child("connectionScreen");
+	screenContainer.add(connectionScreen,CONNECTION_SCREEN_NAME);
+	screenContainer.add(creditsScreen,CREDITS_SCREEN_NAME);
+	screenContainer.add(levelSelectorScreen,LEVEL_SELECTOR_SCREEN_NAME);
+	screenContainer.add(levelScreen,LEVEL_SCREEN_NAME);
+	showScreen(CONNECTION_SCREEN_NAME);
 
 	show_all_children();
 }
 
-void ClientWindow::showStartScreen() {
-	screenContainer.set_visible_child("connectionScreen");
-}
-
-void ClientWindow::showCreditsScreen() {
-	screenContainer.set_visible_child("creditsScreen");
-}
-
-void ClientWindow::startGameAndShowLevelSelector() {
-	std::string serverIP = connectionWindow.getServerIP();
-	std::string serverPort = connectionWindow.getServerPort();
-	model.connectServer(serverIP, serverPort);
-	screenContainer.set_visible_child("levelSelectorScreen");
-}
-
-void ClientWindow::showLevel() {
-	levelScreen.startLevel();
-	screenContainer.set_visible_child("levelScreen");
-}
-
-void ClientWindow::cleanLevelScreen(){
-	if (0==screenContainer.get_visible_child_name().compare("levelScreen")) {
+void ClientWindow::showScreen(std::string childrenName) {
+	screenContainer.set_visible_child(childrenName);
+	if (childrenName == LEVEL_SCREEN_NAME)
+		levelScreen.startLevel();
+	else
 		levelScreen.stopLevel();
-	}
+}
+
+void ClientWindow::connectModel() {
+	std::string serverIP = connectionScreen.getServerIP();
+	std::string serverPort = connectionScreen.getServerPort();
+	model.connectServer(serverIP, serverPort);
+	showScreen(LEVEL_SELECTOR_SCREEN_NAME);	//TODO mover al modelo
 }
 
 bool ClientWindow::on_key_press_event(GdkEventKey* key_event) {

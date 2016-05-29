@@ -44,6 +44,7 @@ public:
 
 	//Envia datos por el socket
 	void enviar(const std::string &mensaje);
+	void enviar(const int &mensaje);
 
 	//Recibe datos hasta encontrar un caracter separador
 	std::string recibirHasta(const char separador);
@@ -51,6 +52,11 @@ public:
 	void cerrar();
 
 	virtual ~Socket();
+
+private:
+	//Convierte un numero de cualquier tipo a string (en decimal)
+	template <typename T>
+	std::string numeroATexto(T numero);
 };
 
 #endif /* SOCKET_H_ */

@@ -14,7 +14,7 @@ private:
 
 public:
 	explicit Drawing();
-	void setImage(const std::string &rutaImagen, const int width, const int height);
+	void setImage(const std::string &rutaImagen, const int width, const int height, bool flip);
 	virtual ~Drawing();
 
 protected:

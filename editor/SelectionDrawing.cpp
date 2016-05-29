@@ -8,7 +8,7 @@
 
 bool SelectionDrawing::on_selection(uint id) {
     if (id){
-        setImage(sprites.get(id), SIDE, SIDE);
+        setImage(sprites.get(id), SIDE, SIDE, false);
         show();
     } else {
         hide();

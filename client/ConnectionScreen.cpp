@@ -16,7 +16,7 @@ ConnectionScreen::ConnectionScreen(MegamanClientModel& model) :
 	const int height = Gdk::screen_height();
 
 	//Dibujamos el fondo de la pantalla de inicio
-	connectionBackground.setImage("../images/introbackground.jpg",width,height);
+	connectionBackground.setImage("../images/introbackground.jpg",width,height,false);
 	put(connectionBackground,0,0);
 
 	//Armo la box para la vinculacion

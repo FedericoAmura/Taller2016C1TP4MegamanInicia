@@ -20,13 +20,12 @@ private:
 	std::string posX;
 	std::string posY;
 	bool dibujado;
-	bool isForeGround;
 
 public:
 	Drawable();
 	void setIsDrawed(bool isDrawed);
 	bool isDrawed();
-	void setImage(std::string ruta, int width, int height);
+	void setImage(std::string ruta, int width, int height, bool flip);
 	void setCoordinates(const std::string &x, const std::string &y);
 	Drawing& getImage();
 	float getX();

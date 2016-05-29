@@ -8,8 +8,7 @@
 #include "Drawable.h"
 
 Drawable::Drawable() :
-	dibujado(false),
-	isForeGround(true) {
+	dibujado(false) {
 }
 
 Drawable::~Drawable() {
@@ -23,9 +22,9 @@ void Drawable::setIsDrawed(bool isDrawed) {
 	dibujado = isDrawed;
 }
 
-void Drawable::setImage(std::string ruta, int width, int height) {
+void Drawable::setImage(std::string ruta, int width, int height, bool flip) {
 	Lock l(m);
-	drawing.setImage(ruta, width, height);
+	drawing.setImage(ruta, width, height, flip);
 }
 
 void Drawable::setCoordinates(const std::string &x, const std::string &y) {

@@ -5,12 +5,10 @@
 Drawing::Drawing() {
 }
 
-void Drawing::setImage(const std::string &rutaImagen, const int width, const int height) {
+void Drawing::setImage(const std::string &rutaImagen, const int width, const int height, bool flip) {
 	image = Gdk::Pixbuf::create_from_file(rutaImagen,width,height,1);
-	if (image) {
-		image = image->add_alpha(true,240,255,0);	//Saco ese amarillo horrible de fondo
-		set_size_request(width, height);
-	}
+	if (image && flip) image = image->flip(true);
+	if (image) set_size_request(width, height);
 }
 
 Drawing::~Drawing() {

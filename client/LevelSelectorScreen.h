@@ -18,29 +18,28 @@
 class LevelSelectorScreen : public Gtk::Grid {
 private:
 	MegamanClientModel& model;
-	Gtk::Label messages;
-	Drawing sparkManIcon;
-	Gtk::Button sparkManButton;
-	Drawing snakeManIcon;
-	Gtk::Button snakeManButton;
-	Drawing needleManIcon;
-	Gtk::Button needleManButton;
-	Drawing hardManIcon;
-	Gtk::Button hardManButton;
+	//Gtk::Label messages;
 	Drawing megaManIcon;
 	Gtk::Button megaManButton;
-	Drawing topManIcon;
-	Gtk::Button topManButton;
-	Drawing genimiManIcon;
-	Gtk::Button geminiManButton;
 	Drawing magnetManIcon;
 	Gtk::Button magnetManButton;
-	Drawing shadowManIcon;
-	Gtk::Button shadowManButton;
+	Drawing sparkManIcon;
+	Gtk::Button sparkManButton;
+	Drawing ringManIcon;
+	Gtk::Button ringManButton;
+	Drawing fireManIcon;
+	Gtk::Button fireManButton;
+	Drawing bombManIcon;
+	Gtk::Button bombManButton;
 
 public:
 	LevelSelectorScreen(MegamanClientModel& model);
 	Gtk::Button& getMegamanButton();
+	Gtk::Button& getMagnetManButton();
+	Gtk::Button& getSparkManButton();
+	Gtk::Button& getRingManButton();
+	Gtk::Button& getFireManButton();
+	Gtk::Button& getBombManButton();
 	virtual ~LevelSelectorScreen();
 };
 

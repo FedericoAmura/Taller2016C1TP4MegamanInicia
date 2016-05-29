@@ -20,12 +20,13 @@
 #include "LevelScreen.h"
 #include "LevelSelectorScreen.h"
 #include "MegamanClientModel.h"
+#include "WindowNames.h"
 
 class ClientWindow : public Gtk::Window {
 private:
 	MegamanClientModel model;
 	Gtk::Stack screenContainer;
-	ConnectionScreen connectionWindow;
+	ConnectionScreen connectionScreen;
 	CreditsScreen creditsScreen;
 	LevelSelectorScreen levelSelectorScreen;
 	LevelScreen levelScreen;
@@ -34,10 +35,8 @@ public:
 	ClientWindow();
 	virtual ~ClientWindow();
 
-	void showStartScreen();
-	void showCreditsScreen();
-	void startGameAndShowLevelSelector();
-	void showLevel();
+	void showScreen(std::string childrenName);
+	void connectModel();
 	void cleanLevelScreen();
 
 private:
