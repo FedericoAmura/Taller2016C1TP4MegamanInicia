@@ -39,6 +39,7 @@ SpriteDispenser::SpriteDispenser() {
 	paths[STONE_WALL] = TLE_PATH + "stone_wall.png";
 	paths[STONE_LADDER] = TLE_PATH + "stone_ladder.png";
 	paths[SPIKE] = TLE_PATH + "stone_spike.png";
+	paths[SKY_PLATFORM] = TLE_PATH + "sky_platform.png";
 	//Mobs
 	paths[BUMBY_0] = MOB_PATH + "bumby0.png";
 	paths[BUMBY_1] = MOB_PATH + "bumby1.png";

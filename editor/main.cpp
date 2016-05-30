@@ -36,6 +36,7 @@ int main(int argc, char *argv[]) {
     }
     //Instantiate app window
     refBuilder->get_widget("EditorWindow", appWindow);
+    appWindow->set_title("Megaman Begins Level Editor");
 
     //Element selector display
     Gtk::Box* m_EditingArea = NULL;
