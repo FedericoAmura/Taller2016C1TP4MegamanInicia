@@ -68,3 +68,14 @@ ConnectionEnded::~ConnectionEnded() {}
 int ConnectionEnded::getClient() {
 	return descriptor;
 }
+
+/***************************************************/
+LevelFinished::LevelFinished(int condition): condition(condition) {
+	id=5;
+}
+
+LevelFinished::~LevelFinished() {}
+
+int LevelFinished::getCondition() {
+	return condition;
+}

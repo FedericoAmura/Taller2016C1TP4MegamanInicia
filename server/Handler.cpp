@@ -70,6 +70,7 @@ void SendMessage::handle(Event* e){
 	game->sendTo(mensaje,destino);
 }
 
+/*************************************************/
 DisconnectClient::DisconnectClient(Game* j):Handler(j) {}
 
 DisconnectClient::~DisconnectClient() {}
@@ -77,4 +78,15 @@ DisconnectClient::~DisconnectClient() {}
 void DisconnectClient::handle(Event* e) {
 	ConnectionEnded* event= (ConnectionEnded*)e;
 	game->removeClient(event->getClient());
+}
+
+/*************************************************/
+FinishLevel::FinishLevel(Game* j):Handler(j) {}
+
+FinishLevel::~FinishLevel() {}
+
+void FinishLevel::handle(Event* e) {
+	//LevelFinished* event= (LevelFinished*)e;
+	//event->getCondition();
+	game->stopLevel();
 }

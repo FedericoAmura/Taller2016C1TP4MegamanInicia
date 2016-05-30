@@ -15,6 +15,7 @@
 #define DRAW 1
 #define REDRAW 2
 #define MOVE 3
+#define KILL 4
 #define SOUND 5
 #define START_LEVEL_SCREEN 6
 #define BACK_TO_LEVEL_SELECTION 7
@@ -70,6 +71,12 @@
  * ej: "3 5 14 22\n" mover el dibujable 5 a pos X:14-Y:22
  * */
 
+//KILL codes
+/* Se manda id del dibujable para que se borre de pantalla
+ * formato: "KILL idSprite"
+ * ej: "4 5\n" borrar dibujable 5
+ * */
+
 //SOUND codes
 #define DISPARO 1
 /* Se manda el codigo del ruido correspondiente
@@ -78,9 +85,9 @@
  * */
 
 //START_LEVEL_SCREEN codes
-/* Se manda para notificar el inicio de un nivel
- * formato: "START_LEVEL_SCREEN\n"
- * ej: "6\n" y el cliente cambia al modo nivel
+/* Se manda para notificar el inicio de un nivel, seguido del cod de nivel
+ * formato: "START_LEVEL_SCREEN levelCode\n"
+ * ej: "6 1001\n" y el cliente cambia al modo nivel MAGNETMAN
  * */
 
 //BACK_TO_LEVEL_SELECTION codes

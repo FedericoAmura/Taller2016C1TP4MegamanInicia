@@ -9,6 +9,7 @@
 #include <Box2D/Box2D.h>
 #include "../json/json.h"
 #include <string>
+#include <glog/logging.h>
 
 int LevelObject::uniqueId=0;
 
@@ -34,15 +35,19 @@ LevelObject::LevelObject(b2World* w,Json::Value& json,const b2Vec2& pos,int id)
 	}
 }
 
-/*adds fixture with normal density no friction or restitution*/
-void LevelObject::addFixture(b2FixtureDef& fDef) {
+/*adds fixture with normal density, no friction or restitution
+ * redefine and call super to make sure fixtures collide with corresponding entities*/
+b2Fixture* LevelObject::addFixture(b2FixtureDef& fDef) {
 	fDef.density = 1;
 	fDef.friction=0;
 	fDef.restitution=0;
-	body->CreateFixture(&fDef);
+	return body->CreateFixture(&fDef);
 }
 
-LevelObject::~LevelObject() {}
+/*destroys itself and removes body from world*/
+LevelObject::~LevelObject() {
+	world->DestroyBody(body);
+}
 
 /*returns the position in world coordinates*/
 const b2Vec2& LevelObject::getPos() {

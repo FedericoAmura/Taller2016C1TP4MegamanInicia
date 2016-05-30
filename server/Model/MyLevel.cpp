@@ -16,6 +16,7 @@
 #include <iostream>//fixed
 #include <fstream>//ifstream
 #include <map>
+#include <exception>
 
 #include "../Event.h"
 #include "../Game.h"
@@ -24,12 +25,14 @@
 #include "Megaman.h"
 #include "Obstacle.h"
 #include "MyContactListener.h"
+#include "../common/CommunicationCodes.h"
 
-#define W_WIDTH 100
-#define W_HEIGHT 100
+#define W_WIDTH 95
+#define W_HEIGHT 95
 
 MyLevel::MyLevel(Game* j,std::string lvlFileName)
 :world(b2Vec2(0,-10),true),running(false),game(j) {
+	megaman=nullptr;
 	world.SetContinuousPhysics(true);
 	world.SetContactListener(&contactListener);
 	/*abro configuraciones*/
@@ -93,7 +96,7 @@ LevelObject* MyLevel::createObject(Json::Value objectJson,Json::Value config) {
 		//create megaman
 		if (megaman==nullptr){
 			creado=true;
-			megaman = new Megaman(&world, config["megaman"], pos);
+			megaman = new Megaman(&world, config["megaman"], pos,this);
 			objetoNuevo=megaman;
 		}
 		break;
@@ -110,21 +113,27 @@ LevelObject* MyLevel::createObject(Json::Value objectJson,Json::Value config) {
 	case 4:{
 		//create obstacle
 		creado=true;
-		objetoNuevo = new Obstacle(&world,config[idAsString],pos,id);
+		objetoNuevo = new Obstacle(&world,config["wall"],pos,id);
 		break;
 	}
-	case 5:
+	case 5:{
 		//todo create special obstacle
 		creado=true;
-		objetoNuevo = new Obstacle(&world,config[idAsString],pos,id);
+		if(id==5003){
+			objetoNuevo = new Spikes(&world,config["wall"],pos,id);
+		}else{
+			//todo escalera
+			objetoNuevo= new Spikes(&world,config["wall"],pos,id);
+		}
 		break;
+	}
 	default:
 		break;
 	}
 	if(creado){
 		/*notify clients about creation*/
 		std::stringstream msj;
-		msj<<"1 "<<objetoNuevo->getId()<<" "<<objetoNuevo->getSpriteId();
+		msj<<DRAW<<" "<<objetoNuevo->getId()<<" "<<objetoNuevo->getSpriteId();
 		msj<<" 0 "<<posToString(objetoNuevo->getPos());
 		game->notify(new MessageSent(msj.str(),0));
 		return objetoNuevo;
@@ -139,8 +148,10 @@ void MyLevel::createBoundaries() {
 	b2BodyDef bordersBodyDef;
 	bordersBodyDef.position.Set(0, -thickness);
 	b2Body* bordersBody = world.CreateBody(&bordersBodyDef);
+	bordersBody->SetUserData((void*)0);
 	b2PolygonShape borderShape;
 	b2FixtureDef myFixtureDef;
+	myFixtureDef.filter.categoryBits=BOUNDARY;
 	myFixtureDef.shape = &borderShape;
 	borderShape.SetAsBox(w_width / 2, thickness,
 			b2Vec2(w_width / 2, 0), 0); //ground
@@ -183,6 +194,35 @@ b2Vec2 MyLevel::jsonPosToWorldPos(int x, int y) {
 	return pos;
 }
 
+/*informs the client of the new position of the level objects that changed*/
+void MyLevel::redrawForClient(){
+	std::map<int,LevelObject*>::iterator it=objects.begin();
+	for(;it!=objects.end();it++){
+		LevelObject* obj= it->second;
+		if(obj->changed()){
+			std::stringstream msj;
+			msj<<MOVE<<" "<<obj->getId()<<" "<<posToString(obj->getPos());
+			game->notify(new MessageSent(msj.str(),0));
+		}
+	}
+}
+
+void MyLevel::removeDead(){
+	while(!toRemove.empty()){
+		LevelObject* dead= toRemove.front();
+		toRemove.pop();
+		std::stringstream killMsg;
+		killMsg<<KILL<<" "<<dead->getId();
+		game->notify(new MessageSent(killMsg.str(),0));
+		objects.erase(dead->getId());
+		if(dead==megaman){
+			game->notify(new LevelFinished(-1));
+			this->stop();
+		}
+		delete dead;
+	}
+}
+
 /*runs the physics simulation until it is stopped*/
 void MyLevel::run(){
 	{
@@ -194,20 +234,19 @@ void MyLevel::run(){
 	int32 positionIterations = 2;
 	LOG(INFO)<<"physics simulation of level started";
 
-	while(isRunning()){
-		world.Step(timeStep, velocityIterations, positionIterations);
-		//todo si jugadores pasan mitad pantalla mover
-		//informar de todos los cambios, mediante move code
-		std::map<int,LevelObject*>::iterator it=objects.begin();
-		for(;it!=objects.end();it++){
-			LevelObject* obj= it->second;
-			if(obj->changed()){
-				std::stringstream msj;
-				msj<<"3 "<<obj->getId()<<" "<<posToString(obj->getPos());
-				game->notify(new MessageSent(msj.str(),0));
-			}
+	try{
+		while(isRunning()){
+			//todo create bullets
+			//todo manage AI
+			//todo si jugadores pasan mitad pantalla mover
+			world.Step(timeStep, velocityIterations, positionIterations);
+			removeDead();
+			respawnAll();
+			redrawForClient();
+			usleep(timeStep* 1000000 );
 		}
-		usleep(timeStep* 1000000 );
+	}catch(std::exception& e){
+		LOG(ERROR)<<e.what();
 	}
 	LOG(INFO)<<"physics simulation of level stopped";
 }
@@ -220,6 +259,21 @@ void MyLevel::stop(){
 
 /*makes the megaman move according to the input*/
 void MyLevel::moveMegaman(char boton){
-	megaman->move(boton);
+	if(megaman!=nullptr)
+		megaman->move(boton);
 }
 
+void MyLevel::remove(LevelObject* deadObject){
+	toRemove.push(deadObject);
+}
+
+void MyLevel::respawnAll() {
+	while(!toRespawn.empty()){
+		toRespawn.front()->spawn();
+		toRespawn.pop();
+	}
+}
+
+void MyLevel::respawn(Megaman* meg) {
+	toRespawn.push(meg);
+}

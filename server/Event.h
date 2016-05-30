@@ -64,4 +64,14 @@ public:
 	virtual ~ConnectionEnded();
 	int getClient();
 };
+
+/*************************************************************/
+
+class LevelFinished: public Event{
+	int condition;
+public:
+	explicit LevelFinished(int condition);
+	virtual ~LevelFinished();
+	int getCondition();
+};
 #endif /* SERVER_EVENT_H_ */

@@ -54,4 +54,12 @@ public:
 	virtual ~DisconnectClient();
 	void handle(Event* e);
 };
+
+/************************************************/
+class FinishLevel: public Handler{
+public:
+	explicit FinishLevel(Game* j);
+	virtual ~FinishLevel();
+	void handle(Event* e);
+};
 #endif /* SERVER_HANDLER_H_ */

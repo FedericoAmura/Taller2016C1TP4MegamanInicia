@@ -18,6 +18,7 @@ manager(this),level(nullptr),firstClient(-1) {
 	manager.setHandler(2,new RecvMessage(this));
 	manager.setHandler(3,new SendMessage(this));
 	manager.setHandler(4,new DisconnectClient(this));
+	manager.setHandler(5,new FinishLevel(this));
 }
 
 Game::~Game() {
@@ -135,7 +136,9 @@ void Game::selectLevel(int levelId, int client){
 	/*TODO default level for now*/
 	if((!levelChosen())&&(client==firstClient)){
 		LOG(INFO)<<"level seleccionado: "<<levelId;
-		notify(new MessageSent("6",0));
+		std::stringstream msg;
+		msg<<START_LEVEL_SCREEN<<" "<<levelId;
+		notify(new MessageSent(msg.str(),0));
 		level= new MyLevel(this,"../server/Model/simplex.json");
 		level->start();
 	}

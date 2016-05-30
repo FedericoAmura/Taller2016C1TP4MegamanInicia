@@ -11,6 +11,7 @@
 #include <Box2D/Box2D.h>
 #include <string>
 #include <map>
+#include <queue>
 
 #include "../Thread.h"
 #include "LevelObject.h"
@@ -33,6 +34,12 @@ class MyLevel: public Thread{
 	void fileToJson(std::string fileName, Json::Value& json);
 	LevelObject* createObject(Json::Value objectJson,Json::Value config);
 
+	std::queue<LevelObject*> toRemove;
+	void removeDead();
+	void redrawForClient();
+	std::queue<Megaman*> toRespawn;
+	void respawnAll();
+
 	float stepsPerSecond;
 	float hScale;
 	float vScale;
@@ -46,6 +53,8 @@ public:
 	void stop();
 	bool isRunning();
 	void moveMegaman(char boton);
+	void remove(LevelObject* deadObject);
+	void respawn(Megaman* meg);
 };
 
 #endif /* SERVER_MODEL_MYLEVEL_H_ */

@@ -15,9 +15,12 @@
 #define JUMPSENSOR 1
 
  enum _entityCategory {
-    BOUNDARY =     0x0001,
-    FRIENDLY =     0x0002,
-    ENEMY =        0x0004,
+    BOUNDARY =	0x0001,
+    FRIENDLY =	0x0002,
+    ENEMY =		0x0004,
+	SPIKES =	0x0008,
+	LADDERS =	0X0010,
+	ITEM =		0x0020,
   };
 
 class LevelObject {
@@ -27,7 +30,7 @@ protected:
 	b2Body* body;
 	const int objectId;
 	int spriteId;
-	virtual void addFixture(b2FixtureDef& fDef);
+	b2Fixture* addFixture(b2FixtureDef& fDef);
 
 public:
 	LevelObject(b2World* w,Json::Value& json,const b2Vec2& pos,int id);
