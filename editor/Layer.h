@@ -29,11 +29,14 @@ public:
     uint getEntity(uint x, uint y);
     bool isEmpty(uint x, uint y);
     Json::Value toJson();
+    void enlarge();
+    void shorten();
+    uint getLength() {return length;}
+    uint getWidth() {return width;}
 private:
     uint length;
     uint width;
     vector<vector <Entity*> >entities;
-    void addLength();
 };
 
 

@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
     //Instantiate app window
     refBuilder->get_widget("EditorWindow", appWindow);
 
-    //Element elector display
+    //Element selector display
     Gtk::Box* m_EditingArea = NULL;
     refBuilder->get_widget("Workspace", m_EditingArea);
     Selector selector;
@@ -69,6 +69,12 @@ int main(int argc, char *argv[]) {
     manager.signal_selection().connect(sigc::mem_fun(s_button, &ButtonDeleteSelection::on_selection));
     s_button.signal_clicked().connect(sigc::mem_fun(manager, &WorkspaceEventManager::on_delete));
     m_Box->pack_start(s_button);
+    Gtk::Button* plusButton = NULL;
+    refBuilder->get_widget("plusButton", plusButton);
+    Gtk::Button* lessButton = NULL;
+    refBuilder->get_widget("lessButton", lessButton);
+    plusButton->signal_clicked().connect(sigc::mem_fun(manager, &WorkspaceEventManager::on_enlarge));
+    lessButton->signal_clicked().connect(sigc::mem_fun(manager, &WorkspaceEventManager::on_shorten));
 
     //Drag and drop activation
     std::vector<Gtk::TargetEntry> list_targets;
@@ -80,6 +86,10 @@ int main(int argc, char *argv[]) {
     if(appWindow) {
         app->run(*appWindow);
     }
+
+    //Descomentar para guardar cambios
+    level.toJson("simplex.json");
+
     delete appWindow;
     return 0;
 }

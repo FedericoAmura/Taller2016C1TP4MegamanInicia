@@ -20,6 +20,8 @@ public:
     void setDroppable(std::vector<Gtk::TargetEntry>& listTargets);
     type_signal_selection signal_selection();
     void on_delete();
+    void on_enlarge();
+    void on_shorten();
 
 private:
     Workspace& workspace;

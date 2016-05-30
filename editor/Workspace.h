@@ -26,12 +26,15 @@ public:
     bool removeEntity(uint x, uint y);
     uint getId(uint x, uint y);
     bool validPosition(uint x, uint y);
+    void enlargeLevel();
+    void shortenLevel();
 private:
     Level& level;
     drawing_map_t drawings;
     SpriteDispenser sprites;
     Glib::RefPtr<Gdk::Pixbuf> background;
     void resize();
+    void refresh();
 
     //callbacks
 

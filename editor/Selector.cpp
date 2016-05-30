@@ -15,7 +15,7 @@ Selector::Selector() {
     set_size_request(300, -1);
     SpriteDispenser sprites;
     m_TilesLabel.set_text("Tiles");
-    m_MobsLabel.set_text("Mobs");
+    m_MobsLabel.set_text("Spawners");
     m_TilesView.set_item_width(ICON_WIDTH);
     m_MobsView.set_item_width(ICON_WIDTH);
     EntitySet tiles(&m_TilesView);
@@ -26,14 +26,15 @@ Selector::Selector() {
             IconEntry(STONE_LADDER, sprites.get(STONE_LADDER), "Ladder")
     };
     vector<IconEntry> mob_entries = {
+            IconEntry(MEGAMAN_IDLE_0, sprites.get(MEGAMAN_IDLE_0), "Megaman"),
             IconEntry(BUMBY_0, sprites.get(BUMBY_0), "Bumby"),
-            IconEntry(MET_HIDDEN, sprites.get(MET_HIDDEN), "Met"),
+            IconEntry(MET_VULNERABLE, sprites.get(MET_VULNERABLE), "Met"),
             IconEntry(SNIPER_ATTACK, sprites.get(SNIPER_ATTACK), "Sniper"),
             IconEntry(JUMPING_SNIPER, sprites.get(JUMPING_SNIPER), "Jumping Sniper"),
             IconEntry(BOMBMAN_ATTACK, sprites.get(BOMBMAN_ATTACK), "Bombman"),
             IconEntry(FIREMAN_CAST_0, sprites.get(FIREMAN_CAST_0), "Fireman"),
-            IconEntry(MAGNETMAN_ATTACK, sprites.get(MAGNETMAN_ATTACK), "Magnetman"),
-            IconEntry(SPARKMAN_CAST_ATTACK_1, sprites.get(SPARKMAN_CAST_ATTACK_1), "Sparkman")
+            IconEntry(MAGNETMAN_IDLE, sprites.get(MAGNETMAN_IDLE), "Magnetman"),
+            IconEntry(SPARKMAN_IDLE, sprites.get(SPARKMAN_IDLE), "Sparkman")
     };
     tiles.fill(tile_entries);
     mobs.fill(mob_entries);

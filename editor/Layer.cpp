@@ -7,6 +7,7 @@
 #include "Level.h"
 
 #define WIDTH 15
+#define MIN_LEN 20
 
 using std::runtime_error;
 
@@ -38,7 +39,7 @@ bool Layer::addEntity(prototype_t prototype) {
     Entity* new_entity = new Entity(id);
     entities[x][y] = new_entity;
     if (length - x == 1) {
-        addLength();
+        enlarge();
     }
     return true;
 }
@@ -89,7 +90,8 @@ Json::Value Layer::toJson() {
     return array;
 }
 
-void Layer::addLength() {
+void Layer::enlarge() {
+    //enlarges layer by 1
     vector<Entity*> new_row(width);
     for (uint j = 0; j != width; ++j){
         new_row[j] = NULL;
@@ -97,6 +99,24 @@ void Layer::addLength() {
     entities.push_back(new_row);
     ++length;
 }
+
+void Layer::shorten() {
+    //shortens layer by 1 if last two columns are empty
+    if (length < MIN_LEN) {
+        return;
+    }
+    for (uint i = length - 2; i != length; ++i){
+        for (uint j = 0; j != width; ++j){
+            if (entities[i][j] != NULL){
+                return;
+            }
+        }
+    }
+    entities.pop_back();
+    --length;
+}
+
+
 
 
 

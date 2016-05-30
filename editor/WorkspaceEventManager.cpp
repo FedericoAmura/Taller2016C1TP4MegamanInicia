@@ -71,6 +71,18 @@ void WorkspaceEventManager::setDroppable(vector<TargetEntry>& list_targets) {
 
 }
 
+void WorkspaceEventManager::on_enlarge() {
+    workspace.enlargeLevel();
+}
+
+void WorkspaceEventManager::on_shorten() {
+    workspace.shortenLevel();
+}
+
+
+
+
+
 
 
 

@@ -19,23 +19,22 @@ using std::runtime_error;
 
 typedef Json::Value::iterator v_iter;
 
-Level::Level(uint len) : length(len) {
-    width = WIDTH;
+Level::Level(uint len) {
     entities = new Layer(len);
 }
 
-Level::Level(string json_file) : width(WIDTH) {
+Level::Level(string json_file) {
     //Open File
     ifstream in(json_file);
     Json::Value level_json;
     in >> level_json;
     //Length
-    this->length = level_json["length"].asUInt();
+    uint length = level_json["length"].asUInt();
     //Width
-    this->width = level_json["width"].asUInt();
+    uint width = level_json["width"].asUInt();
     //Foreground tiles
     Json::Value foreground = level_json["foreground"];
-    Layer* foreground_layer = new Layer(this->length);
+    Layer* foreground_layer = new Layer(length);
     for (v_iter it = foreground.begin(); it != foreground.end(); ++it) {
         prototype_t p;
         p.x = (*it)["x"].asUInt();
@@ -48,7 +47,6 @@ Level::Level(string json_file) : width(WIDTH) {
 }
 
 bool Level::addEntity(prototype_t prototype) {
-    if (length - prototype.x == 1) ++length;
     return entities->addEntity(prototype);
 
 }
@@ -60,7 +58,7 @@ bool Level::removeEntity(uint x, uint y) {
 void Level::toJson(string file_name) {
     Json::Value level(Json::objectValue);
     level["valid"] = true; //TODO: por ahora hardcodeo esto, despues va a depender de los chequeos del editor
-    level["length"] = length;
+    level["length"] = getLength();
     level["width"] = WIDTH;
     level["foreground"] = entities->toJson();
     ofstream out(file_name, ofstream::out);

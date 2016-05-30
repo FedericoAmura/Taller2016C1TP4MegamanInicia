@@ -190,7 +190,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>
-                          <object class="GtkButton" id="MoreSize">
+                          <object class="GtkButton" id="plusButton">
                             <property name="label" translatable="yes">+</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
@@ -206,7 +206,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkButton" id="LessSize">
+                          <object class="GtkButton" id="lessButton">
                             <property name="label" translatable="yes">-</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>

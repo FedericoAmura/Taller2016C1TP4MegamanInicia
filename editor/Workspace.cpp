@@ -90,6 +90,21 @@ bool Workspace::validPosition(uint x, uint y) {
     return (x < level.getLength() && y < level.getWidth());
 }
 
+void Workspace::enlargeLevel() {
+    level.enlarge();
+    resize();
+}
+
+void Workspace::shortenLevel() {
+    level.shorten();
+    resize();
+}
+
+
+
+
+
+
 
 
 
