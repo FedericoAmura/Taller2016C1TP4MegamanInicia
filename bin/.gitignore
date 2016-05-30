@@ -1,5 +1,5 @@
-/editor
-/editor_test
+editor
+editor_test
 /test_level.json
-/client
-/server
+client
+server

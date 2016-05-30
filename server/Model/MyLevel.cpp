@@ -35,6 +35,7 @@
 
 MyLevel::MyLevel(Game* j,std::string lvlFileName)
 :world(b2Vec2(0,-10)),running(false),game(j) {
+	LevelObject::resetIds();
 	megaman=nullptr;
 	world.SetContinuousPhysics(true);
 	world.SetContactListener(&contactListener);

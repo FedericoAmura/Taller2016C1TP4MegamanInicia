@@ -70,4 +70,9 @@ bool LevelObject::changed() {
 }
 
 /*default does nothing, should be redifined in subclass*/
-void LevelObject::collideWith(LevelObject* obj) {}
+void LevelObject::collideWith(LevelObject* obj) {
+}
+
+void LevelObject::resetIds() {
+	LevelObject::uniqueId=0;
+}

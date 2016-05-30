@@ -41,6 +41,7 @@ protected:
 public:
 	LevelObject(b2World* w,Json::Value& json,const b2Vec2& pos,int id);
 	virtual ~LevelObject();
+	static void resetIds();
 	const b2Vec2& getPos();
 	int getId();
 	int getSpriteId();
