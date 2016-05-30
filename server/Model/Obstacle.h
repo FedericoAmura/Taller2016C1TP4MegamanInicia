@@ -27,4 +27,14 @@ public:
 	void collideWith(LevelObject* obj);
 };
 
+#include "Megaman.h"
+
+class Ladder:public Obstacle{
+	void changeFixtureFilter(b2Fixture* f);
+public:
+	Ladder(b2World* w,Json::Value& json,const b2Vec2& pos,int id);
+	virtual ~Ladder();
+	void collideWith(LevelObject* obj);
+	void stopCollidingWith(Megaman* meg);
+};
 #endif /* SERVER_MODEL_OBSTACLE_H_ */

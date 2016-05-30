@@ -1,60 +1,38 @@
 /*
  * Megaman.cpp
  *
- *  Created on: May 27, 2016
+ *  Created on: May 30, 2016
  *      Author: nicolas
  */
 
 #include "Megaman.h"
+#include "Character.h"
 #include "../entities.h"
-#include "LevelObject.h"
-#include "MyLevel.h"
 #include <glog/logging.h>
+#include "MyLevel.h"
 
 Megaman::Megaman(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl):
-LevelObject(w,json,pos,MEGAMAN_IDLE_0),livesRemaining(3),level(lvl),canJump(false){
-	spawnPoint=pos;
-	body->SetType(b2_dynamicBody);
-	body->SetFixedRotation(true);
-	body->SetBullet(true);
+Character(w,json,pos,lvl),livesRemaining(3),spawnPoint(pos),laddersTouching(0) {
 	hSpeed=json["HSpeed"].asFloat();
-	jFactor=json["JFactor"].asFloat();
+	climbSpeed=json["ClimbSpeed"].asFloat();
 	//set filters
 	for (b2Fixture* f = body->GetFixtureList(); f; f = f->GetNext()){
 		changeFixtureFilter(f);
 	}
-	//no jump in air
-	Json::Value jSensor=json["jumpSensor"];
-	b2PolygonShape polygonShape;
-	b2Vec2 center(jSensor["x"].asFloat(),jSensor["y"].asFloat());
-	polygonShape.SetAsBox(jSensor["width"].asFloat(),
-			jSensor["height"].asFloat(),center,0);//place and size
-	b2FixtureDef sensorFixDef;
-	sensorFixDef.shape = &polygonShape;
-	sensorFixDef.density = 0.01;
-	sensorFixDef.isSensor = true;
-	sensorFixDef.filter.maskBits=BOUNDARY;//only detects floor (or walls)
-	b2Fixture* jumpSensor = body->CreateFixture(&sensorFixDef);
-	jumpSensor->SetUserData((void*)JUMPSENSOR);//to recognize sensor
+	createJumpSensor(json["jumpSensor"]);
 }
 
-Megaman::~Megaman() {}
+Megaman::~Megaman() {
+	// TODO Auto-generated destructor stub
+}
 
 /*makes sure fixtures collide with corresponding entities*/
 void Megaman::changeFixtureFilter(b2Fixture* f) {
 	b2Filter filter=f->GetFilterData();
-	filter.categoryBits=FRIENDLY;
-	filter.maskBits=(ENEMY|BOUNDARY|SPIKES);
+	filter.categoryBits=CHARACTERS;
+	filter.maskBits=(BOUNDARIES|SPIKES|LADDERS|ITEMS|BULLETS);
+	filter.groupIndex=FRIENDLY;
 	f->SetFilterData(filter);
-}
-
-/*jumps, like duh*/
-void Megaman::jump() {
-	if(canJump){
-		b2Vec2 vel = body->GetLinearVelocity();
-		vel.y = jFactor * (-world->GetGravity().y); //upwards - don't change x velocity
-		body->SetLinearVelocity(vel);
-	}
 }
 
 /*takes key and moves accordingly*/
@@ -67,7 +45,12 @@ void Megaman::move(char key){
 		break;
 	}
 	case 'w':{
-		jump();
+		if(checkClimbing()){
+			b2Vec2 vel(0,climbSpeed);
+			body->SetLinearVelocity(vel);
+		}else{
+			jump();
+		}
 		break;
 	}
 	case 'd':{
@@ -79,6 +62,9 @@ void Megaman::move(char key){
 	case 's':{
 		b2Vec2 vel = body->GetLinearVelocity();
 		vel.x=0;//stop moving sideways
+		if(checkClimbing()){
+			vel.y=-climbSpeed;
+		}
 		body->SetLinearVelocity(vel);
 		break;
 	}
@@ -86,7 +72,8 @@ void Megaman::move(char key){
 	}
 }
 
-/*kill megaman*/
+/*kills megaman. if he has lives remaining he's queued for respawn
+ * else he gets removed*/
 void Megaman::kill() {
 	LOG(INFO)<<"megaman murio,vidas restantes: "
 			<<livesRemaining;
@@ -102,4 +89,17 @@ void Megaman::kill() {
  * sends megaman to his assigned spawning point*/
 void Megaman::spawn() {
 	body->SetTransform(spawnPoint,0);
+}
+
+bool Megaman::checkClimbing(){
+	if (laddersTouching >0){
+		body->SetGravityScale(0.0);
+		b2Vec2 vel =body->GetLinearVelocity();
+		vel.y=0;
+		body->SetLinearVelocity(vel);
+		return true;
+	}else{
+		body->SetGravityScale(1.0);
+		return false;
+	}
 }

@@ -15,9 +15,9 @@
 
 #include "../Thread.h"
 #include "LevelObject.h"
-#include "Megaman.h"
 #include "MyContactListener.h"
 
+class Megaman;
 class Game;
 
 class MyLevel: public Thread{

@@ -6,9 +6,11 @@
  */
 
 #include "MyContactListener.h"
-#include "Megaman.h"
 #include "LevelObject.h"
 #include <glog/logging.h>
+#include "Character.h"
+#include "Megaman.h"
+#include "Obstacle.h"
 
 MyContactListener::MyContactListener() {
 	// TODO Auto-generated constructor stub
@@ -23,7 +25,7 @@ MyContactListener::~MyContactListener() {
 //todo make more general
 void MyContactListener::setJump(b2Fixture* fixture,bool state){
 	void* bodyUserData=fixture->GetBody()->GetUserData();
-	Megaman* megaman= (Megaman*)bodyUserData;
+	Character* megaman= (Character*)bodyUserData;
 	megaman->canJump=state;
 }
 
@@ -49,9 +51,8 @@ void MyContactListener::BeginContact(b2Contact* contact) {
 	//LOG(INFO)<<"cat bits 1: "<<catBits1;
 	uint16 catBits2=contact->GetFixtureB()->GetFilterData().categoryBits;
 	//LOG(INFO)<<"cat bits 2: "<<catBits2;
-	uint16 boundary=BOUNDARY;
 	//si ninguno es borde les pido que colisionen como objetos
-	if(((catBits1 | catBits2) & boundary)==0){
+	if(((catBits1 | catBits2) & BOUNDARIES)==0){
 		LOG(INFO)<<"COLLISION";
 		void* userData1=contact->GetFixtureA()->GetBody()->GetUserData();
 		void* userData2=contact->GetFixtureB()->GetBody()->GetUserData();
@@ -64,4 +65,14 @@ void MyContactListener::BeginContact(b2Contact* contact) {
 
 void MyContactListener::EndContact(b2Contact* contact) {
 	setAllJumps(contact,false);
+
+	uint16 catBits1=contact->GetFixtureA()->GetFilterData().categoryBits;
+	uint16 catBits2=contact->GetFixtureB()->GetFilterData().categoryBits;
+	void* userData1=contact->GetFixtureA()->GetBody()->GetUserData();
+	void* userData2=contact->GetFixtureB()->GetBody()->GetUserData();
+	if(catBits1==LADDERS){
+		((Ladder*)userData1)->stopCollidingWith((Megaman*)userData2);
+	}else if(catBits2==LADDERS){
+		((Ladder*)userData2)->stopCollidingWith((Megaman*)userData1);
+	}
 }

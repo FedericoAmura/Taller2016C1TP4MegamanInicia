@@ -14,14 +14,20 @@
 
 #define JUMPSENSOR 1
 
- enum _entityCategory {
-    BOUNDARY =	0x0001,
-    FRIENDLY =	0x0002,
-    ENEMY =		0x0004,
-	SPIKES =	0x0008,
-	LADDERS =	0X0010,
-	ITEM =		0x0020,
-  };
+//todo use namespace to avoid name cluttering
+enum _entityCategory {
+	BOUNDARIES 	=	0x0001,
+	SPIKES 		=	0x0002,
+	LADDERS		=	0X0004,
+	BULLETS		=	0x0008,
+	ITEMS		=	0x0010,
+	CHARACTERS	=	0x0020,
+};
+
+enum _entityGroups{
+	FRIENDLY	= -1,
+	ENEMY		= -2,
+};
 
 class LevelObject {
 protected:

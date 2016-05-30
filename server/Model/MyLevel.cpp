@@ -16,22 +16,23 @@
 #include <iostream>//fixed
 #include <fstream>//ifstream
 #include <map>
-#include <exception>
+#include <exception>//catch
 
 #include "../Event.h"
 #include "../Game.h"
 #include "../json/json.h"
 #include "LevelObject.h"
-#include "Megaman.h"
 #include "Obstacle.h"
 #include "MyContactListener.h"
 #include "../common/CommunicationCodes.h"
+#include "Character.h"
+#include "Megaman.h"
 
-#define W_WIDTH 95
-#define W_HEIGHT 95
+#define WINDOW_WIDTH 24
+#define WINDOW_HEIGHT 14
 
 MyLevel::MyLevel(Game* j,std::string lvlFileName)
-:world(b2Vec2(0,-10),true),running(false),game(j) {
+:world(b2Vec2(0,-10)),running(false),game(j) {
 	megaman=nullptr;
 	world.SetContinuousPhysics(true);
 	world.SetContactListener(&contactListener);
@@ -48,8 +49,8 @@ MyLevel::MyLevel(Game* j,std::string lvlFileName)
 	this->stepsPerSecond=world_json["steps/second"].asFloat();
 	world.SetGravity(b2Vec2(0,world_json["gravity"].asFloat()));
 
-	this->hScale=W_HEIGHT/w_height;
-	this->vScale=W_WIDTH/w_width;
+	this->hScale=WINDOW_HEIGHT/w_height;
+	this->vScale=WINDOW_WIDTH/w_width;
 
 	LOG(INFO)<<"w_height: "<<w_height;
 	LOG(INFO)<<"w_width: "<<w_width;
@@ -123,7 +124,7 @@ LevelObject* MyLevel::createObject(Json::Value objectJson,Json::Value config) {
 			objetoNuevo = new Spikes(&world,config["wall"],pos,id);
 		}else{
 			//todo escalera
-			objetoNuevo= new Spikes(&world,config["wall"],pos,id);
+			objetoNuevo= new Ladder(&world,config["wall"],pos,id);
 		}
 		break;
 	}
@@ -151,7 +152,7 @@ void MyLevel::createBoundaries() {
 	bordersBody->SetUserData((void*)0);
 	b2PolygonShape borderShape;
 	b2FixtureDef myFixtureDef;
-	myFixtureDef.filter.categoryBits=BOUNDARY;
+	myFixtureDef.filter.categoryBits=BOUNDARIES;
 	myFixtureDef.shape = &borderShape;
 	borderShape.SetAsBox(w_width / 2, thickness,
 			b2Vec2(w_width / 2, 0), 0); //ground
@@ -160,10 +161,10 @@ void MyLevel::createBoundaries() {
 			b2Vec2(w_width / 2, w_height), 0); //ceiling
 	bordersBody->CreateFixture(&myFixtureDef);
 	borderShape.SetAsBox(thickness, w_height / 2,
-			b2Vec2(0 - 1, w_height / 2), 0); //left wall
+			b2Vec2(0 - thickness, w_height / 2), 0); //left wall
 	bordersBody->CreateFixture(&myFixtureDef);
 	borderShape.SetAsBox(thickness, w_height / 2,
-			b2Vec2(w_width + 1, w_height / 2), 0); //right wall
+			b2Vec2(w_width + thickness, w_height / 2), 0); //right wall
 	bordersBody->CreateFixture(&myFixtureDef);
 }
 
@@ -177,7 +178,9 @@ bool MyLevel::isRunning(){
 std::string MyLevel::posToString(b2Vec2 pos){
 	//devuelvo esq iz sup
 	float px = pos.x-0.5;
-	float py = (W_HEIGHT-pos.y+0.5);
+	float py = WINDOW_HEIGHT-pos.y+0.5;
+	//todo check reference frame
+
 	std::stringstream positionString;
 	positionString.precision(2);
 	positionString<<std::fixed<<px<<" "<<py;
