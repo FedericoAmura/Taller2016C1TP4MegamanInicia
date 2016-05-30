@@ -10,8 +10,9 @@
 	"megaman":
 	{
 		"HSpeed" : 		10.0,
-		"ClimbSpeed":	3.0,
-		"JFactor" :		1,
+		"ClimbSpeed":	5.0,
+		"JFactor" :		1.0,
+		"inmuneTime":	2.0,
 		"jumpSensor":
 		{
 			"x": 0.0,

@@ -15,6 +15,8 @@ Megaman::Megaman(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl):
 Character(w,json,pos,lvl),livesRemaining(3),spawnPoint(pos),laddersTouching(0) {
 	hSpeed=json["HSpeed"].asFloat();
 	climbSpeed=json["ClimbSpeed"].asFloat();
+	inmuneTime=json["inmuneTime"].asFloat();
+	inmuneTimeLeft=inmuneTime;
 	//set filters
 	for (b2Fixture* f = body->GetFixtureList(); f; f = f->GetNext()){
 		changeFixtureFilter(f);
@@ -75,13 +77,17 @@ void Megaman::move(char key){
 /*kills megaman. if he has lives remaining he's queued for respawn
  * else he gets removed*/
 void Megaman::kill() {
-	LOG(INFO)<<"megaman murio,vidas restantes: "
-			<<livesRemaining;
-	if(livesRemaining>=1){
-		livesRemaining--;
-		level->respawn(this);
-	}else{
-		level->remove(this);
+	LOG(INFO)<<"inmune time left: "<<inmuneTimeLeft;
+	if(inmuneTimeLeft<=0){
+		LOG(INFO)<<"megaman murio,vidas restantes: "
+				<<livesRemaining;
+		inmuneTimeLeft=inmuneTime;
+		if(livesRemaining>=1){
+			livesRemaining--;
+			level->respawn(this);
+		}else{
+			level->remove(this);
+		}
 	}
 }
 
@@ -94,12 +100,20 @@ void Megaman::spawn() {
 bool Megaman::checkClimbing(){
 	if (laddersTouching >0){
 		body->SetGravityScale(0.0);
-		b2Vec2 vel =body->GetLinearVelocity();
-		vel.y=0;
-		body->SetLinearVelocity(vel);
+		if(laddersTouching==1){
+			b2Vec2 vel =body->GetLinearVelocity();
+			vel.y=0;
+			body->SetLinearVelocity(vel);
+		}
 		return true;
 	}else{
 		body->SetGravityScale(1.0);
 		return false;
+	}
+}
+
+void Megaman::tick(float time) {
+	if(inmuneTimeLeft>0){
+		inmuneTimeLeft-=time;
 	}
 }

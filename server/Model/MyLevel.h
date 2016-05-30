@@ -12,11 +12,13 @@
 #include <string>
 #include <map>
 #include <queue>
+#include <vector>
 
 #include "../Thread.h"
 #include "LevelObject.h"
 #include "MyContactListener.h"
 
+class Character;
 class Megaman;
 class Game;
 
@@ -39,6 +41,8 @@ class MyLevel: public Thread{
 	void redrawForClient();
 	std::queue<Megaman*> toRespawn;
 	void respawnAll();
+	std::vector<Character*> characters;
+	void tickAll(float time);
 
 	float stepsPerSecond;
 	float hScale;

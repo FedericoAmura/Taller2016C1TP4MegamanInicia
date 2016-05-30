@@ -27,3 +27,7 @@ void Enemy::changeFixtureFilter(b2Fixture* f) {
 	filter.groupIndex=ENEMY;
 	f->SetFilterData(filter);
 }
+
+void Enemy::tick(float time) {
+	//todo tick enemy
+}

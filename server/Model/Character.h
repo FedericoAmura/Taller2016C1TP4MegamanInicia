@@ -25,6 +25,7 @@ public:
 	Character(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl);
 	virtual ~Character();
 	virtual void kill();
+	virtual void tick(float time)=0;//in seconds
 };
 
 #endif /* SERVER_MODEL_CHARACTER_H_ */

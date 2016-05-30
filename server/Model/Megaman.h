@@ -15,6 +15,8 @@ class Megaman: public Character {
 	float climbSpeed;
 	uint livesRemaining;
 	b2Vec2 spawnPoint;
+	float inmuneTime;//seconds
+	float inmuneTimeLeft;//seconds
 
 protected:
 	void changeFixtureFilter(b2Fixture* f);
@@ -28,6 +30,7 @@ public:
 	void kill();
 	void spawn();
 	bool checkClimbing();
+	void tick(float time);
 };
 
 #endif /* SERVER_MODEL_MEGAMAN_H_ */

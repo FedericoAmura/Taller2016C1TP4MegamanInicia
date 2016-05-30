@@ -16,6 +16,7 @@ protected:
 public:
 	Enemy(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl);
 	virtual ~Enemy();
+	void tick(float time);
 };
 
 #endif /* SERVER_MODEL_ENEMY_H_ */

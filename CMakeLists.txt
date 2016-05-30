@@ -16,7 +16,7 @@ add_subdirectory(Box2D)
 include_directories (${Box2D_SOURCE_DIR})
 
 #Aca van todos los flags del compilador
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pedantic -Wall -g -O0 -pthread -lm " )
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pedantic -Wall -g -O0 -pthread " )
 
 #Mas magia
 link_directories( ${GTKMM_LIBRARY_DIRS}  )

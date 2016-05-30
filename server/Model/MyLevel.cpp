@@ -17,6 +17,7 @@
 #include <fstream>//ifstream
 #include <map>
 #include <exception>//catch
+#include <vector>
 
 #include "../Event.h"
 #include "../Game.h"
@@ -26,6 +27,7 @@
 #include "MyContactListener.h"
 #include "../common/CommunicationCodes.h"
 #include "Character.h"
+#include "Enemy.h"
 #include "Megaman.h"
 
 #define WINDOW_WIDTH 24
@@ -87,8 +89,8 @@ LevelObject* MyLevel::createObject(Json::Value objectJson,Json::Value config) {
 	int id=objectJson["id"].asInt();
 	int objectType=(int)id/1000;
 	std::string idAsString=objectJson["id"].asString();//for mets
-	bool creado=false;
-	LevelObject* objetoNuevo;
+	bool created=false;
+	LevelObject* newObject;
 	b2Vec2 pos=jsonPosToWorldPos(objectJson["x"].asInt(),
 			objectJson["y"].asInt());
 	//todo cambiar switch por algo automatico, implica cambios en config.json
@@ -96,15 +98,20 @@ LevelObject* MyLevel::createObject(Json::Value objectJson,Json::Value config) {
 	case 9:{
 		//create megaman
 		if (megaman==nullptr){
-			creado=true;
+			created=true;
 			megaman = new Megaman(&world, config["megaman"], pos,this);
-			objetoNuevo=megaman;
+			newObject=megaman;
+			characters.push_back(megaman);
 		}
 		break;
 	}
-	case 1:
-		//todo create npc
+	case 1:{
+		created=true;
+		Character* enemy = new Enemy(&world, config["megaman"], pos,this);
+		newObject=enemy;
+		characters.push_back(enemy);
 		break;
+	}
 	case 2:
 		//todo create weapon???
 		break;
@@ -113,31 +120,31 @@ LevelObject* MyLevel::createObject(Json::Value objectJson,Json::Value config) {
 		break;
 	case 4:{
 		//create obstacle
-		creado=true;
-		objetoNuevo = new Obstacle(&world,config["wall"],pos,id);
+		created=true;
+		newObject = new Obstacle(&world,config["wall"],pos,id);
 		break;
 	}
 	case 5:{
-		//todo create special obstacle
-		creado=true;
+		// create special obstacle
+		created=true;
 		if(id==5003){
-			objetoNuevo = new Spikes(&world,config["wall"],pos,id);
+			newObject = new Spikes(&world,config["wall"],pos,id);
 		}else{
-			//todo escalera
-			objetoNuevo= new Ladder(&world,config["wall"],pos,id);
+			//escalera
+			newObject= new Ladder(&world,config["wall"],pos,id);
 		}
 		break;
 	}
 	default:
 		break;
 	}
-	if(creado){
+	if(created){
 		/*notify clients about creation*/
 		std::stringstream msj;
-		msj<<DRAW<<" "<<objetoNuevo->getId()<<" "<<objetoNuevo->getSpriteId();
-		msj<<" 0 "<<posToString(objetoNuevo->getPos());
+		msj<<DRAW<<" "<<newObject->getId()<<" "<<newObject->getSpriteId();
+		msj<<" 0 "<<posToString(newObject->getPos());
 		game->notify(new MessageSent(msj.str(),0));
-		return objetoNuevo;
+		return newObject;
 	}else{
 		return nullptr;
 	}
@@ -232,7 +239,7 @@ void MyLevel::run(){
 		Lock l(runningMutex);
 		running=true;
 	}
-	float32 timeStep = 1.0f / stepsPerSecond;
+	float32 timeStep = 1.0f / stepsPerSecond;//seconds
 	int32 velocityIterations = 6;
 	int32 positionIterations = 2;
 	LOG(INFO)<<"physics simulation of level started";
@@ -240,9 +247,9 @@ void MyLevel::run(){
 	try{
 		while(isRunning()){
 			//todo create bullets
-			//todo manage AI
 			//todo si jugadores pasan mitad pantalla mover
 			world.Step(timeStep, velocityIterations, positionIterations);
+			tickAll(timeStep);
 			removeDead();
 			respawnAll();
 			redrawForClient();
@@ -279,4 +286,11 @@ void MyLevel::respawnAll() {
 
 void MyLevel::respawn(Megaman* meg) {
 	toRespawn.push(meg);
+}
+
+void MyLevel::tickAll(float time) {
+	std::vector<Character*>::iterator it=characters.begin();
+	for(; it!=characters.end(); it++){
+		(*it)->tick(time);
+	}
 }
