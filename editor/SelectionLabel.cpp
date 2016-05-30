@@ -3,7 +3,7 @@
 //
 
 #include "SelectionLabel.h"
-#include "../client/MyArea.h"
+#include "../common/MyArea.h"
 #include <string>
 
 using std::string;

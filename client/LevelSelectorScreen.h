@@ -13,7 +13,7 @@
 #include <gtkmm/label.h>
 
 #include "MegamanClientModel.h"
-#include "MyArea.h"
+#include "../common/MyArea.h"
 
 class LevelSelectorScreen : public Gtk::Grid {
 private:

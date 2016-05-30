@@ -5,7 +5,7 @@
 #include <gtkmm/iconview.h>
 #include <iostream>
 #include "Selector.h"
-#include "SpriteDispenser.h"
+#include "../common/SpriteDispenser.h"
 #include "EntitySet.h"
 #include "../entities.h"
 
@@ -26,14 +26,14 @@ Selector::Selector() {
             IconEntry(STONE_LADDER, sprites.get(STONE_LADDER), "Ladder")
     };
     vector<IconEntry> mob_entries = {
-            IconEntry(BUMBY, sprites.get(BUMBY), "Bumby"),
-            IconEntry(MET, sprites.get(MET), "Met"),
-            IconEntry(SNIPER, sprites.get(SNIPER), "Sniper"),
+            IconEntry(BUMBY_0, sprites.get(BUMBY_0), "Bumby"),
+            IconEntry(MET_HIDDEN, sprites.get(MET_HIDDEN), "Met"),
+            IconEntry(SNIPER_ATTACK, sprites.get(SNIPER_ATTACK), "Sniper"),
             IconEntry(JUMPING_SNIPER, sprites.get(JUMPING_SNIPER), "Jumping Sniper"),
-            IconEntry(BOMBMAN, sprites.get(BOMBMAN), "Bombman"),
-            IconEntry(FIREMAN, sprites.get(FIREMAN), "Fireman"),
-            IconEntry(MAGNETMAN, sprites.get(MAGNETMAN), "Magnetman"),
-            IconEntry(SPARKMAN, sprites.get(SPARKMAN), "Sparkman")
+            IconEntry(BOMBMAN_ATTACK, sprites.get(BOMBMAN_ATTACK), "Bombman"),
+            IconEntry(FIREMAN_CAST_0, sprites.get(FIREMAN_CAST_0), "Fireman"),
+            IconEntry(MAGNETMAN_ATTACK, sprites.get(MAGNETMAN_ATTACK), "Magnetman"),
+            IconEntry(SPARKMAN_CAST_ATTACK_1, sprites.get(SPARKMAN_CAST_ATTACK_1), "Sparkman")
     };
     tiles.fill(tile_entries);
     mobs.fill(mob_entries);

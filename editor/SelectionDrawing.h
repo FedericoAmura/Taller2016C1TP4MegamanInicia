@@ -5,8 +5,8 @@
 #ifndef MEGAMAN_SELECTIONDRAWING_H
 #define MEGAMAN_SELECTIONDRAWING_H
 
-#include "../client/MyArea.h"
-#include "SpriteDispenser.h"
+#include "../common/MyArea.h"
+#include "../common/SpriteDispenser.h"
 
 class SelectionDrawing : public Drawing {
 public:

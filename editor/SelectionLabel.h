@@ -7,7 +7,7 @@
 
 
 #include <gtkmm/label.h>
-#include "SpriteDispenser.h"
+#include "../common/SpriteDispenser.h"
 
 class SelectionLabel : public Gtk::Label {
 public:

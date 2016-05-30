@@ -6,7 +6,9 @@
 #define MEGAMAN_SPRITEDISPENSER_H
 
 #include <string>
-#include "Level.h"
+#include <map>
+
+typedef unsigned int uint;
 
 using std::string;
 
@@ -15,7 +17,7 @@ public:
     SpriteDispenser();
     string get(uint id);
 private:
-    map<uint, string> paths;
+    std::map<uint, string> paths;
 };
 
 

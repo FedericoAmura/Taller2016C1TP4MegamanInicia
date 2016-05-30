@@ -15,7 +15,7 @@
 #include <gtkmm/label.h>
 
 #include "MegamanClientModel.h"
-#include "MyArea.h"
+#include "../common/MyArea.h"
 
 class ConnectionScreen : public Gtk::Fixed {
 private:

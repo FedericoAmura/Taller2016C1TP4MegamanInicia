@@ -5,8 +5,8 @@
 #ifndef MEGAMAN_WORKSPACE_H
 #define MEGAMAN_WORKSPACE_H
 #include "Level.h"
-#include "SpriteDispenser.h"
-#include "../client/MyArea.h"
+#include "../common/SpriteDispenser.h"
+#include "../common/MyArea.h"
 #include <vector>
 #include <map>
 #include <gtkmm/drawingarea.h>

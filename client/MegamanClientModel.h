@@ -14,8 +14,9 @@
 #include "Socket.h"
 #include "Drawable.h"
 #include "Drawables.h"
-#include "MyArea.h"
+#include "../common/MyArea.h"
 #include "Thread.h"
+#include "../common/SpriteDispenser.h"
 
 typedef sigc::signal<void,std::string> StringSignal;
 
@@ -23,6 +24,7 @@ class MegamanClientModel : public Thread {
 private:
 	Socket* serverProxy;
 	Drawables drawables;
+	SpriteDispenser sprites;
 	bool recibirServer;
 	StringSignal windowChangeSignal;
 

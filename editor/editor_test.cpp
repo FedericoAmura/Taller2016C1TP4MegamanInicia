@@ -55,7 +55,7 @@ int main(){
 
     prototype_t sparkman;
     sparkman.x = sparkman.y = 5;
-    sparkman.id = SPARKMAN;
+    sparkman.id = SPARKMAN_CAST_ATTACK_1;
 
     levelTest(spike);
     jsonTest(spike, sparkman);

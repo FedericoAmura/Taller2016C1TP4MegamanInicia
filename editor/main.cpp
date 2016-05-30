@@ -2,7 +2,7 @@
 #include <iostream>
 #include "EntitySet.h"
 #include "../entities.h"
-#include "SpriteDispenser.h"
+#include "../common/SpriteDispenser.h"
 #include "Workspace.h"
 #include "WorkspaceEventManager.h"
 #include "SelectionLabel.h"

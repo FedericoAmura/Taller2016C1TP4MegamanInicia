@@ -30,6 +30,7 @@ Drawables& MegamanClientModel::getDrawables() {
 void MegamanClientModel::run() {
 	while (recibirServer) {
 		std::string message = serverProxy->recibirHasta('\n');
+		if (message.length() == 0) continue;
 		std::cout << message << std::endl;	//DEBUG
 		std::stringstream ss(message);
 		std::string commandString;
@@ -44,10 +45,13 @@ void MegamanClientModel::run() {
 			std::string flipped; ss >> flipped;
 			std::string xDrawable; ss >> xDrawable;
 			std::string yDrawable; ss >> yDrawable;
-			Drawable* drawable = new Drawable();
-			drawable->setImage("../sprites/megaman pc/megaman_attack0.png",66,52,atoi(flipped.c_str()));
+			Drawable* drawable = drawables.getDrawable(atoi(idDrawable.c_str()));
+			if (drawable == 0) {
+				drawable = new Drawable();
+				drawable->setIsDrawed(false);
+			}
+			drawable->setImage(sprites.get((uint)atoi(idDrawing.c_str())),66,52,atoi(flipped.c_str()));
 			drawable->setCoordinates(xDrawable,yDrawable);
-			drawable->setIsDrawed(false);
 			drawables.setDrawable(atoi(idDrawable.c_str()),drawable);
 			}
 			break;
@@ -57,7 +61,7 @@ void MegamanClientModel::run() {
 			std::string idDrawing; ss >> idDrawing;
 			std::string flipped; ss >> flipped;
 			Drawable* drawable = drawables.getDrawable(atoi(idDrawable.c_str()));
-			drawable->setImage("../sprites/megaman pc/megaman_attack0.png",66,52,atoi(flipped.c_str()));
+			drawable->setImage(sprites.get((uint)atoi(idDrawing.c_str())),66,52,atoi(flipped.c_str()));
 			}
 			break;
 		case MOVE:

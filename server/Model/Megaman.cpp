@@ -10,7 +10,7 @@
 #include "LevelObject.h"
 
 Megaman::Megaman(b2World* w,Json::Value& json,const b2Vec2& pos):
-LevelObject(w,json,pos,MEGAMAN),canJump(false){
+LevelObject(w,json,pos,MEGAMAN_IDLE_0),canJump(false){
 	body->SetType(b2_dynamicBody);
 	body->SetFixedRotation(true);
 	body->SetBullet(true);
