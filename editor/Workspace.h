@@ -25,7 +25,7 @@ public:
     bool addElement(uint x, uint y, uint id);
     bool removeEntity(uint x, uint y);
     uint getId(uint x, uint y);
-    void on_button_clicked(GdkEventButton* button_event);
+    bool validPosition(uint x, uint y);
 private:
     Level& level;
     drawing_map_t drawings;

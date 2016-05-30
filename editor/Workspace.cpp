@@ -80,12 +80,17 @@ bool Workspace::removeEntity(uint x, uint y) {
     } else {
         return false;
     }
-
 }
 
 uint Workspace::getId(uint x, uint y) {
     return level.getEntity(x, y);
 }
+
+bool Workspace::validPosition(uint x, uint y) {
+    return (x < level.getLength() && y < level.getWidth());
+}
+
+
 
 
 

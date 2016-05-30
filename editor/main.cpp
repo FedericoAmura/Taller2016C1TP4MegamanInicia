@@ -1,7 +1,6 @@
 #include <gtkmm.h>
 #include <iostream>
 #include "EntitySet.h"
-#include "../entities.h"
 #include "../common/SpriteDispenser.h"
 #include "Workspace.h"
 #include "WorkspaceEventManager.h"
@@ -35,10 +34,10 @@ int main(int argc, char *argv[]) {
         cerr << "BuilderError: " << ex.what() << endl;
         return 1;
     }
-    //Get the GtkBuilder-instantiated Window:
+    //Instantiate app window
     refBuilder->get_widget("EditorWindow", appWindow);
 
-    //Toolbox display
+    //Element elector display
     Gtk::Box* m_EditingArea = NULL;
     refBuilder->get_widget("Workspace", m_EditingArea);
     Selector selector;
@@ -47,7 +46,8 @@ int main(int argc, char *argv[]) {
     //Workspace grid
     Gtk::Viewport* m_Viewport = NULL;
     refBuilder->get_widget("WorkspaceView", m_Viewport);
-    Level level(20);
+    Level level("simplex.json");
+    level.setBackgroundFile("../images/background1.jpg");
     Workspace workspace(level);
     WorkspaceEventManager manager(workspace);
     workspace.set_vexpand(true);
@@ -75,7 +75,6 @@ int main(int argc, char *argv[]) {
     list_targets.push_back(Gtk::TargetEntry("STRING"));
     manager.setDroppable(list_targets);
     selector.setDraggable(list_targets);
-
 
     //Run
     if(appWindow) {

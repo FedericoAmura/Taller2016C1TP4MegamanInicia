@@ -8,6 +8,11 @@
 #define TILE_PXL 32
 #define NO_SELECTION 0
 
+typedef const Glib::RefPtr<Gdk::DragContext> DragContext;
+typedef const Gtk::SelectionData SelectData;
+
+using Gtk::TargetEntry;
+
 WorkspaceEventManager::WorkspaceEventManager(Workspace &workspace)
     : workspace(workspace) {
         add(workspace);
@@ -22,6 +27,9 @@ WorkspaceEventManager::WorkspaceEventManager(Workspace &workspace)
 bool WorkspaceEventManager::on_button_press(GdkEventButton *event) {
     uint xint = ((uint) event->x) / TILE_PXL;
     uint yint = ((uint) event->y) / TILE_PXL;
+    if (!workspace.validPosition(xint, yint)) {
+        return false;
+    }
     uint id = workspace.getId(xint, yint);
     m_signal_selection.emit(id);
     if (id) {
@@ -47,17 +55,17 @@ void WorkspaceEventManager::on_delete() {
 
 }
 
-void WorkspaceEventManager::on_drag_data_received(const Glib::RefPtr<Gdk::DragContext> &context,
-                                                  int x, int y,
-                                                  const Gtk::SelectionData& selection_data,
-                                                  guint info, guint time) {
+void WorkspaceEventManager::on_drag_data_received(DragContext&, int x, int y,
+                                                  SelectData& selection_data,
+                                                  guint, guint) {
     uint xint = ((uint) x) / TILE_PXL;
     uint yint = ((uint) y) / TILE_PXL;
+    if (!workspace.validPosition(xint, yint)) return;
     uint id = (uint) atoi(selection_data.get_text().c_str());
     workspace.addElement(xint, yint, id);
 }
 
-void WorkspaceEventManager::setDroppable(std::vector<Gtk::TargetEntry>& list_targets) {
+void WorkspaceEventManager::setDroppable(vector<TargetEntry>& list_targets) {
     this->list_targets = list_targets;
     drag_dest_set(list_targets);
 

@@ -75,7 +75,6 @@
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
-                        <signal name="select" handler="gtk_main_quit" swapped="no"/>
                       </object>
                     </child>
                   </object>
@@ -295,63 +294,6 @@
           </packing>
         </child>
       </object>
-    </child>
-  </object>
-  <object class="GtkListStore" id="liststore1"/>
-  <object class="GtkNotebook" id="Selector">
-    <property name="width_request">300</property>
-    <property name="visible">True</property>
-    <property name="can_focus">True</property>
-    <property name="hexpand">False</property>
-    <property name="resize_mode">immediate</property>
-    <child>
-      <object class="GtkIconView" id="TileIcons">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="margin">6</property>
-        <property name="vexpand">True</property>
-        <property name="model">liststore1</property>
-      </object>
-      <packing>
-        <property name="reorderable">True</property>
-      </packing>
-    </child>
-    <child type="tab">
-      <object class="GtkLabel" id="TilesLabel">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="label" translatable="yes">Tiles</property>
-      </object>
-      <packing>
-        <property name="tab_fill">False</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkIconView" id="MobIcons">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="margin">6</property>
-      </object>
-      <packing>
-        <property name="position">1</property>
-      </packing>
-    </child>
-    <child type="tab">
-      <object class="GtkLabel" id="MobsLabel">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="label" translatable="yes">Mobs</property>
-      </object>
-      <packing>
-        <property name="position">1</property>
-        <property name="tab_fill">False</property>
-      </packing>
-    </child>
-    <child>
-      <placeholder/>
-    </child>
-    <child type="tab">
-      <placeholder/>
     </child>
   </object>
 </interface>

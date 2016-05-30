@@ -14,17 +14,17 @@ using std::vector;
 using std::map;
 
 typedef unsigned int uint;
-typedef unsigned char color_t;
 
 class Level {
 private:
     uint length;
     uint width;
-    Layer entities;
+    Layer* entities;
     string background_file;
 
 public:
     Level(string json_file);
+    ~Level();
     explicit Level(uint len);
     void setBackgroundFile(string path);
     string getBackgroundFile() {return background_file;};
