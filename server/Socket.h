@@ -9,6 +9,7 @@
 #define SERVER_SOCKET_H_
 
 #include <stdint.h>
+#include <string>
 
 #include "Observer.h"
 #include "SendRecvThread.h"
@@ -35,7 +36,7 @@ public:
 	virtual ~Socket();
 	void iniciarComunicaciones();
 
-	void enviar(char* mensaje);
+	void enviar(std::string mensaje);
 	virtual void notify(Event* e);
 
 protected:

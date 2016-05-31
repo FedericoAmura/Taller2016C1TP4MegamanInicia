@@ -8,23 +8,23 @@
 #ifndef SERVER_SENDRECVTHREAD_H_
 #define SERVER_SENDRECVTHREAD_H_
 
-#include <queue>
 #include <string>
 
 #include "Observer.h"
 #include "Thread.h"
+#include "ThreadQueue.h"
 
 class Socket;//forward declaration
 
 class SendThread: public Thread {
 	Socket* socket;
-	std::queue<std::string> aEnviar;
+	ThreadQueue<std::string> aEnviar;
 
 public:
 	explicit SendThread(Socket* s);
 	virtual ~SendThread();
 	virtual void run();
-	void enviar(char* data);
+	void enviar(std::string  data);
 };
 
 class RecvThread: public Thread {

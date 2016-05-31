@@ -12,6 +12,7 @@
 #define CLIENT_DISCONNECTED 99
 
 //OPERATION CODES server->client
+#define HELLO 0//para confirmar conexion
 #define DRAW 1
 #define REDRAW 2
 #define MOVE 3
@@ -50,10 +51,16 @@
  * ej: "90 DrawableID no encontrado\n"
  * */
 
+//HELLO codes
+/* se manda seguido del numero de jugador asignado
+ * formato: "HELLO numCliente\n"
+ * ej: "0 1\n" hola, sos el cliente 1
+ * */
+
 //DRAW codes
 /* Se manda el id del dibujable, seguido del codigo del sprite correspondiente,
  * su sentido y su posicion. Se usa para nuevos dibujables.
- * formato: "DRAW idSprite flipped posX posY"
+ * formato: "DRAW idSprite flipped posX pos\n"
  * ej: "1 5 9000 0 10 20\n" dibujar el dibujable 5 como un megamanIddle sin
  * flippear en pos X:10-Y:20
  * */

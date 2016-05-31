@@ -8,8 +8,6 @@
 #ifndef SERVER_GAME_H_
 #define SERVER_GAME_H_
 
-#include <queue>
-
 #include <map>
 #include <string>
 
@@ -19,14 +17,14 @@
 #include "Model/MyLevel.h"
 #include "Observer.h"
 #include "Thread.h"
+#include "ThreadQueue.h"
 class Server;//forward declaration
 
 class Game:public Thread,public Observer{
 	Mutex goOnMutex;
 	bool goOn;
 	Server* server;
-	Mutex queueMutex;
-	std::queue<Event*> eventQueue;
+	ThreadQueue<Event*> eventQueue;
 	HandlerCoordinator manager;
 	MyLevel* level;
 

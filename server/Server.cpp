@@ -43,9 +43,7 @@ void Server::runServer() {
 		if(entrada=="q")
 			continuar=false;
 	}while(continuar);
-	/*informe de cierre a clientes*/
-	game.notify(new MessageSent("chau",0));
-	sleep(1);
+	//sleep(1);//optional wait
 	/*cierre*/
 	game.stop();
 	LOG(INFO)<<"server finalizado";

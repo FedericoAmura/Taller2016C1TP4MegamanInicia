@@ -191,7 +191,6 @@ bool MyLevel::isRunning(){
 	return running;
 }
 
-
 /*transforms box2d position to client position format*/
 std::string MyLevel::posToString(b2Vec2 pos){
 	//devuelvo esq iz sup

@@ -24,29 +24,21 @@ SendThread::~SendThread() {}
 
 void SendThread::run(){
 	while(socket->estaAbierto()){
-		//todo lock
-		if(!aEnviar.empty()){
-			std::string mensaje=aEnviar.front();
-			aEnviar.pop();
-			mensaje.append("\n");
-			try{
-				socket->send((char*)mensaje.c_str(),mensaje.size());
-			}catch(std::exception& e){
-				LOG(ERROR) << e.what();
-				socket->shutdown();
-			}
-			//LOG(INFO)<<"enviado msg: "<<mensaje;
-		}else{
-			usleep(TIMEOUT);
+		std::string mensaje=aEnviar.pop();
+		mensaje.append("\n");
+		try{
+			socket->send((char*)mensaje.c_str(),mensaje.size());
+		}catch(std::exception& e){
+			LOG(ERROR) << e.what();
+			socket->shutdown();
 		}
+		//LOG(INFO)<<"enviado msg: "<<mensaje;
 	}
 }
 
 /*aniade a la cola de envios data. data debe ser string sin fin de linea*/
-void SendThread::enviar(char* data){
-	//todo lock
-	std::string s(data);
-	aEnviar.push(s);
+void SendThread::enviar(std::string data){
+	aEnviar.push(data);
 }
 
 /******************************************************************************/

@@ -31,6 +31,7 @@ Socket::Socket(int descriptor,Observer* modelo):modelo(modelo),
 /*apaga y cierra el socket*/
 Socket::~Socket(){
 	this->shutdown();
+	sendThr.enviar("9");//destrabador
 	if(comunicandose){
 		sendThr.join();
 		recvThr.join();
@@ -95,7 +96,7 @@ void Socket::notify(Event* e){
 }
 
 /*aniade mensaje a la cola de envio*/
-void Socket::enviar(char* mensaje){
+void Socket::enviar(std::string mensaje){
 	sendThr.enviar(mensaje);
 }
 

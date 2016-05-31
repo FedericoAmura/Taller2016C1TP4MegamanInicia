@@ -10,7 +10,7 @@
 	"megaman":
 	{
 		"weaponId":		2004,
-		"HSpeed" : 		3.0,
+		"HSpeed" : 		10.0,
 		"ClimbSpeed":	3.0,
 		"JFactor" :		0.5,
 		"inmuneTime":	2.0,

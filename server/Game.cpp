@@ -12,8 +12,12 @@
 #define TIMEOUT 10000
 
 /*creates game with server as communications*/
-Game::Game(Server* server):goOn(true),server(server),
-manager(this),level(nullptr),firstClient(-1) {
+Game::Game(Server* server):
+goOn(true),
+server(server),
+manager(this),
+level(nullptr),
+firstClient(-1) {
 	manager.setHandler(1,new AcceptConnection(this));
 	manager.setHandler(2,new RecvMessage(this));
 	manager.setHandler(3,new SendMessage(this));
@@ -24,17 +28,14 @@ manager(this),level(nullptr),firstClient(-1) {
 Game::~Game() {
 	/*join level thread*/
 	stopLevel();
-
-	/*free event queue resources*/
-	while(!eventQueue.empty()){
-		delete eventQueue.front();
-		eventQueue.pop();
-	}
-
 	//candidato para extraer, liberar clientes
 	std::map<int,Socket*>::iterator it=clients.begin();
 	for(; it!=clients.end(); it++){
 		delete (it->second);
+	}
+	/*free event queue resources*/
+	while(!eventQueue.empty()){
+		delete eventQueue.pop();
 	}
 }
 
@@ -43,29 +44,14 @@ void Game::run(){
 	//todo initialize certain things here
 	LOG(INFO)<<"loop eventos juego iniciado";
 	while(isntStopped()){
-		bool empty;
-		{
-			Lock l(queueMutex);
-			empty=eventQueue.empty();
-		}
-		if(empty){
-			usleep(TIMEOUT);
-		}else{
-			Event* e;
-			{
-				Lock l(queueMutex);
-				e=eventQueue.front();
-				eventQueue.pop();
-			}
-			manager.handle(e);
-		}
+		Event* e=eventQueue.pop();
+		manager.handle(e);
 	}
 	LOG(INFO)<<"loop eventos juego finalizado";
 }
 
 /*sends event to event loop*/
 void Game::notify(Event* e){
-	Lock l(queueMutex);
 	eventQueue.push(e);
 }
 
@@ -73,6 +59,7 @@ void Game::notify(Event* e){
 void Game::stop(){
 	Lock l(goOnMutex);
 	goOn=false;
+	this->notify(new MessageSent("9",0));
 }
 
 /*returns true if game should keep running*/
@@ -109,12 +96,12 @@ void Game::sendTo(std::string data, int destino){
 		Lock l(clientsMutex);
 		std::map<int,Socket*>::iterator it=clients.begin();
 		for(; it!=clients.end(); it++){
-			(it->second)->enviar((char*)data.c_str());
+			(it->second)->enviar(data);
 		}
 	}else{
 		Lock l(clientsMutex);
 		if(clients.find(destino)!=clients.end()){
-			(clients[destino])->enviar((char*)data.c_str());
+			(clients[destino])->enviar(data);
 		}
 	}
 }
