@@ -1,7 +1,7 @@
 {
 	"world":
 	{
-		"gravity":		 -20.0,
+		"gravity":		 -10.0,
 		"width" :		 95.0,
 		"height" :		 95.0,
 		"steps/second" : 15.0
@@ -10,9 +10,9 @@
 	"megaman":
 	{
 		"weaponId":		2004,
-		"HSpeed" : 		10.0,
-		"ClimbSpeed":	5.0,
-		"JFactor" :		1.0,
+		"HSpeed" : 		3.0,
+		"ClimbSpeed":	3.0,
+		"JFactor" :		0.5,
 		"inmuneTime":	2.0,
 		"life":			20.0,
 		"jumpSensor":
@@ -25,7 +25,7 @@
 		"shapes":
 		[
 			{
-				"width" : 0.5,
+				"width" : 0.4,
 				"height" : 0.5,
 				"X":0.0,
 				"Y":0.0

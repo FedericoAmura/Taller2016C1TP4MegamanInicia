@@ -36,8 +36,10 @@
 #define WINDOW_HEIGHT 14
 #define COFIG_FILE "../server/Model/config.json"
 
-MyLevel::MyLevel(Game* j,std::string lvlFileName)
-:world(b2Vec2(0,-10)),running(false),game(j) {
+MyLevel::MyLevel(Game* j,std::string lvlFileName):
+world(b2Vec2(0,-10)),
+running(false),
+game(j) {
 	LevelObject::resetIds();
 	megaman=nullptr;
 	world.SetContinuousPhysics(true);
@@ -55,8 +57,8 @@ MyLevel::MyLevel(Game* j,std::string lvlFileName)
 	this->stepsPerSecond=world_json["steps/second"].asFloat();
 	world.SetGravity(b2Vec2(0,world_json["gravity"].asFloat()));
 
-	this->hScale=WINDOW_HEIGHT/w_height;
-	this->vScale=WINDOW_WIDTH/w_width;
+	this->hScale=world_json["width"].asFloat()/WINDOW_WIDTH;
+	this->vScale=world_json["height"].asFloat()/WINDOW_HEIGHT;
 
 	LOG(INFO)<<"w_height: "<<w_height;
 	LOG(INFO)<<"w_width: "<<w_width;
@@ -189,11 +191,15 @@ bool MyLevel::isRunning(){
 	return running;
 }
 
+
 /*transforms box2d position to client position format*/
 std::string MyLevel::posToString(b2Vec2 pos){
 	//devuelvo esq iz sup
 	float px = pos.x-0.5;
 	float py = WINDOW_HEIGHT-pos.y+0.5;
+	//scale for client, should be done there
+	px*=hScale;
+	py*=vScale;
 	//todo check reference frame
 
 	std::stringstream positionString;

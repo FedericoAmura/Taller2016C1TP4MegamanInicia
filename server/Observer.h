@@ -10,10 +10,11 @@
 
 #include "Event.h"
 
+/*interface*/
 class Observer {
 public:
-	Observer();
-	virtual ~Observer();
+	Observer(){}
+	virtual ~Observer(){}
 	virtual void notify(Event* e)=0;
 };
 

@@ -127,6 +127,8 @@ void Game::removeClient(int descriptor) {
 		clients.erase(it);
 		LOG(INFO)<<"cliente desconectado, id:"<<descriptor;
 	}
+	if(clients.empty())
+		stopLevel();
 }
 /****************************************************/
 
@@ -162,10 +164,8 @@ void Game::stopLevel(){
 			level->stop();
 			level->join();
 		}
-
 		LOG(INFO)<<"destruyendo nivel";
 		delete level;
-		LOG(INFO)<<"nivel destruido";
 		level=nullptr;
 		std::string levelExitMsg="7";
 		this->notify(new MessageSent(levelExitMsg,0));
