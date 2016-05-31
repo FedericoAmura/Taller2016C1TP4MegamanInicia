@@ -3,6 +3,10 @@
 //
 
 #include "SpriteDispenser.h"
+
+#include <gdkmm/general.h>
+#include <iostream>
+
 #include "../entities.h"
 
 #define IMG_PATH "../sprites"
@@ -12,6 +16,9 @@
 #define TLE_PATH (string) IMG_PATH + "/level/tiles/"
 
 SpriteDispenser::SpriteDispenser() {
+	tileSide = (float)Gdk::screen_height()/(float)15;
+
+	//PATHS
 	//megaman
 	paths[MEGAMAN_IDLE_0] = (string) IMG_PATH + "/megaman pc/megaman_idle.png";
 	paths[MEGAMAN_IDLE_1] = (string) IMG_PATH + "/megaman pc/megaman_idle1.png";
@@ -102,6 +109,188 @@ SpriteDispenser::SpriteDispenser() {
 	paths[SPARKMAN_PREPARE_1_ATTACK_2] = BSS_PATH + "sparkman/sparkman_prepare1_attack2.png";
 	paths[SPARKMAN_PREPARE_2_ATTACK_1] = BSS_PATH + "sparkman/sparkman_prepare2_attack1.png";
 	paths[SPARKMAN_PREPARE_2_ATTACK_2] = BSS_PATH + "sparkman/sparkman_prepare2_attack2.png";
+
+	//SIZES
+	heigths[MEGAMAN_IDLE_0] = tileSide*1.5625;
+	heigths[MEGAMAN_IDLE_1] = tileSide*1.5625;
+	heigths[MEGAMAN_IDLE_2] = tileSide*1.5625;
+	heigths[MEGAMAN_ATTACK] = tileSide*1.0;
+	heigths[MEGAMAN_ATTACK_CLIMB] = tileSide*1.0;
+	heigths[MEGAMAN_ATTACK_JUMP] = tileSide*1.0;
+	heigths[MEGAMAN_ATTACK_RUN_0] = tileSide*1.0;
+	heigths[MEGAMAN_ATTACK_RUN_1] = tileSide*1.0;
+	heigths[MEGAMAN_ATTACK_RUN_2] = tileSide*1.0;
+	heigths[MEGAMAN_BOMB_THROW] = tileSide*1.0;
+	heigths[MEGAMAN_CLIMB] = tileSide*1.0;
+	heigths[MEGAMAN_CLIMB_TOP] = tileSide*1.0;
+	heigths[MEGAMAN_FALL] = tileSide*1.0;
+	heigths[MEGAMAN_JUMP] = tileSide*1.0;
+	heigths[MEGAMAN_RUN_0] = tileSide*1.0;
+	heigths[MEGAMAN_RUN_1] = tileSide*1.0;
+	heigths[MEGAMAN_RUN_2] = tileSide*1.0;
+	heigths[MEGAMAN_SWIPE] = tileSide*1.0;
+	//tiles
+	heigths[BOSS_DOOR] = tileSide*1.0;
+	heigths[CABLE_EDGE_0] = tileSide*1.0;
+	heigths[CABLE_EDGE_1] = tileSide*1.0;
+	heigths[CABLE_FLOOR_0] = tileSide*1.0;
+	heigths[STONE_WALL] = tileSide*1.0;
+	heigths[STONE_LADDER] = tileSide*1.0;
+	heigths[SPIKE] = tileSide*1.0;
+	heigths[SKY_PLATFORM] = tileSide*1.0;
+	//Mobs
+	heigths[BUMBY_0] = tileSide*1.0;
+	heigths[BUMBY_1] = tileSide*1.0;
+	heigths[MET_HIDDEN] = tileSide*1.0;
+	heigths[MET_TRANSITION] = tileSide*1.0;
+	heigths[MET_VULNERABLE] = tileSide*1.0;
+	heigths[SNIPER_ATTACK] = tileSide*1.0;
+	heigths[SNIPER_DEFEND] = tileSide*1.0;
+	heigths[SNIPER_JUMP] = tileSide*1.0;
+	heigths[SNIPER_VULNERABLE] = tileSide*1.0;
+	heigths[JUMPING_SNIPER] = tileSide*1.0;
+	//BombMan
+	heigths[BOMBMAN_ATTACK] = tileSide*1.0;
+	heigths[BOMBMAN_CAST] = tileSide*1.0;
+	heigths[BOMBMAN_IDLE] = tileSide*1.0;
+	heigths[BOMBMAN_JUGGLE] = tileSide*1.0;
+	heigths[BOMBMAN_JUMP] = tileSide*1.0;
+	heigths[BOMBMAN_JUMP_FRONT] = tileSide*1.0;
+	heigths[BOMBMAN_JUMP_BACK] = tileSide*1.0;
+	//FireMan
+	heigths[FIREMAN_CAST_0] = tileSide*1.0;
+	heigths[FIREMAN_CAST_1] = tileSide*1.0;
+	heigths[FIREMAN_IDLE_0] = tileSide*1.0;
+	heigths[FIREMAN_IDLE_1] = tileSide*1.0;
+	heigths[FIREMAN_JUMP] = tileSide*1.0;
+	heigths[FIREMAN_RUN_0] = tileSide*1.0;
+	heigths[FIREMAN_RUN_1] = tileSide*1.0;
+	heigths[FIREMAN_RUN_2] = tileSide*1.0;
+	heigths[FIREMAN_RUN_3] = tileSide*1.0;
+	//MagnetMan
+	heigths[MAGNETMAN_ATTACK] = tileSide*1.0;
+	heigths[MAGNETMAN_CELEBRATE] = tileSide*1.0;
+	heigths[MAGNETMAN_DEFEND_0] = tileSide*1.0;
+	heigths[MAGNETMAN_DEFEND_1] = tileSide*1.0;
+	heigths[MAGNETMAN_DEFEND_2] = tileSide*1.0;
+	heigths[MAGNETMAN_IDLE] = tileSide*1.0;
+	heigths[MAGNETMAN_JUMP_0] = tileSide*1.0;
+	heigths[MAGNETMAN_JUMP_1] = tileSide*1.0;
+	heigths[MAGNETMAN_PREPARED] = tileSide*1.0;
+	//RingMan
+	heigths[RINGMAN_CAST] = tileSide*1.0;
+	heigths[RINGMAN_IDLE] = tileSide*1.0;
+	heigths[RINGMAN_JUMP] = tileSide*1.0;
+	heigths[RINGMAN_PREPARE_JUMP_0] = tileSide*1.0;
+	heigths[RINGMAN_PREPARE_JUMP_1] = tileSide*1.0;
+	heigths[RINGMAN_PREPARE_STAND_0] = tileSide*1.0;
+	heigths[RINGMAN_PREPARE_STAND_1] = tileSide*1.0;
+	heigths[RINGMAN_RUN_0] = tileSide*1.0;
+	heigths[RINGMAN_RUN_1] = tileSide*1.0;
+	heigths[RINGMAN_RUN_2] = tileSide*1.0;
+	heigths[RINGMAN_RUN_3] = tileSide*1.0;
+	//SparkMan
+	heigths[SPARKMAN_CAST_ATTACK_1] = tileSide*1.0;
+	heigths[SPARKMAN_CAST_ATTACK_2] = tileSide*1.0;
+	heigths[SPARKMAN_IDLE] = tileSide*1.0;
+	heigths[SPARKMAN_JUMP] = tileSide*1.0;
+	heigths[SPARKMAN_PREPARE_0_ATTACK_1] = tileSide*1.0;
+	heigths[SPARKMAN_PREPARE_0_ATTACK_2] = tileSide*1.0;
+	heigths[SPARKMAN_PREPARE_1_ATTACK_1] = tileSide*1.0;
+	heigths[SPARKMAN_PREPARE_1_ATTACK_2] = tileSide*1.0;
+	heigths[SPARKMAN_PREPARE_2_ATTACK_1] = tileSide*1.0;
+	heigths[SPARKMAN_PREPARE_2_ATTACK_2] = tileSide*1.0;
+
+	//WIDTHS
+	widths[MEGAMAN_IDLE_0] = tileSide*1.625;
+	widths[MEGAMAN_IDLE_1] = tileSide*1.625;
+	widths[MEGAMAN_IDLE_2] = tileSide*1.625;
+	widths[MEGAMAN_ATTACK] = tileSide*1.0;
+	widths[MEGAMAN_ATTACK_CLIMB] = tileSide*1.0;
+	widths[MEGAMAN_ATTACK_JUMP] = tileSide*1.0;
+	widths[MEGAMAN_ATTACK_RUN_0] = tileSide*1.0;
+	widths[MEGAMAN_ATTACK_RUN_1] = tileSide*1.0;
+	widths[MEGAMAN_ATTACK_RUN_2] = tileSide*1.0;
+	widths[MEGAMAN_BOMB_THROW] = tileSide*1.0;
+	widths[MEGAMAN_CLIMB] = tileSide*1.0;
+	widths[MEGAMAN_CLIMB_TOP] = tileSide*1.0;
+	widths[MEGAMAN_FALL] = tileSide*1.0;
+	widths[MEGAMAN_JUMP] = tileSide*1.0;
+	widths[MEGAMAN_RUN_0] = tileSide*1.0;
+	widths[MEGAMAN_RUN_1] = tileSide*1.0;
+	widths[MEGAMAN_RUN_2] = tileSide*1.0;
+	widths[MEGAMAN_SWIPE] = tileSide*1.0;
+	//tiles
+	widths[BOSS_DOOR] = tileSide*1.0;
+	widths[CABLE_EDGE_0] = tileSide*1.0;
+	widths[CABLE_EDGE_1] = tileSide*1.0;
+	widths[CABLE_FLOOR_0] = tileSide*1.0;
+	widths[STONE_WALL] = tileSide*1.0;
+	widths[STONE_LADDER] = tileSide*1.0;
+	widths[SPIKE] = tileSide*1.0;
+	widths[SKY_PLATFORM] = tileSide*1.0;
+	//Mobs
+	widths[BUMBY_0] = tileSide*1.0;
+	widths[BUMBY_1] = tileSide*1.0;
+	widths[MET_HIDDEN] = tileSide*1.0;
+	widths[MET_TRANSITION] = tileSide*1.0;
+	widths[MET_VULNERABLE] = tileSide*1.0;
+	widths[SNIPER_ATTACK] = tileSide*1.0;
+	widths[SNIPER_DEFEND] = tileSide*1.0;
+	widths[SNIPER_JUMP] = tileSide*1.0;
+	widths[SNIPER_VULNERABLE] = tileSide*1.0;
+	widths[JUMPING_SNIPER] = tileSide*1.0;
+	//BombMan
+	widths[BOMBMAN_ATTACK] = tileSide*1.0;
+	widths[BOMBMAN_CAST] = tileSide*1.0;
+	widths[BOMBMAN_IDLE] = tileSide*1.0;
+	widths[BOMBMAN_JUGGLE] = tileSide*1.0;
+	widths[BOMBMAN_JUMP] = tileSide*1.0;
+	widths[BOMBMAN_JUMP_FRONT] = tileSide*1.0;
+	widths[BOMBMAN_JUMP_BACK] = tileSide*1.0;
+	//FireMan
+	widths[FIREMAN_CAST_0] = tileSide*1.0;
+	widths[FIREMAN_CAST_1] = tileSide*1.0;
+	widths[FIREMAN_IDLE_0] = tileSide*1.0;
+	widths[FIREMAN_IDLE_1] = tileSide*1.0;
+	widths[FIREMAN_JUMP] = tileSide*1.0;
+	widths[FIREMAN_RUN_0] = tileSide*1.0;
+	widths[FIREMAN_RUN_1] = tileSide*1.0;
+	widths[FIREMAN_RUN_2] = tileSide*1.0;
+	widths[FIREMAN_RUN_3] = tileSide*1.0;
+	//MagnetMan
+	widths[MAGNETMAN_ATTACK] = tileSide*1.0;
+	widths[MAGNETMAN_CELEBRATE] = tileSide*1.0;
+	widths[MAGNETMAN_DEFEND_0] = tileSide*1.0;
+	widths[MAGNETMAN_DEFEND_1] = tileSide*1.0;
+	widths[MAGNETMAN_DEFEND_2] = tileSide*1.0;
+	widths[MAGNETMAN_IDLE] = tileSide*1.0;
+	widths[MAGNETMAN_JUMP_0] = tileSide*1.0;
+	widths[MAGNETMAN_JUMP_1] = tileSide*1.0;
+	widths[MAGNETMAN_PREPARED] = tileSide*1.0;
+	//RingMan
+	widths[RINGMAN_CAST] = tileSide*1.0;
+	widths[RINGMAN_IDLE] = tileSide*1.0;
+	widths[RINGMAN_JUMP] = tileSide*1.0;
+	widths[RINGMAN_PREPARE_JUMP_0] = tileSide*1.0;
+	widths[RINGMAN_PREPARE_JUMP_1] = tileSide*1.0;
+	widths[RINGMAN_PREPARE_STAND_0] = tileSide*1.0;
+	widths[RINGMAN_PREPARE_STAND_1] = tileSide*1.0;
+	widths[RINGMAN_RUN_0] = tileSide*1.0;
+	widths[RINGMAN_RUN_1] = tileSide*1.0;
+	widths[RINGMAN_RUN_2] = tileSide*1.0;
+	widths[RINGMAN_RUN_3] = tileSide*1.0;
+	//SparkMan
+	widths[SPARKMAN_CAST_ATTACK_1] = tileSide*1.0;
+	widths[SPARKMAN_CAST_ATTACK_2] = tileSide*1.0;
+	widths[SPARKMAN_IDLE] = tileSide*1.0;
+	widths[SPARKMAN_JUMP] = tileSide*1.0;
+	widths[SPARKMAN_PREPARE_0_ATTACK_1] = tileSide*1.0;
+	widths[SPARKMAN_PREPARE_0_ATTACK_2] = tileSide*1.0;
+	widths[SPARKMAN_PREPARE_1_ATTACK_1] = tileSide*1.0;
+	widths[SPARKMAN_PREPARE_1_ATTACK_2] = tileSide*1.0;
+	widths[SPARKMAN_PREPARE_2_ATTACK_1] = tileSide*1.0;
+	widths[SPARKMAN_PREPARE_2_ATTACK_2] = tileSide*1.0;
 }
 
 string SpriteDispenser::get(uint id) {
@@ -110,6 +299,24 @@ string SpriteDispenser::get(uint id) {
 		throw std::runtime_error("Requested invalid sprite");
 	} else {
 		return sprite;
+	}
+}
+
+float SpriteDispenser::getHeight(uint id) {
+	float size = heigths[id];
+	if (size == 0){
+		throw std::runtime_error("Requested invalid sprite");
+	} else {
+		return size;
+	}
+}
+
+float SpriteDispenser::getWidth(uint id) {
+	float size = widths[id];
+	if (size == 0){
+		throw std::runtime_error("Requested invalid sprite");
+	} else {
+		return size;
 	}
 }
 

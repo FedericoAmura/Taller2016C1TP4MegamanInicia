@@ -16,8 +16,13 @@ class SpriteDispenser {
 public:
     SpriteDispenser();
     string get(uint id);
+    float getHeight(uint id);
+    float getWidth(uint id);
 private:
     std::map<uint, string> paths;
+    std::map<uint, float> heigths;
+    std::map<uint, float> widths;
+    float tileSide;
 };
 
 

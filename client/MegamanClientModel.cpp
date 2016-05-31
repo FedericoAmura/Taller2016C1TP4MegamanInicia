@@ -50,7 +50,8 @@ void MegamanClientModel::run() {
 				drawable = new Drawable();
 				drawable->setIsDrawed(false);
 			}
-			drawable->setImage(sprites.get((uint)atoi(idDrawing.c_str())),66,52,atoi(flipped.c_str()));
+			uint id = (uint)atoi(idDrawing.c_str());
+			drawable->setImage(sprites.get(id),sprites.getWidth(id),sprites.getHeight(id),atoi(flipped.c_str()));
 			drawable->setCoordinates(xDrawable,yDrawable);
 			drawables.setDrawable(atoi(idDrawable.c_str()),drawable);
 			}
@@ -61,7 +62,8 @@ void MegamanClientModel::run() {
 			std::string idDrawing; ss >> idDrawing;
 			std::string flipped; ss >> flipped;
 			Drawable* drawable = drawables.getDrawable(atoi(idDrawable.c_str()));
-			drawable->setImage(sprites.get((uint)atoi(idDrawing.c_str())),66,52,atoi(flipped.c_str()));
+			uint id = (uint)atoi(idDrawing.c_str());
+			drawable->setImage(sprites.get(id),sprites.getWidth(id),sprites.getHeight(id),atoi(flipped.c_str()));
 			}
 			break;
 		case MOVE:
