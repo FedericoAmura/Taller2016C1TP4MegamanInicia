@@ -159,6 +159,9 @@
 #define STONE_LADDER 5002
 #define SPIKE 5003
 
+//BULLETS
+#define NORMAL 6000
+
 //Others
 #define EMPTY 0000
 

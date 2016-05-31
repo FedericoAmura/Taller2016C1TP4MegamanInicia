@@ -9,14 +9,14 @@
 #define SERVER_MODEL_MEGAMAN_H_
 
 #include "Character.h"
+#include "Stat.h"
 
 class Megaman: public Character {
 	float hSpeed;
 	float climbSpeed;
 	uint livesRemaining;
 	b2Vec2 spawnPoint;
-	float inmuneTime;//seconds
-	float inmuneTimeLeft;//seconds
+	Stat<float> inmuneTime;//seconds
 
 protected:
 	void changeFixtureFilter(b2Fixture* f);

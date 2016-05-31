@@ -9,10 +9,12 @@
 
 	"megaman":
 	{
+		"weaponId":		2004,
 		"HSpeed" : 		10.0,
 		"ClimbSpeed":	5.0,
 		"JFactor" :		1.0,
 		"inmuneTime":	2.0,
+		"life":			20.0,
 		"jumpSensor":
 		{
 			"x": 0.0,
@@ -42,5 +44,15 @@
 					"Y":0.0
 				}
 		]
+	},
+	"2004":
+	{
+		"cooldown":	0.25,
+		"bulletId":	6000,
+		"speed":
+		{
+			"x":	5.0,
+			"y":	0.0
+		}
 	}
 }

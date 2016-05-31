@@ -11,16 +11,24 @@
 #include "LevelObject.h"
 #include "MyLevel.h"
 #include <glog/logging.h>
+#include "Bullet.h"
+#include "Weapon.h"
 
 Character::Character(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl):
-LevelObject(w,json,pos,MEGAMAN_IDLE_0),level(lvl),canJump(false){
+LevelObject(w,json,pos,MEGAMAN_IDLE_0),
+level(lvl),
+life(json["life"].asInt()),
+canJump(false){
 	body->SetType(b2_dynamicBody);
 	body->SetFixedRotation(true);
 	body->SetBullet(true);
 	jFactor=json["JFactor"].asFloat();
+	myWeapon= new Weapon(json["weaponId"].asInt(),level,ENEMY);
 }
 
-Character::~Character() {}
+Character::~Character() {
+	delete myWeapon;
+}
 
 /*creates a jump sensor, to avoid jumping in air*/
 void Character::createJumpSensor(Json::Value jSensor){
@@ -52,4 +60,17 @@ void Character::kill() {
 	level->remove(this);
 }
 
+/*informs the weapon of the time step*/
+void Character::tick(float time){
+	myWeapon->tick(time);
+}
 
+/*damages by 1, independent of bullet, redefine for dif behaviour*/
+void Character::damage(Bullet* bullet) {
+	life.dec(1);
+}
+
+/*fires the weapon currently held*/
+void Character::shoot() {
+	myWeapon->shoot(body->GetPosition());
+}

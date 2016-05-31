@@ -12,16 +12,19 @@
 #include "MyLevel.h"
 
 Megaman::Megaman(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl):
-Character(w,json,pos,lvl),livesRemaining(3),spawnPoint(pos),laddersTouching(0) {
-	hSpeed=json["HSpeed"].asFloat();
-	climbSpeed=json["ClimbSpeed"].asFloat();
-	inmuneTime=json["inmuneTime"].asFloat();
-	inmuneTimeLeft=inmuneTime;
+Character(w,json,pos,lvl),
+hSpeed(json["HSpeed"].asFloat()),
+climbSpeed(json["ClimbSpeed"].asFloat()),
+livesRemaining(3),
+spawnPoint(pos),
+inmuneTime(json["inmuneTime"].asFloat()),
+laddersTouching(0){
 	//set filters
 	for (b2Fixture* f = body->GetFixtureList(); f; f = f->GetNext()){
 		changeFixtureFilter(f);
 	}
 	createJumpSensor(json["jumpSensor"]);
+	myWeapon->setOwner(FRIENDLY);
 }
 
 Megaman::~Megaman() {
@@ -77,11 +80,11 @@ void Megaman::move(char key){
 /*kills megaman. if he has lives remaining he's queued for respawn
  * else he gets removed*/
 void Megaman::kill() {
-	LOG(INFO)<<"inmune time left: "<<inmuneTimeLeft;
-	if(inmuneTimeLeft<=0){
+	LOG(INFO)<<"inmune time left: "<<inmuneTime.getCurrent();
+	if(inmuneTime.getCurrent()==0){
 		LOG(INFO)<<"megaman murio,vidas restantes: "
 				<<livesRemaining;
-		inmuneTimeLeft=inmuneTime;
+		inmuneTime.maxOut();
 		if(livesRemaining>=1){
 			livesRemaining--;
 			level->respawn(this);
@@ -113,7 +116,5 @@ bool Megaman::checkClimbing(){
 }
 
 void Megaman::tick(float time) {
-	if(inmuneTimeLeft>0){
-		inmuneTimeLeft-=time;
-	}
+	inmuneTime.dec(time);
 }

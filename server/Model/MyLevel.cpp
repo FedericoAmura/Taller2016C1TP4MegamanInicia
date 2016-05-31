@@ -29,9 +29,12 @@
 #include "Character.h"
 #include "Enemy.h"
 #include "Megaman.h"
+#include "ObjectInfo.h"
+#include "Bullet.h"
 
 #define WINDOW_WIDTH 24
 #define WINDOW_HEIGHT 14
+#define COFIG_FILE "../server/Model/config.json"
 
 MyLevel::MyLevel(Game* j,std::string lvlFileName)
 :world(b2Vec2(0,-10)),running(false),game(j) {
@@ -41,7 +44,7 @@ MyLevel::MyLevel(Game* j,std::string lvlFileName)
 	world.SetContactListener(&contactListener);
 	/*abro configuraciones*/
 	Json::Value config_json;
-	fileToJson("../server/Model/config.json",config_json);
+	fileToJson(COFIG_FILE,config_json);
 	/*cargo nivel*/
 	Json::Value level_json;
 	fileToJson(lvlFileName,level_json);
@@ -65,7 +68,10 @@ MyLevel::MyLevel(Game* j,std::string lvlFileName)
 	Json::Value objetosNivel=level_json["foreground"];
 	Json::ValueIterator it=objetosNivel.begin();
 	for(; it!=objetosNivel.end(); it++){
-		LevelObject* newObj=createObject(*it,config_json);
+		int id=(*it)["id"].asInt();
+		b2Vec2 pos=jsonPosToWorldPos((*it)["x"].asInt(),
+				(*it)["y"].asInt());
+		LevelObject* newObj=createObject(id,pos,config_json);
 		if(newObj!= nullptr)
 			objects[newObj->getId()]=newObj;
 	}
@@ -86,15 +92,11 @@ MyLevel::~MyLevel() {
 }
 
 /*retruns new object if id has config, nullptr if not*/
-LevelObject* MyLevel::createObject(Json::Value objectJson,Json::Value config) {
-	int id=objectJson["id"].asInt();
+LevelObject* MyLevel::createObject(int id,b2Vec2& pos,Json::Value config) {
 	int objectType=(int)id/1000;
-	std::string idAsString=objectJson["id"].asString();//for mets
 	bool created=false;
 	LevelObject* newObject;
-	b2Vec2 pos=jsonPosToWorldPos(objectJson["x"].asInt(),
-			objectJson["y"].asInt());
-	//todo cambiar switch por algo automatico, implica cambios en config.json
+	//todo cambiar hardcodeo por algo mas automatico, implica cambios en config.json
 	switch(objectType){
 	case 9:{
 		//create megaman
@@ -134,6 +136,11 @@ LevelObject* MyLevel::createObject(Json::Value objectJson,Json::Value config) {
 			//escalera
 			newObject= new Ladder(&world,config["wall"],pos,id);
 		}
+		break;
+	}
+	case 6:{
+		created=true;
+		newObject= new Bullet(&world,config["wall"],pos,id);
 		break;
 	}
 	default:
@@ -274,10 +281,12 @@ void MyLevel::moveMegaman(char boton){
 		megaman->move(boton);
 }
 
+/*adds object to remove list*/
 void MyLevel::remove(LevelObject* deadObject){
 	toRemove.push(deadObject);
 }
 
+/*respawns objects in respawn list*/
 void MyLevel::respawnAll() {
 	while(!toRespawn.empty()){
 		toRespawn.front()->spawn();
@@ -285,13 +294,39 @@ void MyLevel::respawnAll() {
 	}
 }
 
+/*adds megaman to respawn list*/
 void MyLevel::respawn(Megaman* meg) {
 	toRespawn.push(meg);
 }
 
+/*informs all characters of the passage of a time step*/
 void MyLevel::tickAll(float time) {
 	std::vector<Character*>::iterator it=characters.begin();
 	for(; it!=characters.end(); it++){
 		(*it)->tick(time);
 	}
+}
+
+/*adds the objects in the create list to the game */
+void MyLevel::createNewObjects() {
+	Json::Value config_json;
+	fileToJson(COFIG_FILE,config_json);
+	while(!toCreate.empty()){
+		ObjectInfo* info=toCreate.front();
+		b2Vec2 pos=info->getPos();
+		LevelObject* obj=createObject(info->getId(),pos,config_json);
+		int objectType=obj->getSpriteId()/1000;
+		if(objectType==6){//bullet
+			Bullet* bullet=(Bullet*)obj;
+			BulletInfo* bInfo=(BulletInfo*)info;
+			bullet->initialize(bInfo->getGroupBits(),bInfo->getSpeed(),this);
+		}
+		delete info;
+		toCreate.pop();
+	}
+}
+
+/*requests to create a new object at pos*/
+void MyLevel::newObject(ObjectInfo* info) {
+	toCreate.push(info);
 }

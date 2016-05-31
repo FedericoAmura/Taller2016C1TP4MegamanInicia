@@ -17,6 +17,7 @@
 #include "../Thread.h"
 #include "LevelObject.h"
 #include "MyContactListener.h"
+#include "ObjectInfo.h"
 
 class Character;
 class Megaman;
@@ -34,8 +35,8 @@ class MyLevel: public Thread{
 	b2Vec2 jsonPosToWorldPos(int x, int y);
 	void createBoundaries();
 	void fileToJson(std::string fileName, Json::Value& json);
-	LevelObject* createObject(Json::Value objectJson,Json::Value config);
 
+	LevelObject* createObject(int id,b2Vec2& pos,Json::Value config);
 	std::queue<LevelObject*> toRemove;
 	void removeDead();
 	void redrawForClient();
@@ -43,6 +44,8 @@ class MyLevel: public Thread{
 	void respawnAll();
 	std::vector<Character*> characters;
 	void tickAll(float time);
+	std::queue<ObjectInfo*> toCreate;
+	void createNewObjects();
 
 	float stepsPerSecond;
 	float hScale;
@@ -59,6 +62,7 @@ public:
 	void moveMegaman(char boton);
 	void remove(LevelObject* deadObject);
 	void respawn(Megaman* meg);
+	void newObject(ObjectInfo* info);
 };
 
 #endif /* SERVER_MODEL_MYLEVEL_H_ */
