@@ -25,7 +25,7 @@ bool Obstacle::changed() {
 
 /***********************************************************************/
 Spikes::Spikes(b2World* w, Json::Value& json, const b2Vec2& pos, int id):
-		Obstacle(w,json,pos,id){
+				Obstacle(w,json,pos,id){
 	//set filters
 	for (b2Fixture* f = body->GetFixtureList(); f; f = f->GetNext()){
 		changeFixtureFilter(f);
@@ -35,8 +35,11 @@ Spikes::Spikes(b2World* w, Json::Value& json, const b2Vec2& pos, int id):
 Spikes::~Spikes() {}
 
 void Spikes::collideWith(LevelObject* obj) {
-	Character* character= (Character*)obj;
-	character->kill();
+	int objType= obj->getSpriteId()/1000;
+	if(objType==9||objType==1){
+		Character* character= (Character*)obj;
+		character->kill();
+	}
 }
 
 void Spikes::changeFixtureFilter(b2Fixture* f) {
@@ -55,7 +58,7 @@ void Ladder::changeFixtureFilter(b2Fixture* f) {
 }
 
 Ladder::Ladder(b2World* w, Json::Value& json, const b2Vec2& pos, int id):
-Obstacle(w,json,pos,id){
+		Obstacle(w,json,pos,id){
 	//set filters
 	for (b2Fixture* f = body->GetFixtureList(); f; f = f->GetNext()){
 		changeFixtureFilter(f);
@@ -79,3 +82,4 @@ void Ladder::stopCollidingWith(Megaman* megaman) {
 		megaman->laddersTouching--;
 	megaman->checkClimbing();
 }
+

@@ -20,6 +20,7 @@ public:
 	virtual ~Bullet();
 	void collideWith(LevelObject* obj);
 	void initialize(uint16 groupBits, b2Vec2& speed, MyLevel* lvl);
+	virtual void copyCorner(b2Vec2& corner);
 };
 
 #endif /* SERVER_MODEL_BULLET_H_ */

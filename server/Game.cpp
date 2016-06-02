@@ -163,10 +163,11 @@ void Game::stopLevel(){
 //todo move more than one megaman
 void Game::movePlayer(int keyPressed, int source) {
 	if(levelChosen()){
-		if (KEY_UP == keyPressed) getLevel()->moveMegaman('w');
-		if (KEY_RIGHT == keyPressed) getLevel()->moveMegaman('d');
-		if (KEY_DOWN == keyPressed) getLevel()->moveMegaman('s');
-		if (KEY_LEFT == keyPressed) getLevel()->moveMegaman('a');
+		if (KEY_UP	 	== keyPressed) getLevel()->moveMegaman('w');
+		if (KEY_RIGHT 	== keyPressed) getLevel()->moveMegaman('d');
+		if (KEY_DOWN	== keyPressed) getLevel()->moveMegaman('s');
+		if (KEY_LEFT	== keyPressed) getLevel()->moveMegaman('a');
+		if (KEY_SPACE	== keyPressed) getLevel()->moveMegaman('f');
 	}
 }
 

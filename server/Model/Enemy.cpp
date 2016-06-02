@@ -31,3 +31,4 @@ void Enemy::changeFixtureFilter(b2Fixture* f) {
 void Enemy::tick(float time) {
 	//todo tick enemy
 }
+

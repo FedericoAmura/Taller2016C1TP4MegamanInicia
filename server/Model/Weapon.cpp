@@ -11,10 +11,11 @@
 #include "ObjectInfo.h"
 #include <fstream>
 #include <sstream>
+#include <glog/logging.h>
 
 #define COFIG_FILE "../server/Model/config.json"
 
-Weapon::Weapon(int id,MyLevel* lvl,uint16 group):
+Weapon::Weapon(int id,MyLevel* lvl,int group):
 level(lvl),
 weaponId(id),
 groupBits(group),
@@ -43,11 +44,14 @@ void Weapon::shoot(const b2Vec2& pos){
 		BulletInfo* info= new BulletInfo(bulletId,pos,speedVec,groupBits);
 		level->newObject(info);
 		cooldown.maxOut();
+//		LOG(INFO)<<"firing bullet: "<<bulletId<<" at: "
+//				<<(int)pos.x<<"-"<<(int)pos.y
+//				<<"	speed: "<<(int)speedVec.x<<"-"<<(int)speedVec.y;
 	}
 }
 
 /*sets the collision group for the bullets*/
-void Weapon::setOwner(uint16 group) {
+void Weapon::setOwner(int group) {
 	groupBits=group;
 }
 

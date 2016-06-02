@@ -16,14 +16,14 @@ class Weapon {
 	MyLevel* level;
 protected:
 	int weaponId;
-	uint16 groupBits;
+	int groupBits;
 	Stat<float> cooldown;
 	Json::Value getJson();
 public:
-	Weapon(int id,MyLevel* lvl,uint16 group);
+	Weapon(int id,MyLevel* lvl,int group);
 	virtual ~Weapon();
 	virtual void shoot(const b2Vec2& pos);
-	void setOwner(uint16 group);
+	void setOwner(int group);
 	void tick(float time);
 };
 

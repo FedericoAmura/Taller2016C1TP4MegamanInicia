@@ -76,3 +76,8 @@ void LevelObject::collideWith(LevelObject* obj) {
 void LevelObject::resetIds() {
 	LevelObject::uniqueId=0;
 }
+
+void LevelObject::copyCorner(b2Vec2& corner) {
+	corner.x=body->GetPosition().x;
+	corner.y=body->GetPosition().y;
+}

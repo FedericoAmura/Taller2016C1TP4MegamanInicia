@@ -18,6 +18,7 @@
 #include "LevelObject.h"
 #include "MyContactListener.h"
 #include "ObjectInfo.h"
+#include "Spawner.h"
 
 class Character;
 class Megaman;
@@ -36,7 +37,10 @@ class MyLevel: public Thread{
 	void createBoundaries();
 	void fileToJson(std::string fileName, Json::Value& json);
 
-	LevelObject* createObject(int id,b2Vec2& pos,Json::Value config);
+	LevelObject* createObject(int id,b2Vec2& pos);
+	std::vector<Spawner*> spawners;
+	void addSpawner(int id,b2Vec2& pos);
+
 	std::queue<LevelObject*> toRemove;
 	void removeDead();
 	void redrawForClient();
@@ -50,8 +54,11 @@ class MyLevel: public Thread{
 	float stepsPerSecond;
 	float hScale;
 	float vScale;
-	float w_width;
-	float w_height;
+	float worldWidth;
+	float worldHeight;
+	float windowWidth;
+	float windowHeight;
+	b2Vec2 windowPos;
 
 public:
 	explicit MyLevel(Game* j,std::string lvlFileName);

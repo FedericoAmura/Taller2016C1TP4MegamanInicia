@@ -47,6 +47,7 @@ public:
 	int getSpriteId();
 	virtual bool changed();
 	virtual void collideWith(LevelObject* obj);
+	virtual void copyCorner(b2Vec2& corner);
 };
 
 #endif /* SERVER_MODEL_LEVELOBJECT_H_ */

@@ -1,12 +1,45 @@
 {
 	"world":
 	{
-		"gravity":		 -10.0,
-		"width" :		 95.0,
-		"height" :		 95.0,
-		"steps/second" : 15.0
+		"windowWidth":	24.0,
+		"windowHeight":	14.0,
+		"gravity":		-40.0,
+		"width" :		95.0,
+		"height" :		95.0,
+		"steps/second":	24.0
 	},
-
+	
+	"windowBoundaries":
+	{
+		"shapes":
+		[
+				{
+					"width" : 12.0,
+					"height" : 0.01,
+					"X":0.0,
+					"Y":-7.0
+				},
+				{
+					"width" : 12.0,
+					"height" : 0.01,
+					"X":0.0,
+					"Y":7.0
+				},
+				{
+					"width" : 0.01,
+					"height" : 7.0,
+					"X":12.0,
+					"Y":0.0
+				},
+				{
+					"width" : 0.01,
+					"height" : 7,
+					"X":-12.0,
+					"Y":0.0
+				}
+		]
+	},
+	
 	"megaman":
 	{
 		"weaponId":		2004,
@@ -48,10 +81,10 @@
 	"2004":
 	{
 		"cooldown":	0.25,
-		"bulletId":	6000,
+		"bulletId":	2004,
 		"speed":
 		{
-			"x":	5.0,
+			"x":	2.0,
 			"y":	0.0
 		}
 	}

@@ -50,6 +50,7 @@ void Character::createJumpSensor(Json::Value jSensor){
 void Character::jump() {
 	if(canJump){
 		b2Vec2 vel = body->GetLinearVelocity();
+		//todo change
 		vel.y = jFactor * (-world->GetGravity().y); //upwards - don't change x velocity
 		body->SetLinearVelocity(vel);
 	}

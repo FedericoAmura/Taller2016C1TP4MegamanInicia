@@ -14,6 +14,8 @@
 #define BSS_PATH (string) IMG_PATH + "/bosses/"
 #define LVL_PATH (string) IMG_PATH + "/level/"
 #define TLE_PATH (string) IMG_PATH + "/level/tiles/"
+#define WEP_PATH (string) IMG_PATH + "/weapons/"
+#define ITM_PATH (string) IMG_PATH + "/items/"
 
 SpriteDispenser::SpriteDispenser() {
 	tileSide = (float)Gdk::screen_height()/(float)15;
@@ -47,6 +49,26 @@ SpriteDispenser::SpriteDispenser() {
 	paths[STONE_LADDER] = TLE_PATH + "stone_ladder.png";
 	paths[SPIKE] = TLE_PATH + "stone_spike.png";
 	paths[SKY_PLATFORM] = TLE_PATH + "sky_platform.png";
+	paths[BOSS_DOOR] = TLE_PATH + "boss_door.png";
+
+	//weapons
+	paths[BOMB] = WEP_PATH + "bombman_weapon.png";
+	paths[FIREMAN_FLAME] = WEP_PATH + "fireman_weapon0.png";
+	paths[MEGAMAN_FLAME] = WEP_PATH + "cable_floor0.png";
+	paths[MEGAMAN_WEAPON] = WEP_PATH + "megaman_weapon.png";
+	paths[MET_WEAPON] = WEP_PATH + "met_weapon.png";
+	paths[SNIPER_WEAPON] = WEP_PATH + "sniper_weapon.png";
+	paths[RINGMAN_WEAPON] = WEP_PATH + " ringman_weapon0.png";
+	paths[MAGNETMAN_WEAPON] = WEP_PATH + "sparkman_weapon1_0.png";
+	paths[SPARKMAN_SPARKS] = WEP_PATH + "stone_spike.png";
+	paths[SPARKMAN_GENKIDAMA] = WEP_PATH + "sky_platform.png";
+	//Items
+	//los sprites de esto no son los correctos, despues lo arreglo
+	paths[BIG_ENERGY] = WEP_PATH + "big_energy_capsule.png";
+	paths[SMALL_ENERGY] = WEP_PATH + "small_energy_capsule.png";
+	paths[BIG_PLASMA] = WEP_PATH + "big_plasma_capsule.png";
+	paths[SMALL_PLASMA] = WEP_PATH + "small_plasma_capsule.png";
+	paths[LIFE] = WEP_PATH + "life.png";
 	//Mobs
 	paths[BUMBY_0] = MOB_PATH + "bumby0.png";
 	paths[BUMBY_1] = MOB_PATH + "bumby1.png";
@@ -111,7 +133,7 @@ SpriteDispenser::SpriteDispenser() {
 	paths[SPARKMAN_PREPARE_2_ATTACK_2] = BSS_PATH + "sparkman/sparkman_prepare2_attack2.png";
 
 	//SIZES
-	heigths[MEGAMAN_IDLE_0] = tileSide*1.5625;
+	heigths[MEGAMAN_IDLE_0] = tileSide*1.0;//tileSide*1.5625;
 	heigths[MEGAMAN_IDLE_1] = tileSide*1.5625;
 	heigths[MEGAMAN_IDLE_2] = tileSide*1.5625;
 	heigths[MEGAMAN_ATTACK] = tileSide*1.0;
@@ -129,6 +151,24 @@ SpriteDispenser::SpriteDispenser() {
 	heigths[MEGAMAN_RUN_1] = tileSide*1.0;
 	heigths[MEGAMAN_RUN_2] = tileSide*1.0;
 	heigths[MEGAMAN_SWIPE] = tileSide*1.0;
+	//weapons
+	heigths[BOMB] = tileSide*0.2;
+	heigths[FIREMAN_FLAME] = tileSide*0.2;
+	heigths[MEGAMAN_FLAME] = tileSide*0.2;
+	heigths[MEGAMAN_WEAPON] = tileSide*0.2;
+	heigths[MET_WEAPON] = tileSide*0.2;
+	heigths[SNIPER_WEAPON] = tileSide*0.2;
+	heigths[RINGMAN_WEAPON] = tileSide*0.2;
+	heigths[MAGNETMAN_WEAPON] = tileSide*0.2;
+	heigths[SPARKMAN_SPARKS] = tileSide*0.2;
+	heigths[SPARKMAN_GENKIDAMA] =tileSide*0.2;
+	//Items
+	//los sprites de esto no son los correctos, despues lo arreglo
+	heigths[BIG_ENERGY] = tileSide*0.2;
+	heigths[SMALL_ENERGY] = tileSide*0.2;
+	heigths[BIG_PLASMA] = tileSide*0.2;
+	heigths[SMALL_PLASMA] = tileSide*0.2;
+	heigths[LIFE] = tileSide*0.2;
 	//tiles
 	heigths[BOSS_DOOR] = tileSide*1.0;
 	heigths[CABLE_EDGE_0] = tileSide*1.0;
@@ -202,7 +242,7 @@ SpriteDispenser::SpriteDispenser() {
 	heigths[SPARKMAN_PREPARE_2_ATTACK_2] = tileSide*1.0;
 
 	//WIDTHS
-	widths[MEGAMAN_IDLE_0] = tileSide*1.625;
+	widths[MEGAMAN_IDLE_0] = tileSide*1.0;//tileSide*1.625;
 	widths[MEGAMAN_IDLE_1] = tileSide*1.625;
 	widths[MEGAMAN_IDLE_2] = tileSide*1.625;
 	widths[MEGAMAN_ATTACK] = tileSide*1.0;
@@ -220,6 +260,24 @@ SpriteDispenser::SpriteDispenser() {
 	widths[MEGAMAN_RUN_1] = tileSide*1.0;
 	widths[MEGAMAN_RUN_2] = tileSide*1.0;
 	widths[MEGAMAN_SWIPE] = tileSide*1.0;
+	//weapons
+	widths[BOMB] = tileSide*0.2;
+	widths[FIREMAN_FLAME] = tileSide*0.2;
+	widths[MEGAMAN_FLAME] = tileSide*0.2;
+	widths[MEGAMAN_WEAPON] = tileSide*0.2;
+	widths[MET_WEAPON] = tileSide*0.2;
+	widths[SNIPER_WEAPON] = tileSide*0.2;
+	widths[RINGMAN_WEAPON] = tileSide*0.2;
+	widths[MAGNETMAN_WEAPON] = tileSide*0.2;
+	widths[SPARKMAN_SPARKS] = tileSide*0.2;
+	widths[SPARKMAN_GENKIDAMA] =tileSide*0.2;
+	//Items
+	//los sprites de esto no son los correctos, despues lo arreglo
+	widths[BIG_ENERGY] = tileSide*0.2;
+	widths[SMALL_ENERGY] = tileSide*0.2;
+	widths[BIG_PLASMA] = tileSide*0.2;
+	widths[SMALL_PLASMA] = tileSide*0.2;
+	widths[LIFE] = tileSide*0.2;
 	//tiles
 	widths[BOSS_DOOR] = tileSide*1.0;
 	widths[CABLE_EDGE_0] = tileSide*1.0;

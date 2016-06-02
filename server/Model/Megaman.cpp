@@ -73,6 +73,10 @@ void Megaman::move(char key){
 		body->SetLinearVelocity(vel);
 		break;
 	}
+	case 'f':{
+		this->shoot();
+		break;
+	}
 	default: break;
 	}
 }
@@ -116,5 +120,6 @@ bool Megaman::checkClimbing(){
 }
 
 void Megaman::tick(float time) {
+	Character::tick(time);
 	inmuneTime.dec(time);
 }

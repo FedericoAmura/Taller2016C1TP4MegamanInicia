@@ -32,9 +32,8 @@
 #include "ObjectInfo.h"
 #include "Bullet.h"
 
-#define WINDOW_WIDTH 24
-#define WINDOW_HEIGHT 14
 #define COFIG_FILE "../server/Model/config.json"
+#define IGNORE 0
 
 MyLevel::MyLevel(Game* j,std::string lvlFileName):
 world(b2Vec2(0,-10)),
@@ -44,6 +43,8 @@ game(j) {
 	megaman=nullptr;
 	world.SetContinuousPhysics(true);
 	world.SetContactListener(&contactListener);
+	windowPos.x=0;
+	windowPos.y=0;
 	/*abro configuraciones*/
 	Json::Value config_json;
 	fileToJson(COFIG_FILE,config_json);
@@ -51,19 +52,16 @@ game(j) {
 	Json::Value level_json;
 	fileToJson(lvlFileName,level_json);
 	/*seteo variables mundo*/
+	this->worldHeight=level_json["width"].asInt();
+	this->worldWidth=level_json["length"].asInt();
+
 	Json::Value world_json=config_json["world"];
-	this->w_height=level_json["width"].asInt();
-	this->w_width=level_json["length"].asInt();
 	this->stepsPerSecond=world_json["steps/second"].asFloat();
 	world.SetGravity(b2Vec2(0,world_json["gravity"].asFloat()));
-
-	this->hScale=world_json["width"].asFloat()/WINDOW_WIDTH;
-	this->vScale=world_json["height"].asFloat()/WINDOW_HEIGHT;
-
-	LOG(INFO)<<"w_height: "<<w_height;
-	LOG(INFO)<<"w_width: "<<w_width;
-	LOG(INFO)<<"stepsPerSecond: "<<stepsPerSecond;
-	LOG(INFO)<<"gravity: "<<world.GetGravity().y;
+	this->windowHeight=world_json["windowHeight"].asFloat();
+	this->windowWidth=world_json["windowWidth"].asFloat();
+	this->hScale=world_json["width"].asFloat()/windowWidth;
+	this->vScale=world_json["height"].asFloat()/windowHeight;
 	//window borders
 	createBoundaries();
 	//load all objects of the level
@@ -73,9 +71,10 @@ game(j) {
 		int id=(*it)["id"].asInt();
 		b2Vec2 pos=jsonPosToWorldPos((*it)["x"].asInt(),
 				(*it)["y"].asInt());
-		LevelObject* newObj=createObject(id,pos,config_json);
-		if(newObj!= nullptr)
-			objects[newObj->getId()]=newObj;
+		if(id/1000 ==1)
+			addSpawner(id,pos);
+		else
+			createObject(id,pos);
 	}
 }
 
@@ -87,14 +86,20 @@ void MyLevel::fileToJson(std::string fileName, Json::Value& json){
 }
 
 MyLevel::~MyLevel() {
-	std::map<int,LevelObject*>::iterator it=objects.begin();
-	for(;it!=objects.end();it++){
-		delete it->second;
+	std::map<int,LevelObject*>::iterator objectIt=objects.begin();
+	for(;objectIt!=objects.end();objectIt++){
+		delete objectIt->second;
+	}
+	std::vector<Spawner*>::iterator spawnerIt=spawners.begin();
+	for(;spawnerIt!=spawners.end();spawnerIt++){
+		delete (*spawnerIt);
 	}
 }
 
 /*retruns new object if id has config, nullptr if not*/
-LevelObject* MyLevel::createObject(int id,b2Vec2& pos,Json::Value config) {
+LevelObject* MyLevel::createObject(int id,b2Vec2& pos) {
+	Json::Value config;
+	fileToJson(COFIG_FILE,config);
 	int objectType=(int)id/1000;
 	bool created=false;
 	LevelObject* newObject;
@@ -110,16 +115,24 @@ LevelObject* MyLevel::createObject(int id,b2Vec2& pos,Json::Value config) {
 		}
 		break;
 	}
+	case 0:{
+		created=true;
+		newObject = new Obstacle(&world,config["windowBoundaries"],pos,0);
+		break;
+	}
 	case 1:{
 		created=true;
+		//todo more enemies
 		Character* enemy = new Enemy(&world, config["megaman"], pos,this);
 		newObject=enemy;
 		characters.push_back(enemy);
 		break;
 	}
-	case 2:
-		//todo create weapon???
+	case 2:{
+		created=true;
+		newObject= new Bullet(&world,config["wall"],pos,id);
 		break;
+	}
 	case 3:
 		//todo create item
 		break;
@@ -140,20 +153,19 @@ LevelObject* MyLevel::createObject(int id,b2Vec2& pos,Json::Value config) {
 		}
 		break;
 	}
-	case 6:{
-		created=true;
-		newObject= new Bullet(&world,config["wall"],pos,id);
-		break;
-	}
 	default:
 		break;
 	}
 	if(created){
 		/*notify clients about creation*/
-		std::stringstream msj;
-		msj<<DRAW<<" "<<newObject->getId()<<" "<<newObject->getSpriteId();
-		msj<<" 0 "<<posToString(newObject->getPos());
-		game->notify(new MessageSent(msj.str(),0));
+		int spriteId=newObject->getSpriteId();
+		if(!(spriteId==IGNORE)){
+			std::stringstream msj;
+			msj<<DRAW<<" "<<newObject->getId()<<" "<<spriteId;
+			msj<<" 0 "<<posToString(newObject->getPos());
+			game->notify(new MessageSent(msj.str(),0));
+		}
+		objects[newObject->getId()]=newObject;
 		return newObject;
 	}else{
 		return nullptr;
@@ -161,28 +173,14 @@ LevelObject* MyLevel::createObject(int id,b2Vec2& pos,Json::Value config) {
 }
 
 void MyLevel::createBoundaries() {
-	//window borders
-	float thickness=0.01;
-	b2BodyDef bordersBodyDef;
-	bordersBodyDef.position.Set(0, -thickness);
-	b2Body* bordersBody = world.CreateBody(&bordersBodyDef);
-	bordersBody->SetUserData((void*)0);
-	b2PolygonShape borderShape;
-	b2FixtureDef myFixtureDef;
-	myFixtureDef.filter.categoryBits=BOUNDARIES;
-	myFixtureDef.shape = &borderShape;
-	borderShape.SetAsBox(w_width / 2, thickness,
-			b2Vec2(w_width / 2, 0), 0); //ground
-	bordersBody->CreateFixture(&myFixtureDef);
-	borderShape.SetAsBox(w_width / 2, thickness,
-			b2Vec2(w_width / 2, w_height), 0); //ceiling
-	bordersBody->CreateFixture(&myFixtureDef);
-	borderShape.SetAsBox(thickness, w_height / 2,
-			b2Vec2(0 - thickness, w_height / 2), 0); //left wall
-	bordersBody->CreateFixture(&myFixtureDef);
-	borderShape.SetAsBox(thickness, w_height / 2,
-			b2Vec2(w_width + thickness, w_height / 2), 0); //right wall
-	bordersBody->CreateFixture(&myFixtureDef);
+	b2Vec2 pos(windowPos.x,windowPos.y);
+	pos.x+=windowWidth/2;
+	pos.y+=windowHeight/2;
+	LevelObject* obj=createObject(0,pos);
+	//todo remove workaround (ordered ids)
+	std::stringstream msj;
+	msj<<DRAW<<" "<<obj->getId()<<" 4000 0 150 150";
+	game->notify(new MessageSent(msj.str(),0));
 }
 
 /*informs whether the thread is(should be) running*/
@@ -193,9 +191,8 @@ bool MyLevel::isRunning(){
 
 /*transforms box2d position to client position format*/
 std::string MyLevel::posToString(b2Vec2 pos){
-	//devuelvo esq iz sup
-	float px = pos.x-0.5;
-	float py = WINDOW_HEIGHT-pos.y+0.5;
+	float px = pos.x;
+	float py = windowHeight-pos.y;
 	//scale for client, should be done there
 	px*=hScale;
 	py*=vScale;
@@ -212,7 +209,7 @@ b2Vec2 MyLevel::jsonPosToWorldPos(int x, int y) {
 	float posX,posY;
 	posX=x+0.5;//desfaso centro medio tile
 	posY= y+0.5;//desfaso centro medio tile
-	posY=w_height-posY;//corrijo por diferente centro de coordenadas
+	posY=worldHeight-posY;//corrijo por diferente centro de coordenadas
 	b2Vec2 pos(posX,posY);
 	return pos;
 }
@@ -224,7 +221,9 @@ void MyLevel::redrawForClient(){
 		LevelObject* obj= it->second;
 		if(obj->changed()){
 			std::stringstream msj;
-			msj<<MOVE<<" "<<obj->getId()<<" "<<posToString(obj->getPos());
+			b2Vec2 corner;
+			obj->copyCorner(corner);
+			msj<<MOVE<<" "<<obj->getId()<<" "<<posToString(corner);
 			game->notify(new MessageSent(msj.str(),0));
 		}
 	}
@@ -259,7 +258,7 @@ void MyLevel::run(){
 
 	try{
 		while(isRunning()){
-			//todo create bullets
+			createNewObjects();
 			//todo si jugadores pasan mitad pantalla mover
 			world.Step(timeStep, velocityIterations, positionIterations);
 			tickAll(timeStep);
@@ -312,26 +311,32 @@ void MyLevel::tickAll(float time) {
 	}
 }
 
-/*adds the objects in the create list to the game */
+/*adds the objects in the create list to the game
+ * then deletes the info*/
 void MyLevel::createNewObjects() {
-	Json::Value config_json;
-	fileToJson(COFIG_FILE,config_json);
-	while(!toCreate.empty()){
-		ObjectInfo* info=toCreate.front();
-		b2Vec2 pos=info->getPos();
-		LevelObject* obj=createObject(info->getId(),pos,config_json);
-		int objectType=obj->getSpriteId()/1000;
-		if(objectType==6){//bullet
-			Bullet* bullet=(Bullet*)obj;
-			BulletInfo* bInfo=(BulletInfo*)info;
-			bullet->initialize(bInfo->getGroupBits(),bInfo->getSpeed(),this);
+	if(!toCreate.empty()){
+		while(!toCreate.empty()){
+			ObjectInfo* info=toCreate.front();
+			b2Vec2 pos=info->getPos();
+			LevelObject* obj=createObject(info->getId(),pos);
+			int objectType=obj->getSpriteId()/1000;
+			if(objectType==2){//bullet
+				Bullet* bullet=(Bullet*)obj;
+				BulletInfo* bInfo=(BulletInfo*)info;
+				bullet->initialize(bInfo->getGroupBits(),bInfo->getSpeed(),this);
+			}
+			delete info;
+			toCreate.pop();
 		}
-		delete info;
-		toCreate.pop();
 	}
+
 }
 
 /*requests to create a new object at pos*/
 void MyLevel::newObject(ObjectInfo* info) {
 	toCreate.push(info);
+}
+
+void MyLevel::addSpawner(int id, b2Vec2& pos) {
+	spawners.push_back(new Spawner(id,pos,this));
 }
