@@ -8,7 +8,7 @@
 #ifndef SERVER_ACCEPTCONNECTIONS_H_
 #define SERVER_ACCEPTCONNECTIONS_H_
 
-#include "Thread.h"
+#include "../common/Thread.h"
 #include "Observer.h"
 #include "ServerSocket.h"
 

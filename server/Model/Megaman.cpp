@@ -38,6 +38,7 @@ void Megaman::changeFixtureFilter(b2Fixture* f) {
 	filter.maskBits=(BOUNDARIES|SPIKES|LADDERS|ITEMS|BULLETS);
 	filter.groupIndex=FRIENDLY;
 	f->SetFilterData(filter);
+	f->SetFriction(0);
 }
 
 /*takes key and moves accordingly*/
@@ -84,16 +85,18 @@ void Megaman::move(char key){
 /*kills megaman. if he has lives remaining he's queued for respawn
  * else he gets removed*/
 void Megaman::kill() {
-	LOG(INFO)<<"inmune time left: "<<inmuneTime.getCurrent();
-	if(inmuneTime.getCurrent()==0){
+	//LOG(INFO)<<"inmune time left: "<<inmuneTime.getCurrent();
+	if(inmuneTime.getCurrent()==0 && !dead){
 		LOG(INFO)<<"megaman murio,vidas restantes: "
 				<<livesRemaining;
 		inmuneTime.maxOut();
 		if(livesRemaining>=1){
 			livesRemaining--;
 			level->respawn(this);
+			dead=false;
 		}else{
 			level->remove(this);
+			dead=true;
 		}
 	}
 }

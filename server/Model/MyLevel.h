@@ -14,7 +14,7 @@
 #include <queue>
 #include <vector>
 
-#include "../Thread.h"
+#include "../common/Thread.h"
 #include "LevelObject.h"
 #include "MyContactListener.h"
 #include "ObjectInfo.h"
@@ -46,14 +46,12 @@ class MyLevel: public Thread{
 	void redrawForClient();
 	std::queue<Megaman*> toRespawn;
 	void respawnAll();
-	std::vector<Character*> characters;
+	std::map<int,Character*> characters;
 	void tickAll(float time);
 	std::queue<ObjectInfo*> toCreate;
 	void createNewObjects();
 
 	float stepsPerSecond;
-	float hScale;
-	float vScale;
 	float worldWidth;
 	float worldHeight;
 	float windowWidth;

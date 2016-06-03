@@ -18,11 +18,12 @@ Character::Character(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl
 LevelObject(w,json,pos,MEGAMAN_IDLE_0),
 level(lvl),
 life(json["life"].asInt()),
+dead(false),
 canJump(false){
 	body->SetType(b2_dynamicBody);
 	body->SetFixedRotation(true);
 	body->SetBullet(true);
-	jFactor=json["JFactor"].asFloat();
+	jSpeed=json["JSpeed"].asFloat();
 	myWeapon= new Weapon(json["weaponId"].asInt(),level,ENEMY);
 }
 
@@ -51,14 +52,17 @@ void Character::jump() {
 	if(canJump){
 		b2Vec2 vel = body->GetLinearVelocity();
 		//todo change
-		vel.y = jFactor * (-world->GetGravity().y); //upwards - don't change x velocity
+		vel.y = jSpeed; //upwards - don't change x velocity
 		body->SetLinearVelocity(vel);
 	}
 }
 
 /*kills character, removing him from game*/
 void Character::kill() {
-	level->remove(this);
+	if(!dead){
+		dead=true;
+		level->remove(this);
+	}
 }
 
 /*informs the weapon of the time step*/
@@ -69,6 +73,9 @@ void Character::tick(float time){
 /*damages by 1, independent of bullet, redefine for dif behaviour*/
 void Character::damage(Bullet* bullet) {
 	life.dec(1);
+	LOG(INFO)<<"id: "<<this->getId()<<" life left "<<life.getCurrent();
+	if(life.getCurrent()==0)
+		this->kill();
 }
 
 /*fires the weapon currently held*/

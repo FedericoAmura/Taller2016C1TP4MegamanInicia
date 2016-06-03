@@ -44,14 +44,14 @@ void Weapon::shoot(const b2Vec2& pos){
 		BulletInfo* info= new BulletInfo(bulletId,pos,speedVec,groupBits);
 		level->newObject(info);
 		cooldown.maxOut();
-//		LOG(INFO)<<"firing bullet: "<<bulletId<<" at: "
-//				<<(int)pos.x<<"-"<<(int)pos.y
-//				<<"	speed: "<<(int)speedVec.x<<"-"<<(int)speedVec.y;
+		LOG(INFO)<<"firing bullet: "<<bulletId<<" at: "
+				<<(int)pos.x<<"-"<<(int)pos.y
+				<<"	speed: "<<(int)speedVec.x<<"-"<<(int)speedVec.y;
 	}
 }
 
 /*sets the collision group for the bullets*/
-void Weapon::setOwner(int group) {
+void Weapon::setOwner(int16 group) {
 	groupBits=group;
 }
 

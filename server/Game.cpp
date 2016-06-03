@@ -128,7 +128,7 @@ void Game::selectLevel(int levelId, int client){
 		std::stringstream msg;
 		msg<<START_LEVEL_SCREEN<<" "<<levelId;
 		notify(new MessageSent(msg.str(),0));
-		level= new MyLevel(this,"../server/Model/simplex.json");
+		level= new MyLevel(this,"../server/Model/basic0.json");
 		level->start();
 	}
 }

@@ -11,7 +11,7 @@
 #include <string>
 
 #include "Observer.h"
-#include "Thread.h"
+#include "../common/Thread.h"
 #include "ThreadQueue.h"
 
 class Socket;//forward declaration

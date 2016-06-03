@@ -9,15 +9,16 @@
 
 #include <Box2D/Box2D.h>
 #include <string>
-#include <sstream>
+#include <sstream>		//stringstream
 #include <glog/logging.h>
-#include <unistd.h>//usleep
-#include <iomanip>//setprecision
-#include <iostream>//fixed
-#include <fstream>//ifstream
+#include <unistd.h>		//usleep
+#include <iomanip>		//setprecision
+#include <iostream>		//fixed
+#include <fstream>		//ifstream
 #include <map>
-#include <exception>//catch
+#include <exception>	//catch
 #include <vector>
+#include <algorithm>    // std::find
 
 #include "../Event.h"
 #include "../Game.h"
@@ -38,7 +39,7 @@
 MyLevel::MyLevel(Game* j,std::string lvlFileName):
 world(b2Vec2(0,-10)),
 running(false),
-game(j) {
+game(j){
 	LevelObject::resetIds();
 	megaman=nullptr;
 	world.SetContinuousPhysics(true);
@@ -60,8 +61,6 @@ game(j) {
 	world.SetGravity(b2Vec2(0,world_json["gravity"].asFloat()));
 	this->windowHeight=world_json["windowHeight"].asFloat();
 	this->windowWidth=world_json["windowWidth"].asFloat();
-	this->hScale=world_json["width"].asFloat()/windowWidth;
-	this->vScale=world_json["height"].asFloat()/windowHeight;
 	//window borders
 	createBoundaries();
 	//load all objects of the level
@@ -71,17 +70,17 @@ game(j) {
 		int id=(*it)["id"].asInt();
 		b2Vec2 pos=jsonPosToWorldPos((*it)["x"].asInt(),
 				(*it)["y"].asInt());
-		if(id/1000 ==1)
-			addSpawner(id,pos);
-		else
-			createObject(id,pos);
+		//if(id/1000 ==1)
+		//addSpawner(id,pos);
+		//else
+		createObject(id,pos);
 	}
 }
 
 /*opens file and sends data to json*/
 void MyLevel::fileToJson(std::string fileName, Json::Value& json){
 	std::ifstream configFile(fileName);
-	LOG(INFO)<<"abierto archivo: "<<fileName;
+	//LOG(INFO)<<"abierto archivo: "<<fileName;
 	configFile >> json;
 }
 
@@ -103,6 +102,9 @@ LevelObject* MyLevel::createObject(int id,b2Vec2& pos) {
 	int objectType=(int)id/1000;
 	bool created=false;
 	LevelObject* newObject;
+	std::stringstream converter;
+	converter<<id;
+	std::string idAsString=converter.str();
 	//todo cambiar hardcodeo por algo mas automatico, implica cambios en config.json
 	switch(objectType){
 	case 9:{
@@ -111,7 +113,7 @@ LevelObject* MyLevel::createObject(int id,b2Vec2& pos) {
 			created=true;
 			megaman = new Megaman(&world, config["megaman"], pos,this);
 			newObject=megaman;
-			characters.push_back(megaman);
+			characters[newObject->getId()]=megaman;
 		}
 		break;
 	}
@@ -123,9 +125,9 @@ LevelObject* MyLevel::createObject(int id,b2Vec2& pos) {
 	case 1:{
 		created=true;
 		//todo more enemies
-		Character* enemy = new Enemy(&world, config["megaman"], pos,this);
+		Character* enemy = new Enemy(&world, config[idAsString], pos,this);
 		newObject=enemy;
-		characters.push_back(enemy);
+		characters[newObject->getId()]=enemy;
 		break;
 	}
 	case 2:{
@@ -193,9 +195,6 @@ bool MyLevel::isRunning(){
 std::string MyLevel::posToString(b2Vec2 pos){
 	float px = pos.x;
 	float py = windowHeight-pos.y;
-	//scale for client, should be done there
-	px*=hScale;
-	py*=vScale;
 	//todo check reference frame
 
 	std::stringstream positionString;
@@ -233,14 +232,21 @@ void MyLevel::removeDead(){
 	while(!toRemove.empty()){
 		LevelObject* dead= toRemove.front();
 		toRemove.pop();
+		//notify clients
 		std::stringstream killMsg;
-		killMsg<<KILL<<" "<<dead->getId();
+		int deadId=dead->getId();
+		killMsg<<KILL<<" "<<deadId;
 		game->notify(new MessageSent(killMsg.str(),0));
-		objects.erase(dead->getId());
+		//erase from object tracker
+		objects.erase(deadId);
+		//erase from characters tracker
+		characters.erase(deadId);
+		//if no megamans left exit
 		if(dead==megaman){
 			game->notify(new LevelFinished(-1));
 			this->stop();
 		}
+		//delete the dead
 		delete dead;
 	}
 }
@@ -305,9 +311,9 @@ void MyLevel::respawn(Megaman* meg) {
 
 /*informs all characters of the passage of a time step*/
 void MyLevel::tickAll(float time) {
-	std::vector<Character*>::iterator it=characters.begin();
+	std::map<int,Character*>::iterator it=characters.begin();
 	for(; it!=characters.end(); it++){
-		(*it)->tick(time);
+		it->second->tick(time);
 	}
 }
 

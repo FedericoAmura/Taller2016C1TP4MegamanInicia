@@ -18,10 +18,11 @@ class MyLevel;//forward declaration
 
 class Character: public LevelObject {
 protected:
-	float jFactor;
+	float jSpeed;
 	MyLevel* level;
 	Weapon* myWeapon;
 	Stat<int> life;
+	bool dead;
 
 	void jump();
 	void createJumpSensor(Json::Value jSensor);

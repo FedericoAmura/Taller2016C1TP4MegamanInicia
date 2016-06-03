@@ -43,11 +43,61 @@
 	"megaman":
 	{
 		"weaponId":		2004,
-		"HSpeed" : 		10.0,
+		"HSpeed" : 		3.0,
 		"ClimbSpeed":	3.0,
-		"JFactor" :		0.5,
+		"JSpeed" :		15.0,
 		"inmuneTime":	2.0,
 		"life":			20.0,
+		"jumpSensor":
+		{
+			"x": 		0.0,
+			"y": 		-0.5,
+			"width": 	0.25,
+			"height": 	0.1
+		},
+		"shapes":
+		[
+			{
+				"width" : 	0.4,
+				"height" : 	0.5,
+				"X":		0.0,
+				"Y":		0.0
+			}
+		]
+	},
+	
+	"1022":
+	{
+		"id":			1022,
+		"weaponId":		2004,
+		"JSpeed" :		0.0,
+		"life":			2.0,
+		"jumpFreq":		60.0,
+		"jumpSensor":
+		{
+			"x":	 	0.0,
+			"y": 		0.0,
+			"width": 	0.1,
+			"height": 	0.1
+		},
+		"shapes":
+		[
+			{
+				"width" :	0.4,
+				"height" : 	0.5,
+				"X":		0.0,
+				"Y":		0.0
+			}
+		]
+	},
+	
+	"1030":
+	{
+		"id":			1030,
+		"weaponId":		2004,
+		"JSpeed" :		15.0,
+		"life":			2.0,
+		"jumpFreq":		2.0,
 		"jumpSensor":
 		{
 			"x": 0.0,

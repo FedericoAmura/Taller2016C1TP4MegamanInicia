@@ -38,8 +38,8 @@ LevelObject::LevelObject(b2World* w,Json::Value& json,const b2Vec2& pos,int id)
 /*adds fixture with normal density, no friction or restitution
  * redefine and call super to make sure fixtures collide with corresponding entities*/
 b2Fixture* LevelObject::addFixture(b2FixtureDef& fDef) {
-	fDef.density = 1;
-	fDef.friction=0;
+	fDef.density = 1.0;
+	fDef.friction=0.2;
 	fDef.restitution=0;
 	return body->CreateFixture(&fDef);
 }

@@ -16,7 +16,7 @@
 #include "Socket.h"
 #include "Model/MyLevel.h"
 #include "Observer.h"
-#include "Thread.h"
+#include "../common/Thread.h"
 #include "ThreadQueue.h"
 class Server;//forward declaration
 

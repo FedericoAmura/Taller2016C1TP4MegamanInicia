@@ -12,6 +12,7 @@
 
 class Enemy: public Character {
 protected:
+	Stat<float> jumpTime;
 	void changeFixtureFilter(b2Fixture* f);
 public:
 	Enemy(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl);
