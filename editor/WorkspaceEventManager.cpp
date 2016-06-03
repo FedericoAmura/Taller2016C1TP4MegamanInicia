@@ -5,7 +5,6 @@
 #include <iostream>
 #include "WorkspaceEventManager.h"
 
-#define TILE_PXL 55
 #define NO_SELECTION 0
 
 typedef const Glib::RefPtr<Gdk::DragContext> DragContext;
@@ -59,8 +58,9 @@ void WorkspaceEventManager::on_delete() {
 void WorkspaceEventManager::on_drag_data_received(DragContext&, int x, int y,
                                                   SelectData& selection_data,
                                                   guint, guint) {
-    uint xint = ((uint) x) / TILE_PXL;
-    uint yint = ((uint) y) / TILE_PXL;
+    const int screen_width = workspace.getScreenWidth();
+    uint xint = ((uint) x) / screen_width;
+    uint yint = ((uint) y) / screen_width;
     if (!workspace.validPosition(xint, yint)) return;
     uint id = (uint) atoi(selection_data.get_text().c_str());
     workspace.addElement(xint, yint, id);
@@ -80,9 +80,6 @@ void WorkspaceEventManager::on_shorten() {
     workspace.shortenLevel();
 }
 
-void WorkspaceEventManager::init() {
-
-}
 
 
 

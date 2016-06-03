@@ -7,7 +7,7 @@
 #include "Workspace.h"
 #include "../entities.h"
 
-#define SIZE_TRANSFORM 15.3
+#define SIZE_TRANSFORM 15.5
 #define EDGE 2
 
 typedef Glib::RefPtr<Gdk::Pixbuf> Pixbuf;
@@ -16,7 +16,6 @@ typedef drawing_map_t::iterator p_iter;
 Workspace::Workspace(Level& level)
         : level(level) {
     screen_width = (int) Gdk::screen_height()/SIZE_TRANSFORM;
-    std::cout << Gdk::screen_height() << "sd"<<  std::endl;
     resize();
     for (uint i = 0; i < level.getLength() ; ++i){
         for (uint j = 0; j < level.getWidth() ; ++j){
