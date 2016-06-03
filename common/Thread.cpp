@@ -7,10 +7,10 @@
 
 #include "Thread.h"
 
-#include <pthread.h>
-#include <stdexcept>
-#include <cstring>
 #include <cerrno>
+#include <cstring>
+#include <stdexcept>
+#include <string>
 
 void* Thread::runner(void *data) {
 	Thread *self = (Thread*)data;

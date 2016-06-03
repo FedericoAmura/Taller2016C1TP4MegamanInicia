@@ -7,6 +7,7 @@
 
 #ifndef SERVER_THREAD_H_
 #define SERVER_THREAD_H_
+
 #include <pthread.h>
 
 class Thread {

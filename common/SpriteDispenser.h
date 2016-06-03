@@ -5,8 +5,10 @@
 #ifndef MEGAMAN_SPRITEDISPENSER_H
 #define MEGAMAN_SPRITEDISPENSER_H
 
-#include <string>
 #include <map>
+#include <string>
+
+#include "Thread.h"
 
 typedef unsigned int uint;
 
@@ -16,13 +18,15 @@ class SpriteDispenser {
 public:
     SpriteDispenser();
     string get(uint id);
-    float getHeight(uint id);
-    float getWidth(uint id);
+    double getHeight(uint id);
+    double getWidth(uint id);
 private:
+	Mutex m;
     std::map<uint, string> paths;
-    std::map<uint, float> heigths;
-    std::map<uint, float> widths;
-    float tileSide;
+    std::map<uint, double> heigths;
+    std::map<uint, double> widths;
+    double tileHeight;
+    double tileWidth;
 };
 
 

@@ -1,1 +1,3 @@
 [^.]*
+server.INFO*
+*.INFO

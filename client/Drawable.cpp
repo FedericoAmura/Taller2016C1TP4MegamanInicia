@@ -7,19 +7,16 @@
 
 #include "Drawable.h"
 
+#include <iostream>
+
 Drawable::Drawable() :
-	dibujado(false) {
+	posX(0.0),
+	posY(0.0),
+	drawed(false),
+	draw(true) {
 }
 
 Drawable::~Drawable() {
-}
-
-bool Drawable::isDrawed() {
-	return dibujado;
-}
-
-void Drawable::setIsDrawed(bool isDrawed) {
-	dibujado = isDrawed;
 }
 
 void Drawable::setImage(std::string ruta, int width, int height, bool flip) {
@@ -27,7 +24,7 @@ void Drawable::setImage(std::string ruta, int width, int height, bool flip) {
 	drawing.setImage(ruta, width, height, flip);
 }
 
-void Drawable::setCoordinates(const std::string &x, const std::string &y) {
+void Drawable::setCoordinates(double x, double y) {
 	Lock l(m);
 	posX = x;
 	posY = y;
@@ -38,13 +35,33 @@ Drawing& Drawable::getImage() {
 	return drawing;
 }
 
-float Drawable::getX() {
+double Drawable::getX() {
 	Lock l(m);
-	return atof(posX.c_str());
+	return posX;
 }
 
-float Drawable::getY() {
+double Drawable::getY() {
 	Lock l(m);
-	return atof(posY.c_str());
+	return posY;
+}
+
+void Drawable::setIsDrawed(bool isDrawed) {
+	Lock l(m);
+	drawed = isDrawed;
+}
+
+void Drawable::setDraw(bool shouldDraw) {
+	Lock l(m);
+	draw = shouldDraw;
+}
+
+bool Drawable::isDrawed() {
+	Lock l(m);
+	return drawed;
+}
+
+bool Drawable::shouldDraw() {
+	Lock l(m);
+	return draw;
 }
 

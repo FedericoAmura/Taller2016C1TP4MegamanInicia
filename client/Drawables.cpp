@@ -19,16 +19,19 @@ void Drawables::setDrawable(int ID, Drawable* drawable) {
 }
 
 bool Drawables::hasDrawable(int ID) {
+	Lock l(m);
 	if (drawableContainer[ID] != 0)
 		return true;
 	return false;
 }
 
 int Drawables::size() {
+	Lock l(m);
 	return drawableContainer.size();
 }
 
 Drawable* Drawables::getDrawable(int ID) {
+	Lock l(m);
 	return drawableContainer[ID];
 }
 

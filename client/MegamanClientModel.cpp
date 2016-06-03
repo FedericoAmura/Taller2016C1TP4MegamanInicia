@@ -31,7 +31,7 @@ void MegamanClientModel::run() {
 	while (recibirServer) {
 		std::string message = serverProxy->recibirHasta('\n');
 		if (message.length() == 0) continue;
-		std::cout << message << std::endl;	//DEBUG
+		//std::cout << message << std::endl;	//DEBUG
 		std::stringstream ss(message);
 		std::string commandString;
 		ss >> commandString;
@@ -43,8 +43,8 @@ void MegamanClientModel::run() {
 			std::string idDrawable; ss >> idDrawable;
 			std::string idDrawing; ss >> idDrawing;
 			std::string flipped; ss >> flipped;
-			std::string xDrawable; ss >> xDrawable;
-			std::string yDrawable; ss >> yDrawable;
+			double xDrawable; ss >> xDrawable;
+			double yDrawable; ss >> yDrawable;
 			Drawable* drawable = drawables.getDrawable(atoi(idDrawable.c_str()));
 			if (drawable == 0) {
 				drawable = new Drawable();
@@ -53,6 +53,7 @@ void MegamanClientModel::run() {
 			uint id = (uint)atoi(idDrawing.c_str());
 			drawable->setImage(sprites.get(id),sprites.getWidth(id),sprites.getHeight(id),atoi(flipped.c_str()));
 			drawable->setCoordinates(xDrawable,yDrawable);
+			drawable->setDraw(true);
 			drawables.setDrawable(atoi(idDrawable.c_str()),drawable);
 			}
 			break;
@@ -64,15 +65,17 @@ void MegamanClientModel::run() {
 			Drawable* drawable = drawables.getDrawable(atoi(idDrawable.c_str()));
 			uint id = (uint)atoi(idDrawing.c_str());
 			drawable->setImage(sprites.get(id),sprites.getWidth(id),sprites.getHeight(id),atoi(flipped.c_str()));
+			drawable->setDraw(true);
 			}
 			break;
 		case MOVE:
 			{
 			std::string idDrawable; ss >> idDrawable;
-			std::string xDrawable; ss >> xDrawable;
-			std::string yDrawable; ss >> yDrawable;
+			double xDrawable; ss >> xDrawable;
+			double yDrawable; ss >> yDrawable;
 			Drawable* drawable = drawables.getDrawable(atoi(idDrawable.c_str()));
 			drawable->setCoordinates(xDrawable,yDrawable);
+			drawable->setDraw(true);
 			}
 			break;
 		case SOUND:

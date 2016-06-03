@@ -30,17 +30,23 @@ void LevelScreen::startLevel() {
 }
 
 bool LevelScreen::update() {
-	const float width = (float) Gdk::screen_width();
-	const float height = (float) Gdk::screen_height();
+	const double widthTile = ceil((double)Gdk::screen_width()/(double)24);
+	const double heightTile = ceil((double)Gdk::screen_height()/(double)15);
 
 	for (int i = 0; i < model.getDrawables().size(); ++i) {
 		Drawable* drawable = model.getDrawables().getDrawable(i);
-		if (drawable->isDrawed()) {
-			move(drawable->getImage(),drawable->getX()*(width/100),drawable->getY()*(height/100));
-		} else {
-			put(drawable->getImage(),drawable->getX()*(width/100),drawable->getY()*(height/100));
-			drawable->setIsDrawed(true);
-			drawable->getImage().show();
+		if (!drawable) continue;	//Fix hasta implementar el iterador
+		if (drawable->shouldDraw()) {
+			int drawableX = (int) (drawable->getX()*widthTile);
+			int drawableY = (int) (drawable->getY()*heightTile);
+			if (drawable->isDrawed()) {
+				move(drawable->getImage(),drawableX,drawableY);
+			} else {
+				put(drawable->getImage(),drawableX,drawableY);
+				drawable->setIsDrawed(true);
+				drawable->getImage().show();
+			}
+			drawable->setDraw(false);
 		}
 	}
 

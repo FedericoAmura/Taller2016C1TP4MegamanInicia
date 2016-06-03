@@ -11,7 +11,7 @@
 #include <map>
 
 #include "Drawable.h"
-#include "Thread.h"
+#include "../common/Thread.h"
 
 class Drawables {
 private:
