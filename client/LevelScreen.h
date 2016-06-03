@@ -15,7 +15,7 @@
 
 #include "MegamanClientModel.h"
 #include "Drawable.h"
-#include "../common/MyArea.h"
+#include "../common/Drawing.h"
 #include "Socket.h"
 
 class LevelScreen : public Gtk::Fixed {

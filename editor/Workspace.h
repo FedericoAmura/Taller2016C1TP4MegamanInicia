@@ -6,7 +6,7 @@
 #define MEGAMAN_WORKSPACE_H
 #include "Level.h"
 #include "../common/SpriteDispenser.h"
-#include "../common/MyArea.h"
+#include "../common/Drawing.h"
 #include <vector>
 #include <map>
 #include <gtkmm/drawingarea.h>
@@ -34,7 +34,6 @@ private:
     SpriteDispenser sprites;
     Glib::RefPtr<Gdk::Pixbuf> background;
     void resize();
-    void refresh();
 
     //callbacks
 

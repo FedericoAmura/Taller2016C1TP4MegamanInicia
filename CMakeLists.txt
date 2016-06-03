@@ -6,7 +6,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
 
 #Magia para que ande gtkmm
 find_package(PkgConfig)
-pkg_check_modules(GTKMM gtkmm-3.0)
+pkg_check_modules(GTKMM gtkmm-3.12)
 
 #glog
 find_package (glog 0.3.4 REQUIRED)
@@ -27,11 +27,11 @@ include_directories( ${GTKMM_INCLUDE_DIRS}  )
 set(SOURCE_FILES editor/main.cpp entities.h editor/Level.cpp editor/Level.h editor/Entity.cpp editor/Entity.h
         editor/Layer.cpp editor/Layer.h jsoncpp.cpp editor/Workspace.cpp editor/Workspace.h
         json/json-forwards.h json/json.h editor/ToolboxModelColumns.cpp editor/ToolboxModelColumns.h editor/EntitySet.cpp
-        editor/EntitySet.h common/SpriteDispenser.cpp common/SpriteDispenser.h common/MyArea.cpp common/MyArea.h common/Thread.cpp
+        editor/EntitySet.h common/SpriteDispenser.cpp common/SpriteDispenser.h common/Drawing.cpp common/Drawing.h common/Thread.cpp
         common/Thread.h editor/WorkspaceEventManager.cpp editor/WorkspaceEventManager.cpp editor/WorkspaceEventManager.h
         editor/SelectionLabel.cpp editor/SelectionLabel.cpp editor/SelectionLabel.h editor/SelectionDrawing.cpp
         editor/SelectionDrawing.h editor/ButtonDeleteSelection.cpp editor/ButtonDeleteSelection.h editor/Selector.cpp
-        editor/Selector.h editor/EntityIconView.cpp editor/EntityIconView.h)
+        editor/Selector.h editor/EntityIconView.cpp editor/EntityIconView.h editor/EditorMainWindow.cpp editor/EditorMainWindow.h)
 add_executable(editor ${SOURCE_FILES})
 
 set(SOURCE_FILES editor/editor_test.cpp editor/Entity.cpp editor/Entity.h

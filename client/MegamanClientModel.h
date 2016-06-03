@@ -14,7 +14,7 @@
 #include "Socket.h"
 #include "Drawable.h"
 #include "Drawables.h"
-#include "../common/MyArea.h"
+#include "../common/Drawing.h"
 #include "../common/Thread.h"
 #include "../common/SpriteDispenser.h"
 

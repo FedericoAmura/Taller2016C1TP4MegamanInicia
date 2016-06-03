@@ -11,7 +11,7 @@
 #include <string>
 
 #include "../common/Thread.h"
-#include "../common/MyArea.h"
+#include "../common/Drawing.h"
 
 class Drawable {
 private:

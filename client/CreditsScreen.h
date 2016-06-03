@@ -12,7 +12,7 @@
 #include <gtkmm/fixed.h>
 #include <gtkmm/label.h>
 
-#include "../common/MyArea.h"
+#include "../common/Drawing.h"
 
 class CreditsScreen : public Gtk::Fixed {
 private:

@@ -21,7 +21,7 @@ Workspace::Workspace(Level& level) : level(level) {
             if (id != 0) {
                 pair<uint, uint> position = std::make_pair(i, j);
                 Drawing* drawing = new Drawing();
-                drawing->setImage(sprites.get(id), TILE_PXL, TILE_PXL, false);
+                drawing->setImage(sprites.get(id), TILE_PXL, TILE_PXL);
                 drawings[position] = drawing;
                 put(*drawing,
                     std::get<0>(position) * TILE_PXL,
@@ -52,7 +52,7 @@ bool Workspace::addElement(uint x, uint y, uint id) {
         //Add to view
         pair<uint, uint> position = std::make_pair(x, y);
         Drawing* drawing = new Drawing();
-        drawing->setImage(sprites.get(id), TILE_PXL, TILE_PXL, false);
+        drawing->setImage(sprites.get(id), TILE_PXL, TILE_PXL);
         drawings[position] = drawing;
         put(*drawing,
             std::get<0>(position) * TILE_PXL,
@@ -99,6 +99,7 @@ void Workspace::shortenLevel() {
     level.shorten();
     resize();
 }
+
 
 
 

@@ -4,10 +4,11 @@
 
 #include "SelectionDrawing.h"
 
-#define SIDE 45
+#define SIDE 90
 
 bool SelectionDrawing::on_selection(uint id) {
     if (id){
+        hide();
         setImage(sprites.get(id), SIDE, SIDE, false);
         show();
     } else {
