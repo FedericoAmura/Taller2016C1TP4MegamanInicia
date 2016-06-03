@@ -6,7 +6,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
 
 #Magia para que ande gtkmm
 find_package(PkgConfig)
-pkg_check_modules(GTKMM gtkmm-3.12)
+pkg_check_modules(GTKMM gtkmm-3.0)
 
 #glog
 find_package (glog 0.3.4 REQUIRED)

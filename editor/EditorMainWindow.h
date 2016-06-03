@@ -27,6 +27,8 @@ private:
     Gtk::VBox editing_box;
     WorkspaceEventManager manager;
     Selector selector;
+    Gtk::Frame selection_frame;
+    Gtk::VBox selection_box;
     SelectionDrawing selection_drawing;
     SelectionLabel selection_label;
     ButtonDeleteSelection delete_button;
