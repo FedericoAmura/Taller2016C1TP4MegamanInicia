@@ -1,13 +1,7 @@
-#include <gtkmm.h>
 #include <iostream>
 #include "EntitySet.h"
 #include "../common/SpriteDispenser.h"
 #include "Workspace.h"
-#include "WorkspaceEventManager.h"
-#include "SelectionLabel.h"
-#include "SelectionDrawing.h"
-#include "ButtonDeleteSelection.h"
-#include "Selector.h"
 #include "EditorMainWindow.h"
 
 typedef Glib::RefPtr<Gtk::Application> App;

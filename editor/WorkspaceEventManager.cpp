@@ -5,7 +5,7 @@
 #include <iostream>
 #include "WorkspaceEventManager.h"
 
-#define TILE_PXL 32
+#define TILE_PXL 55
 #define NO_SELECTION 0
 
 typedef const Glib::RefPtr<Gdk::DragContext> DragContext;
@@ -25,8 +25,9 @@ WorkspaceEventManager::WorkspaceEventManager(Workspace &workspace)
     }
 
 bool WorkspaceEventManager::on_button_press(GdkEventButton *event) {
-    uint xint = ((uint) event->x) / TILE_PXL;
-    uint yint = ((uint) event->y) / TILE_PXL;
+    const int screen_width = workspace.getScreenWidth();
+    uint xint = ((uint) event->x) / screen_width;
+    uint yint = ((uint) event->y) / screen_width;
     if (!workspace.validPosition(xint, yint)) {
         return false;
     }
@@ -78,6 +79,13 @@ void WorkspaceEventManager::on_enlarge() {
 void WorkspaceEventManager::on_shorten() {
     workspace.shortenLevel();
 }
+
+void WorkspaceEventManager::init() {
+
+}
+
+
+
 
 
 

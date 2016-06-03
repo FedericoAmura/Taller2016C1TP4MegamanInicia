@@ -28,12 +28,17 @@ public:
     bool validPosition(uint x, uint y);
     void enlargeLevel();
     void shortenLevel();
+    const int getScreenWidth() {return screen_width;}
+    void init(int hight);
 private:
     Level& level;
     drawing_map_t drawings;
     SpriteDispenser sprites;
+    int screen_width;
     Glib::RefPtr<Gdk::Pixbuf> background;
+
     void resize();
+
 
     //callbacks
 

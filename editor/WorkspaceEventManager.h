@@ -19,6 +19,7 @@ public:
     WorkspaceEventManager(Workspace& workspace);
     void setDroppable(std::vector<Gtk::TargetEntry>& listTargets);
     type_signal_selection signal_selection();
+    void init();
     void on_delete();
     void on_enlarge();
     void on_shorten();

@@ -7,13 +7,16 @@
 #include "Workspace.h"
 #include "../entities.h"
 
-#define TILE_PXL 32
+#define SIZE_TRANSFORM 15.3
 #define EDGE 2
 
 typedef Glib::RefPtr<Gdk::Pixbuf> Pixbuf;
 typedef drawing_map_t::iterator p_iter;
 
-Workspace::Workspace(Level& level) : level(level) {
+Workspace::Workspace(Level& level)
+        : level(level) {
+    screen_width = (int) Gdk::screen_height()/SIZE_TRANSFORM;
+    std::cout << Gdk::screen_height() << "sd"<<  std::endl;
     resize();
     for (uint i = 0; i < level.getLength() ; ++i){
         for (uint j = 0; j < level.getWidth() ; ++j){
@@ -21,11 +24,11 @@ Workspace::Workspace(Level& level) : level(level) {
             if (id != 0) {
                 pair<uint, uint> position = std::make_pair(i, j);
                 Drawing* drawing = new Drawing();
-                drawing->setImage(sprites.get(id), TILE_PXL, TILE_PXL);
+                drawing->setImage(sprites.get(id), screen_width, screen_width);
                 drawings[position] = drawing;
                 put(*drawing,
-                    std::get<0>(position) * TILE_PXL,
-                    std::get<1>(position) * TILE_PXL);
+                    std::get<0>(position) * screen_width,
+                    std::get<1>(position) * screen_width);
                 drawing->show();
             }
         }
@@ -33,7 +36,7 @@ Workspace::Workspace(Level& level) : level(level) {
 }
 
 void Workspace::resize() {
-    set_size_request(level.getLength()*TILE_PXL, level.getWidth()*TILE_PXL);
+    set_size_request(level.getLength()*screen_width, level.getWidth()*screen_width);
 }
 
 Workspace::~Workspace() {
@@ -52,11 +55,11 @@ bool Workspace::addElement(uint x, uint y, uint id) {
         //Add to view
         pair<uint, uint> position = std::make_pair(x, y);
         Drawing* drawing = new Drawing();
-        drawing->setImage(sprites.get(id), TILE_PXL, TILE_PXL);
+        drawing->setImage(sprites.get(id), screen_width, screen_width);
         drawings[position] = drawing;
         put(*drawing,
-            std::get<0>(position) * TILE_PXL,
-            std::get<1>(position) * TILE_PXL);
+            std::get<0>(position) * screen_width,
+            std::get<1>(position) * screen_width);
         drawing->show();
         if (level.getLength() - x == EDGE){
             resize();
@@ -99,6 +102,8 @@ void Workspace::shortenLevel() {
     level.shorten();
     resize();
 }
+
+
 
 
 

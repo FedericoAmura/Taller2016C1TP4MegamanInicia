@@ -7,12 +7,10 @@
 #define SIDE 90
 
 bool SelectionDrawing::on_selection(uint id) {
+    hide();
     if (id){
-        hide();
         setImage(sprites.get(id), SIDE, SIDE, false);
         show();
-    } else {
-        hide();
     }
     return true;
 }

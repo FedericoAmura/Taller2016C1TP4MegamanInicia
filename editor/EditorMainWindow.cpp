@@ -2,6 +2,7 @@
 // Created by marcos on 03/06/16.
 //
 
+#include <iostream>
 #include "EditorMainWindow.h"
 
 EditorMainWindow::EditorMainWindow(Workspace& workspace)
@@ -17,6 +18,7 @@ EditorMainWindow::EditorMainWindow(Workspace& workspace)
     editing_box.pack_start(selector, true, true);
     editing_box.pack_end(selection_frame, false, true);
     selection_frame.add(selection_box);
+    selection_drawing.set_halign(Gtk::ALIGN_CENTER);
     selection_box.pack_start(selection_drawing, true, false);
     selection_label.set_text("No element selected");
     selection_box.pack_end(selection_label, true, false);
@@ -37,4 +39,6 @@ EditorMainWindow::EditorMainWindow(Workspace& workspace)
     manager.setDroppable(list_targets);
     selector.setDraggable(list_targets);
 }
+
+
 
