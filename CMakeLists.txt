@@ -34,11 +34,6 @@ set(SOURCE_FILES editor/main.cpp entities.h editor/Level.cpp editor/Level.h edit
         editor/Selector.h editor/EntityIconView.cpp editor/EntityIconView.h editor/EditorMainWindow.cpp editor/EditorMainWindow.h)
 add_executable(editor ${SOURCE_FILES})
 
-set(SOURCE_FILES editor/editor_test.cpp editor/Entity.cpp editor/Entity.h
-        editor/Level.h editor/Level.cpp editor/Layer.cpp editor/Layer.h jsoncpp.cpp json/json-forwards.h
-        json/json.h)
-add_executable(editor_test ${SOURCE_FILES})
-
 #files comunes
 FILE(GLOB COMMON_SOURCE_FILES common/*)
 
@@ -53,7 +48,6 @@ FILE(GLOB_RECURSE SERVER_SOURCE_FILES server/*)
 add_executable(server ${SERVER_SOURCE_FILES} ${COMMON_SOURCE_FILES} jsoncpp.cpp json/json-forwards.h json/json.h)
 
 #linkeos
-target_link_libraries(editor_test ${GTKMM_LIBRARIES} )
 target_link_libraries(editor ${GTKMM_LIBRARIES} )
 target_link_libraries(client ${GTKMM_LIBRARIES} )
 target_link_libraries (client glog::glog)

@@ -31,12 +31,12 @@ private:
 
 protected:
     type_signal_selection m_signal_selection;
-    void on_drag_data_received(
-            const Glib::RefPtr<Gdk::DragContext>& context, int x, int y,
-            const Gtk::SelectionData& selection_data, guint info, guint time);
 
     //handlers
     bool on_button_press(GdkEventButton* event);
+    void on_drag_data_received(
+            const Glib::RefPtr<Gdk::DragContext>& context, int x, int y,
+            const Gtk::SelectionData& selection_data, guint info, guint time);
 
 };
 
