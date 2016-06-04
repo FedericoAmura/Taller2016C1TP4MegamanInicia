@@ -5,10 +5,11 @@
 #ifndef MEGAMAN_LAYER_H
 #define MEGAMAN_LAYER_H
 
-
 #include "Entity.h"
 #include "../json/json.h"
 #include <vector>
+
+#define DEF_LEN 20
 
 using std::vector;
 
@@ -21,21 +22,21 @@ typedef struct prototype {
 
 class Layer {
 public:
-    Layer(){} //TODO: Consultar sobre esto.
+    Layer() : Layer(DEF_LEN) {}
     explicit Layer(uint length);
-    ~Layer();
-    bool addEntity(prototype_t prototype);
-    bool removeEntity(uint x, uint y);
+    virtual ~Layer();
+    virtual bool addEntity(prototype_t prototype);
+    virtual bool removeEntity(uint x, uint y);
     uint getEntity(uint x, uint y);
     bool isEmpty(uint x, uint y);
     Json::Value toJson();
-    void enlarge();
-    void shorten();
-    uint getLength() {return length;}
-    uint getWidth() {return width;}
+    uint getLength();
+    uint getWidth();
+
 private:
-    uint length;
-    uint width;
+
+
+protected:
     vector<vector <Entity*> >entities;
 };
 

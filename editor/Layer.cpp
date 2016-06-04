@@ -7,16 +7,15 @@
 #include "Level.h"
 
 #define WIDTH 15
-#define MIN_LEN 20
 
 using std::runtime_error;
 
 typedef vector<Entity*>::iterator v_iter;
 
-Layer::Layer(unsigned int length) : length(length), width(WIDTH) {
-    entities = vector<vector<Entity*> >(length, std::vector<Entity*>(width));
+Layer::Layer(unsigned int length) {
+    entities = vector<vector<Entity*> >(length, std::vector<Entity*>(WIDTH));
     for (unsigned int i = 0; i != length; ++i){
-        for (unsigned int j = 0; j != width; ++j){
+        for (unsigned int j = 0; j != WIDTH; ++j){
             entities[i][j] = NULL;
         }
     }
@@ -29,7 +28,7 @@ bool Layer::isEmpty(unsigned int x, unsigned int y) {
 bool Layer::addEntity(prototype_t prototype) {
     uint x = prototype.x;
     uint y = prototype.y;
-    if (x >= length || y >= width) {
+    if (x >= getLength() || y >= getWidth()) {
         throw runtime_error("Insertion out of bounds");
     }
     uint id = prototype.id;
@@ -38,9 +37,6 @@ bool Layer::addEntity(prototype_t prototype) {
     }
     Entity* new_entity = new Entity(id);
     entities[x][y] = new_entity;
-    if (length - x == 1) {
-        enlarge();
-    }
     return true;
 }
 
@@ -64,8 +60,8 @@ uint Layer::getEntity(uint x, uint y) {
 
 Layer::~Layer() {
     Entity* current_entity;
-    for(unsigned int i = 0; i != length; ++i){
-        for(unsigned int j = 0; j != width; ++j){
+    for(unsigned int i = 0; i != getLength(); ++i){
+        for(unsigned int j = 0; j != getWidth(); ++j){
             current_entity = entities[i][j];
             if(current_entity != NULL){
                 delete current_entity;
@@ -76,8 +72,8 @@ Layer::~Layer() {
 
 Json::Value Layer::toJson() {
     Json::Value array(Json::arrayValue);
-    for (uint i = 0; i != length; ++i){
-        for (uint j = 0; j != width; ++j){
+    for (uint i = 0; i != getLength(); ++i){
+        for (uint j = 0; j != getWidth(); ++j){
             if (entities[i][j] != NULL){
                 Json::Value entity_value(Json::objectValue);
                 entity_value["x"] = i;
@@ -90,36 +86,11 @@ Json::Value Layer::toJson() {
     return array;
 }
 
-void Layer::enlarge() {
-    //enlarges layer by 1
-    vector<Entity*> new_row(width);
-    for (uint j = 0; j != width; ++j){
-        new_row[j] = NULL;
-    }
-    entities.push_back(new_row);
-    ++length;
+uint Layer::getLength() {
+    return (uint) entities.size();
 }
 
-void Layer::shorten() {
-    //shortens layer by 1 if last two columns are empty
-    if (length < MIN_LEN) {
-        return;
-    }
-    for (uint i = length - 2; i != length; ++i){
-        for (uint j = 0; j != width; ++j){
-            if (entities[i][j] != NULL){
-                return;
-            }
-        }
-    }
-    entities.pop_back();
-    --length;
+uint Layer::getWidth() {
+    return (uint) entities[0].size();
 }
-
-
-
-
-
-
-
 

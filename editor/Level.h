@@ -16,24 +16,23 @@ using std::map;
 typedef unsigned int uint;
 
 class Level {
-private:
-    Layer* entities;
-    string background_file;
-
 public:
+    Level() {};
     Level(string json_file);
-    ~Level();
+    virtual ~Level();
     explicit Level(uint len);
     void setBackgroundFile(string path);
     string getBackgroundFile() {return background_file;};
     uint getLength() {return entities->getLength();}
     uint getWidth() {return entities->getWidth();}
-    void toJson(string file_name);
+    virtual void toJson(string file_name);
     bool addEntity(prototype_t prototype);
     bool removeEntity(uint x, uint y);
     uint getEntity(uint x, uint y);
-    void enlarge() {entities->enlarge();}
-    void shorten() {entities->shorten();}
+
+protected:
+    Layer* entities;
+    string background_file;
 };
 
 

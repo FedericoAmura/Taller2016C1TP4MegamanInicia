@@ -60,9 +60,7 @@ bool Workspace::addElement(uint x, uint y, uint id) {
             std::get<0>(position) * screen_width,
             std::get<1>(position) * screen_width);
         drawing->show();
-        if (level.getLength() - x == EDGE){
-            resize();
-        }
+        resize();
         return true;
     } else {
         return false;
@@ -78,6 +76,7 @@ bool Workspace::removeEntity(uint x, uint y) {
         Drawing* drawing = drawings[position];
         drawings.erase(position);
         delete drawing;
+        resize();
         return true;
     } else {
         return false;
@@ -90,16 +89,6 @@ uint Workspace::getId(uint x, uint y) {
 
 bool Workspace::validPosition(uint x, uint y) {
     return (x < level.getLength() && y < level.getWidth());
-}
-
-void Workspace::enlargeLevel() {
-    level.enlarge();
-    resize();
-}
-
-void Workspace::shortenLevel() {
-    level.shorten();
-    resize();
 }
 
 

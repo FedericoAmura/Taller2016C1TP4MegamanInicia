@@ -73,14 +73,6 @@ void WorkspaceEventManager::setDroppable(vector<TargetEntry>& list_targets) {
 
 }
 
-void WorkspaceEventManager::on_enlarge() {
-    workspace.enlargeLevel();
-}
-
-void WorkspaceEventManager::on_shorten() {
-    workspace.shortenLevel();
-}
-
 bool WorkspaceEventManager::on_selection(uint id) {
     something_selected = false;
     return true;

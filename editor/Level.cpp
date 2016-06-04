@@ -8,6 +8,7 @@
 #include <stdexcept>
 #include <giomm.h>
 #include "Level.h"
+#include "DynamicLayer.h"
 
 #define WIDTH 15
 
@@ -20,7 +21,7 @@ using std::runtime_error;
 typedef Json::Value::iterator v_iter;
 
 Level::Level(uint len) {
-    entities = new Layer(len);
+    entities = new DynamicLayer(len);
 }
 
 Level::Level(string json_file) {
@@ -31,24 +32,22 @@ Level::Level(string json_file) {
     //Length
     uint length = level_json["length"].asUInt();
     //Width
-    uint width = level_json["width"].asUInt();
+    //uint width = level_json["width"].asUInt();
     //Foreground tiles
     Json::Value foreground = level_json["foreground"];
-    Layer* foreground_layer = new Layer(length);
+    entities = new DynamicLayer(length);
     for (v_iter it = foreground.begin(); it != foreground.end(); ++it) {
         prototype_t p;
         p.x = (*it)["x"].asUInt();
         p.y = (*it)["y"].asUInt();
         p.id = (*it)["id"].asUInt();
-        foreground_layer->addEntity(p);
+        entities->addEntity(p);
     }
-    entities = foreground_layer;
     in.close();
 }
 
 bool Level::addEntity(prototype_t prototype) {
     return entities->addEntity(prototype);
-
 }
 
 bool Level::removeEntity(uint x, uint y) {
@@ -82,5 +81,7 @@ uint Level::getEntity(uint x, uint y) {
 Level::~Level() {
     delete entities;
 }
+
+
 
 
