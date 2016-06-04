@@ -25,8 +25,7 @@ private:
     std::map<uint, string> paths;
     std::map<uint, double> heigths;
     std::map<uint, double> widths;
-    double tileHeight;
-    double tileWidth;
+    double tileSize;
 };
 
 

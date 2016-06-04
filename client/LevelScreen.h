@@ -23,6 +23,7 @@ private:
 	MegamanClientModel& model;
 	sigc::connection updateScreenConn;
 	Drawing levelBackground;
+	double tileSize;
 
 public:
 	LevelScreen(MegamanClientModel& model);

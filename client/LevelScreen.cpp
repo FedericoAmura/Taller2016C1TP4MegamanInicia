@@ -16,11 +16,12 @@
 
 LevelScreen::LevelScreen(MegamanClientModel& model) :
 model(model) {
-	const int width = Gdk::screen_width();
-	const int height = Gdk::screen_height();
+	double tileWidth = ceil((double)Gdk::screen_width()/(double)27);
+	double tileHeight = ceil((double)Gdk::screen_height()/(double)15);
+	tileSize = std::max(ceil((double)Gdk::screen_height()/(double)15),ceil((double)Gdk::screen_width()/(double)27));
 
 	//TODO Dibujamos el fondo del nivel, despues se va a pasar al modelo como el fondo
-	levelBackground.setImage("../images/background1.jpg",width,height,false);
+	levelBackground.setImage("../images/background1.jpg",Gdk::screen_width(),Gdk::screen_height(),false);
 	put(levelBackground,0,0);
 }
 
@@ -30,15 +31,12 @@ void LevelScreen::startLevel() {
 }
 
 bool LevelScreen::update() {
-	const double widthTile = ceil((double)Gdk::screen_width()/(double)24);
-	const double heightTile = ceil((double)Gdk::screen_height()/(double)15);
-
 	for (int i = 0; i < model.getDrawables().size(); ++i) {
 		Drawable* drawable = model.getDrawables().getDrawable(i);
 		if (!drawable) continue;	//Fix hasta implementar el iterador
 		if (drawable->shouldDraw()) {
-			int drawableX = (int) (drawable->getX()*widthTile);
-			int drawableY = (int) (drawable->getY()*heightTile);
+			int drawableX = (int) (drawable->getX()*tileSize+0.5);
+			int drawableY = (int) (drawable->getY()*tileSize+0.5);
 			if (drawable->isDrawed()) {
 				move(drawable->getImage(),drawableX,drawableY);
 			} else {

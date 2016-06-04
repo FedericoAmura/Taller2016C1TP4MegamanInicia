@@ -6,7 +6,7 @@ Drawing::Drawing() {
 }
 
 void Drawing::setImage(const std::string &path, const int width, const int height, bool flip) {
-	image = Gdk::Pixbuf::create_from_file(path,width,height,1);
+	image = Gdk::Pixbuf::create_from_file(path,width,height,0);
 	if (!image) return;
 	if (flip) image = image->flip(true);
 	set_size_request(width, height);
