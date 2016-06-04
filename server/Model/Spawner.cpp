@@ -27,7 +27,9 @@ void Spawner::spawn() {
 	}
 }
 
-/*used to make spawner able to spawn again*/
+/*ask spawner to determine if he should be able to spawn again*/
 void Spawner::spawnedFalse() {
-	spawned=false;
+	if(!level->posInWindow(pos)){
+		spawned=false;
+	}
 }

@@ -41,6 +41,7 @@ class MyLevel: public Thread{
 	b2Vec2 jsonPosToWorldPos(int x, int y);
 	void fileToJson(std::string fileName, Json::Value& json);
 
+	LevelObject* boundaries;
 	void createBoundaries();
 
 	std::vector<Spawner*> spawners;
@@ -50,7 +51,7 @@ class MyLevel: public Thread{
 	std::queue<LevelObject*> toRemove;
 	void removeDead();
 
-	void redrawForClient();
+	void redrawForClient(bool checkChanges=true);
 
 	std::queue<Megaman*> toRespawn;
 	void respawnAll();
@@ -60,6 +61,8 @@ class MyLevel: public Thread{
 
 	std::queue<ObjectInfo*> toCreate;
 	void createNewObjects();
+
+	void moveScreen();
 
 	float stepsPerSecond;
 	float worldWidth;
@@ -80,7 +83,7 @@ public:
 	void respawn(Megaman* meg);
 	LevelObject* createObject(int id,b2Vec2& pos);
 	void newObject(ObjectInfo* info);
-	bool posInWindow(b2Vec2& pos);
+	bool posInWindow(const b2Vec2& pos);
 };
 
 #endif /* SERVER_MODEL_MYLEVEL_H_ */

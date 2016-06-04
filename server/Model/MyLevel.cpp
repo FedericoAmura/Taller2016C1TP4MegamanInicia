@@ -33,6 +33,9 @@
 
 #define COFIG_FILE "../server/Model/config.json"
 #define IGNORE 0
+#define LEFT_ZONE_LIMIT 0.2
+#define RIGHT_ZONE_LIMIT 0.8
+#define OFFSET 0.1
 
 MyLevel::MyLevel(Game* j,std::string lvlFileName):
 world(b2Vec2(0,-10)),
@@ -41,6 +44,7 @@ game(j),
 factory(&world,this){
 	LevelObject::resetIds();
 	megaman=nullptr;
+	boundaries=nullptr;
 	world.SetContinuousPhysics(true);
 	world.SetContactListener(&contactListener);
 	windowPos.x=0;
@@ -101,15 +105,19 @@ LevelObject* MyLevel::createObject(int id,b2Vec2& pos) {
 	LevelObject* newObject=factory.createObject(id,pos);
 	if(newObject){
 		int objectType=(int)newObject->getSpriteId()/1000;
+		if(objectType==0 && boundaries==nullptr){
+			boundaries= newObject;
+		}
 		if(objectType==9 && megaman==nullptr){//megaman
 			megaman=(Megaman*) newObject;
+			characters[newObject->getId()]=megaman;
 		}
-		if(objectType==1 || objectType==9){//character
+		if(objectType==1){//character
 			characters[newObject->getId()]=(Character*)newObject;
 		}
 		/*notify clients about creation*/
 		int spriteId=newObject->getSpriteId();
-		if(!(spriteId==IGNORE)){
+		if(spriteId!=IGNORE){
 			std::stringstream msj;
 			msj<<DRAW<<" "<<newObject->getId()<<" "<<spriteId;
 			msj<<" 0 "<<posToString(newObject->getPos());
@@ -123,7 +131,10 @@ LevelObject* MyLevel::createObject(int id,b2Vec2& pos) {
 }
 
 void MyLevel::createBoundaries() {
-	createObject(0,windowPos);
+	if(boundaries){
+		remove(boundaries);
+	}
+	newObject(new ObjectInfo(0,windowPos));
 }
 
 /*informs whether the thread is(should be) running*/
@@ -134,9 +145,8 @@ bool MyLevel::isRunning(){
 
 /*transforms box2d position to client position format*/
 std::string MyLevel::posToString(b2Vec2 pos){
-	float px = pos.x-0.5;
-	float py = windowHeight-pos.y+0.4;
-	//todo check reference frame
+	float px = (pos.x-windowPos.x)-0.5;
+	float py = windowHeight-(pos.y-windowPos.y)+0.4;
 
 	std::stringstream positionString;
 	positionString.precision(2);
@@ -154,12 +164,15 @@ b2Vec2 MyLevel::jsonPosToWorldPos(int x, int y) {
 	return pos;
 }
 
-/*informs the client of the new position of the level objects that changed*/
-void MyLevel::redrawForClient(){
+/*informs the client of the new position of the level objects in window
+ * that changed. If checkChanges is passed as false(note: default is true),
+ * then all objects in window are drawn independent of changes*/
+void MyLevel::redrawForClient(bool checkChanges){
 	std::map<int,LevelObject*>::iterator it=objects.begin();
 	for(;it!=objects.end();it++){
 		LevelObject* obj= it->second;
-		if(obj->changed()){
+		bool changesCheck= !checkChanges || obj->changed();
+		if(changesCheck&&posInWindow(obj->getPos())){
 			std::stringstream msj;
 			b2Vec2 corner;
 			obj->copyCorner(corner);
@@ -173,17 +186,25 @@ void MyLevel::removeDead(){
 	while(!toRemove.empty()){
 		LevelObject* dead= toRemove.front();
 		toRemove.pop();
-		//notify clients
-		std::stringstream killMsg;
 		int deadId=dead->getId();
-		killMsg<<KILL<<" "<<deadId;
-		game->notify(new MessageSent(killMsg.str(),0));
+		if(dead!=boundaries){
+			//notify clients
+			std::stringstream killMsg;
+			killMsg<<KILL<<" "<<deadId;
+			game->notify(new MessageSent(killMsg.str(),0));
+		}else{
+			//reset boundaries if removed
+			boundaries=nullptr;
+		}
 		//erase from object tracker
-		objects.erase(deadId);
-		//erase from characters tracker
-		characters.erase(deadId);
+		if(objects.find(deadId)!=objects.end())
+			objects.erase(deadId);
+		//erase from characters tracker if it was there
+		if(characters.find(deadId)!=characters.end())
+			characters.erase(deadId);
 		//if no megamans left exit
 		if(dead==megaman){
+			megaman=nullptr;
 			game->notify(new LevelFinished(-1));
 			this->stop();
 		}
@@ -205,11 +226,11 @@ void MyLevel::run(){
 
 	try{
 		while(isRunning()){
+			moveScreen();
+			removeDead();
 			createNewObjects();
-			//todo si jugadores pasan mitad pantalla mover
 			world.Step(timeStep, velocityIterations, positionIterations);
 			tickAll(timeStep);
-			removeDead();
 			respawnAll();
 			redrawForClient();
 			usleep(timeStep* 1000000 );
@@ -282,25 +303,69 @@ void MyLevel::newObject(ObjectInfo* info) {
 	toCreate.push(info);
 }
 
+/*adds new spawner to level*/
 void MyLevel::addSpawner(int id, b2Vec2& pos) {
 	spawners.push_back(new Spawner(id,pos,this));
 }
 
+/*asks all spawners to determine if they can, and to do, spawn*/
 void MyLevel::spawn() {
 	std::vector<Spawner*>::iterator spawnerIt=spawners.begin();
 	for(; spawnerIt!=spawners.end(); spawnerIt++){
+		(*spawnerIt)->spawnedFalse();
 		(*spawnerIt)->spawn();
 	}
 }
 
-bool MyLevel::posInWindow(b2Vec2& pos) {
+/*returns true if pos is inside of current window*/
+bool MyLevel::posInWindow(const b2Vec2& pos) {
 	b2Vec2 relativePos;
 	relativePos.x=pos.x-windowPos.x;
 	relativePos.y=pos.y-windowPos.y;
-	if(relativePos.x<windowWidth && relativePos.y<windowHeight)
+	bool xAxisOk=relativePos.x<windowWidth && relativePos.x>0;
+	bool yAxisOk=relativePos.y<windowHeight && relativePos.y>0;
+	if(xAxisOk && yAxisOk)
 		return true;
 	else
 		return false;
 }
 
+/*if all megamans are past LEFT or RIGHT the zone limit, moves the window.
+ * If screen moved spawns new enemies, kills characters outside window,
+ * informs client to move all objects*/
+void MyLevel::moveScreen() {
+	//todo more megamans
+	bool inRightZone;
+	bool inLeftZone= windowPos.x != 0;//check not left border
+	inLeftZone= inLeftZone && ( megaman->getPos().x <
+			(windowPos.x + windowWidth* LEFT_ZONE_LIMIT) );
+	if (inLeftZone){
+		windowPos.x-=windowWidth*(RIGHT_ZONE_LIMIT-OFFSET);
+		if(windowPos.x<0)
+			windowPos.x=0;
+	}else{
+		inRightZone= (windowPos.x+windowWidth)<worldWidth;//check not rigth border
+		inRightZone= inRightZone && ( megaman->getPos().x >
+		(windowPos.x + windowWidth* RIGHT_ZONE_LIMIT) );
+		if (inRightZone){
+			windowPos.x+=windowWidth*(1-LEFT_ZONE_LIMIT-OFFSET);
+			if((windowPos.x+windowWidth)>worldWidth)
+				windowPos.x=worldWidth-windowWidth;
+		}
+	}
+	if(inLeftZone||inRightZone){
+		LOG(INFO)<<"screen moved. new position: "<< std::fixed<<
+				std::setprecision(2)<<windowPos.x<<" "<<windowPos.y;
 
+		createBoundaries();
+		spawn();//create new characters and restores spawners outside
+		std::map<int,Character*>::iterator characterIt=characters.begin();
+		for(; characterIt!=characters.end(); characterIt++){
+			Character* character=characterIt->second;
+			if( !posInWindow(character->getPos()) ){
+				character->kill();
+			}
+		}
+		redrawForClient(false);
+	}
+}

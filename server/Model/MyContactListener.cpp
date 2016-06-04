@@ -53,7 +53,7 @@ void MyContactListener::BeginContact(b2Contact* contact) {
 	//LOG(INFO)<<"cat bits 1: "<<catBits1;
 	//uint16 catBits2=contact->GetFixtureB()->GetFilterData().categoryBits;
 	//LOG(INFO)<<"cat bits 2: "<<catBits2;
-	LOG(INFO)<<"COLLISION";
+	//LOG(INFO)<<"COLLISION";
 	void* userData1=contact->GetFixtureA()->GetBody()->GetUserData();
 	void* userData2=contact->GetFixtureB()->GetBody()->GetUserData();
 	LevelObject* obj1=(LevelObject*)userData1;

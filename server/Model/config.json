@@ -1,7 +1,7 @@
 {
 	"world":
 	{
-		"windowWidth":	24.0,
+		"windowWidth":	26.0,
 		"windowHeight":	14.0,
 		"gravity":		-40.0,
 		"width" :		95.0,
@@ -17,19 +17,19 @@
 					"type":		4,
 					"X1":		0.0,
 					"Y1":		0.0,
-					"X2":		24.0,
+					"X2":		26.0,
 					"Y2":		0.0
 				},
 				{
 					"type":		4,
-					"X1":		24.0,
+					"X1":		26.0,
 					"Y1":		0.0,
-					"X2":		24.0,
+					"X2":		26.0,
 					"Y2":		14.0
 				},
 				{
 					"type":		4,
-					"X1":		24.0,
+					"X1":		26.0,
 					"Y1":		14.0,
 					"X2":		0.0,
 					"Y2":		14.0
@@ -47,18 +47,18 @@
 	"megaman":
 	{
 		"weaponId":		2004,
-		"HSpeed" : 		5.0,
+		"HSpeed" : 		10.0,
 		"ClimbSpeed":	3.0,
-		"JSpeed" :		15.0,
+		"JSpeed" :		25.0,
 		"inmuneTime":	2.0,
 		"life":			20.0,
 		"jumpSensor":
 		{
 			"type":		1,
 			"x": 		0.0,
-			"y": 		-0.4,
-			"width": 	0.3,
-			"height": 	0.2
+			"y": 		-0.3,
+			"width": 	0.1,
+			"height": 	0.3
 		},
 		"shapes":
 		[
@@ -116,7 +116,34 @@
 			{
 				"type":		1,
 				"width" :	0.3,
-				"height" : 	0.25,
+				"height" : 	0.4,
+				"X":		0.0,
+				"Y":		0.0
+			}
+		]
+	},
+	
+	"1010":
+	{
+		"id":			1010,
+		"weaponId":		2004,
+		"JSpeed" :		0.0,
+		"life":			2.0,
+		"jumpFreq":		60.0,
+		"jumpSensor":
+		{
+			"type":		1,
+			"x":	 	0.0,
+			"y": 		0.0,
+			"width": 	0.1,
+			"height": 	0.1
+		},
+		"shapes":
+		[
+			{
+				"type":		1,
+				"width" :	0.3,
+				"height" : 	0.4,
 				"X":		0.0,
 				"Y":		0.0
 			}
@@ -126,6 +153,33 @@
 	"1030":
 	{
 		"id":			1030,
+		"weaponId":		2004,
+		"JSpeed" :		15.0,
+		"life":			2.0,
+		"jumpFreq":		2.0,
+		"jumpSensor":
+		{
+			"type":		1,
+			"x":		0.0,
+			"y": 		-0.5,
+			"width": 	0.25,
+			"height": 	0.1
+		},
+		"shapes":
+		[
+			{
+				"type":		1,
+				"width" :	0.4,
+				"height" : 	0.5,
+				"X":		0.0,
+				"Y":		0.0
+			}
+		]
+	},
+	
+	"1040":
+	{
+		"id":			1040,
 		"weaponId":		2004,
 		"JSpeed" :		15.0,
 		"life":			2.0,
@@ -163,6 +217,7 @@
 				}
 		]
 	},
+	
 	"spikes":
 	{
 		"shapes":
@@ -179,6 +234,7 @@
 				}
 		]
 	},
+	
 	"2004":
 	{
 		

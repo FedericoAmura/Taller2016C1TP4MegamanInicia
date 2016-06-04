@@ -68,7 +68,7 @@ bool Game::isntStopped(){
 	return goOn;
 }
 
-/**********a potencialmente extrar clase************/
+/***************************************************/
 /*adds client to game, max 4 clients*/
 void Game::addClient(int descriptor){
 	Socket* nuevoCliente= new Socket(descriptor,this);
@@ -122,14 +122,46 @@ void Game::removeClient(int descriptor) {
 /*chooses and creates the level selected, if no level is currently running
  * post: level is initialized*/
 void Game::selectLevel(int levelId, int client){
-	/*TODO default level for now*/
 	if((!levelChosen())&&(client==firstClient)){
 		LOG(INFO)<<"level seleccionado: "<<levelId;
-		std::stringstream msg;
-		msg<<START_LEVEL_SCREEN<<" "<<levelId;
-		notify(new MessageSent(msg.str(),0));
-		level= new MyLevel(this,"../server/Model/basic0.json");
-		level->start();
+		std::string levelFilePath;
+		switch(levelId){
+		case 1001:{
+			levelFilePath="../levels/basic0.json";
+			break;
+		}
+		case 1002:{
+			levelFilePath="../levels/basic0.json";
+			break;
+		}
+		case 1003:{
+			levelFilePath="../levels/basic1.json";
+			break;
+		}
+		case 1004:{
+			levelFilePath="../levels/basic2.json";
+				break;
+		}
+		case 1005:{
+			levelFilePath="../bin/simplex.json";
+				break;
+		}
+		default:{
+			levelFilePath="../levels/basic0.json";
+			break;
+		}
+		}//end switch
+		try{
+			MyLevel* lvl=new MyLevel(this,levelFilePath);
+			level= lvl;//to avoid asigning invalid in case of error
+			level->start();
+			std::stringstream msg;
+			msg<<START_LEVEL_SCREEN<<" "<<levelId;
+			notify(new MessageSent(msg.str(),0));
+		}catch(std::exception& e){
+			LOG(ERROR)<<e.what();
+			level=nullptr;
+		}
 	}
 }
 
