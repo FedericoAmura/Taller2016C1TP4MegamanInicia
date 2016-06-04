@@ -5,6 +5,7 @@
  *      Author: nicolas
  */
 
+#include <cstdint>
 #include "MyContactListener.h"
 #include "LevelObject.h"
 #include <glog/logging.h>
@@ -32,14 +33,14 @@ void MyContactListener::setJump(b2Fixture* fixture,bool state){
 /*checks to see if any fixture was foot sensor, and enables/disables jump*/
 void MyContactListener::setAllJumps(b2Contact* contact,bool state) {
 	//check if fixture A was the foot sensor
-	int fixtureUserData = (int)contact->GetFixtureA()->GetUserData();
+	intptr_t fixtureUserData = (intptr_t)contact->GetFixtureA()->GetUserData();
 
 	//if not int its pointer so no big risk in cast
 	if ((fixtureUserData) == JUMPSENSOR) {
 		setJump(contact->GetFixtureA(), state);
 	}
 	//check if fixture B was the foot sensor
-	fixtureUserData = (int)contact->GetFixtureB()->GetUserData();
+	fixtureUserData = (intptr_t)contact->GetFixtureB()->GetUserData();
 	if ((fixtureUserData) == JUMPSENSOR) {
 		setJump(contact->GetFixtureB(), state);
 	}
