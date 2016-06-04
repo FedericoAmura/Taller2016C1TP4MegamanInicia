@@ -78,7 +78,7 @@ LevelObject* ObjectFactory::createObject(int id, b2Vec2& pos) {
 		// create special obstacle
 		created=true;
 		if(id==5003){
-			newObject = new Spikes(world,config["wall"],pos,id);
+			newObject = new Spikes(world,config["spikes"],pos,id);
 		}else{
 			//escalera
 			newObject= new Ladder(world,config["wall"],pos,id);

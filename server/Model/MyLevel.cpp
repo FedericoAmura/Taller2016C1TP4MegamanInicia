@@ -123,10 +123,7 @@ LevelObject* MyLevel::createObject(int id,b2Vec2& pos) {
 }
 
 void MyLevel::createBoundaries() {
-	b2Vec2 pos(windowPos.x,windowPos.y);
-	pos.x+=windowWidth/2;
-	pos.y+=windowHeight/2;
-	createObject(0,pos);
+	createObject(0,windowPos);
 }
 
 /*informs whether the thread is(should be) running*/
@@ -137,8 +134,8 @@ bool MyLevel::isRunning(){
 
 /*transforms box2d position to client position format*/
 std::string MyLevel::posToString(b2Vec2 pos){
-	float px = pos.x;
-	float py = windowHeight-pos.y;
+	float px = pos.x-0.5;
+	float py = windowHeight-pos.y+0.4;
 	//todo check reference frame
 
 	std::stringstream positionString;

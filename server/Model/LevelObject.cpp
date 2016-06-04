@@ -31,7 +31,7 @@ LevelObject::LevelObject(b2World* w,Json::Value& json,const b2Vec2& pos,int id)
 enum _shapeTypes{
 	BOX=		1,
 	CIRCLE=		2,
-	POLYGON=	3,
+	TRIANGLE=	3,
 	EDGE=		4,
 };
 
@@ -57,6 +57,26 @@ void LevelObject::createFixture(Json::Value& jsonShape) {
 		circle.m_p.Set(jsonShape["X"].asFloat(),jsonShape["Y"].asFloat());
 		circle.m_radius = jsonShape["radius"].asFloat();
 		fixtureDef.shape =&circle;
+		this->addFixture(fixtureDef);
+		break;
+	}
+	case TRIANGLE:{
+		b2PolygonShape triangle;
+		b2Vec2 vertices[3];
+		vertices[0].Set(jsonShape["X1"].asFloat(),jsonShape["Y1"].asFloat());
+		vertices[1].Set(jsonShape["X2"].asFloat(),jsonShape["Y2"].asFloat());
+		vertices[2].Set(jsonShape["X3"].asFloat(),jsonShape["Y3"].asFloat());
+		triangle.Set(vertices,3);
+		fixtureDef.shape =&triangle;
+		this->addFixture(fixtureDef);
+		break;
+	}
+	case EDGE:{
+		b2EdgeShape edge;
+		b2Vec2 pos1(jsonShape["X1"].asFloat(),jsonShape["Y1"].asFloat());
+		b2Vec2 pos2(jsonShape["X2"].asFloat(),jsonShape["Y2"].asFloat());
+		edge.Set(pos1,pos2);
+		fixtureDef.shape =&edge;
 		this->addFixture(fixtureDef);
 		break;
 	}
