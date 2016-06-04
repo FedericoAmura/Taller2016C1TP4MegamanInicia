@@ -19,7 +19,9 @@ LevelObject(w,json,pos,MEGAMAN_IDLE_0),
 level(lvl),
 life(json["life"].asInt()),
 dead(false),
-canJump(false){
+direction(LEFT),
+canJump(false),
+hasFlipped(false){
 	body->SetType(b2_dynamicBody);
 	body->SetFixedRotation(true);
 	body->SetBullet(true);
@@ -81,4 +83,8 @@ void Character::damage(Bullet* bullet) {
 /*fires the weapon currently held*/
 void Character::shoot() {
 	myWeapon->shoot(body->GetPosition());
+}
+
+int Character::getDirection() {
+	return direction;
 }

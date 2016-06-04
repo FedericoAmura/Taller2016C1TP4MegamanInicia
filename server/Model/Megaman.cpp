@@ -49,6 +49,10 @@ void Megaman::move(char key){
 		b2Vec2 vel = body->GetLinearVelocity();
 		vel.x=-hSpeed;
 		body->SetLinearVelocity(vel);
+		if(direction!=LEFT){
+			direction=LEFT;
+			hasFlipped=true;
+		}
 		break;
 	}
 	case 'w':{
@@ -64,6 +68,10 @@ void Megaman::move(char key){
 		b2Vec2 vel = body->GetLinearVelocity();
 		vel.x=hSpeed;
 		body->SetLinearVelocity(vel);
+		if(direction!=RIGHT){
+			direction=RIGHT;
+			hasFlipped=true;
+		}
 		break;
 	}
 	case 's':{

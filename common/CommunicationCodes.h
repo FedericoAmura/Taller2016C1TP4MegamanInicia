@@ -60,7 +60,7 @@
 //DRAW codes
 /* Se manda el id del dibujable, seguido del codigo del sprite correspondiente,
  * su sentido y su posicion. Se usa para nuevos dibujables.
- * formato: "DRAW idSprite flipped posX pos\n"
+ * formato: "DRAW id idSprite flipped posX pos\n"
  * ej: "1 5 9000 0 10 20\n" dibujar el dibujable 5 como un megamanIddle sin
  * flippear en pos X:10-Y:20
  * */
@@ -68,13 +68,13 @@
 //REDRAW codes
 /* Se manda el id del dibujable, seguido del codigo del nuevo sprite y si va
  * invertido. Se usa para cambiar el dibujo.
- * formato: "REDRAW idSprite flipped"
+ * formato: "REDRAW id idSprite flipped"
  * ej: "2 5 9000 1\n" redibujar el dibujable 5 como megamanIddle pero flippeado
  * */
 
 //MOVE codes
 /* Se manda el id del dibujable, seguido de su posicion
- * formato: "MOVE idSprite posX posY"
+ * formato: "MOVE id idSprite posX posY"
  * ej: "3 5 14 22\n" mover el dibujable 5 a pos X:14-Y:22
  * */
 

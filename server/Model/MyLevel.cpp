@@ -172,11 +172,22 @@ void MyLevel::redrawForClient(bool checkChanges){
 	for(;it!=objects.end();it++){
 		LevelObject* obj= it->second;
 		bool changesCheck= !checkChanges || obj->changed();
-		if(changesCheck&&posInWindow(obj->getPos())){
+		if(changesCheck && posInWindow(obj->getPos())){
 			std::stringstream msj;
 			b2Vec2 corner;
 			obj->copyCorner(corner);
 			msj<<MOVE<<" "<<obj->getId()<<" "<<posToString(corner);
+			game->notify(new MessageSent(msj.str(),0));
+		}
+	}
+	std::map<int,Character*>::iterator characterIt=characters.begin();
+	for(;characterIt!=characters.end();characterIt++){
+		Character* character= characterIt->second;
+		if(character->hasFlipped){
+			character->hasFlipped=false;
+			std::stringstream msj;
+			msj<<REDRAW<<" "<<character->getId()<<" "<<character->getSpriteId()
+				<<" "<<character->getDirection();
 			game->notify(new MessageSent(msj.str(),0));
 		}
 	}
@@ -330,7 +341,7 @@ bool MyLevel::posInWindow(const b2Vec2& pos) {
 		return false;
 }
 
-/*if all megamans are past LEFT or RIGHT the zone limit, moves the window.
+/*if all megamans are past LEFT or RIGHT zone limit, moves the window.
  * If screen moved spawns new enemies, kills characters outside window,
  * informs client to move all objects*/
 void MyLevel::moveScreen() {

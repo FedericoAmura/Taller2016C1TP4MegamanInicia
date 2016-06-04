@@ -138,4 +138,3 @@ void LevelObject::copyCorner(b2Vec2& corner) {
 	corner.y=body->GetPosition().y;
 }
 
-
