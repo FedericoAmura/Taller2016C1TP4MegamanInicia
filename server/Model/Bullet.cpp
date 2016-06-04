@@ -60,6 +60,6 @@ void Bullet::initialize(int16 groupBits,b2Vec2& speed,MyLevel* lvl) {
 }
 
 void Bullet::copyCorner(b2Vec2& corner) {
-	corner.x=body->GetPosition().x;
-	corner.y=body->GetPosition().y;
+	corner.x=body->GetPosition().x +0.45;
+	corner.y=body->GetPosition().y -0.45;
 }

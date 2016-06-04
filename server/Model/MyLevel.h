@@ -8,18 +8,22 @@
 #ifndef SERVER_MODEL_MYLEVEL_H_
 #define SERVER_MODEL_MYLEVEL_H_
 
-#include <Box2D/Box2D.h>
-#include <string>
 #include <map>
 #include <queue>
+#include <string>
 #include <vector>
 
-#include "../common/Thread.h"
-#include "LevelObject.h"
+#include "../../Box2D/Box2D/Common/b2Math.h"
+#include "../../Box2D/Box2D/Dynamics/b2World.h"
+#include "../../common/Thread.h"
+#include "../../json/json.h"
+#include "Character.h"
+#include "Megaman.h"
 #include "MyContactListener.h"
-#include "ObjectInfo.h"
+#include "ObjectFactory.h"
 #include "Spawner.h"
 
+class ObjectInfo;
 class Character;
 class Megaman;
 class Game;
@@ -32,22 +36,28 @@ class MyLevel: public Thread{
 	std::map<int,LevelObject*> objects;
 	Megaman* megaman;
 	MyContactListener contactListener;
+	ObjectFactory factory;
 	std::string posToString(b2Vec2 pos);
 	b2Vec2 jsonPosToWorldPos(int x, int y);
-	void createBoundaries();
 	void fileToJson(std::string fileName, Json::Value& json);
 
-	LevelObject* createObject(int id,b2Vec2& pos);
+	void createBoundaries();
+
 	std::vector<Spawner*> spawners;
 	void addSpawner(int id,b2Vec2& pos);
+	void spawn();
 
 	std::queue<LevelObject*> toRemove;
 	void removeDead();
+
 	void redrawForClient();
+
 	std::queue<Megaman*> toRespawn;
 	void respawnAll();
+
 	std::map<int,Character*> characters;
 	void tickAll(float time);
+
 	std::queue<ObjectInfo*> toCreate;
 	void createNewObjects();
 
@@ -65,9 +75,12 @@ public:
 	void stop();
 	bool isRunning();
 	void moveMegaman(char boton);
+
 	void remove(LevelObject* deadObject);
 	void respawn(Megaman* meg);
+	LevelObject* createObject(int id,b2Vec2& pos);
 	void newObject(ObjectInfo* info);
+	bool posInWindow(b2Vec2& pos);
 };
 
 #endif /* SERVER_MODEL_MYLEVEL_H_ */

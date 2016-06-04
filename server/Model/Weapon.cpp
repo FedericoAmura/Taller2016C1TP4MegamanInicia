@@ -12,6 +12,8 @@
 #include <fstream>
 #include <sstream>
 #include <glog/logging.h>
+#include <iomanip>		//setprecision
+#include <iostream>		//fixed
 
 #define COFIG_FILE "../server/Model/config.json"
 
@@ -44,9 +46,10 @@ void Weapon::shoot(const b2Vec2& pos){
 		BulletInfo* info= new BulletInfo(bulletId,pos,speedVec,groupBits);
 		level->newObject(info);
 		cooldown.maxOut();
-		LOG(INFO)<<"firing bullet: "<<bulletId<<" at: "
-				<<(int)pos.x<<"-"<<(int)pos.y
-				<<"	speed: "<<(int)speedVec.x<<"-"<<(int)speedVec.y;
+		LOG(INFO)<<std::fixed<<std::setprecision(2)
+				<<"firing bullet: "<<bulletId<<" at: "
+				<<pos.x<<"-"<<pos.y
+				<<"	speed: "<<speedVec.x<<"-"<<speedVec.y;
 	}
 }
 

@@ -8,9 +8,13 @@
 #ifndef SERVER_MODEL_WEAPON_H_
 #define SERVER_MODEL_WEAPON_H_
 
-#include <Box2D/Box2D.h>
-#include "MyLevel.h"
+#include <Box2D/Common/b2Settings.h>
+#include "../../json/json.h"
+
 #include "Stat.h"
+#include "MyLevel.h"
+
+struct b2Vec2;
 
 class Weapon {
 	MyLevel* level;

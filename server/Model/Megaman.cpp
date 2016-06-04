@@ -10,6 +10,7 @@
 #include "../entities.h"
 #include <glog/logging.h>
 #include "MyLevel.h"
+#include "Weapon.h"
 
 Megaman::Megaman(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl):
 Character(w,json,pos,lvl),

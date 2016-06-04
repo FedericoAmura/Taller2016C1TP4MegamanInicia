@@ -10,9 +10,10 @@
 
 #include "LevelObject.h"
 #include <Box2D/Box2D.h>
-#include "Weapon.h"
+
 #include "Stat.h"
 
+class Weapon;
 class Bullet;
 class MyLevel;//forward declaration
 

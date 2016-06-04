@@ -24,12 +24,10 @@
 #include "../Game.h"
 #include "../json/json.h"
 #include "LevelObject.h"
-#include "Obstacle.h"
 #include "MyContactListener.h"
 #include "../common/CommunicationCodes.h"
-#include "Character.h"
-#include "Enemy.h"
 #include "Megaman.h"
+#include "ObjectFactory.h"
 #include "ObjectInfo.h"
 #include "Bullet.h"
 
@@ -39,7 +37,8 @@
 MyLevel::MyLevel(Game* j,std::string lvlFileName):
 world(b2Vec2(0,-10)),
 running(false),
-game(j){
+game(j),
+factory(&world,this){
 	LevelObject::resetIds();
 	megaman=nullptr;
 	world.SetContinuousPhysics(true);
@@ -70,11 +69,13 @@ game(j){
 		int id=(*it)["id"].asInt();
 		b2Vec2 pos=jsonPosToWorldPos((*it)["x"].asInt(),
 				(*it)["y"].asInt());
-		//if(id/1000 ==1)
-		//addSpawner(id,pos);
-		//else
-		createObject(id,pos);
+		if(id/1000 ==1){
+			addSpawner(id,pos);
+		}else{
+			createObject(id,pos);
+		}
 	}
+	spawn();
 }
 
 /*opens file and sends data to json*/
@@ -97,68 +98,15 @@ MyLevel::~MyLevel() {
 
 /*retruns new object if id has config, nullptr if not*/
 LevelObject* MyLevel::createObject(int id,b2Vec2& pos) {
-	Json::Value config;
-	fileToJson(COFIG_FILE,config);
-	int objectType=(int)id/1000;
-	bool created=false;
-	LevelObject* newObject;
-	std::stringstream converter;
-	converter<<id;
-	std::string idAsString=converter.str();
-	//todo cambiar hardcodeo por algo mas automatico, implica cambios en config.json
-	switch(objectType){
-	case 9:{
-		//create megaman
-		if (megaman==nullptr){
-			created=true;
-			megaman = new Megaman(&world, config["megaman"], pos,this);
-			newObject=megaman;
-			characters[newObject->getId()]=megaman;
+	LevelObject* newObject=factory.createObject(id,pos);
+	if(newObject){
+		int objectType=(int)newObject->getSpriteId()/1000;
+		if(objectType==9 && megaman==nullptr){//megaman
+			megaman=(Megaman*) newObject;
 		}
-		break;
-	}
-	case 0:{
-		created=true;
-		newObject = new Obstacle(&world,config["windowBoundaries"],pos,0);
-		break;
-	}
-	case 1:{
-		created=true;
-		//todo more enemies
-		Character* enemy = new Enemy(&world, config[idAsString], pos,this);
-		newObject=enemy;
-		characters[newObject->getId()]=enemy;
-		break;
-	}
-	case 2:{
-		created=true;
-		newObject= new Bullet(&world,config["wall"],pos,id);
-		break;
-	}
-	case 3:
-		//todo create item
-		break;
-	case 4:{
-		//create obstacle
-		created=true;
-		newObject = new Obstacle(&world,config["wall"],pos,id);
-		break;
-	}
-	case 5:{
-		// create special obstacle
-		created=true;
-		if(id==5003){
-			newObject = new Spikes(&world,config["wall"],pos,id);
-		}else{
-			//escalera
-			newObject= new Ladder(&world,config["wall"],pos,id);
+		if(objectType==1 || objectType==9){//character
+			characters[newObject->getId()]=(Character*)newObject;
 		}
-		break;
-	}
-	default:
-		break;
-	}
-	if(created){
 		/*notify clients about creation*/
 		int spriteId=newObject->getSpriteId();
 		if(!(spriteId==IGNORE)){
@@ -178,11 +126,7 @@ void MyLevel::createBoundaries() {
 	b2Vec2 pos(windowPos.x,windowPos.y);
 	pos.x+=windowWidth/2;
 	pos.y+=windowHeight/2;
-	LevelObject* obj=createObject(0,pos);
-	//todo remove workaround (ordered ids)
-	std::stringstream msj;
-	msj<<DRAW<<" "<<obj->getId()<<" 4000 0 150 150";
-	game->notify(new MessageSent(msj.str(),0));
+	createObject(0,pos);
 }
 
 /*informs whether the thread is(should be) running*/
@@ -317,25 +261,23 @@ void MyLevel::tickAll(float time) {
 	}
 }
 
-/*adds the objects in the create list to the game
- * then deletes the info*/
 void MyLevel::createNewObjects() {
-	if(!toCreate.empty()){
-		while(!toCreate.empty()){
-			ObjectInfo* info=toCreate.front();
-			b2Vec2 pos=info->getPos();
-			LevelObject* obj=createObject(info->getId(),pos);
+	while(!toCreate.empty()){
+		ObjectInfo* info=toCreate.front();
+		toCreate.pop();
+
+		b2Vec2 pos=info->getPos();
+		LevelObject* obj=createObject(info->getId(),pos);
+		if(obj){
 			int objectType=obj->getSpriteId()/1000;
 			if(objectType==2){//bullet
 				Bullet* bullet=(Bullet*)obj;
 				BulletInfo* bInfo=(BulletInfo*)info;
 				bullet->initialize(bInfo->getGroupBits(),bInfo->getSpeed(),this);
 			}
-			delete info;
-			toCreate.pop();
 		}
+		delete info;
 	}
-
 }
 
 /*requests to create a new object at pos*/
@@ -346,3 +288,22 @@ void MyLevel::newObject(ObjectInfo* info) {
 void MyLevel::addSpawner(int id, b2Vec2& pos) {
 	spawners.push_back(new Spawner(id,pos,this));
 }
+
+void MyLevel::spawn() {
+	std::vector<Spawner*>::iterator spawnerIt=spawners.begin();
+	for(; spawnerIt!=spawners.end(); spawnerIt++){
+		(*spawnerIt)->spawn();
+	}
+}
+
+bool MyLevel::posInWindow(b2Vec2& pos) {
+	b2Vec2 relativePos;
+	relativePos.x=pos.x-windowPos.x;
+	relativePos.y=pos.y-windowPos.y;
+	if(relativePos.x<windowWidth && relativePos.y<windowHeight)
+		return true;
+	else
+		return false;
+}
+
+

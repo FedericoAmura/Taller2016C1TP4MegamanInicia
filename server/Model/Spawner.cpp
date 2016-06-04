@@ -21,7 +21,7 @@ Spawner::~Spawner() {}
 
 /*if it hasnt spawned, it spawns a new enemy*/
 void Spawner::spawn() {
-	if(!spawned){
+	if( (!spawned) && level->posInWindow(pos) ){
 		spawned=true;
 		level->newObject(new ObjectInfo(id,pos));
 	}
