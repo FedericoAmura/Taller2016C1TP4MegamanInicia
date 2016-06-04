@@ -57,7 +57,7 @@ bool Level::removeEntity(uint x, uint y) {
 void Level::toJson(string file_name) {
     Json::Value level(Json::objectValue);
     level["valid"] = true; //TODO: por ahora hardcodeo esto, despues va a depender de los chequeos del editor
-    level["length"] = getLength();
+    level["length"] = getLength() - EMPTY_MARGIN;
     level["width"] = WIDTH;
     level["foreground"] = entities->toJson();
     ofstream out(file_name, ofstream::out);

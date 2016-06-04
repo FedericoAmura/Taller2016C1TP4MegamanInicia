@@ -5,8 +5,9 @@
 #ifndef MEGAMAN_DYNAMICLAYER_H
 #define MEGAMAN_DYNAMICLAYER_H
 
-
 #include "Layer.h"
+
+#define EMPTY_MARGIN 8
 
 class DynamicLayer : public Layer {
 public:

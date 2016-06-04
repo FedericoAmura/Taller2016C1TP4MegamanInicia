@@ -6,7 +6,7 @@
 #include <vector>
 
 #define MIN_LEN 20
-#define EMPTY_MARGIN 8
+
 
 using std::vector;
 

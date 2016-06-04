@@ -41,6 +41,7 @@ void ChamberLevel::toJson(string file_name) {
     level["chamber"] = entities->toJson();
     ofstream out(file_name, ofstream::out);
     out << level;
+    in.close();
     out.close();
 }
 
