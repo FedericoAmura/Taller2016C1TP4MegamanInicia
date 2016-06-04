@@ -37,6 +37,7 @@ protected:
 	const int objectId;
 	int spriteId;
 	b2Fixture* addFixture(b2FixtureDef& fDef);
+	void createFixture(Json::Value& jsonShape);
 
 public:
 	LevelObject(b2World* w,Json::Value& json,const b2Vec2& pos,int id);

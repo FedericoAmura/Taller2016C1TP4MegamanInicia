@@ -21,17 +21,52 @@ LevelObject::LevelObject(b2World* w,Json::Value& json,const b2Vec2& pos,int id)
 	bodyDef.position.Set(pos.x,pos.y);
 	body = world->CreateBody(&bodyDef);
 	body->SetUserData(this);
-	//shape
-	b2PolygonShape shape;
 	Json::Value shapes=json["shapes"];
-	Json::ValueIterator it=shapes.begin();
-	for(; it!=shapes.end(); it++){
-		shape.SetAsBox((*it)["width"].asFloat(),(*it)["height"].asFloat(),
-				b2Vec2((*it)["X"].asFloat(),(*it)["Y"].asFloat()),0);
-		//fixture
-		b2FixtureDef fixtureDef;
-		fixtureDef.shape = &shape;
+	Json::ValueIterator shapesIt=shapes.begin();
+	for(; shapesIt!=shapes.end(); shapesIt++){
+		createFixture(*shapesIt);
+	}
+}
+
+enum _shapeTypes{
+	BOX=		1,
+	CIRCLE=		2,
+	POLYGON=	3,
+	EDGE=		4,
+};
+
+/*determines type and sets the shape from the json
+ * delete shape after use*/
+void LevelObject::createFixture(Json::Value& jsonShape) {
+	b2FixtureDef fixtureDef;
+	int shapeType=jsonShape["type"].asInt();
+	/*note: the addFixture is in each case because of the shape scope*/
+	switch(shapeType){
+	case BOX:{
+		b2PolygonShape box;
+		b2Vec2 pos(jsonShape["X"].asFloat(),jsonShape["Y"].asFloat());
+		box.SetAsBox(jsonShape["width"].asFloat(),
+				jsonShape["height"].asFloat(),
+				pos,0);
+		fixtureDef.shape =&box;
 		this->addFixture(fixtureDef);
+		break;
+	}
+	case CIRCLE:{
+		b2CircleShape circle;
+		circle.m_p.Set(jsonShape["X"].asFloat(),jsonShape["Y"].asFloat());
+		circle.m_radius = jsonShape["radius"].asFloat();
+		fixtureDef.shape =&circle;
+		this->addFixture(fixtureDef);
+		break;
+	}
+	default:{
+		b2PolygonShape box;
+		box.SetAsBox(0.5,0.5);
+		fixtureDef.shape =&box;
+		this->addFixture(fixtureDef);
+		break;
+	}
 	}
 }
 
@@ -73,6 +108,7 @@ bool LevelObject::changed() {
 void LevelObject::collideWith(LevelObject* obj) {
 }
 
+/*reset the id generator for all objects*/
 void LevelObject::resetIds() {
 	LevelObject::uniqueId=0;
 }
@@ -81,3 +117,5 @@ void LevelObject::copyCorner(b2Vec2& corner) {
 	corner.x=body->GetPosition().x;
 	corner.y=body->GetPosition().y;
 }
+
+
