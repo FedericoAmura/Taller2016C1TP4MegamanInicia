@@ -20,6 +20,7 @@ WorkspaceEventManager::WorkspaceEventManager(Workspace &workspace)
                 .connect(sigc::mem_fun(*this, &WorkspaceEventManager::on_button_press));
         signal_drag_data_received()
                 .connect(sigc::mem_fun(*this, &WorkspaceEventManager::on_drag_data_received));
+        signal_selection().connect(sigc::mem_fun(*this, &WorkspaceEventManager::on_selection));
         something_selected = false;
     }
 
@@ -46,13 +47,13 @@ type_signal_selection WorkspaceEventManager::signal_selection() {
 }
 
 void WorkspaceEventManager::on_delete() {
-    if (!something_selected || !workspace.removeEntity(
+    if (!something_selected) return;
+    if (!workspace.removeEntity(
                 std::get<0>(selection),
                 std::get<1>(selection))){
         throw std::runtime_error("Nothing to delete");
     }
     m_signal_selection.emit(NO_SELECTION);
-
 }
 
 void WorkspaceEventManager::on_drag_data_received(DragContext&, int x, int y,
@@ -79,6 +80,13 @@ void WorkspaceEventManager::on_enlarge() {
 void WorkspaceEventManager::on_shorten() {
     workspace.shortenLevel();
 }
+
+bool WorkspaceEventManager::on_selection(uint id) {
+    something_selected = false;
+    return true;
+}
+
+
 
 
 

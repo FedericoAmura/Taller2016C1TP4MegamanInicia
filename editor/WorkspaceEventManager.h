@@ -38,6 +38,7 @@ protected:
     void on_drag_data_received(
             const Glib::RefPtr<Gdk::DragContext>& context, int x, int y,
             const Gtk::SelectionData& selection_data, guint info, guint time);
+    bool on_selection(uint id);
 
 };
 
