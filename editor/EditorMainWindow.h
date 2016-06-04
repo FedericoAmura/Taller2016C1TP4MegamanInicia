@@ -19,13 +19,18 @@
 
 class EditorMainWindow : public Gtk::ApplicationWindow {
 public:
-    EditorMainWindow(Workspace& workspace);
+    EditorMainWindow(Workspace& main, Workspace& chamber);
 
 private:
     Gtk::HBox main_box;
-    Gtk::ScrolledWindow scrollable_workspace;
+    Gtk::ScrolledWindow scrollable_main;
+    Gtk::ScrolledWindow scrollable_chamber;
     Gtk::VBox editing_box;
-    WorkspaceEventManager manager;
+    Gtk::Label main_tab;
+    Gtk::Label chamber_tab;
+    Gtk::Notebook level_book;
+    WorkspaceEventManager main_manager;
+    WorkspaceEventManager chamber_manager;
     Selector selector;
     Gtk::Frame selection_frame;
     Gtk::VBox selection_box;

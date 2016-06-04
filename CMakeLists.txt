@@ -31,7 +31,8 @@ set(SOURCE_FILES editor/main.cpp entities.h editor/Level.cpp editor/Level.h edit
         common/Thread.h editor/WorkspaceEventManager.cpp editor/WorkspaceEventManager.cpp editor/WorkspaceEventManager.h
         editor/SelectionLabel.cpp editor/SelectionLabel.cpp editor/SelectionLabel.h editor/SelectionDrawing.cpp
         editor/SelectionDrawing.h editor/ButtonDeleteSelection.cpp editor/ButtonDeleteSelection.h editor/Selector.cpp
-        editor/Selector.h editor/EntityIconView.cpp editor/EntityIconView.h editor/EditorMainWindow.cpp editor/EditorMainWindow.h)
+        editor/Selector.h editor/EntityIconView.cpp editor/EntityIconView.h editor/EditorMainWindow.cpp editor/EditorMainWindow.h
+        )
 add_executable(editor ${SOURCE_FILES})
 
 #files comunes

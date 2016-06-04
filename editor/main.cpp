@@ -12,15 +12,17 @@ using std::endl;
 int main(int argc, char *argv[]) {
     App app = Gtk::Application::create(argc, argv, "Editor.Megaman");
 
-    Level new_level("simplex.json");
-    Workspace workspace(new_level);
-    EditorMainWindow appWindow(workspace);
+    Level main_level("simplex.json");
+    Workspace main_ws(main_level);
+    Level chamber(20);
+    Workspace chamber_ws(chamber);
+    EditorMainWindow appWindow(main_ws, chamber_ws);
 
     //Run
     app->run(appWindow);
 
     //Descomentar para guardar cambios
-    new_level.toJson("simplex.json");
+    main_level.toJson("simplex.json");
 
     return 0;
 }
