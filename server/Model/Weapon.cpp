@@ -37,12 +37,14 @@ Json::Value Weapon::getJson() {
 }
 
 /*creates bullets with the json details*/
-void Weapon::shoot(const b2Vec2& pos){
+void Weapon::shoot(const b2Vec2& pos, int direction){
 	if(cooldown.getCurrent()==0){
 		Json::Value weaponInfo = getJson();
 		int bulletId=weaponInfo["bulletId"].asInt();
 		Json::Value speed=weaponInfo["speed"];
 		b2Vec2 speedVec(speed["x"].asFloat(),speed["y"].asFloat());
+		if(direction==0)
+			speedVec.x=-1*speedVec.x;
 		BulletInfo* info= new BulletInfo(bulletId,pos,speedVec,groupBits);
 		level->newObject(info);
 		cooldown.maxOut();

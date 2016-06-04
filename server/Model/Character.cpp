@@ -82,7 +82,7 @@ void Character::damage(Bullet* bullet) {
 
 /*fires the weapon currently held*/
 void Character::shoot() {
-	myWeapon->shoot(body->GetPosition());
+	myWeapon->shoot(body->GetPosition(),direction);
 }
 
 int Character::getDirection() {
