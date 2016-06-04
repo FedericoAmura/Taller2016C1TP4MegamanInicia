@@ -10,6 +10,7 @@
 #include <stdexcept>
 
 #include "../entities.h"
+#include "MegamanBeginsConstants.h"
 
 #define IMG_PATH "../sprites"
 #define MOB_PATH (string) IMG_PATH + "/mobs/"
@@ -20,8 +21,8 @@
 #define ITM_PATH (string) IMG_PATH + "/items/"
 
 SpriteDispenser::SpriteDispenser() {
-	double tileHeight = ceil((double)Gdk::screen_height()/(double)15)+1;
-	double tileWidth = ceil((double)Gdk::screen_width()/(double)27)+1;
+	double tileWidth = ceil((double)Gdk::screen_width()/(double)TILES_HORIZONTAL)+1;
+	double tileHeight = ceil((double)Gdk::screen_height()/(double)TILES_VERTICAL)+1;
 	tileSize = std::max(tileHeight,tileWidth);
 
 	//PATHS

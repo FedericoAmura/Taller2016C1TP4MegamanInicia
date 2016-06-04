@@ -1,5 +1,5 @@
-#ifndef SRC_CLIENTKEYCODES_H_
-#define SRC_CLIENTKEYCODES_H_
+#ifndef SRC_COMMUNICATIONCODES_H_
+#define SRC_COMMUNICATIONCODES_H_
 
 /* Protocolo de comunicacion
  * se envian los mensajes terminados por un '\n'
@@ -109,4 +109,4 @@
  * ej: "9\n"
  * */
 
-#endif /* SRC_CLIENTKEYCODES_H_ */
+#endif /* SRC_COMMUNICATIONCODES_H_ */

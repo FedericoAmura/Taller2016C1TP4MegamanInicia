@@ -11,7 +11,7 @@
 #include <iostream>
 
 #include "WindowNames.h"
-
+#include "../common/MegamanBeginsConstants.h"
 #include "../common/CommunicationCodes.h"
 
 MegamanClientModel::MegamanClientModel() :
@@ -75,6 +75,15 @@ void MegamanClientModel::run() {
 			double yDrawable; ss >> yDrawable;
 			Drawable* drawable = drawables.getDrawable(atoi(idDrawable.c_str()));
 			drawable->setCoordinates(xDrawable,yDrawable);
+			drawable->setDraw(true);
+			}
+			break;
+		case KILL:
+			{
+			std::string idDrawable; ss >> idDrawable;
+			Drawable* drawable = drawables.getDrawable(atoi(idDrawable.c_str()));
+			//TODO Por ahora lo dibujamos arafue
+			drawable->setCoordinates(TILES_HORIZONTAL,TILES_VERTICAL);
 			drawable->setDraw(true);
 			}
 			break;

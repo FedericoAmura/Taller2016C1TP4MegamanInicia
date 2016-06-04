@@ -12,13 +12,14 @@
 #include <iostream>
 #include <string>
 
+#include "../common/MegamanBeginsConstants.h"
 #include "Drawables.h"
 
 LevelScreen::LevelScreen(MegamanClientModel& model) :
 model(model) {
-	double tileWidth = ceil((double)Gdk::screen_width()/(double)27);
-	double tileHeight = ceil((double)Gdk::screen_height()/(double)15);
-	tileSize = std::max(ceil((double)Gdk::screen_height()/(double)15),ceil((double)Gdk::screen_width()/(double)27));
+	double tileWidth = ceil((double)Gdk::screen_width()/(double)TILES_HORIZONTAL);
+	double tileHeight = ceil((double)Gdk::screen_height()/(double)TILES_VERTICAL);
+	tileSize = std::max(tileHeight,tileWidth);
 
 	//TODO Dibujamos el fondo del nivel, despues se va a pasar al modelo como el fondo
 	levelBackground.setImage("../images/background1.jpg",Gdk::screen_width(),Gdk::screen_height(),false);
