@@ -16,14 +16,17 @@ typedef sigc::signal<bool, uint> type_signal_selection;
 
 class WorkspaceEventManager : public Gtk::EventBox {
 public:
-    WorkspaceEventManager(Workspace& workspace);
+    WorkspaceEventManager(Workspace* workspace);
+    ~WorkspaceEventManager();
+    void replaceLevel();
     void setDroppable(std::vector<Gtk::TargetEntry>& listTargets);
     type_signal_selection signal_selection();
     void on_delete();
     bool on_selection_change(uint id);
+    void on_switch_page(guint);
 
 private:
-    Workspace& workspace;
+    Workspace* workspace;
     bool something_selected;
     pair<uint, uint> selection;
     vector<Gtk::TargetEntry> list_targets;

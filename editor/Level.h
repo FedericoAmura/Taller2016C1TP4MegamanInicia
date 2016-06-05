@@ -17,8 +17,9 @@ typedef unsigned int uint;
 
 class Level {
 public:
-    Level() {};
+    Level() : Level(DEF_LEN) {};
     Level(string json_file);
+    Level* cleanCopy();
     virtual ~Level();
     explicit Level(uint len);
     void setBackgroundFile(string path);

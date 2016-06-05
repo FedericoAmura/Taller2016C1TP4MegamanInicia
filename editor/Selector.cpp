@@ -25,7 +25,8 @@ Selector::Selector() {
             IconEntry(SPIKE, sprites.get(SPIKE), "Spike"),
             IconEntry(STONE_LADDER, sprites.get(STONE_LADDER), "Ladder"),
             IconEntry(SKY_PLATFORM, sprites.get(SKY_PLATFORM), "Platform"),
-            IconEntry(BOSS_DOOR, sprites.get(BOSS_DOOR), "Boss Door")
+            IconEntry(BOSS_DOOR, sprites.get(BOSS_DOOR), "Boss Door"),
+            //IconEntry(STONE_FLOOR, sprites.get(STONE_FLOOR), "Floor")
     };
     vector<IconEntry> mob_entries = {
             IconEntry(MEGAMAN_IDLE_0, sprites.get(MEGAMAN_IDLE_0), "Megaman"),

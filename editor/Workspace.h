@@ -20,32 +20,25 @@ typedef std::map<pair<uint, uint>, Drawing* > drawing_map_t;
 
 class Workspace : public Gtk::Fixed {
 public:
-    Workspace(Level& level);
+    Workspace(Level* level);
     ~Workspace();
+    void replaceLevel();
     bool addElement(uint x, uint y, uint id);
     bool removeEntity(uint x, uint y);
     uint getId(uint x, uint y);
     bool validPosition(uint x, uint y);
-    void enlargeLevel();
-    void shortenLevel();
     const int getScreenWidth() {return screen_width;}
-    void init(int hight);
+
 private:
-    Level& level;
+    Level* level;
     drawing_map_t drawings;
     SpriteDispenser sprites;
     int screen_width;
     Glib::RefPtr<Gdk::Pixbuf> background;
 
+    void clean();
     void resize();
-
-
-    //callbacks
-
-
-
-protected:
-
+    void refresh();
 };
 
 

@@ -82,6 +82,12 @@ Level::~Level() {
     delete entities;
 }
 
+Level* Level::cleanCopy() {
+    return new Level;
+}
+
+
+
 
 
 
