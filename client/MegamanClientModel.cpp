@@ -46,12 +46,12 @@ void MegamanClientModel::run() {
 			double xDrawable; ss >> xDrawable;
 			double yDrawable; ss >> yDrawable;
 			Drawable* drawable = drawables.getDrawable(atoi(idDrawable.c_str()));
-			if (drawable == 0) {
+			if (drawable == nullptr) {
 				drawable = new Drawable();
 				drawable->setIsDrawed(false);
 			}
 			uint id = (uint)atoi(idDrawing.c_str());
-			drawable->setImage(sprites.get(id),sprites.getWidth(id),sprites.getHeight(id),atoi(flipped.c_str()));
+			drawable->setImage(id, sprites.get(id),sprites.getWidth(id),sprites.getHeight(id),atoi(flipped.c_str()));
 			drawable->setCoordinates(xDrawable,yDrawable);
 			drawable->setDraw(true);
 			drawables.setDrawable(atoi(idDrawable.c_str()),drawable);
@@ -63,8 +63,9 @@ void MegamanClientModel::run() {
 			std::string idDrawing; ss >> idDrawing;
 			std::string flipped; ss >> flipped;
 			Drawable* drawable = drawables.getDrawable(atoi(idDrawable.c_str()));
+			if (drawable == nullptr) continue;
 			uint id = (uint)atoi(idDrawing.c_str());
-			drawable->setImage(sprites.get(id),sprites.getWidth(id),sprites.getHeight(id),atoi(flipped.c_str()));
+			drawable->setImage(id, sprites.get(id),sprites.getWidth(id),sprites.getHeight(id),atoi(flipped.c_str()));
 			drawable->setDraw(true);
 			}
 			break;
@@ -74,6 +75,7 @@ void MegamanClientModel::run() {
 			double xDrawable; ss >> xDrawable;
 			double yDrawable; ss >> yDrawable;
 			Drawable* drawable = drawables.getDrawable(atoi(idDrawable.c_str()));
+			if (drawable == nullptr) continue;
 			drawable->setCoordinates(xDrawable,yDrawable);
 			drawable->setDraw(true);
 			}
@@ -82,6 +84,7 @@ void MegamanClientModel::run() {
 			{
 			std::string idDrawable; ss >> idDrawable;
 			Drawable* drawable = drawables.getDrawable(atoi(idDrawable.c_str()));
+			if (drawable == nullptr) continue;
 			//TODO Por ahora lo dibujamos arafue
 			drawable->setCoordinates(TILES_HORIZONTAL,TILES_VERTICAL);
 			drawable->setDraw(true);
@@ -143,9 +146,9 @@ void MegamanClientModel::serverSendLevelSelected(int levelCode) {
 	}
 }
 
-void MegamanClientModel::serverSendKey(int keyCode) {
+void MegamanClientModel::serverSendKeyboard(int keyCode) {
 	if (serverProxy!=nullptr) {
-		std::string mensaje = std::to_string(KEY_PRESSED);
+		std::string mensaje = std::to_string(KEYBOARD_STATE);
 		mensaje.append(" ");
 		mensaje.append(std::to_string(keyCode));
 		mensaje.append("\n");

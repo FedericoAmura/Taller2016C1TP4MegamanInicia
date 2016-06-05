@@ -41,7 +41,7 @@ public:
 	void disconnectServer();
 
 	void serverSendLevelSelected(int levelCode);
-	void serverSendKey(int keyCode);
+	void serverSendKeyboard(int keyboardState);
 };
 
 #endif /* SRC_MEGAMANCLIENTMODEL_H_ */

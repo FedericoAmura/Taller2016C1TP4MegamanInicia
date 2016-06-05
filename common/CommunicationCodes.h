@@ -6,7 +6,7 @@
  * con los codigos separados por un espacio*/
 
 //OPERATION CODES client->server
-#define KEY_PRESSED 1
+#define KEYBOARD_STATE 1
 #define SELECT_LEVEL 2
 #define ERROR 90
 #define CLIENT_DISCONNECTED 99
@@ -22,16 +22,12 @@
 #define BACK_TO_LEVEL_SELECTION 7
 #define END_CURRENT 9 //PARA DECIR QUE TERMINO EL ENVIO, EJ: DIBUJAR TODOS LOS SPRITES
 
-//KEY_PRESSED codes
-#define KEY_UP 2
-#define KEY_RIGHT 3
-#define KEY_DOWN 4
-#define KEY_LEFT 5
-#define KEY_SPACE 6
-#define KEY_ESC 7
-/* Se manda el codigo de la tecla apretada en el cliente
- * formato: "KEY_PRESSED keyCode\n"
- * ej: "1 2\n" es tecla apretada arriba
+//KEYBOARD_STATE codes
+/* Ver MegamanBeginsConstants-KEY IDS para los Ids de cada tecla
+ * Se manda el estado del teclado en el cliente
+ * El estado del teclado es la sumatoria de los IDs de las teclas apretadas
+ * formato: "KEYBOARD_STATE keyboardState\n"
+ * ej: "1 14\n" son las teclas UP+RIGHT+DOWN (2+4+8=14)
  * */
 
 //SELECT_LEVEL codes

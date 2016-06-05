@@ -15,6 +15,8 @@
 #include "../common/MegamanBeginsConstants.h"
 #include "Drawables.h"
 
+typedef unsigned int uint;
+
 LevelScreen::LevelScreen(MegamanClientModel& model) :
 model(model) {
 	double tileWidth = ceil((double)Gdk::screen_width()/(double)TILES_HORIZONTAL);
@@ -46,6 +48,10 @@ bool LevelScreen::update() {
 				drawable->getImage().show();
 			}
 			drawable->setDraw(false);
+		}
+		if (drawable->getSpriteId()>=(uint)9000) {
+			//TODO esto deberia levantar los megamanes, chequear
+			drawable->getImage().get_window()->raise();
 		}
 	}
 

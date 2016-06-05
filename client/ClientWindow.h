@@ -8,23 +8,27 @@
 #ifndef SRC_CLIENTWINDOW_H_
 #define SRC_CLIENTWINDOW_H_
 
-#include <gtkmm/stack.h>
-#include <gtkmm/window.h>
+#include <gdk/gdk.h>
 #include <gdkmm/event.h>
 #include <gdkmm.h>
-#include <gdk/gdk.h>
+#include <gtkmm/stack.h>
+#include <gtkmm/window.h>
 #include <cstdbool>
+#include <string>
 
 #include "ConnectionScreen.h"
 #include "CreditsScreen.h"
+#include "KeyMap.h"
 #include "LevelScreen.h"
 #include "LevelSelectorScreen.h"
 #include "MegamanClientModel.h"
-#include "WindowNames.h"
 
 class ClientWindow : public Gtk::Window {
 private:
 	MegamanClientModel model;
+	KeyMap keyboard;
+	sigc::connection updateKeyboardConn;
+
 	Gtk::Stack screenContainer;
 	ConnectionScreen connectionScreen;
 	CreditsScreen creditsScreen;
@@ -41,6 +45,8 @@ public:
 
 private:
 	bool on_key_press_event(GdkEventKey* key_event);
+	bool on_key_release_event(GdkEventKey* key_event);
+	bool updateKeyboard();
 };
 
 #endif /* SRC_CLIENTWINDOW_H_ */

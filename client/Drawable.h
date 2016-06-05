@@ -17,6 +17,7 @@ class Drawable {
 private:
 	Drawing drawing;
 	Mutex m;
+	uint spriteId;
 	double posX;
 	double posY;
 	bool drawed;	//indica si el drawable ya fue dibujado en un container
@@ -26,9 +27,10 @@ public:
 	Drawable();
 	virtual ~Drawable();
 
-	void setImage(std::string ruta, int width, int height, bool flip);
+	void setImage(uint spriteId, std::string ruta, int width, int height, bool flip);
 	void setCoordinates(double x, double y);
 
+	uint getSpriteId();
 	Drawing& getImage();
 	double getX();
 	double getY();

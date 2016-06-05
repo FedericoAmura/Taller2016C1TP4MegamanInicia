@@ -19,8 +19,6 @@ LevelSelectorScreen::LevelSelectorScreen(MegamanClientModel& model) :
 	const int imgHeight = height/2-50;	//-50 porque nos saca de fullscreen
 
 	const int messagesWidth = width-height;
-	//messages.set_size_request(messagesWidth,height);
-	//messages.set_label("Elija un nivel\nAca escribimos cosas como los jugadores conectados");
 
 	//MegaMan
 	megaManIcon.setImage("../images/levelImages/MegaMan.png",imgWidth,imgHeight,false);
