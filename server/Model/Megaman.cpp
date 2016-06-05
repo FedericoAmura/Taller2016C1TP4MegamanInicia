@@ -11,6 +11,7 @@
 #include <glog/logging.h>
 #include "MyLevel.h"
 #include "Weapon.h"
+#include "../common/MegamanBeginsConstants.h"
 
 Megaman::Megaman(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl):
 Character(w,json,pos,lvl),
@@ -28,9 +29,7 @@ laddersTouching(0){
 	myWeapon->setOwner(FRIENDLY);
 }
 
-Megaman::~Megaman() {
-	// TODO Auto-generated destructor stub
-}
+Megaman::~Megaman() {}
 
 /*makes sure fixtures collide with corresponding entities*/
 void Megaman::changeFixtureFilter(b2Fixture* f) {
@@ -42,53 +41,58 @@ void Megaman::changeFixtureFilter(b2Fixture* f) {
 	f->SetFriction(0);
 }
 
-/*takes key and moves accordingly*/
-void Megaman::move(char key){
-	switch(key){
-	case 'a':{
-		b2Vec2 vel = body->GetLinearVelocity();
+/*moves according to new key state*/
+void Megaman::changeKeyState(uint keyState){
+	b2Vec2 vel = body->GetLinearVelocity();
+	bool up,down,left,right,climbing;
+	up=keyState & KEY_UP_ID;
+	down=keyState & KEY_DOWN_ID;
+	left=keyState & KEY_LEFT_ID;
+	right=keyState & KEY_RIGHT_ID;
+	climbing=checkClimbing();
+
+	if(down){
+		if(climbing)
+			vel.y=-climbSpeed;
+	}else{
+		if(climbing && !up)
+			vel.y=0;
+	}
+	if(up){
+		if(climbing){
+			vel.y=climbSpeed;
+		}else{
+			jump();
+			vel.y=body->GetLinearVelocity().y;
+		}
+	}else{
+		if(climbing && !down)
+			vel.y=0;
+	}
+
+	if(left){
 		vel.x=-hSpeed;
-		body->SetLinearVelocity(vel);
 		if(direction!=LEFT){
 			direction=LEFT;
 			hasFlipped=true;
 		}
-		break;
+	}else{
+		if(!right)
+			vel.x=0;
 	}
-	case 'w':{
-		if(checkClimbing()){
-			b2Vec2 vel(0,climbSpeed);
-			body->SetLinearVelocity(vel);
-		}else{
-			jump();
-		}
-		break;
-	}
-	case 'd':{
-		b2Vec2 vel = body->GetLinearVelocity();
+	if(right){
 		vel.x=hSpeed;
-		body->SetLinearVelocity(vel);
 		if(direction!=RIGHT){
 			direction=RIGHT;
 			hasFlipped=true;
 		}
-		break;
+	}else{
+		if(!left)
+			vel.x=0;
 	}
-	case 's':{
-		b2Vec2 vel = body->GetLinearVelocity();
-		vel.x=0;//stop moving sideways
-		if(checkClimbing()){
-			vel.y=-climbSpeed;
-		}
-		body->SetLinearVelocity(vel);
-		break;
-	}
-	case 'f':{
-		this->shoot();
-		break;
-	}
-	default: break;
-	}
+	body->SetLinearVelocity(vel);
+	if(keyState & KEY_SPACE_ID)
+		shoot();
 }
 
 /*kills megaman. if he has lives remaining he's queued for respawn

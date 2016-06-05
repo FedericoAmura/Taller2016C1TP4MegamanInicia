@@ -17,9 +17,7 @@ jumpTime(json["jumpFreq"].asFloat()){
 	createJumpSensor(json["jumpSensor"]);
 }
 
-Enemy::~Enemy() {
-	// TODO Auto-generated destructor stub
-}
+Enemy::~Enemy() {}
 
 /*makes sure fixtures collide with corresponding entities*/
 void Enemy::changeFixtureFilter(b2Fixture* f) {
@@ -32,11 +30,26 @@ void Enemy::changeFixtureFilter(b2Fixture* f) {
 }
 
 void Enemy::tick(float time) {
+	Character::tick(time);
 	jumpTime.dec(time);
 	if(jumpTime.getCurrent()==0){
 		jump();
 		jumpTime.maxOut();
 	}
-	//todo fire
+	shoot();
 }
 
+FlyingEnemy::FlyingEnemy(b2World* w,
+		Json::Value& json,
+		const b2Vec2& pos,
+		MyLevel* lvl):
+Enemy(w,json,pos,lvl){
+	body->SetGravityScale(0);
+}
+
+FlyingEnemy::~FlyingEnemy() {}
+
+void FlyingEnemy::tick(float time){
+	Enemy::tick(time);
+	//todo move towards a megaman
+}

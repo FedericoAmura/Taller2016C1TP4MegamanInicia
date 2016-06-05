@@ -77,7 +77,7 @@ public:
 	void run();
 	void stop();
 	bool isRunning();
-	void moveMegaman(char boton);
+	void changeKeyState(uint keyState, int client);
 
 	void remove(LevelObject* deadObject);
 	void respawn(Megaman* meg);

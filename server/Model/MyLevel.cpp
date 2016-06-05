@@ -259,9 +259,10 @@ void MyLevel::stop(){
 }
 
 /*makes the megaman move according to the input*/
-void MyLevel::moveMegaman(char boton){
+void MyLevel::changeKeyState(uint keyState, int client){
+	//todo direct to proper megaman
 	if(megaman!=nullptr)
-		megaman->move(boton);
+		megaman->changeKeyState(keyState);
 }
 
 /*adds object to remove list*/

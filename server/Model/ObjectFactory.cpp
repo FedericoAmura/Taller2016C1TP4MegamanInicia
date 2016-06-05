@@ -57,7 +57,11 @@ LevelObject* ObjectFactory::createObject(int id, b2Vec2& pos) {
 	case 1:{
 		created=true;
 		//todo more enemies
-		newObject = new Enemy(world, config[idAsString], pos,level);
+		if(id==1010){
+			newObject = new FlyingEnemy(world, config[idAsString], pos,level);
+		}else{
+			newObject = new Enemy(world, config[idAsString], pos,level);
+		}
 		break;
 	}
 	case 2:{

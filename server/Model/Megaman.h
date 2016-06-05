@@ -18,7 +18,6 @@ class Megaman: public Character {
 	b2Vec2 spawnPoint;
 	Stat<float> inmuneTime;//seconds
 
-protected:
 	void changeFixtureFilter(b2Fixture* f);
 
 public:
@@ -26,11 +25,11 @@ public:
 
 	Megaman(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl);
 	virtual ~Megaman();
-	void move(char key);
 	void kill();
 	void spawn();
 	bool checkClimbing();
 	void tick(float time);
+	void changeKeyState(uint keyState);
 };
 
 #endif /* SERVER_MODEL_MEGAMAN_H_ */

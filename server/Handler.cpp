@@ -13,6 +13,7 @@
 #include "../common/CommunicationCodes.h"
 #include "Event.h"
 #include "Game.h"
+#include "../common/MegamanBeginsConstants.h"
 
 Handler::Handler(Game* j):game(j){}
 
@@ -43,12 +44,12 @@ void RecvMessage::handle(Event* e){
 	LOG(INFO)<<"mensaje recibido: "<< evento->getMessage() <<"	desde: "<<procedencia;
 	switch(cod){
 	case 1:/*key presed*/
-		int keyPressed;
-		msj>>keyPressed;
-		if(keyPressed==7)
+		uint keyState;
+		msj>>keyState;
+		if(keyState & KEY_ESC_ID)
 			game->stopLevel();
 		else
-			game->movePlayer(keyPressed,procedencia);
+			game->movePlayer(keyState,procedencia);
 		break;
 	case 2:/*select level*/
 		int levelId;

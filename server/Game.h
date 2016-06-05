@@ -43,7 +43,7 @@ public:
 	void selectLevel(int levelId,int client);
 	void stopLevel();
 	MyLevel* getLevel();
-	void movePlayer(int keyPressed,int source);
+	void movePlayer(uint keyState,int source);
 
 	void addClient(int descriptor);
 	void sendTo(std::string data, int destino);

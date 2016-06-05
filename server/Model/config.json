@@ -56,9 +56,9 @@
 		{
 			"type":		1,
 			"x": 		0.0,
-			"y": 		-0.3,
-			"width": 	0.1,
-			"height": 	0.3
+			"y": 		-0.4,
+			"width": 	0.2,
+			"height": 	0.2
 		},
 		"shapes":
 		[
@@ -99,7 +99,7 @@
 	"1022":
 	{
 		"id":			1022,
-		"weaponId":		2004,
+		"weaponId":		2006,
 		"JSpeed" :		0.0,
 		"life":			2.0,
 		"jumpFreq":		60.0,
@@ -126,7 +126,7 @@
 	"1010":
 	{
 		"id":			1010,
-		"weaponId":		2004,
+		"weaponId":		2001,
 		"JSpeed" :		0.0,
 		"life":			2.0,
 		"jumpFreq":		60.0,
@@ -153,7 +153,7 @@
 	"1030":
 	{
 		"id":			1030,
-		"weaponId":		2004,
+		"weaponId":		2006,
 		"JSpeed" :		15.0,
 		"life":			2.0,
 		"jumpFreq":		2.0,
@@ -180,7 +180,7 @@
 	"1040":
 	{
 		"id":			1040,
-		"weaponId":		2004,
+		"weaponId":		2006,
 		"JSpeed" :		15.0,
 		"life":			2.0,
 		"jumpFreq":		2.0,
@@ -235,9 +235,28 @@
 		]
 	},
 	
+	"2001":
+	{
+		"cooldown":	1.0,
+		"bulletId":	2001,
+		"speed":
+		{
+			"x":	0.0,
+			"y":	-3.0
+		},
+		"shapes":
+		[
+				{
+					"type":		2,
+					"radius":	0.1,
+					"X":		0.0,
+					"Y":		0.0
+				}
+		]
+	},
+	
 	"2004":
 	{
-		
 		"cooldown":	0.25,
 		"bulletId":	2004,
 		"speed":
@@ -254,5 +273,26 @@
 					"Y":		0.0
 				}
 		]
+	},
+	
+	"2006":
+	{
+		"cooldown":	1.0,
+		"bulletId":	2006,
+		"speed":
+		{
+			"x":	2.0,
+			"y":	0.0
+		},
+		"shapes":
+		[
+				{
+					"type":		2,
+					"radius":	0.1,
+					"X":		0.0,
+					"Y":		0.0
+				}
+		]
 	}
+	
 }

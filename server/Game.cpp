@@ -194,13 +194,9 @@ void Game::stopLevel(){
 
 /*moves the corresponding player*/
 //todo move more than one megaman
-void Game::movePlayer(int keyPressed, int source) {
+void Game::movePlayer(uint keyState, int source) {
 	if(levelChosen()){
-		if (KEY_UP_ID	 	== keyPressed) getLevel()->moveMegaman('w');
-		if (KEY_RIGHT_ID 	== keyPressed) getLevel()->moveMegaman('d');
-		if (KEY_DOWN_ID	== keyPressed) getLevel()->moveMegaman('s');
-		if (KEY_LEFT_ID	== keyPressed) getLevel()->moveMegaman('a');
-		if (KEY_SPACE_ID	== keyPressed) getLevel()->moveMegaman('f');
+		getLevel()->changeKeyState(keyState,source);
 	}
 }
 
