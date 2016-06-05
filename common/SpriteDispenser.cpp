@@ -69,11 +69,11 @@ SpriteDispenser::SpriteDispenser() {
 	paths[SPARKMAN_GENKIDAMA] = WEP_PATH + "sky_platform.png";
 	//Items
 	//los sprites de esto no son los correctos, despues lo arreglo
-	paths[BIG_ENERGY] = WEP_PATH + "big_energy_capsule.png";
-	paths[SMALL_ENERGY] = WEP_PATH + "small_energy_capsule.png";
-	paths[BIG_PLASMA] = WEP_PATH + "big_plasma_capsule.png";
-	paths[SMALL_PLASMA] = WEP_PATH + "small_plasma_capsule.png";
-	paths[LIFE] = WEP_PATH + "life.png";
+	paths[BIG_ENERGY] = ITM_PATH + "big_energy_capsule.png";
+	paths[SMALL_ENERGY] = ITM_PATH + "small_energy_capsule.png";
+	paths[BIG_PLASMA] = ITM_PATH + "big_plasma_capsule.png";
+	paths[SMALL_PLASMA] = ITM_PATH + "small_plasma_capsule.png";
+	paths[LIFE] = ITM_PATH + "life.png";
 	//Mobs
 	paths[BUMBY_0] = MOB_PATH + "bumby0.png";
 	paths[BUMBY_1] = MOB_PATH + "bumby1.png";

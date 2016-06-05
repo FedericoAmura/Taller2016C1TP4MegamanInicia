@@ -41,7 +41,7 @@ void RecvMessage::handle(Event* e){
 	std::stringstream msj(evento->getMessage());
 	int cod;
 	msj>>cod;
-	LOG(INFO)<<"mensaje recibido: "<< evento->getMessage() <<"	desde: "<<procedencia;
+	//LOG(INFO)<<"mensaje recibido: "<< evento->getMessage() <<"	desde: "<<procedencia;
 	switch(cod){
 	case 1:/*key presed*/
 		uint keyState;

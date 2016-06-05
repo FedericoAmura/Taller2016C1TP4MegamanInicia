@@ -21,7 +21,6 @@ class ObjectFactory {
 	b2World* world;
 	MyLevel* level;
 
-
 public:
 	ObjectFactory(b2World* w, MyLevel* lvl);
 	virtual ~ObjectFactory();

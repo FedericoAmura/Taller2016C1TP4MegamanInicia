@@ -31,13 +31,10 @@ void Bullet::collideWith(LevelObject* obj) {
 		if(objType==9 || objType==1){
 			LOG(INFO)<<"bullet hit someone";
 			Character* character=(Character*) obj;
-			LOG(INFO)<<"cast succesful";
 			character->damage(this);
 		}
-		LOG(INFO)<<"remove me";
 		level->remove(this);
 		removed=true;
-		LOG(INFO)<<"done";
 	}
 }
 

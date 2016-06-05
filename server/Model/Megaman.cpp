@@ -139,3 +139,13 @@ void Megaman::tick(float time) {
 	Character::tick(time);
 	inmuneTime.dec(time);
 }
+
+void Megaman::heal(uint amount) {
+	this->life.inc(amount);
+	LOG(INFO)<<objectId<<" healed, life left: "<<life.getCurrent();
+}
+
+void Megaman::charge(uint amount) {
+	//todo charge weapon/s
+	LOG(INFO)<<objectId<<" charged by: "<<amount;
+}

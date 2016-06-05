@@ -30,6 +30,8 @@ public:
 	bool checkClimbing();
 	void tick(float time);
 	void changeKeyState(uint keyState);
+	void heal(uint amount);
+	void charge(uint amount);
 };
 
 #endif /* SERVER_MODEL_MEGAMAN_H_ */

@@ -103,7 +103,7 @@ MyLevel::~MyLevel() {
 /*retruns new object if id has config, nullptr if not*/
 LevelObject* MyLevel::createObject(int id,b2Vec2& pos) {
 	LevelObject* newObject=factory.createObject(id,pos);
-	if(newObject){
+	if(newObject!=nullptr){
 		int objectType=(int)newObject->getSpriteId()/1000;
 		if(objectType==0 && boundaries==nullptr){
 			boundaries= newObject;

@@ -7,6 +7,15 @@
 
 #include "Enemy.h"
 
+#include <glog/logging.h>
+#include "../../Box2D/Box2D/Common/b2Math.h"
+#include "../../Box2D/Box2D/Dynamics/b2Body.h"
+#include "../../Box2D/Box2D/Dynamics/b2Fixture.h"
+#include "../../entities.h"
+#include "LevelObject.h"
+#include "MyLevel.h"
+#include "ObjectInfo.h"
+
 Enemy::Enemy(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl):
 Character(w,json,pos,lvl),
 jumpTime(json["jumpFreq"].asFloat()){
@@ -18,6 +27,25 @@ jumpTime(json["jumpFreq"].asFloat()){
 }
 
 Enemy::~Enemy() {}
+
+ObjectInfo* Enemy::chooseDrop() {
+	int id;
+	//todo get chances and choose randomly
+	id=BIG_ENERGY;
+	ObjectInfo* drop=new ObjectInfo(id,body->GetPosition());
+	return drop;
+}
+
+void Enemy::kill() {
+	if(!dead){
+		ObjectInfo* drop=chooseDrop();
+		if(drop!=nullptr){
+			LOG(INFO)<<"dropped item: "<<drop->getId();
+			level->newObject(drop);
+		}
+	}
+	Character::kill();
+}
 
 /*makes sure fixtures collide with corresponding entities*/
 void Enemy::changeFixtureFilter(b2Fixture* f) {
@@ -53,3 +81,5 @@ void FlyingEnemy::tick(float time){
 	Enemy::tick(time);
 	//todo move towards a megaman
 }
+
+
