@@ -8,6 +8,7 @@
 #include <vector>
 #include <gtkmm/notebook.h>
 #include "EntityIconView.h"
+#include "WorkspaceEventManager.h"
 
 using std::vector;
 
@@ -15,6 +16,7 @@ class Selector : public Gtk::Notebook {
 public:
     Selector();
     void setDraggable(vector<Gtk::TargetEntry>& list_targets);
+    void connect(WorkspaceEventManager* manager);
 
 private:
     Gtk::Label m_TilesLabel;

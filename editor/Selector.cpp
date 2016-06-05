@@ -53,6 +53,15 @@ void Selector::setDraggable(vector<Gtk::TargetEntry>& list_targets) {
 
 }
 
+void Selector::connect(WorkspaceEventManager* manager) {
+    m_TilesView.signal_selection_change()
+            .connect(sigc::mem_fun(manager, &WorkspaceEventManager::on_selection_change));
+    m_MobsView.signal_selection_change()
+            .connect(sigc::mem_fun(manager, &WorkspaceEventManager::on_selection_change));
+}
+
+
+
 
 
 

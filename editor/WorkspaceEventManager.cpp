@@ -24,7 +24,7 @@ WorkspaceEventManager::WorkspaceEventManager(Workspace &workspace)
         something_selected = false;
     }
 
-bool WorkspaceEventManager::on_button_press(GdkEventButton *event) {
+bool WorkspaceEventManager::on_button_press(GdkEventButton* event) {
     const int screen_width = workspace.getScreenWidth();
     uint xint = ((uint) event->x) / screen_width;
     uint yint = ((uint) event->y) / screen_width;
@@ -38,6 +38,9 @@ bool WorkspaceEventManager::on_button_press(GdkEventButton *event) {
         something_selected = true;
     } else {
         something_selected = false;
+        if (input_selection){
+            workspace.addElement(xint, yint, input_selection);
+        }
     }
     return true;
 }
@@ -78,24 +81,10 @@ bool WorkspaceEventManager::on_selection(uint id) {
     return true;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+bool WorkspaceEventManager::on_selection_change(uint id) {
+    input_selection = id;
+    return true;
+}
 
 
 

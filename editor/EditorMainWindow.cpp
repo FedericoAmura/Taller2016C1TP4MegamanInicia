@@ -45,6 +45,8 @@ EditorMainWindow::EditorMainWindow(Workspace& main, Workspace& chamber)
     chamber_manager.signal_selection().connect(sigc::mem_fun(selection_drawing, &SelectionDrawing::on_selection));
     chamber_manager.signal_selection().connect(sigc::mem_fun(delete_button, &ButtonDeleteSelection::on_selection));
     delete_button.signal_clicked().connect(sigc::mem_fun(chamber_manager, &WorkspaceEventManager::on_delete));
+    selector.connect(&main_manager);
+    selector.connect(&chamber_manager);
 
     //Drag and drop activation
     std::vector<Gtk::TargetEntry> list_targets;

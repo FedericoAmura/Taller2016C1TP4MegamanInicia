@@ -20,6 +20,7 @@ public:
     void setDroppable(std::vector<Gtk::TargetEntry>& listTargets);
     type_signal_selection signal_selection();
     void on_delete();
+    bool on_selection_change(uint id);
 
 private:
     Workspace& workspace;
@@ -29,6 +30,7 @@ private:
 
 protected:
     type_signal_selection m_signal_selection;
+    uint input_selection;
 
     //handlers
     bool on_button_press(GdkEventButton* event);
@@ -36,7 +38,6 @@ protected:
             const Glib::RefPtr<Gdk::DragContext>& context, int x, int y,
             const Gtk::SelectionData& selection_data, guint info, guint time);
     bool on_selection(uint id);
-
 };
 
 
