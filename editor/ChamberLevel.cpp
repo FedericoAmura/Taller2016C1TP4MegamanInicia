@@ -45,6 +45,14 @@ void ChamberLevel::toJson(string file_name) {
     out.close();
 }
 
+Level* ChamberLevel::cleanCopy() {
+    return new ChamberLevel;
+}
+
+Level* ChamberLevel::openCopy(string file) {
+    return new ChamberLevel(file);
+}
+
 
 
 

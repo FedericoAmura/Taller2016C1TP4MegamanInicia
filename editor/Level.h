@@ -19,7 +19,8 @@ class Level {
 public:
     Level() : Level(DEF_LEN) {};
     Level(string json_file);
-    Level* cleanCopy();
+    virtual Level* cleanCopy();
+    virtual Level* openCopy(string file);
     virtual ~Level();
     explicit Level(uint len);
     void setBackgroundFile(string path);

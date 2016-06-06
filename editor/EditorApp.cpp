@@ -7,11 +7,14 @@
 #include "ChamberLevel.h"
 #include <iostream>
 #include <giomm.h>
+#include <gtkmm/dialog.h>
+#include <gtkmm/filechooserdialog.h>
 
 #define MAIN_WINDOW 0
 
 EditorApp::EditorApp()
         : Gtk::Application("Megaman.Editor") {
+    open_file_name = "";
     Glib::set_application_name("Megaman Begins Level Editor");
 }
 
@@ -29,6 +32,8 @@ void EditorApp::on_startup() {
                sigc::mem_fun(*this, &EditorApp::on_menu_file_open));
     add_action("save",
                sigc::mem_fun(*this, &EditorApp::on_menu_file_save));
+    add_action("saveas",
+               sigc::mem_fun(*this, &EditorApp::on_menu_file_save_as));
     add_action("quit", sigc::mem_fun(*this, &EditorApp::on_menu_file_quit));
     add_action("about", sigc::mem_fun(*this, &EditorApp::on_menu_help_about));
 
@@ -54,6 +59,10 @@ void EditorApp::on_startup() {
                     "          <attribute name='label' translatable='yes'>Save</attribute>"
                     "          <attribute name='action'>app.save</attribute>"
                     "          <attribute name='accel'>&lt;Primary&gt;s</attribute>"
+                    "        </item>"
+                    "        <item>"
+                    "          <attribute name='label' translatable='yes'>Save As...</attribute>"
+                    "          <attribute name='action'>app.saveas</attribute>"
                     "        </item>"
                     "      </section>"
                     "      <section>"
@@ -98,9 +107,9 @@ void EditorApp::on_activate() {
 
 void EditorApp::create_window() {
     Level* main = new Level;
-    Level* chamber = new ChamberLevel;
-    Workspace* main_ws = new Workspace(main);
-    Workspace* chamber_ws = new Workspace(chamber);
+    ChamberLevel* chamber = new ChamberLevel;
+    main_ws = new Workspace(main);
+    chamber_ws = new Workspace(chamber);
     win = new EditorMainWindow(main_ws, chamber_ws);
     add_window(*win);
     win->signal_hide().connect(sigc::bind<Gtk::Window*>(
@@ -113,26 +122,81 @@ void EditorApp::on_window_hide(Gtk::Window* window) {
 }
 
 void EditorApp::on_menu_file_new() {
-    win->new_file();
+    main_ws->replaceLevel();
+    chamber_ws->replaceLevel();
 }
 
 void EditorApp::on_menu_file_open() {
-    std::cout << "A File|Open menu item was selected." << std::endl;
+    Gtk::FileChooserDialog open("Open file",
+                                  Gtk::FILE_CHOOSER_ACTION_OPEN);
+    open.set_transient_for(*win);
+
+    //buttons
+    open.add_button("_Cancel", Gtk::RESPONSE_CANCEL);
+    open.add_button("Open", Gtk::RESPONSE_OK);
+
+    //filter
+    Glib::RefPtr<Gtk::FileFilter> filter_json = Gtk::FileFilter::create();
+    filter_json->set_name("JSON files");
+    filter_json->add_pattern("*.json");
+    open.add_filter(filter_json);
+
+    int result = open.run();
+    switch(result) {
+        case(Gtk::RESPONSE_OK): {
+            open_file_name = open.get_filename();
+            main_ws->replaceLevel(open_file_name);
+            chamber_ws->replaceLevel(open_file_name);
+            break;
+        } case(Gtk::RESPONSE_CANCEL): {
+            break;
+        } default: {
+            break;
+        }
+    }
 }
 
 void EditorApp::on_menu_file_save() {
-    std::cout << "A File|Save menu item was selected." << std::endl;
+    if (open_file_name == "") {
+        on_menu_file_save_as();
+    } else {
+        main_ws->save(open_file_name);
+        chamber_ws->save(open_file_name);
+    }
+}
+
+void EditorApp::on_menu_file_save_as() {
+    Gtk::FileChooserDialog open("Save file",
+                                Gtk::FILE_CHOOSER_ACTION_SAVE);
+    open.set_transient_for(*win);
+
+    //buttons:
+    open.add_button("_Cancel", Gtk::RESPONSE_CANCEL);
+    open.add_button("Save", Gtk::RESPONSE_OK);
+
+    int result = open.run();
+    switch(result) {
+        case(Gtk::RESPONSE_OK): {
+            open_file_name = open.get_filename();
+            on_menu_file_save();
+            break;
+        } case(Gtk::RESPONSE_CANCEL): {
+            break;
+        } default: {
+            break;
+        }
+    }
 }
 
 void EditorApp::on_menu_help_about() {
-    std::cout << "App|Help|About was selected." << std::endl;
+    //TODO
 }
 
 void EditorApp::on_menu_file_quit() {
     quit();
     std::vector<Gtk::Window*> windows = get_windows();
-    if (windows.size() > 0){
-        windows[MAIN_WINDOW]->hide();
+    for (uint i = 0; i < windows.size(); ++i){
+        windows[i]->hide();
     }
 }
 

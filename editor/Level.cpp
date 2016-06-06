@@ -86,6 +86,12 @@ Level* Level::cleanCopy() {
     return new Level;
 }
 
+Level* Level::openCopy(string file) {
+    return new Level(file);
+}
+
+
+
 
 
 

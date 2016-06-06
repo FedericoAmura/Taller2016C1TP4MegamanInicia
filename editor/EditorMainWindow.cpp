@@ -47,8 +47,8 @@ EditorMainWindow::EditorMainWindow(Workspace* main, Workspace* chamber)
     delete_button.signal_clicked().connect(sigc::mem_fun(chamber_manager, &WorkspaceEventManager::on_delete));
     selector.connect(&main_manager);
     selector.connect(&chamber_manager);
-    //level_book.signal_switch_page().connect(sigc::mem_fun(main_manager, &WorkspaceEventManager::on_switch_page));
-    //level_book.signal_switch_page().connect(sigc::mem_fun(chamber_manager, &WorkspaceEventManager::on_switch_page));
+    level_book.signal_switch_page().connect(sigc::mem_fun(main_manager, &WorkspaceEventManager::on_switch_page));
+    level_book.signal_switch_page().connect(sigc::mem_fun(chamber_manager, &WorkspaceEventManager::on_switch_page));
 
     //Drag and drop activation
     std::vector<Gtk::TargetEntry> list_targets;
@@ -56,10 +56,5 @@ EditorMainWindow::EditorMainWindow(Workspace* main, Workspace* chamber)
     main_manager.setDroppable(list_targets);
     chamber_manager.setDroppable(list_targets);
     selector.setDraggable(list_targets);
-}
-
-void EditorMainWindow::new_file() {
-    main_manager.replaceLevel();
-    chamber_manager.replaceLevel();
 }
 

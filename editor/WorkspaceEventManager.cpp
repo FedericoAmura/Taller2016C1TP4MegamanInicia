@@ -91,11 +91,7 @@ WorkspaceEventManager::~WorkspaceEventManager() {
     delete workspace;
 }
 
-void WorkspaceEventManager::replaceLevel() {
-    workspace->replaceLevel();
-}
-
-void WorkspaceEventManager::on_switch_page(guint) {
+void WorkspaceEventManager::on_switch_page(Gtk::Widget*, guint) {
     //Otherwise there can be bugs when the workspace
     //is updated whilst obscured.
     workspace->hide();

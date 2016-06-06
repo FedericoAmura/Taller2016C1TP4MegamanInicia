@@ -79,13 +79,20 @@ bool Workspace::validPosition(uint x, uint y) {
 }
 
 void Workspace::replaceLevel() {
+    //Asks for copy to get same type
     Level* new_level = level->cleanCopy();
     delete level;
     level = new_level;
-    clean();
-    resize();
-    refresh();
+    renew();
 }
+
+void Workspace::replaceLevel(string file) {
+    Level* new_level = level->openCopy(file);
+    delete level;
+    level = new_level;
+    renew();
+}
+
 
 void Workspace::refresh() {
     for (uint i = 0; i < level->getLength() ; ++i){
@@ -112,5 +119,22 @@ void Workspace::clean() {
         drawings.erase(it);
     }
 }
+
+void Workspace::save(string file_name) {
+    level->toJson(file_name);
+}
+
+void Workspace::renew() {
+    clean();
+    resize();
+    refresh();
+}
+
+
+
+
+
+
+
 
 

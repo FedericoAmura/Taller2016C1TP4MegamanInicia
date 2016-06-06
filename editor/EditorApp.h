@@ -31,6 +31,9 @@ private:
     Glib::RefPtr<Gtk::Builder> builder;
     string open_file_name;
 
+    Workspace* main_ws;
+    Workspace* chamber_ws;
+
     void create_window();
 
     //Handlers
@@ -38,6 +41,7 @@ private:
     void on_menu_file_new();
     void on_menu_file_open();
     void on_menu_file_save();
+    void on_menu_file_save_as();
     void on_menu_file_quit();
     void on_menu_help_about();
 

@@ -23,11 +23,13 @@ public:
     Workspace(Level* level);
     ~Workspace();
     void replaceLevel();
+    void replaceLevel(string file);
     bool addElement(uint x, uint y, uint id);
     bool removeEntity(uint x, uint y);
     uint getId(uint x, uint y);
     bool validPosition(uint x, uint y);
     const int getScreenWidth() {return screen_width;}
+    void save(string file_name);
 
 private:
     Level* level;
@@ -39,6 +41,7 @@ private:
     void clean();
     void resize();
     void refresh();
+    void renew();
 };
 
 

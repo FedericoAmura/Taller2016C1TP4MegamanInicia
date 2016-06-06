@@ -21,7 +21,6 @@
 class EditorMainWindow : public Gtk::ApplicationWindow {
 public:
     EditorMainWindow(Workspace* main, Workspace* chamber);
-    void new_file();
 
 private:
     //Widgets
@@ -40,21 +39,6 @@ private:
     SelectionDrawing selection_drawing;
     SelectionLabel selection_label;
     ButtonDeleteSelection delete_button;
-
-    Glib::RefPtr<Gtk::Builder> builder;
-
-    //Handlers
-    void on_menu_others();
-    void on_menu_choices(const Glib::ustring& parameter);
-    void on_menu_choices_other(int parameter);
-    void on_menu_toggle();
-
-    //Two sets of choices:
-    Glib::RefPtr<Gio::SimpleAction> m_refChoice;
-    Glib::RefPtr<Gio::SimpleAction> m_refChoiceOther;
-
-    Glib::RefPtr<Gio::SimpleAction> m_refToggle;
-
 };
 
 

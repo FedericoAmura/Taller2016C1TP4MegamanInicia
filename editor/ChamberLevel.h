@@ -15,6 +15,8 @@ public:
         entities = new Layer(27); //hardcodeo por ahora
     }
     void toJson(string file_name);
+    Level* cleanCopy();
+    Level* openCopy(string file);
 };
 
 

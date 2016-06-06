@@ -18,12 +18,11 @@ class WorkspaceEventManager : public Gtk::EventBox {
 public:
     WorkspaceEventManager(Workspace* workspace);
     ~WorkspaceEventManager();
-    void replaceLevel();
     void setDroppable(std::vector<Gtk::TargetEntry>& listTargets);
     type_signal_selection signal_selection();
     void on_delete();
     bool on_selection_change(uint id);
-    void on_switch_page(guint);
+    void on_switch_page(Gtk::Widget*, guint);
 
 private:
     Workspace* workspace;

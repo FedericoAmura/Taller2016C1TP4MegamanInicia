@@ -1,12 +1,5 @@
 {
-	"chamber" : 
-	[
-		{
-			"id" : 4119,
-			"x" : 6,
-			"y" : 6
-		}
-	],
+	"chamber" : [],
 	"foreground" : 
 	[
 		{
@@ -20,7 +13,7 @@
 			"y" : 5
 		}
 	],
-	"length" : 29,
+	"length" : 21,
 	"valid" : true,
 	"width" : 15
 }
