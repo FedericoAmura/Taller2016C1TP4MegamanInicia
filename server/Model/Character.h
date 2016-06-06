@@ -27,7 +27,7 @@ protected:
 	float jSpeed;
 	MyLevel* level;
 	Weapon* myWeapon;
-	Stat<int> life;
+	Stat<uint> life;
 	bool dead;
 	int direction;
 
@@ -45,6 +45,7 @@ public:
 	virtual void damage(Bullet* bullet);
 	void shoot();
 	int getDirection();
+	bool isDead();
 };
 
 #endif /* SERVER_MODEL_CHARACTER_H_ */

@@ -33,8 +33,8 @@
 
 #define COFIG_FILE "../server/Model/config.json"
 #define IGNORE 0
-#define LEFT_ZONE_LIMIT 0.2
-#define RIGHT_ZONE_LIMIT 0.8
+#define LEFT_ZONE_LIMIT 0.1
+#define RIGHT_ZONE_LIMIT 0.9
 #define OFFSET 0.1
 
 MyLevel::MyLevel(Game* j,std::string lvlFileName):
@@ -43,7 +43,6 @@ running(false),
 game(j),
 factory(&world,this){
 	LevelObject::resetIds();
-	megaman=nullptr;
 	boundaries=nullptr;
 	world.SetContinuousPhysics(true);
 	world.SetContactListener(&contactListener);
@@ -90,6 +89,7 @@ void MyLevel::fileToJson(std::string fileName, Json::Value& json){
 }
 
 MyLevel::~MyLevel() {
+	/*characters and megamans are cleaned with the level objects*/
 	std::map<int,LevelObject*>::iterator objectIt=objects.begin();
 	for(;objectIt!=objects.end();objectIt++){
 		delete objectIt->second;
@@ -108,9 +108,14 @@ LevelObject* MyLevel::createObject(int id,b2Vec2& pos) {
 		if(objectType==0 && boundaries==nullptr){
 			boundaries= newObject;
 		}
-		if(objectType==9 && megaman==nullptr){//megaman
-			megaman=(Megaman*) newObject;
-			characters[newObject->getId()]=megaman;
+		if(objectType==9){//megaman
+			if(megamans.size()<1){
+				Megaman* megaman=(Megaman*) newObject;
+				megamans[1]=megaman;//todo remove hardcode
+				characters[newObject->getId()]=megaman;
+			}else{
+				return nullptr;
+			}
 		}
 		if(objectType==1){//character
 			characters[newObject->getId()]=(Character*)newObject;
@@ -179,6 +184,11 @@ void MyLevel::redrawForClient(bool checkChanges){
 			msj<<MOVE<<" "<<obj->getId()<<" "<<posToString(corner);
 			game->notify(new MessageSent(msj.str(),0));
 		}
+		if(!posInWindow(obj->getPos())){//hide
+			std::stringstream msj;
+			msj<<MOVE<<" "<<obj->getId()<<" 27 15";
+			game->notify(new MessageSent(msj.str(),0));
+		}
 	}
 	std::map<int,Character*>::iterator characterIt=characters.begin();
 	for(;characterIt!=characters.end();characterIt++){
@@ -187,7 +197,7 @@ void MyLevel::redrawForClient(bool checkChanges){
 			character->hasFlipped=false;
 			std::stringstream msj;
 			msj<<REDRAW<<" "<<character->getId()<<" "<<character->getSpriteId()
-				<<" "<<character->getDirection();
+												<<" "<<character->getDirection();
 			game->notify(new MessageSent(msj.str(),0));
 		}
 	}
@@ -204,21 +214,14 @@ void MyLevel::removeDead(){
 			killMsg<<KILL<<" "<<deadId;
 			game->notify(new MessageSent(killMsg.str(),0));
 		}else{
-			//reset boundaries if removed
-			boundaries=nullptr;
+			boundaries=nullptr;//reset boundaries if removed
 		}
 		//erase from object tracker
 		if(objects.find(deadId)!=objects.end())
 			objects.erase(deadId);
-		//erase from characters tracker if it was there
+		//erase from characters tracker
 		if(characters.find(deadId)!=characters.end())
 			characters.erase(deadId);
-		//if no megamans left exit
-		if(dead==megaman){
-			megaman=nullptr;
-			game->notify(new LevelFinished(-1));
-			this->stop();
-		}
 		//delete the dead
 		delete dead;
 	}
@@ -242,8 +245,14 @@ void MyLevel::run(){
 			createNewObjects();
 			world.Step(timeStep, velocityIterations, positionIterations);
 			tickAll(timeStep);
-			respawnAll();
 			redrawForClient();
+			respawnAll();
+			//if no megamans left exit
+			if(allMegamansDead()){
+				LOG(INFO)<<"all megamans dead";
+				game->notify(new LevelFinished(-1));
+				this->stop();
+			}
 			usleep(timeStep* 1000000 );
 		}
 	}catch(std::exception& e){
@@ -260,9 +269,12 @@ void MyLevel::stop(){
 
 /*makes the megaman move according to the input*/
 void MyLevel::changeKeyState(uint keyState, int client){
-	//todo direct to proper megaman
-	if(megaman!=nullptr)
-		megaman->changeKeyState(keyState);
+	std::map<int,Megaman*>::iterator pos=megamans.find(client);
+	if(pos!=megamans.end()){
+		Megaman* megaman=pos->second;
+		if(!megaman->isDead())
+			megaman->changeKeyState(keyState);
+	}
 }
 
 /*adds object to remove list*/
@@ -270,9 +282,21 @@ void MyLevel::remove(LevelObject* deadObject){
 	toRemove.push(deadObject);
 }
 
+/*returns true if all megamans died*/
+bool MyLevel::allMegamansDead() {
+	bool allDead = true;
+	std::map<int, Megaman*>::iterator megIt = megamans.begin();
+	for (; megIt != megamans.end(); megIt++) {
+		Megaman* megaman = megIt->second;
+		if (!megaman->isDead())
+			allDead = false;
+	}
+	return allDead;
+}
+
 /*respawns objects in respawn list*/
 void MyLevel::respawnAll() {
-	while(!toRespawn.empty()){
+	while(!toRespawn.empty() && allMegamansDead()){
 		toRespawn.front()->spawn();
 		toRespawn.pop();
 	}
@@ -346,21 +370,28 @@ bool MyLevel::posInWindow(const b2Vec2& pos) {
  * If screen moved spawns new enemies, kills characters outside window,
  * informs client to move all objects*/
 void MyLevel::moveScreen() {
-	//todo more megamans
-	bool inRightZone;
-	bool inLeftZone= windowPos.x != 0;//check not left border
-	inLeftZone= inLeftZone && ( megaman->getPos().x <
-			(windowPos.x + windowWidth* LEFT_ZONE_LIMIT) );
+	bool inRightZone, inLeftZone;
+	inLeftZone= (windowPos.x != 0);//check not left border
+	std::map<int,Megaman*>::iterator megIt=megamans.begin();
+	for(; megIt!=megamans.end(); megIt++){
+		Megaman* megaman=megIt->second;
+		inLeftZone= inLeftZone && ( megaman->getPos().x <
+				(windowPos.x + windowWidth* LEFT_ZONE_LIMIT) );
+	}
 	if (inLeftZone){
 		windowPos.x-=windowWidth*(RIGHT_ZONE_LIMIT-OFFSET);
 		if(windowPos.x<0)
 			windowPos.x=0;
 	}else{
 		inRightZone= (windowPos.x+windowWidth)<worldWidth;//check not rigth border
-		inRightZone= inRightZone && ( megaman->getPos().x >
-		(windowPos.x + windowWidth* RIGHT_ZONE_LIMIT) );
+		megIt=megamans.begin();
+		for(; megIt!=megamans.end(); megIt++){
+			Megaman* megaman=megIt->second;
+			inRightZone= inRightZone && ( megaman->getPos().x >
+				(windowPos.x + windowWidth* RIGHT_ZONE_LIMIT) );
+		}
 		if (inRightZone){
-			windowPos.x+=windowWidth*(1-LEFT_ZONE_LIMIT-OFFSET);
+			windowPos.x+=windowWidth*(RIGHT_ZONE_LIMIT-LEFT_ZONE_LIMIT-OFFSET);
 			if((windowPos.x+windowWidth)>worldWidth)
 				windowPos.x=worldWidth-windowWidth;
 		}

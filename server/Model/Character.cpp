@@ -73,7 +73,7 @@ void Character::tick(float time){
 
 /*damages by 1, independent of bullet, redefine for dif behaviour*/
 void Character::damage(Bullet* bullet) {
-	life.dec(1);
+	life.dec(bullet->getDamage());
 	LOG(INFO)<<"id: "<<this->getId()<<" life left "<<life.getCurrent();
 	if(life.getCurrent()==0)
 		this->kill();
@@ -86,4 +86,8 @@ void Character::shoot() {
 
 int Character::getDirection() {
 	return direction;
+}
+
+bool Character::isDead() {
+	return dead;
 }

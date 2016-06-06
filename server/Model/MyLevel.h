@@ -34,7 +34,7 @@ class MyLevel: public Thread{
 	bool running;
 	Game* game;
 	std::map<int,LevelObject*> objects;
-	Megaman* megaman;
+	std::map<int,Megaman*> megamans;
 	MyContactListener contactListener;
 	ObjectFactory factory;
 	std::string posToString(b2Vec2 pos);
@@ -63,6 +63,7 @@ class MyLevel: public Thread{
 	void createNewObjects();
 
 	void moveScreen();
+	bool allMegamansDead();
 
 	float stepsPerSecond;
 	float worldWidth;

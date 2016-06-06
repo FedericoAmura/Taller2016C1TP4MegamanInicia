@@ -18,6 +18,7 @@ removed(false){
 	body->SetType(b2_dynamicBody);
 	body->SetGravityScale(0);
 	body->SetBullet(true);
+	damage=json["damage"].asUInt();
 	//	LOG(INFO)<<"bullet:"<<getSpriteId()
 	//			<<" created at: "<<(int)pos.x<<(int)pos.y;
 }
@@ -59,4 +60,8 @@ void Bullet::initialize(int16 groupBits,b2Vec2& speed,MyLevel* lvl) {
 void Bullet::copyCorner(b2Vec2& corner) {
 	corner.x=body->GetPosition().x +0.45;
 	corner.y=body->GetPosition().y -0.45;
+}
+
+uint Bullet::getDamage() {
+	return damage;
 }

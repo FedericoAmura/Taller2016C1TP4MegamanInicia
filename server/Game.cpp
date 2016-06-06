@@ -178,9 +178,9 @@ MyLevel* Game::getLevel(){
  * post:level is set to null*/
 void Game::stopLevel(){
 	//todo send lost,won,exited
-	LOG(INFO)<<"cerrando nivel";
 	if(levelChosen()){
 		if(level->isRunning()){
+			LOG(INFO)<<"cerrando nivel";
 			level->stop();
 			level->join();
 		}
@@ -196,7 +196,8 @@ void Game::stopLevel(){
 //todo move more than one megaman
 void Game::movePlayer(uint keyState, int source) {
 	if(levelChosen()){
-		getLevel()->changeKeyState(keyState,source);
+		//todo change hardcode
+		getLevel()->changeKeyState(keyState,1);
 	}
 }
 

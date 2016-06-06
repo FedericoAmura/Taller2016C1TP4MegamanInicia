@@ -26,9 +26,11 @@ public:
 	Megaman(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl);
 	virtual ~Megaman();
 	void kill();
+	void tick(float time);
+	void damage(Bullet* bullet);
+
 	void spawn();
 	bool checkClimbing();
-	void tick(float time);
 	void changeKeyState(uint keyState);
 	void heal(uint amount);
 	void charge(uint amount);

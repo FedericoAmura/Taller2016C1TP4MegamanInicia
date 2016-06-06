@@ -106,9 +106,8 @@ void Megaman::kill() {
 		if(livesRemaining>=1){
 			livesRemaining--;
 			level->respawn(this);
-			dead=false;
+			dead=true;
 		}else{
-			level->remove(this);
 			dead=true;
 		}
 	}
@@ -117,7 +116,10 @@ void Megaman::kill() {
 /*warning: do not call from inside world step or contact listener
  * sends megaman to his assigned spawning point*/
 void Megaman::spawn() {
-	body->SetTransform(spawnPoint,0);
+	if(livesRemaining>0 || !dead){
+		dead=false;
+		body->SetTransform(spawnPoint,0);
+	}
 }
 
 bool Megaman::checkClimbing(){
@@ -148,4 +150,11 @@ void Megaman::heal(uint amount) {
 void Megaman::charge(uint amount) {
 	//todo charge weapon/s
 	LOG(INFO)<<objectId<<" charged by: "<<amount;
+}
+
+void Megaman::damage(Bullet* bullet) {
+	if(inmuneTime.getCurrent()==0){
+		Character::damage(bullet);
+		inmuneTime.maxOut();
+	}
 }

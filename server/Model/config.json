@@ -50,7 +50,7 @@
 		"HSpeed" : 		10.0,
 		"ClimbSpeed":	3.0,
 		"JSpeed" :		25.0,
-		"inmuneTime":	2.0,
+		"inmuneTime":	1.0,
 		"life":			20.0,
 		"jumpSensor":
 		{
@@ -101,7 +101,7 @@
 		"id":			1022,
 		"weaponId":		2006,
 		"JSpeed" :		0.0,
-		"life":			2.0,
+		"life":			1.0,
 		"jumpFreq":		60.0,
 		"jumpSensor":
 		{
@@ -128,7 +128,7 @@
 		"id":			1010,
 		"weaponId":		2001,
 		"JSpeed" :		0.0,
-		"life":			2.0,
+		"life":			1.0,
 		"jumpFreq":		60.0,
 		"jumpSensor":
 		{
@@ -237,7 +237,8 @@
 	
 	"2001":
 	{
-		"cooldown":	1.0,
+		"damage":	2,
+		"cooldown":	2.0,
 		"bulletId":	2001,
 		"speed":
 		{
@@ -257,6 +258,7 @@
 	
 	"2004":
 	{
+		"damage":	1,
 		"cooldown":	0.25,
 		"bulletId":	2004,
 		"speed":
@@ -277,6 +279,7 @@
 	
 	"2006":
 	{
+		"damage":	1,
 		"cooldown":	1.0,
 		"bulletId":	2006,
 		"speed":
