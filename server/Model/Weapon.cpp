@@ -49,10 +49,10 @@ void Weapon::shoot(const b2Vec2& pos, int direction){
 		BulletInfo* info= new BulletInfo(bulletId,pos,speedVec,groupBits);
 		level->newObject(info);
 		cooldown.maxOut();
-		LOG(INFO)<<std::fixed<<std::setprecision(2)
-				<<"firing bullet: "<<bulletId<<" at: "
-				<<pos.x<<" "<<pos.y
-				<<"	speed: "<<speedVec.x<<" "<<speedVec.y;
+//		LOG(INFO)<<std::fixed<<std::setprecision(2)
+//				<<"firing bullet: "<<bulletId<<" at: "
+//				<<pos.x<<" "<<pos.y
+//				<<"	speed: "<<speedVec.x<<" "<<speedVec.y;
 	}
 }
 

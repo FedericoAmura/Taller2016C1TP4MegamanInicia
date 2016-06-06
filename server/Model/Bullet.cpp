@@ -53,9 +53,9 @@ void Bullet::initialize(int16 groupBits,b2Vec2& speed,MyLevel* lvl) {
 		f->SetFilterData(filter);
 		f->SetDensity(0.001);
 	}
-	LOG(INFO)<<std::fixed<<std::setprecision(2)
-			<<"bullet initialized with speed: "
-			<<speed.x<<" "<<speed.y	<<" and group bits: "<<groupBits;
+//	LOG(INFO)<<std::fixed<<std::setprecision(2)
+//			<<"bullet initialized with speed: "
+//			<<speed.x<<" "<<speed.y	<<" and group bits: "<<groupBits;
 }
 
 void Bullet::copyCorner(b2Vec2& corner) {

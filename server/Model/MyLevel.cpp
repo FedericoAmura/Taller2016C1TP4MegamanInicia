@@ -37,11 +37,12 @@
 #define RIGHT_ZONE_LIMIT 0.9
 #define OFFSET 0.1
 
-MyLevel::MyLevel(Game* j,std::string lvlFileName):
+MyLevel::MyLevel(Game* j,std::string lvlFileName,int numberOfClients):
 world(b2Vec2(0,-10)),
 running(false),
 game(j),
-factory(&world,this){
+factory(&world,this),
+numOfClients(numberOfClients){
 	LevelObject::resetIds();
 	boundaries=nullptr;
 	world.SetContinuousPhysics(true);
@@ -109,9 +110,9 @@ LevelObject* MyLevel::createObject(int id,b2Vec2& pos) {
 			boundaries= newObject;
 		}
 		if(objectType==9){//megaman
-			if(megamans.size()<1){
+			if(megamans.size()<numOfClients){
 				Megaman* megaman=(Megaman*) newObject;
-				megamans[1]=megaman;//todo remove hardcode
+				megamans[megamans.size()+1]=megaman;
 				characters[newObject->getId()]=megaman;
 			}else{
 				return nullptr;
@@ -177,17 +178,18 @@ void MyLevel::redrawForClient(bool checkChanges){
 	for(;it!=objects.end();it++){
 		LevelObject* obj= it->second;
 		bool changesCheck= !checkChanges || obj->changed();
-		if(changesCheck && posInWindow(obj->getPos())){
-			std::stringstream msj;
-			b2Vec2 corner;
-			obj->copyCorner(corner);
-			msj<<MOVE<<" "<<obj->getId()<<" "<<posToString(corner);
-			game->notify(new MessageSent(msj.str(),0));
-		}
-		if(!posInWindow(obj->getPos())){//hide
-			std::stringstream msj;
-			msj<<MOVE<<" "<<obj->getId()<<" 27 15";
-			game->notify(new MessageSent(msj.str(),0));
+		if(changesCheck){
+			if(posInWindow(obj->getPos())){
+				std::stringstream msj;
+				b2Vec2 corner;
+				obj->copyCorner(corner);
+				msj<<MOVE<<" "<<obj->getId()<<" "<<posToString(corner);
+				game->notify(new MessageSent(msj.str(),0));
+			}else{
+				std::stringstream msj;
+				msj<<MOVE<<" "<<obj->getId()<<" 27 15";
+				game->notify(new MessageSent(msj.str(),0));
+			}
 		}
 	}
 	std::map<int,Character*>::iterator characterIt=characters.begin();
@@ -197,7 +199,7 @@ void MyLevel::redrawForClient(bool checkChanges){
 			character->hasFlipped=false;
 			std::stringstream msj;
 			msj<<REDRAW<<" "<<character->getId()<<" "<<character->getSpriteId()
-												<<" "<<character->getDirection();
+														<<" "<<character->getDirection();
 			game->notify(new MessageSent(msj.str(),0));
 		}
 	}
@@ -296,9 +298,11 @@ bool MyLevel::allMegamansDead() {
 
 /*respawns objects in respawn list*/
 void MyLevel::respawnAll() {
-	while(!toRespawn.empty() && allMegamansDead()){
-		toRespawn.front()->spawn();
-		toRespawn.pop();
+	if(allMegamansDead()){
+		while(!toRespawn.empty()){
+			toRespawn.front()->spawn();
+			toRespawn.pop();
+		}
 	}
 }
 
@@ -387,7 +391,7 @@ void MyLevel::moveScreen() {
 		for(; megIt!=megamans.end(); megIt++){
 			Megaman* megaman=megIt->second;
 			inRightZone= inRightZone && ( megaman->getPos().x >
-				(windowPos.x + windowWidth* RIGHT_ZONE_LIMIT) );
+		(windowPos.x + windowWidth* RIGHT_ZONE_LIMIT) );
 		}
 		if (inRightZone){
 			windowPos.x+=windowWidth*(RIGHT_ZONE_LIMIT-LEFT_ZONE_LIMIT-OFFSET);

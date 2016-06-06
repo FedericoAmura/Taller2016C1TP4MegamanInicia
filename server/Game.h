@@ -31,6 +31,7 @@ class Game:public Thread,public Observer{
 	Mutex clientsMutex;
 	std::map<int,Socket*> clients;
 	int firstClient;
+	std::map<int,int> clientNum;
 
 public:
 	explicit Game(Server* server);

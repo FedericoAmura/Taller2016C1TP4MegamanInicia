@@ -70,14 +70,14 @@ Ladder::~Ladder() {}
 
 void Ladder::collideWith(LevelObject* obj) {
 	//I'm supposed to only collide with megamans
-	LOG(INFO)<<"megaman touching ladder";
+	//LOG(INFO)<<"megaman touching ladder";
 	Megaman* meg=(Megaman*)obj;
 	meg->laddersTouching++;
 	meg->checkClimbing();
 }
 
 void Ladder::stopCollidingWith(Megaman* megaman) {
-	LOG(INFO)<<"megaman stoped touching ladder";
+	//LOG(INFO)<<"megaman stoped touching ladder";
 	if(megaman->laddersTouching>0)//avoid underflow
 		megaman->laddersTouching--;
 	megaman->checkClimbing();

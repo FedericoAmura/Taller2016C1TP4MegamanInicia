@@ -1,6 +1,7 @@
 #include <glog/logging.h>
 #include <map>
 #include <string>
+#include <sstream>
 #include <unistd.h>
 
 #include "Game.h"
@@ -81,11 +82,13 @@ void Game::addClient(int descriptor){
 	}else{
 		nuevoCliente->iniciarComunicaciones();
 		if(clients.size()==0){
-			std::string msjPrimero= "sos el primer jugador";
-			this->notify(new MessageSent(msjPrimero,descriptor));
 			firstClient=descriptor;
 		}
 		clients[descriptor]=nuevoCliente;
+		std::stringstream msj;
+		msj<<HELLO<<" "<<clients.size();
+		this->notify(new MessageSent(msj.str(),descriptor));
+		clientNum[descriptor]=clients.size();
 		LOG(INFO)<<"Cliente conectado nro: "
 				<<clients.size()<<" descriptor: "<<descriptor;
 	}
@@ -141,11 +144,11 @@ void Game::selectLevel(int levelId, int client){
 		}
 		case 1004:{
 			levelFilePath="../levels/basic2.json";
-				break;
+			break;
 		}
 		case 1005:{
 			levelFilePath="../bin/simplex.json";
-				break;
+			break;
 		}
 		default:{
 			levelFilePath="../levels/basic0.json";
@@ -153,7 +156,7 @@ void Game::selectLevel(int levelId, int client){
 		}
 		}//end switch
 		try{
-			MyLevel* lvl=new MyLevel(this,levelFilePath);
+			MyLevel* lvl=new MyLevel(this,levelFilePath,clients.size());
 			level= lvl;//to avoid asigning invalid in case of error
 			level->start();
 			std::stringstream msg;
@@ -197,7 +200,7 @@ void Game::stopLevel(){
 void Game::movePlayer(uint keyState, int source) {
 	if(levelChosen()){
 		//todo change hardcode
-		getLevel()->changeKeyState(keyState,1);
+		getLevel()->changeKeyState(keyState,clientNum[source]);
 	}
 }
 

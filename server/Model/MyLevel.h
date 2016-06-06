@@ -71,9 +71,10 @@ class MyLevel: public Thread{
 	float windowWidth;
 	float windowHeight;
 	b2Vec2 windowPos;
+	int numOfClients;
 
 public:
-	explicit MyLevel(Game* j,std::string lvlFileName);
+	explicit MyLevel(Game* j,std::string lvlFileName, int numberOfClients);
 	virtual ~MyLevel();
 	void run();
 	void stop();
