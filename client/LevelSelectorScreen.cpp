@@ -18,13 +18,13 @@ LevelSelectorScreen::LevelSelectorScreen(MegamanClientModel& model) :
 	const int imgWidth = width/3-50;	//-50 porque nos saca de fullscreen
 	const int imgHeight = height/2-50;	//-50 porque nos saca de fullscreen
 
-	const int messagesWidth = width-height;
-
 	//MegaMan
+	exitButton.set_label("Disconnect");
 	megaManIcon.setImage("../images/levelImages/MegaMan.png",imgWidth,imgHeight,false);
 	megaManIcon.set_vexpand(true);
 	megaManIcon.set_hexpand(true);
-	megaManButton.set_image(megaManIcon);
+	megamanContainer.add(exitButton);
+	megamanContainer.add(megaManIcon);
 	//MagnetMan
 	magnetManIcon.setImage("../images/levelImages/MagnetMan.png",imgWidth,imgHeight,false);
 	magnetManIcon.set_vexpand(true);
@@ -52,16 +52,16 @@ LevelSelectorScreen::LevelSelectorScreen(MegamanClientModel& model) :
 	bombManButton.set_image(bombManIcon);
 
 	//Agrego los selectores a la grilla
-	add(megaManButton);
-	attach_next_to(magnetManButton,megaManButton,Gtk::PositionType::POS_RIGHT,1,1);
+	add(megamanContainer);
+	attach_next_to(magnetManButton,megamanContainer,Gtk::PositionType::POS_RIGHT,1,1);
 	attach_next_to(sparkManButton,magnetManButton,Gtk::PositionType::POS_RIGHT,1,1);
-	attach_next_to(ringManButton,megaManButton,Gtk::PositionType::POS_BOTTOM,1,1);
+	attach_next_to(ringManButton,megamanContainer,Gtk::PositionType::POS_BOTTOM,1,1);
 	attach_next_to(fireManButton,ringManButton,Gtk::PositionType::POS_RIGHT,1,1);
 	attach_next_to(bombManButton,fireManButton,Gtk::PositionType::POS_RIGHT,1,1);
 }
 
-Gtk::Button& LevelSelectorScreen::getMegamanButton() {
-	return megaManButton;
+Gtk::Button& LevelSelectorScreen::getDisconnectButton() {
+	return exitButton;
 }
 
 Gtk::Button& LevelSelectorScreen::getMagnetManButton() {

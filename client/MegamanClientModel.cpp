@@ -38,6 +38,9 @@ void MegamanClientModel::run() {
 		int command = atoi(commandString.c_str());
 
 		switch (command) {
+		case HELLO:
+			std::cout << "Server connected" << std::endl;
+			break;
 		case DRAW:
 			{
 			std::string idDrawable; ss >> idDrawable;
@@ -48,12 +51,10 @@ void MegamanClientModel::run() {
 			Drawable* drawable = drawables.getDrawable(atoi(idDrawable.c_str()));
 			if (drawable == nullptr) {
 				drawable = new Drawable();
-				drawable->setIsDrawed(false);
 			}
 			uint id = (uint)atoi(idDrawing.c_str());
 			drawable->setImage(id, sprites.get(id),sprites.getWidth(id),sprites.getHeight(id),atoi(flipped.c_str()));
 			drawable->setCoordinates(xDrawable,yDrawable);
-			drawable->setDraw(true);
 			drawables.setDrawable(atoi(idDrawable.c_str()),drawable);
 			}
 			break;
@@ -66,7 +67,7 @@ void MegamanClientModel::run() {
 			if (drawable == nullptr) continue;
 			uint id = (uint)atoi(idDrawing.c_str());
 			drawable->setImage(id, sprites.get(id),sprites.getWidth(id),sprites.getHeight(id),atoi(flipped.c_str()));
-			drawable->setDraw(true);
+			drawable->setChanged(true);
 			}
 			break;
 		case MOVE:
@@ -77,7 +78,7 @@ void MegamanClientModel::run() {
 			Drawable* drawable = drawables.getDrawable(atoi(idDrawable.c_str()));
 			if (drawable == nullptr) continue;
 			drawable->setCoordinates(xDrawable,yDrawable);
-			drawable->setDraw(true);
+			drawable->setChanged(true);
 			}
 			break;
 		case KILL:
@@ -87,7 +88,7 @@ void MegamanClientModel::run() {
 			if (drawable == nullptr) continue;
 			//TODO Por ahora lo dibujamos arafue
 			drawable->setCoordinates(TILES_HORIZONTAL,TILES_VERTICAL);
-			drawable->setDraw(true);
+			drawable->setChanged(true);
 			}
 			break;
 		case SOUND:
@@ -101,6 +102,9 @@ void MegamanClientModel::run() {
 			break;
 		case BACK_TO_LEVEL_SELECTION:
 			windowChangeSignal.emit(LEVEL_SELECTOR_SCREEN_NAME);
+			break;
+		case END_CURRENT:
+			//do nothing
 			break;
 		default:
 			{

@@ -20,8 +20,8 @@ private:
 	uint spriteId;
 	double posX;
 	double posY;
-	bool drawed;	//indica si el drawable ya fue dibujado en un container
-	bool draw;		//indica si el drawable deberia (re)dibujarse
+	bool drawed;		//indica si el drawable ya fue dibujado en un container
+	bool changed;		//indica si el drawable deberia (re)dibujarse
 
 public:
 	Drawable();
@@ -36,9 +36,9 @@ public:
 	double getY();
 
 	void setIsDrawed(bool isDrawed);
-	void setDraw(bool shouldDraw);
+	void setChanged(bool modified);
 	bool isDrawed();
-	bool shouldDraw();
+	bool getChanged();
 
 
 private:

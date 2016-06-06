@@ -14,7 +14,7 @@ Drawable::Drawable() :
 	posX(0.0),
 	posY(0.0),
 	drawed(false),
-	draw(true) {
+	changed(true) {
 }
 
 Drawable::~Drawable() {
@@ -56,9 +56,9 @@ void Drawable::setIsDrawed(bool isDrawed) {
 	drawed = isDrawed;
 }
 
-void Drawable::setDraw(bool shouldDraw) {
+void Drawable::setChanged(bool modified) {
 	Lock l(m);
-	draw = shouldDraw;
+	changed = modified;
 }
 
 bool Drawable::isDrawed() {
@@ -66,8 +66,8 @@ bool Drawable::isDrawed() {
 	return drawed;
 }
 
-bool Drawable::shouldDraw() {
+bool Drawable::getChanged() {
 	Lock l(m);
-	return draw;
+	return changed;
 }
 

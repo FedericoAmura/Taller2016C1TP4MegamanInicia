@@ -41,6 +41,7 @@ public:
 
 	void showScreen(std::string childrenName);
 	void connectModel();
+	void disconnectModel();
 	void cleanLevelScreen();
 
 private:

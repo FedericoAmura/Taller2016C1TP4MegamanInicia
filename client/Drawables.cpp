@@ -30,6 +30,16 @@ int Drawables::size() {
 	return drawableContainer.size();
 }
 
+DrawablesIterator Drawables::drawablesIterator() {
+	Lock l(m);
+	return drawableContainer.begin();
+}
+
+void Drawables::clear() {
+	Lock l(m);
+	drawableContainer.clear();
+}
+
 Drawable* Drawables::getDrawable(int ID) {
 	Lock l(m);
 	return drawableContainer[ID];

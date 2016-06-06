@@ -13,6 +13,8 @@
 #include "Drawable.h"
 #include "../common/Thread.h"
 
+typedef std::map<int,Drawable*>::iterator DrawablesIterator;
+
 class Drawables {
 private:
 	std::map<int,Drawable*> drawableContainer;
@@ -23,6 +25,8 @@ public:
 	void setDrawable(int ID, Drawable* drawable);
 	bool hasDrawable(int ID);
 	int size();
+	DrawablesIterator drawablesIterator();
+	void clear();
 	Drawable* getDrawable(int ID);
 	virtual ~Drawables();
 };

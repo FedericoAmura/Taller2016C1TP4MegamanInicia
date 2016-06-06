@@ -23,6 +23,7 @@ levelScreen(model) {
 	set_title("Megaman Begins");
 	fullscreen();
 	add(screenContainer);
+
 	//Pongo esta ventana a ver el evento de apretar algo e informo al modelo cada 100ms
 	add_events(Gdk::KEY_PRESS_MASK);
 	add_events(Gdk::KEY_RELEASE_MASK);
@@ -41,6 +42,8 @@ levelScreen(model) {
 	credBackButton.signal_clicked().connect(sigc::bind<std::string>(sigc::mem_fun(*this,&ClientWindow::showScreen),CONNECTION_SCREEN_NAME));
 
 	//Conecto senales para notificar al server de eleccion del nivel
+	Gtk::Button &disconnectButton = levelSelectorScreen.getDisconnectButton();
+	disconnectButton.signal_clicked().connect(sigc::mem_fun(*this,&ClientWindow::disconnectModel));
 	Gtk::Button &magnetManButton = levelSelectorScreen.getMagnetManButton();
 	magnetManButton.signal_clicked().connect(sigc::bind<int>(sigc::mem_fun(model,&MegamanClientModel::serverSendLevelSelected),MAGNETMAN));
 	Gtk::Button &sparkManButton = levelSelectorScreen.getSparkManButton();
@@ -81,6 +84,11 @@ void ClientWindow::connectModel() {
 	std::string serverPort = connectionScreen.getServerPort();
 	model.connectServer(serverIP, serverPort);
 	showScreen(LEVEL_SELECTOR_SCREEN_NAME);
+}
+
+void ClientWindow::disconnectModel() {
+	model.disconnectServer();
+	showScreen(CONNECTION_SCREEN_NAME);
 }
 
 bool ClientWindow::on_key_press_event(GdkEventKey* key_event) {

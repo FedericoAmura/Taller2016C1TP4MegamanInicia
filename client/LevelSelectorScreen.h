@@ -8,6 +8,7 @@
 #ifndef SRC_LEVELSELECTORSCREEN_H_
 #define SRC_LEVELSELECTORSCREEN_H_
 
+#include <gtkmm/box.h>
 #include <gtkmm/button.h>
 #include <gtkmm/grid.h>
 #include <gtkmm/label.h>
@@ -18,9 +19,9 @@
 class LevelSelectorScreen : public Gtk::Grid {
 private:
 	MegamanClientModel& model;
-	//Gtk::Label messages;
+	Gtk::VBox megamanContainer;
+	Gtk::Button exitButton;
 	Drawing megaManIcon;
-	Gtk::Button megaManButton;
 	Drawing magnetManIcon;
 	Gtk::Button magnetManButton;
 	Drawing sparkManIcon;
@@ -34,7 +35,7 @@ private:
 
 public:
 	LevelSelectorScreen(MegamanClientModel& model);
-	Gtk::Button& getMegamanButton();
+	Gtk::Button& getDisconnectButton();
 	Gtk::Button& getMagnetManButton();
 	Gtk::Button& getSparkManButton();
 	Gtk::Button& getRingManButton();
