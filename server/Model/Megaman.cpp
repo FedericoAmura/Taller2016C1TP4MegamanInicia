@@ -158,3 +158,8 @@ void Megaman::damage(Bullet* bullet) {
 		inmuneTime.maxOut();
 	}
 }
+
+void Megaman::setSpawnPos(b2Vec2& newPos) {
+	spawnPoint.x=newPos.x;
+	spawnPoint.y=newPos.y;
+}

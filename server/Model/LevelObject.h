@@ -48,6 +48,7 @@ public:
 	int getSpriteId();
 	virtual bool changed();
 	virtual void collideWith(LevelObject* obj);
+	virtual void stopCollidingWith(LevelObject* obj);
 	virtual void copyCorner(b2Vec2& corner);
 };
 

@@ -138,3 +138,5 @@ void LevelObject::copyCorner(b2Vec2& corner) {
 	corner.y=body->GetPosition().y;
 }
 
+void LevelObject::stopCollidingWith(LevelObject* obj) {
+}

@@ -30,19 +30,22 @@
 #include "ObjectFactory.h"
 #include "ObjectInfo.h"
 #include "Bullet.h"
+#include "Obstacle.h"
 
 #define COFIG_FILE "../server/Model/config.json"
 #define IGNORE 0
 #define LEFT_ZONE_LIMIT 0.1
 #define RIGHT_ZONE_LIMIT 0.9
 #define OFFSET 0.1
+#define BOSS_CHAMBER_OFFSET 10
 
-MyLevel::MyLevel(Game* j,std::string lvlFileName,int numberOfClients):
+MyLevel::MyLevel(Game* j,std::string lvlFileName,uint numberOfClients):
 world(b2Vec2(0,-10)),
 running(false),
 game(j),
 factory(&world,this),
-numOfClients(numberOfClients){
+numOfClients(numberOfClients),
+bossEncounter(false){
 	LevelObject::resetIds();
 	boundaries=nullptr;
 	world.SetContinuousPhysics(true);
@@ -73,6 +76,20 @@ numOfClients(numberOfClients){
 		int id=(*it)["id"].asInt();
 		b2Vec2 pos=jsonPosToWorldPos((*it)["x"].asInt(),
 				(*it)["y"].asInt());
+		if(id/1000 ==1){
+			addSpawner(id,pos);
+		}else{
+			createObject(id,pos);
+		}
+	}
+	//load all objects of the level
+	Json::Value objetosBossChamber=level_json["chamber"];
+	Json::ValueIterator chamberIt=objetosBossChamber.begin();
+	for(; chamberIt!=objetosBossChamber.end(); chamberIt++){
+		int id=(*chamberIt)["id"].asInt();
+		b2Vec2 pos=jsonPosToWorldPos(
+				(*chamberIt)["x"].asInt()+worldWidth+BOSS_CHAMBER_OFFSET,
+				(*chamberIt)["y"].asInt());
 		if(id/1000 ==1){
 			addSpawner(id,pos);
 		}else{
@@ -199,7 +216,7 @@ void MyLevel::redrawForClient(bool checkChanges){
 			character->hasFlipped=false;
 			std::stringstream msj;
 			msj<<REDRAW<<" "<<character->getId()<<" "<<character->getSpriteId()
-														<<" "<<character->getDirection();
+																								<<" "<<character->getDirection();
 			game->notify(new MessageSent(msj.str(),0));
 		}
 	}
@@ -239,9 +256,13 @@ void MyLevel::run(){
 	int32 velocityIterations = 6;
 	int32 positionIterations = 2;
 	LOG(INFO)<<"physics simulation of level started";
-
+	bool bossEncounterStarted=false;
 	try{
 		while(isRunning()){
+			if(!bossEncounterStarted && bossEncounter){
+				bossEncounterStarted=true;
+				startBossEncounter();
+			}
 			moveScreen();
 			removeDead();
 			createNewObjects();
@@ -361,8 +382,8 @@ bool MyLevel::posInWindow(const b2Vec2& pos) {
 	b2Vec2 relativePos;
 	relativePos.x=pos.x-windowPos.x;
 	relativePos.y=pos.y-windowPos.y;
-	bool xAxisOk=relativePos.x<windowWidth && relativePos.x>0;
-	bool yAxisOk=relativePos.y<windowHeight && relativePos.y>0;
+	bool xAxisOk=relativePos.x<=windowWidth && relativePos.x>=0;
+	bool yAxisOk=relativePos.y<=windowHeight && relativePos.y>=0;
 	if(xAxisOk && yAxisOk)
 		return true;
 	else
@@ -375,6 +396,7 @@ bool MyLevel::posInWindow(const b2Vec2& pos) {
 void MyLevel::moveScreen() {
 	bool inRightZone, inLeftZone;
 	inLeftZone= (windowPos.x != 0);//check not left border
+	inLeftZone= (!bossEncounter) && inLeftZone;
 	std::map<int,Megaman*>::iterator megIt=megamans.begin();
 	for(; megIt!=megamans.end(); megIt++){
 		Megaman* megaman=megIt->second;
@@ -387,6 +409,7 @@ void MyLevel::moveScreen() {
 			windowPos.x=0;
 	}else{
 		inRightZone= (windowPos.x+windowWidth)<worldWidth;//check not rigth border
+		inRightZone= (!bossEncounter)&& inRightZone;
 		megIt=megamans.begin();
 		for(; megIt!=megamans.end(); megIt++){
 			Megaman* megaman=megIt->second;
@@ -414,4 +437,37 @@ void MyLevel::moveScreen() {
 		}
 		redrawForClient(false);
 	}
+}
+
+void MyLevel::startBossEncounter() {
+	windowPos.x= worldWidth+BOSS_CHAMBER_OFFSET;
+	createBoundaries();
+	std::map<int,Megaman*>::iterator megIt=megamans.begin();
+	for(; megIt!=megamans.end(); megIt++){
+		b2Vec2 newSpawn(windowPos.x+2,windowPos.y+5);
+		Megaman* megaman=megIt->second;
+		megaman->setSpawnPos(newSpawn);
+		megaman->spawn();
+	}
+	spawn();//create new characters and restores spawners outside
+	std::map<int,Character*>::iterator characterIt=characters.begin();
+	for(; characterIt!=characters.end(); characterIt++){
+		Character* character=characterIt->second;
+		if( !posInWindow(character->getPos()) ){
+			character->kill();
+		}
+	}
+	redrawForClient(false);
+}
+
+void MyLevel::megamanAtDoor(BossDoor* door) {
+	uint megamansAlive=0;
+	std::map<int,Megaman*>::iterator megIt=megamans.begin();
+	for(; megIt!=megamans.end(); megIt++){
+		Megaman* megaman=megIt->second;
+		if(!megaman->isDead())
+			megamansAlive++;
+	}
+	if(door->getMegamansTouching()==megamansAlive && megamansAlive>0)
+		bossEncounter=true;
 }

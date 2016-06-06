@@ -65,14 +65,10 @@ void MyContactListener::BeginContact(b2Contact* contact) {
 
 void MyContactListener::EndContact(b2Contact* contact) {
 	setAllJumps(contact,false);
-
-	uint16 catBits1=contact->GetFixtureA()->GetFilterData().categoryBits;
-	uint16 catBits2=contact->GetFixtureB()->GetFilterData().categoryBits;
 	void* userData1=contact->GetFixtureA()->GetBody()->GetUserData();
 	void* userData2=contact->GetFixtureB()->GetBody()->GetUserData();
-	if(catBits1==LADDERS){
-		((Ladder*)userData1)->stopCollidingWith((Megaman*)userData2);
-	}else if(catBits2==LADDERS){
-		((Ladder*)userData2)->stopCollidingWith((Megaman*)userData1);
-	}
+	LevelObject* obj1=(LevelObject*)userData1;
+	LevelObject* obj2=(LevelObject*)userData2;
+	obj1->stopCollidingWith(obj2);
+	obj2->stopCollidingWith(obj1);
 }

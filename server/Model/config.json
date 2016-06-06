@@ -204,6 +204,141 @@
 		]
 	},
 	
+	"1100":
+	{
+		"id":			1102,
+		"weaponId":		2006,
+		"JSpeed" :		15.0,
+		"life":			20.0,
+		"jumpFreq":		2.0,
+		"jumpSensor":
+		{
+			"type":		1,
+			"x":		0.0,
+			"y": 		-0.5,
+			"width": 	0.25,
+			"height": 	0.1
+		},		
+		"shapes":
+		[
+			{
+				"type":		1,
+				"width" :	0.4,
+				"height" : 	0.5,
+				"X":		0.0,
+				"Y":		0.0
+			}
+		]
+	},
+	
+	"1200":
+	{
+		"id":			1202,
+		"weaponId":		2006,
+		"JSpeed" :		15.0,
+		"life":			20.0,
+		"jumpFreq":		2.0,
+		"jumpSensor":
+		{
+			"type":		1,
+			"x":		0.0,
+			"y": 		-0.5,
+			"width": 	0.25,
+			"height": 	0.1
+		},		
+		"shapes":
+		[
+			{
+				"type":		1,
+				"width" :	0.4,
+				"height" : 	0.5,
+				"X":		0.0,
+				"Y":		0.0
+			}
+		]
+	},
+	
+	"1300":
+	{
+		"id":			1305,
+		"weaponId":		2006,
+		"JSpeed" :		15.0,
+		"life":			20.0,
+		"jumpFreq":		2.0,
+		"jumpSensor":
+		{
+			"type":		1,
+			"x":		0.0,
+			"y": 		-0.5,
+			"width": 	0.25,
+			"height": 	0.1
+		},		
+		"shapes":
+		[
+			{
+				"type":		1,
+				"width" :	0.4,
+				"height" : 	0.5,
+				"X":		0.0,
+				"Y":		0.0
+			}
+		]
+	},
+	
+	"1400":
+	{
+		"id":			1401,
+		"weaponId":		2006,
+		"JSpeed" :		15.0,
+		"life":			20.0,
+		"jumpFreq":		2.0,
+		"jumpSensor":
+		{
+			"type":		1,
+			"x":		0.0,
+			"y": 		-0.5,
+			"width": 	0.25,
+			"height": 	0.1
+		},		
+		"shapes":
+		[
+			{
+				"type":		1,
+				"width" :	0.4,
+				"height" : 	0.5,
+				"X":		0.0,
+				"Y":		0.0
+			}
+		]
+	},
+	
+	"1500":
+	{
+		"id":			1502,
+		"weaponId":		2006,
+		"JSpeed" :		15.0,
+		"life":			20.0,
+		"jumpFreq":		2.0,
+		"jumpSensor":
+		{
+			"type":		1,
+			"x":		0.0,
+			"y": 		-0.5,
+			"width": 	0.25,
+			"height": 	0.1
+		},		
+		"shapes":
+		[
+			{
+				"type":		1,
+				"width" :	0.4,
+				"height" : 	0.5,
+				"X":		0.0,
+				"Y":		0.0
+			}
+		]
+	},
+	
 	"wall":
 	{
 		"shapes":

@@ -30,6 +30,7 @@ public:
 	void damage(Bullet* bullet);
 
 	void spawn();
+	void setSpawnPos(b2Vec2& newPos);
 	bool checkClimbing();
 	void changeKeyState(uint keyState);
 	void heal(uint amount);

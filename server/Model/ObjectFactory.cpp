@@ -7,7 +7,7 @@
 
 #include "ObjectFactory.h"
 
-#include <Box2D/Dynamics/b2Body.h>
+#include <Box2D/Box2D.h>
 #include <glog/logging.h>
 #include <sstream>
 #include <fstream> //ifstream
@@ -27,8 +27,8 @@ struct b2Vec2;
 #define COFIG_FILE "../server/Model/config.json"
 
 ObjectFactory::ObjectFactory(b2World* w, MyLevel* lvl):
-				world(w),
-				level(lvl){}
+						world(w),
+						level(lvl){}
 
 ObjectFactory::~ObjectFactory() {}
 
@@ -82,17 +82,22 @@ LevelObject* ObjectFactory::createObject(int id, b2Vec2& pos) {
 	}
 	case 4:{
 		//create obstacle
-		created=true;
-		newObject = new Obstacle(world,config["wall"],pos,id);
+		if(id==BOSS_DOOR){
+			created=true;
+			newObject = new BossDoor(world,config["wall"],pos,id,level);
+		}else{
+			created=true;
+			newObject = new Obstacle(world,config["wall"],pos,id);
+		}
 		break;
 	}
 	case 5:{
 		// create special obstacle
-		created=true;
 		if(id==SPIKE){
+			created=true;
 			newObject = new Spikes(world,config["spikes"],pos,id);
 		}else{
-			//escalera
+			created=true;
 			newObject= new Ladder(world,config["wall"],pos,id);
 		}
 		break;

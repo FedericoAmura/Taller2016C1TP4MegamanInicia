@@ -24,8 +24,9 @@ bool Obstacle::changed() {
 }
 
 /***********************************************************************/
+
 Spikes::Spikes(b2World* w, Json::Value& json, const b2Vec2& pos, int id):
-				Obstacle(w,json,pos,id){
+		Obstacle(w,json,pos,id){
 	//set filters
 	for (b2Fixture* f = body->GetFixtureList(); f; f = f->GetNext()){
 		changeFixtureFilter(f);
@@ -50,10 +51,12 @@ void Spikes::changeFixtureFilter(b2Fixture* f) {
 }
 
 /***********************************************************************/
+
 void Ladder::changeFixtureFilter(b2Fixture* f) {
 	b2Filter filter=f->GetFilterData();
 	filter.categoryBits=LADDERS;
 	filter.maskBits=(CHARACTERS);
+	filter.groupIndex=ENEMY;
 	f->SetFilterData(filter);
 }
 
@@ -76,10 +79,51 @@ void Ladder::collideWith(LevelObject* obj) {
 	meg->checkClimbing();
 }
 
-void Ladder::stopCollidingWith(Megaman* megaman) {
+void Ladder::stopCollidingWith(LevelObject* obj) {
 	//LOG(INFO)<<"megaman stoped touching ladder";
+	Megaman* megaman=(Megaman*)obj;
 	if(megaman->laddersTouching>0)//avoid underflow
 		megaman->laddersTouching--;
 	megaman->checkClimbing();
 }
 
+/***********************************************************************/
+
+void BossDoor::changeFixtureFilter(b2Fixture* f) {
+	b2Filter filter=f->GetFilterData();
+	filter.categoryBits=LADDERS;
+	filter.maskBits=(CHARACTERS);
+	filter.groupIndex=ENEMY;
+	f->SetFilterData(filter);
+}
+
+BossDoor::BossDoor(b2World* w,
+		Json::Value& json,
+		const b2Vec2& pos, int id,
+		MyLevel* lvl):
+		Obstacle(w,json,pos,id),
+		level(lvl){
+	//set filters
+	for (b2Fixture* f = body->GetFixtureList(); f; f = f->GetNext()){
+		changeFixtureFilter(f);
+		f->SetSensor(true);
+	}
+}
+
+BossDoor::~BossDoor() {
+}
+
+void BossDoor::collideWith(LevelObject* obj) {
+	if(megamansTouching.find(obj->getId())==megamansTouching.end())
+		megamansTouching[obj->getId()]=obj;
+	level->megamanAtDoor(this);
+}
+
+void BossDoor::stopCollidingWith(LevelObject* obj) {
+	if(megamansTouching.find(obj->getId())!=megamansTouching.end())
+		megamansTouching.erase(obj->getId());
+}
+
+uint BossDoor::getMegamansTouching() {
+	return megamansTouching.size();
+}

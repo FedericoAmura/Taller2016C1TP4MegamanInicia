@@ -23,6 +23,7 @@
 #include "ObjectFactory.h"
 #include "Spawner.h"
 
+class BossDoor;
 class ObjectInfo;
 class Character;
 class Megaman;
@@ -65,16 +66,19 @@ class MyLevel: public Thread{
 	void moveScreen();
 	bool allMegamansDead();
 
+	void startBossEncounter();
+
 	float stepsPerSecond;
 	float worldWidth;
 	float worldHeight;
 	float windowWidth;
 	float windowHeight;
 	b2Vec2 windowPos;
-	int numOfClients;
+	uint numOfClients;
 
 public:
-	explicit MyLevel(Game* j,std::string lvlFileName, int numberOfClients);
+	bool bossEncounter;
+	explicit MyLevel(Game* j,std::string lvlFileName, uint numberOfClients);
 	virtual ~MyLevel();
 	void run();
 	void stop();
@@ -86,6 +90,7 @@ public:
 	LevelObject* createObject(int id,b2Vec2& pos);
 	void newObject(ObjectInfo* info);
 	bool posInWindow(const b2Vec2& pos);
+	void megamanAtDoor(BossDoor* door);
 };
 
 #endif /* SERVER_MODEL_MYLEVEL_H_ */

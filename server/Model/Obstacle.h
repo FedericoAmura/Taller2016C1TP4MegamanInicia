@@ -35,6 +35,20 @@ public:
 	Ladder(b2World* w,Json::Value& json,const b2Vec2& pos,int id);
 	virtual ~Ladder();
 	void collideWith(LevelObject* obj);
-	void stopCollidingWith(Megaman* meg);
+	void stopCollidingWith(LevelObject* obj);
+};
+
+#include "MyLevel.h"
+
+class BossDoor:public Obstacle{
+	MyLevel* level;
+	std::map<int,LevelObject*> megamansTouching;
+	void changeFixtureFilter(b2Fixture* f);
+public:
+	BossDoor(b2World* w,Json::Value& json,const b2Vec2& pos,int id,MyLevel* lvl);
+	virtual ~BossDoor();
+	void collideWith(LevelObject* obj);
+	void stopCollidingWith(LevelObject* obj);
+	uint getMegamansTouching();
 };
 #endif /* SERVER_MODEL_OBSTACLE_H_ */
