@@ -319,7 +319,6 @@ void MyLevel::createNewObjects() {
 	while(!toCreate.empty()){
 		ObjectInfo* info=toCreate.front();
 		toCreate.pop();
-
 		b2Vec2 pos=info->getPos();
 		LevelObject* obj=createObject(info->getId(),pos);
 		if(obj){

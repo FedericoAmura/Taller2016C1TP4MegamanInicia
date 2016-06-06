@@ -238,7 +238,7 @@
 	"2001":
 	{
 		"damage":	2,
-		"cooldown":	2.0,
+		"cooldown":	3.0,
 		"bulletId":	2001,
 		"speed":
 		{
@@ -280,7 +280,7 @@
 	"2006":
 	{
 		"damage":	1,
-		"cooldown":	1.0,
+		"cooldown":	2.0,
 		"bulletId":	2006,
 		"speed":
 		{

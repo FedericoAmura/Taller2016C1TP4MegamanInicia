@@ -9,6 +9,8 @@
 #include "LevelObject.h"
 #include "Character.h"
 #include <glog/logging.h>
+#include <iomanip>		//setprecision
+#include <iostream>		//fixed
 
 /*watch out bullet not fully initialized. use initialize after*/
 Bullet::Bullet(b2World* w,Json::Value& json,const b2Vec2& pos,int id):
@@ -42,6 +44,7 @@ void Bullet::collideWith(LevelObject* obj) {
 /*use this to finish initialization*/
 void Bullet::initialize(int16 groupBits,b2Vec2& speed,MyLevel* lvl) {
 	level=lvl;
+	body->SetLinearVelocity(speed);
 	for (b2Fixture* f = body->GetFixtureList(); f; f = f->GetNext()){
 		b2Filter filter=f->GetFilterData();
 		filter.categoryBits=BULLETS;
@@ -50,11 +53,9 @@ void Bullet::initialize(int16 groupBits,b2Vec2& speed,MyLevel* lvl) {
 		f->SetFilterData(filter);
 		f->SetDensity(0.001);
 	}
-//	LOG(INFO)<<"bullet initialized with speed: "
-//			<<(int)speed.x<<"-"<<(int)speed.y
-//			<<" and group bits: "<<groupBits;
-	body->SetLinearVelocity(speed);
-
+	LOG(INFO)<<std::fixed<<std::setprecision(2)
+			<<"bullet initialized with speed: "
+			<<speed.x<<" "<<speed.y	<<" and group bits: "<<groupBits;
 }
 
 void Bullet::copyCorner(b2Vec2& corner) {

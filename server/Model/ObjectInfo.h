@@ -23,7 +23,7 @@ public:
 };
 
 class BulletInfo: public ObjectInfo{
-	b2Vec2& speed;
+	b2Vec2 speed;
 	uint16 groupBits;
 public:
 	BulletInfo(int id,const b2Vec2& pos,b2Vec2& speed, uint16 groupBits);

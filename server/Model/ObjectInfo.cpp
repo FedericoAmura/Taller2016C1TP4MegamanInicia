@@ -23,7 +23,7 @@ const b2Vec2& ObjectInfo::getPos() {
 }
 
 BulletInfo::BulletInfo(int id, const b2Vec2& pos, b2Vec2& speed,uint16 groupBits):
-ObjectInfo(id,pos),speed(speed),groupBits(groupBits){}
+ObjectInfo(id,pos),speed(speed.x,speed.y),groupBits(groupBits){}
 
 BulletInfo::~BulletInfo() {}
 
