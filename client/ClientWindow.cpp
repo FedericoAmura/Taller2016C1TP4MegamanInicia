@@ -82,8 +82,12 @@ void ClientWindow::showScreen(std::string childrenName) {
 void ClientWindow::connectModel() {
 	std::string serverIP = connectionScreen.getServerIP();
 	std::string serverPort = connectionScreen.getServerPort();
-	model.connectServer(serverIP, serverPort);
-	showScreen(LEVEL_SELECTOR_SCREEN_NAME);
+	try {
+		model.connectServer(serverIP, serverPort);
+		showScreen(LEVEL_SELECTOR_SCREEN_NAME);
+	} catch (std::exception &e) {
+		//No nos pudimos conectar al server
+	}
 }
 
 void ClientWindow::disconnectModel() {
