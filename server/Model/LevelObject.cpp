@@ -10,6 +10,7 @@
 #include "../json/json.h"
 #include <string>
 #include <glog/logging.h>
+#include "MyLevel.h"
 
 int LevelObject::uniqueId=0;
 
@@ -139,4 +140,8 @@ void LevelObject::copyCorner(b2Vec2& corner) {
 }
 
 void LevelObject::stopCollidingWith(LevelObject* obj) {
+}
+
+void LevelObject::registerIn(MyLevel* level) {
+	level->addObject(this);
 }

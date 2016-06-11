@@ -126,27 +126,7 @@ LevelObject* MyLevel::createObject(int id,b2Vec2& pos) {
 		if(objectType==0 && boundaries==nullptr){
 			boundaries= newObject;
 		}
-		if(objectType==9){//megaman
-			if(megamans.size()<numOfClients){
-				Megaman* megaman=(Megaman*) newObject;
-				megamans[megamans.size()+1]=megaman;
-				characters[newObject->getId()]=megaman;
-			}else{
-				return nullptr;
-			}
-		}
-		if(objectType==1){//character
-			characters[newObject->getId()]=(Character*)newObject;
-		}
-		/*notify clients about creation*/
-		int spriteId=newObject->getSpriteId();
-		if(spriteId!=IGNORE){
-			std::stringstream msj;
-			msj<<DRAW<<" "<<newObject->getId()<<" "<<spriteId;
-			msj<<" 0 "<<posToString(newObject->getPos());
-			game->notify(new MessageSent(msj.str(),0));
-		}
-		objects[newObject->getId()]=newObject;
+		newObject->registerIn(this);
 		return newObject;
 	}else{
 		return nullptr;
@@ -216,7 +196,7 @@ void MyLevel::redrawForClient(bool checkChanges){
 			character->hasFlipped=false;
 			std::stringstream msj;
 			msj<<REDRAW<<" "<<character->getId()<<" "<<character->getSpriteId()
-																								<<" "<<character->getDirection();
+																														<<" "<<character->getDirection();
 			game->notify(new MessageSent(msj.str(),0));
 		}
 	}
@@ -470,4 +450,34 @@ void MyLevel::megamanAtDoor(BossDoor* door) {
 	}
 	if(door->getMegamansTouching()==megamansAlive && megamansAlive>0)
 		bossEncounter=true;
+}
+
+/* adds megaman to megaman tracker if theres space, deletes him if not
+ * then adds him as character*/
+void MyLevel::addMegaman(Megaman* newMegaman) {
+	if(megamans.size()<numOfClients){
+		megamans[megamans.size()+1]=newMegaman;
+		addCharacter(newMegaman);
+	}else{
+		delete newMegaman;
+	}
+}
+
+/*adds character to characters tracker, then adds it as object */
+void MyLevel::addCharacter(Character* newCharacter) {
+	characters[newCharacter->getId()]=newCharacter;
+	addObject(newCharacter);
+}
+
+/*adds object to object tracker, then informs clients of new object*/
+void MyLevel::addObject(LevelObject* newObject) {
+	objects[newObject->getId()]=newObject;
+	/*notify clients about creation*/
+	int spriteId=newObject->getSpriteId();
+	if(spriteId!=IGNORE){
+		std::stringstream msj;
+		msj<<DRAW<<" "<<newObject->getId()<<" "<<spriteId;
+		msj<<" 0 "<<posToString(newObject->getPos());
+		game->notify(new MessageSent(msj.str(),0));
+	}
 }

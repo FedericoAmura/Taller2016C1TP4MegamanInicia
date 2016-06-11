@@ -46,6 +46,7 @@ public:
 	void shoot();
 	int getDirection();
 	bool isDead();
+	virtual void registerIn(MyLevel* level);
 };
 
 #endif /* SERVER_MODEL_CHARACTER_H_ */

@@ -14,6 +14,8 @@
 
 #define JUMPSENSOR 1
 
+class MyLevel;
+
 //todo use namespace to avoid name cluttering
 enum _entityCategory {
 	BOUNDARIES 	=	0x0001,
@@ -50,6 +52,7 @@ public:
 	virtual void collideWith(LevelObject* obj);
 	virtual void stopCollidingWith(LevelObject* obj);
 	virtual void copyCorner(b2Vec2& corner);
+	virtual void registerIn(MyLevel* level);
 };
 
 #endif /* SERVER_MODEL_LEVELOBJECT_H_ */

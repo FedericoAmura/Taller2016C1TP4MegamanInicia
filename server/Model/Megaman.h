@@ -35,6 +35,7 @@ public:
 	void changeKeyState(uint keyState);
 	void heal(uint amount);
 	void charge(uint amount);
+	virtual void registerIn(MyLevel* level);
 };
 
 #endif /* SERVER_MODEL_MEGAMAN_H_ */

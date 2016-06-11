@@ -163,3 +163,7 @@ void Megaman::setSpawnPos(b2Vec2& newPos) {
 	spawnPoint.x=newPos.x;
 	spawnPoint.y=newPos.y;
 }
+
+void Megaman::registerIn(MyLevel* level) {
+	level->addMegaman(this);
+}

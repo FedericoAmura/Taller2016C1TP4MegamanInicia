@@ -91,3 +91,7 @@ int Character::getDirection() {
 bool Character::isDead() {
 	return dead;
 }
+
+void Character::registerIn(MyLevel* level) {
+	level->addCharacter(this);
+}

@@ -91,6 +91,9 @@ public:
 	void newObject(ObjectInfo* info);
 	bool posInWindow(const b2Vec2& pos);
 	void megamanAtDoor(BossDoor* door);
+	void addMegaman(Megaman* newMegaman);
+	void addCharacter(Character* newCharacter);
+	void addObject(LevelObject* newObject);
 };
 
 #endif /* SERVER_MODEL_MYLEVEL_H_ */
