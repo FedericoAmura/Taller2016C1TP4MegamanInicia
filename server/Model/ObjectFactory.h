@@ -24,7 +24,7 @@ class ObjectFactory {
 public:
 	ObjectFactory(b2World* w, MyLevel* lvl);
 	virtual ~ObjectFactory();
-	LevelObject* createObject(int id,b2Vec2& pos);
+	LevelObject* createObject(ObjectInfo* info);
 };
 
 #endif /* SERVER_MODEL_OBJECTFACTORY_H_ */

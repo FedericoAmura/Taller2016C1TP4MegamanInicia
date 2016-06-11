@@ -76,10 +76,11 @@ bossEncounter(false){
 		int id=(*it)["id"].asInt();
 		b2Vec2 pos=jsonPosToWorldPos((*it)["x"].asInt(),
 				(*it)["y"].asInt());
+		ObjectInfo info(id,pos);
 		if(id/1000 ==1){
 			addSpawner(id,pos);
 		}else{
-			createObject(id,pos);
+			createObject(&info);
 		}
 	}
 	//load all objects of the level
@@ -90,10 +91,11 @@ bossEncounter(false){
 		b2Vec2 pos=jsonPosToWorldPos(
 				(*chamberIt)["x"].asInt()+worldWidth+BOSS_CHAMBER_OFFSET,
 				(*chamberIt)["y"].asInt());
+		ObjectInfo info(id,pos);
 		if(id/1000 ==1){
 			addSpawner(id,pos);
 		}else{
-			createObject(id,pos);
+			createObject(&info);
 		}
 	}
 	spawn();
@@ -119,8 +121,8 @@ MyLevel::~MyLevel() {
 }
 
 /*retruns new object if id has config, nullptr if not*/
-LevelObject* MyLevel::createObject(int id,b2Vec2& pos) {
-	LevelObject* newObject=factory.createObject(id,pos);
+LevelObject* MyLevel::createObject(ObjectInfo* info) {
+	LevelObject* newObject=factory.createObject(info);
 	if(newObject!=nullptr){
 		int objectType=(int)newObject->getSpriteId()/1000;
 		if(objectType==0 && boundaries==nullptr){
@@ -324,16 +326,7 @@ void MyLevel::createNewObjects() {
 	while(!toCreate.empty()){
 		ObjectInfo* info=toCreate.front();
 		toCreate.pop();
-		b2Vec2 pos=info->getPos();
-		LevelObject* obj=createObject(info->getId(),pos);
-		if(obj){
-			int objectType=obj->getSpriteId()/1000;
-			if(objectType==2){//bullet
-				Bullet* bullet=(Bullet*)obj;
-				BulletInfo* bInfo=(BulletInfo*)info;
-				bullet->initialize(bInfo->getGroupBits(),bInfo->getSpeed(),this);
-			}
-		}
+		createObject(info);
 		delete info;
 	}
 }

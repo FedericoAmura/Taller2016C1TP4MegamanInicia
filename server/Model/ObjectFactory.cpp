@@ -32,11 +32,15 @@ ObjectFactory::ObjectFactory(b2World* w, MyLevel* lvl):
 
 ObjectFactory::~ObjectFactory() {}
 
-LevelObject* ObjectFactory::createObject(int id, b2Vec2& pos) {
+LevelObject* ObjectFactory::createObject(ObjectInfo* info) {
 	Json::Value config;
 	std::ifstream configFile(COFIG_FILE);
 	//LOG(INFO)<<"abierto archivo: "<<fileName;
 	configFile >> config;
+	int id= info->getId();
+	b2Vec2 pos;
+	pos.x= info->getPos().x;
+	pos.y= info->getPos().y;
 	int objectType=(int)id/1000;
 	bool created=false;
 	LevelObject* newObject;
@@ -68,6 +72,11 @@ LevelObject* ObjectFactory::createObject(int id, b2Vec2& pos) {
 	case 2:{
 		created=true;
 		newObject= new Bullet(world,config[idAsString],pos,id);
+		if(newObject){
+			Bullet* bullet=(Bullet*)newObject;
+			BulletInfo* bInfo=(BulletInfo*)info;
+			bullet->initialize(bInfo->getGroupBits(),bInfo->getSpeed(),level);
+		}
 		break;
 	}
 	case 3:{
@@ -108,7 +117,7 @@ LevelObject* ObjectFactory::createObject(int id, b2Vec2& pos) {
 		break;
 	}
 	}
-	if(created){
+	if(created && newObject){
 		return newObject;
 	}else{
 		return nullptr;

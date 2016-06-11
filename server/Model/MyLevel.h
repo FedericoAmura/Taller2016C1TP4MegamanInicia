@@ -87,7 +87,7 @@ public:
 
 	void remove(LevelObject* deadObject);
 	void respawn(Megaman* meg);
-	LevelObject* createObject(int id,b2Vec2& pos);
+	LevelObject* createObject(ObjectInfo* info);
 	void newObject(ObjectInfo* info);
 	bool posInWindow(const b2Vec2& pos);
 	void megamanAtDoor(BossDoor* door);
