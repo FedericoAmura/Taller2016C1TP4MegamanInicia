@@ -15,7 +15,7 @@
 EditorApp::EditorApp()
         : Gtk::Application("Megaman.Editor") {
     open_file_name = "";
-    Glib::set_application_name("Megaman Begins Level Editor");
+    Glib::set_application_name("Megaman Begins - Level Editor");
 }
 
 Glib::RefPtr<EditorApp> EditorApp::create() {

@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <gtkmm/notebook.h>
+#include <gtkmm/treeview.h>
 #include "EntityIconView.h"
 #include "WorkspaceEventManager.h"
 

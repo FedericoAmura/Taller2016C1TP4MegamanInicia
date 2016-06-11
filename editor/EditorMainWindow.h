@@ -17,12 +17,17 @@
 #include "SelectionLabel.h"
 #include "SelectionDrawing.h"
 #include "ButtonDeleteSelection.h"
+#include "BackgroundComboBox.h"
 
 class EditorMainWindow : public Gtk::ApplicationWindow {
 public:
     EditorMainWindow(Workspace* main, Workspace* chamber);
 
 private:
+    SpriteDispenser sprites;
+    Workspace* main;
+    Workspace* chamber;
+
     //Widgets
     Gtk::HBox main_box;
     Gtk::ScrolledWindow scrollable_main;
@@ -30,6 +35,7 @@ private:
     Gtk::VBox editing_box;
     Gtk::Label main_tab;
     Gtk::Label chamber_tab;
+    BackgroundComboBox background_combo;
     Gtk::Notebook level_book;
     WorkspaceEventManager main_manager;
     WorkspaceEventManager chamber_manager;
@@ -39,6 +45,9 @@ private:
     SelectionDrawing selection_drawing;
     SelectionLabel selection_label;
     ButtonDeleteSelection delete_button;
+
+    //Signal handlers:
+    void on_combo_changed();
 };
 
 

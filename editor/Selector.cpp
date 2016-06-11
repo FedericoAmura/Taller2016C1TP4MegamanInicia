@@ -9,10 +9,10 @@
 #include "EntitySet.h"
 #include "../entities.h"
 
-#define ICON_WIDTH 62
+#define ICON_WIDTH 60
 
 Selector::Selector() {
-    set_size_request(300, -1);
+    set_size_request(200, -1);
     SpriteDispenser sprites;
     m_TilesLabel.set_text("Tiles");
     m_MobsLabel.set_text("Spawners");
@@ -39,8 +39,8 @@ Selector::Selector() {
             IconEntry(MAGNETMAN_IDLE, sprites.get(MAGNETMAN_IDLE), "Magnetman"),
             IconEntry(SPARKMAN_IDLE, sprites.get(SPARKMAN_IDLE), "Sparkman")
     };
-    tiles.fill(tile_entries);
-    mobs.fill(mob_entries);
+    tiles.fill(tile_entries, ICON_WIDTH, ICON_WIDTH);
+    mobs.fill(mob_entries, ICON_WIDTH, ICON_WIDTH);
     append_page(m_TilesView, m_TilesLabel);
     append_page(m_MobsView, m_MobsLabel);
     show();

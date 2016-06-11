@@ -28,9 +28,9 @@ struct IconEntry {
 class EntitySet {
 public:
     EntitySet(Gtk::IconView* view);
-    void fill(vector<IconEntry> entries);
+    void fill(vector<IconEntry> entries, uint x, uint y);
 private:
-    void addIcon(const uint id, const string& file, const ustring& descript);
+    void addIcon(const uint id, const string& file, const ustring& descript, uint x, uint y);
     Gtk::IconView* m_IconView;
     ListStore model;
     ToolboxModelColumns m_Columns;

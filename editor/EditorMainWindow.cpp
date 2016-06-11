@@ -6,7 +6,11 @@
 #include "EditorMainWindow.h"
 
 EditorMainWindow::EditorMainWindow(Workspace* main, Workspace* chamber)
-        : main_manager(main), chamber_manager(chamber) {
+        : main(main),
+          chamber(chamber),
+          background_combo(sprites),
+          main_manager(main),
+          chamber_manager(chamber) {
     //Init
     maximize();
     add(main_box);
@@ -16,14 +20,15 @@ EditorMainWindow::EditorMainWindow(Workspace* main, Workspace* chamber)
     level_book.set_tab_pos(Gtk::POS_LEFT);
     main_tab.set_angle(90);
     chamber_tab.set_angle(90);
-    main_tab.set_text("main");
-    chamber_tab.set_text("chamber");
+    main_tab.set_text("Main");
+    chamber_tab.set_text("Chamber");
     level_book.append_page(scrollable_main, main_tab);
     level_book.append_page(scrollable_chamber, chamber_tab);
     scrollable_main.add(main_manager);
     scrollable_chamber.add(chamber_manager);
     main_box.pack_end(editing_box, false, true);
-    editing_box.set_size_request(300, -1);
+    editing_box.set_size_request(200, -1);
+    editing_box.pack_start(background_combo, false, false);
     editing_box.pack_start(selector, true, true);
     editing_box.pack_end(selection_frame, false, true);
     selection_frame.add(selection_box);
@@ -49,6 +54,7 @@ EditorMainWindow::EditorMainWindow(Workspace* main, Workspace* chamber)
     selector.connect(&chamber_manager);
     level_book.signal_switch_page().connect(sigc::mem_fun(main_manager, &WorkspaceEventManager::on_switch_page));
     level_book.signal_switch_page().connect(sigc::mem_fun(chamber_manager, &WorkspaceEventManager::on_switch_page));
+    background_combo.signal_changed().connect(sigc::mem_fun(*this, &EditorMainWindow::on_combo_changed) );
 
     //Drag and drop activation
     std::vector<Gtk::TargetEntry> list_targets;
@@ -56,5 +62,17 @@ EditorMainWindow::EditorMainWindow(Workspace* main, Workspace* chamber)
     main_manager.setDroppable(list_targets);
     chamber_manager.setDroppable(list_targets);
     selector.setDraggable(list_targets);
+
+    //Background init
+    string background = background_combo.getSelected();
+    main->setBackground(background);
+    chamber->setBackground(background);
 }
+
+void EditorMainWindow::on_combo_changed() {
+    main->setBackground(background_combo.getSelected());
+    chamber->setBackground(background_combo.getSelected());
+}
+
+
 

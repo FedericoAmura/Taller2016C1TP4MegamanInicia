@@ -17,11 +17,15 @@ Workspace::Workspace(Level* level)
         : level(level) {
     screen_width = (int) Gdk::screen_height()/SIZE_TRANSFORM;
     resize();
+    put(background, 0, 0);
     refresh();
 }
 
 void Workspace::resize() {
-    set_size_request(level->getLength()*screen_width, level->getWidth()*screen_width);
+    uint x = level->getLength()*screen_width;
+    uint y = level->getWidth()*screen_width;
+    set_size_request(x, y);
+    background.setSize(x, y);
 }
 
 Workspace::~Workspace() {
@@ -95,6 +99,13 @@ void Workspace::replaceLevel(string file) {
 
 
 void Workspace::refresh() {
+    string background_file = level->getBackgroundFile();
+    if (background_file != "") {
+        background.setImage(background_file,
+                            screen_width * level->getLength(),
+                            screen_width * level->getWidth());
+        background.show();
+    }
     for (uint i = 0; i < level->getLength() ; ++i){
         for (uint j = 0; j < level->getWidth() ; ++j){
             uint id = level->getEntity(i, j);
@@ -129,6 +140,16 @@ void Workspace::renew() {
     resize();
     refresh();
 }
+
+void Workspace::setBackground(string path) {
+    level->setBackgroundFile(path);
+    hide();
+    clean();
+    refresh();
+    show();
+}
+
+
 
 
 

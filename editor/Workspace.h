@@ -7,6 +7,7 @@
 #include "Level.h"
 #include "../common/SpriteDispenser.h"
 #include "../common/Drawing.h"
+#include "BackgroundImage.h"
 #include <vector>
 #include <map>
 #include <gtkmm/drawingarea.h>
@@ -30,13 +31,14 @@ public:
     bool validPosition(uint x, uint y);
     const int getScreenWidth() {return screen_width;}
     void save(string file_name);
+    void setBackground(string path);
 
 private:
     Level* level;
     drawing_map_t drawings;
     SpriteDispenser sprites;
     int screen_width;
-    Glib::RefPtr<Gdk::Pixbuf> background;
+    BackgroundImage background;
 
     void clean();
     void resize();

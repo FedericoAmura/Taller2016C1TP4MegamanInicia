@@ -23,7 +23,7 @@ public:
     virtual Level* openCopy(string file);
     virtual ~Level();
     explicit Level(uint len);
-    void setBackgroundFile(string path);
+    void setBackgroundFile(string& path);
     string getBackgroundFile() {return background_file;};
     uint getLength() {return entities->getLength();}
     uint getWidth() {return entities->getWidth();}

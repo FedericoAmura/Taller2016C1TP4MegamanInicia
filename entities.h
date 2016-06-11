@@ -162,7 +162,11 @@
 //BULLETS
 #define NORMAL 6000
 
-//Others
-#define EMPTY 0000
+//BACKGROUNDS
+#define CITY 7001
+#define ROCK 7002
+#define VALLEY 7003
+#define SPOOKY 7004
+#define SNOW 7005
 
 #endif //MEGAMAN_ENTITIES_H

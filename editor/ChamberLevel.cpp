@@ -21,6 +21,9 @@ ChamberLevel::ChamberLevel(string json_file) {
     ifstream in(json_file);
     Json::Value level_json;
     in >> level_json;
+    //Background
+    Json::Value background = level_json["background"];
+    background_file = background.asString();
     //Chamber tiles
     Json::Value elements = level_json["chamber"];
     entities = new Layer(27); //TODO sacar de header

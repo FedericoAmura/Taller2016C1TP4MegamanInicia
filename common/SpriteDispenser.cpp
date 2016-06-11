@@ -15,7 +15,7 @@
 #define IMG_PATH "../sprites"
 #define MOB_PATH (string) IMG_PATH + "/mobs/"
 #define BSS_PATH (string) IMG_PATH + "/bosses/"
-#define LVL_PATH (string) IMG_PATH + "/level/"
+#define BCK_PATH (string) IMG_PATH + "/level/background/"
 #define TLE_PATH (string) IMG_PATH + "/level/tiles/"
 #define WEP_PATH (string) IMG_PATH + "/weapons/"
 #define ITM_PATH (string) IMG_PATH + "/items/"
@@ -136,6 +136,12 @@ SpriteDispenser::SpriteDispenser() {
 	paths[SPARKMAN_PREPARE_1_ATTACK_2] = BSS_PATH + "sparkman/sparkman_prepare1_attack2.png";
 	paths[SPARKMAN_PREPARE_2_ATTACK_1] = BSS_PATH + "sparkman/sparkman_prepare2_attack1.png";
 	paths[SPARKMAN_PREPARE_2_ATTACK_2] = BSS_PATH + "sparkman/sparkman_prepare2_attack2.png";
+	//Backgrounds
+	paths[CITY] = BCK_PATH + "city.png";
+    paths[SNOW] = BCK_PATH + "snow.png";
+    paths[SPOOKY] = BCK_PATH + "spooky.png";
+    paths[ROCK] = BCK_PATH + "rock.png";
+    paths[VALLEY] = BCK_PATH + "valley.png";
 
 	//SIZES
 	heigths[MEGAMAN_IDLE_0] = tileSize*1.0;//tileSide*1.5625;

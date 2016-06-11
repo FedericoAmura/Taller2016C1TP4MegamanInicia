@@ -33,6 +33,9 @@ Level::Level(string json_file) {
     uint length = level_json["length"].asUInt();
     //Width
     //uint width = level_json["width"].asUInt();
+    //Background
+    Json::Value background = level_json["background"];
+    background_file = background.asString();
     //Foreground tiles
     Json::Value foreground = level_json["foreground"];
     entities = new DynamicLayer(length);
@@ -60,12 +63,13 @@ void Level::toJson(string file_name) {
     level["length"] = getLength() - EMPTY_MARGIN;
     level["width"] = WIDTH;
     level["foreground"] = entities->toJson();
+    level["background"] = background_file;
     ofstream out(file_name, ofstream::out);
     out << level;
     out.close();
 }
 
-void Level::setBackgroundFile(string path) {
+void Level::setBackgroundFile(string& path) {
     std::ifstream infile(path);
     if (infile.good()){
         background_file = path;
