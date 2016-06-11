@@ -15,6 +15,7 @@
 #define JUMPSENSOR 1
 
 class MyLevel;
+class Game;
 
 //todo use namespace to avoid name cluttering
 enum _entityCategory {
@@ -40,6 +41,8 @@ protected:
 	int spriteId;
 	b2Fixture* addFixture(b2FixtureDef& fDef);
 	void createFixture(Json::Value& jsonShape);
+	virtual void copyCorner(b2Vec2& corner);
+	std::string posToString(b2Vec2 pos);
 
 public:
 	LevelObject(b2World* w,Json::Value& json,const b2Vec2& pos,int id);
@@ -51,8 +54,8 @@ public:
 	virtual bool changed();
 	virtual void collideWith(LevelObject* obj);
 	virtual void stopCollidingWith(LevelObject* obj);
-	virtual void copyCorner(b2Vec2& corner);
 	virtual void registerIn(MyLevel* level);
+	virtual void redrawForClients(Game* game,MyLevel* level,bool checkChanges);
 };
 
 #endif /* SERVER_MODEL_LEVELOBJECT_H_ */

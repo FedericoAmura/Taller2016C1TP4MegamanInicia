@@ -13,6 +13,8 @@
 #include <glog/logging.h>
 #include "Bullet.h"
 #include "Weapon.h"
+#include "../common/CommunicationCodes.h"
+#include "../Game.h"
 
 Character::Character(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl):
 LevelObject(w,json,pos,MEGAMAN_IDLE_0),
@@ -20,8 +22,8 @@ level(lvl),
 life(json["life"].asInt()),
 dead(false),
 direction(LEFT),
-canJump(false),
-hasFlipped(false){
+hasFlipped(false),
+canJump(false){
 	body->SetType(b2_dynamicBody);
 	body->SetFixedRotation(true);
 	body->SetBullet(true);
@@ -94,4 +96,15 @@ bool Character::isDead() {
 
 void Character::registerIn(MyLevel* level) {
 	level->addCharacter(this);
+}
+
+void Character::redrawForClients(Game* game, MyLevel* level,
+		bool checkChanges) {
+	LevelObject::redrawForClients(game,level,checkChanges);
+	if(hasFlipped){
+		hasFlipped=false;
+		std::stringstream msj;
+		msj<<REDRAW<<" "<<getId()<<" "<<getSpriteId()<<" "<<direction;
+		game->notify(new MessageSent(msj.str(),0));
+	}
 }

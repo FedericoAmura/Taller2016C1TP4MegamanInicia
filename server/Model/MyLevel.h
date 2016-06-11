@@ -38,7 +38,6 @@ class MyLevel: public Thread{
 	std::map<int,Megaman*> megamans;
 	MyContactListener contactListener;
 	ObjectFactory factory;
-	std::string posToString(b2Vec2 pos);
 	b2Vec2 jsonPosToWorldPos(int x, int y);
 	void fileToJson(std::string fileName, Json::Value& json);
 
@@ -90,10 +89,12 @@ public:
 	LevelObject* createObject(ObjectInfo* info);
 	void newObject(ObjectInfo* info);
 	bool posInWindow(const b2Vec2& pos);
+	std::string posToString(b2Vec2 pos);
 	void megamanAtDoor(BossDoor* door);
 	void addMegaman(Megaman* newMegaman);
 	void addCharacter(Character* newCharacter);
 	void addObject(LevelObject* newObject);
+
 };
 
 #endif /* SERVER_MODEL_MYLEVEL_H_ */

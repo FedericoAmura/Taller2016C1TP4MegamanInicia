@@ -108,6 +108,7 @@ void MyLevel::fileToJson(std::string fileName, Json::Value& json){
 	configFile >> json;
 }
 
+/*deletes level and frees its members*/
 MyLevel::~MyLevel() {
 	/*characters and megamans are cleaned with the level objects*/
 	std::map<int,LevelObject*>::iterator objectIt=objects.begin();
@@ -176,31 +177,7 @@ void MyLevel::redrawForClient(bool checkChanges){
 	std::map<int,LevelObject*>::iterator it=objects.begin();
 	for(;it!=objects.end();it++){
 		LevelObject* obj= it->second;
-		bool changesCheck= !checkChanges || obj->changed();
-		if(changesCheck){
-			if(posInWindow(obj->getPos())){
-				std::stringstream msj;
-				b2Vec2 corner;
-				obj->copyCorner(corner);
-				msj<<MOVE<<" "<<obj->getId()<<" "<<posToString(corner);
-				game->notify(new MessageSent(msj.str(),0));
-			}else{
-				std::stringstream msj;
-				msj<<MOVE<<" "<<obj->getId()<<" 27 15";
-				game->notify(new MessageSent(msj.str(),0));
-			}
-		}
-	}
-	std::map<int,Character*>::iterator characterIt=characters.begin();
-	for(;characterIt!=characters.end();characterIt++){
-		Character* character= characterIt->second;
-		if(character->hasFlipped){
-			character->hasFlipped=false;
-			std::stringstream msj;
-			msj<<REDRAW<<" "<<character->getId()<<" "<<character->getSpriteId()
-																														<<" "<<character->getDirection();
-			game->notify(new MessageSent(msj.str(),0));
-		}
+		obj->redrawForClients(game,this,checkChanges);
 	}
 }
 

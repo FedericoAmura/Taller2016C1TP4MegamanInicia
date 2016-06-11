@@ -11,6 +11,9 @@
 #include <string>
 #include <glog/logging.h>
 #include "MyLevel.h"
+#include "../Game.h"
+#include <sstream>
+#include "../common/CommunicationCodes.h"
 
 int LevelObject::uniqueId=0;
 
@@ -139,9 +142,29 @@ void LevelObject::copyCorner(b2Vec2& corner) {
 	corner.y=body->GetPosition().y;
 }
 
+/*stops colliding with an object. does nothing, bad design for now*/
 void LevelObject::stopCollidingWith(LevelObject* obj) {
 }
 
+/*registers object in level trackers*/
 void LevelObject::registerIn(MyLevel* level) {
 	level->addObject(this);
+}
+
+/*send information about how to draw itself*/
+void LevelObject::redrawForClients(Game* game,MyLevel* level,bool checkChanges) {
+	bool changesCheck= !checkChanges || changed();
+	if(changesCheck){
+		if(level->posInWindow(getPos())){
+			std::stringstream msj;
+			b2Vec2 corner;
+			this->copyCorner(corner);
+			msj<<MOVE<<" "<<getId()<<" "<<level->posToString(corner);
+			game->notify(new MessageSent(msj.str(),0));
+		}else{
+			std::stringstream msj;
+			msj<<MOVE<<" "<<getId()<<" 27 15";
+			game->notify(new MessageSent(msj.str(),0));
+		}
+	}
 }

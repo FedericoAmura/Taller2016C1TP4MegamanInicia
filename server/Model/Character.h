@@ -13,6 +13,7 @@
 
 #include "Stat.h"
 
+class Game;
 class Weapon;
 class Bullet;
 class MyLevel;//forward declaration
@@ -30,13 +31,13 @@ protected:
 	Stat<uint> life;
 	bool dead;
 	int direction;
+	bool hasFlipped;
 
 	void jump();
 	void createJumpSensor(Json::Value jSensor);
 	virtual void changeFixtureFilter(b2Fixture* f)=0;
 public:
 	bool canJump;
-	bool hasFlipped;
 
 	Character(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl);
 	virtual ~Character();
@@ -44,9 +45,10 @@ public:
 	virtual void tick(float time);//in seconds
 	virtual void damage(Bullet* bullet);
 	void shoot();
-	int getDirection();
+	int getDirection();//todo check and remove if unneccesary
 	bool isDead();
 	virtual void registerIn(MyLevel* level);
+	virtual void redrawForClients(Game* game,MyLevel* level,bool checkChanges);
 };
 
 #endif /* SERVER_MODEL_CHARACTER_H_ */
