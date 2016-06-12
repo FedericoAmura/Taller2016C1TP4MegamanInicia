@@ -17,8 +17,11 @@ class Megaman: public Character {
 	uint livesRemaining;
 	b2Vec2 spawnPoint;
 	Stat<float> inmuneTime;//seconds
+	int climbingSpriteId;
+	bool wasClimbing;
 
 	void changeFixtureFilter(b2Fixture* f);
+	virtual bool isJumping();
 
 public:
 	uint laddersTouching;
@@ -36,6 +39,7 @@ public:
 	void heal(uint amount);
 	void charge(uint amount);
 	virtual void registerIn(MyLevel* level);
+	virtual int getSpriteId();
 };
 
 #endif /* SERVER_MODEL_MEGAMAN_H_ */

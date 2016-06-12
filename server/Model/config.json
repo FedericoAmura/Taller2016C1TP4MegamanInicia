@@ -49,9 +49,11 @@
 		"weaponId":		2004,
 		"HSpeed" : 		10.0,
 		"ClimbSpeed":	3.0,
+		"climbSpriteId":9010,
 		"JSpeed" :		25.0,
 		"inmuneTime":	1.0,
 		"life":			20.0,
+		"jumpSpriteId":	9005,
 		"jumpSensor":
 		{
 			"type":		1,
@@ -60,7 +62,6 @@
 			"width": 	0.2,
 			"height": 	0.2
 		},
-		"jumpSpriteId":	9005,
 		"shapes":
 		[
 			{

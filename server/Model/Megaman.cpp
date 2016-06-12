@@ -20,6 +20,7 @@ climbSpeed(json["ClimbSpeed"].asFloat()),
 livesRemaining(3),
 spawnPoint(pos),
 inmuneTime(json["inmuneTime"].asFloat()),
+wasClimbing(false),
 laddersTouching(0){
 	//set filters
 	for (b2Fixture* f = body->GetFixtureList(); f; f = f->GetNext()){
@@ -27,6 +28,7 @@ laddersTouching(0){
 	}
 	jumpingSpriteId=json["jumpSpriteId"].asInt();
 	createJumpSensor(json["jumpSensor"]);
+	climbingSpriteId=json["climbSpriteId"].asInt();
 	myWeapon->setOwner(FRIENDLY);
 }
 
@@ -123,36 +125,51 @@ void Megaman::spawn() {
 	}
 }
 
+/*	returns true if he is climbing, false if not.
+ * also handles vertical motion if he is climbing*/
 bool Megaman::checkClimbing(){
-	if (laddersTouching >0){
-		body->SetGravityScale(0.0);
-		if(laddersTouching==1){
-			b2Vec2 vel =body->GetLinearVelocity();
-			vel.y=0;
-			body->SetLinearVelocity(vel);
+	if(!wasClimbing){
+		if (laddersTouching >0){
+			body->SetGravityScale(0.0);
+			if(laddersTouching==1){
+				b2Vec2 vel =body->GetLinearVelocity();
+				vel.y=0;
+				body->SetLinearVelocity(vel);
+			}
+			return true;
+		}else{
+			body->SetGravityScale(1.0);
+			return false;
 		}
-		return true;
 	}else{
-		body->SetGravityScale(1.0);
-		return false;
+		if (laddersTouching >0){
+			return true;
+		}else{
+			body->SetGravityScale(1.0);
+			return false;
+		}
 	}
 }
 
+/*informs of passage of time*/
 void Megaman::tick(float time) {
 	Character::tick(time);
 	inmuneTime.dec(time);
 }
 
+/* increases enegry by amount*/
 void Megaman::heal(uint amount) {
 	this->life.inc(amount);
 	LOG(INFO)<<objectId<<" healed, life left: "<<life.getCurrent();
 }
 
+/* increases charge by amount*/
 void Megaman::charge(uint amount) {
 	//todo charge weapon/s
 	LOG(INFO)<<objectId<<" charged by: "<<amount;
 }
 
+/* damages him*/
 void Megaman::damage(Bullet* bullet) {
 	if(inmuneTime.getCurrent()==0){
 		Character::damage(bullet);
@@ -160,11 +177,28 @@ void Megaman::damage(Bullet* bullet) {
 	}
 }
 
+/*changes the spwan point*/
 void Megaman::setSpawnPos(b2Vec2& newPos) {
 	spawnPoint.x=newPos.x;
 	spawnPoint.y=newPos.y;
 }
 
+/*registers him in level as a megaman*/
 void Megaman::registerIn(MyLevel* level) {
 	level->addMegaman(this);
+}
+
+bool Megaman::isJumping() {
+	return Character::isJumping() && !checkClimbing();
+}
+
+/* returns sprite id according to jump state, climbing
+ * or just walking/idle*/
+int Megaman::getSpriteId() {
+	if(this->isJumping())
+		return jumpingSpriteId;
+	else if(checkClimbing())
+		return climbingSpriteId;
+	else
+		return spriteId;
 }

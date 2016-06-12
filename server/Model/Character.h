@@ -35,7 +35,7 @@ protected:
 
 	bool wasJumping;
 	int jumpingSpriteId;
-	bool isJumping();
+	virtual bool isJumping();
 	void jump();//todo maybe jumps should be only abailable for some
 
 	void createJumpSensor(Json::Value jSensor);//todo maybe better sensor?
