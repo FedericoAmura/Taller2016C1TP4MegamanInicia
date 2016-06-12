@@ -59,7 +59,7 @@ bool Level::removeEntity(uint x, uint y) {
 
 void Level::toJson(string file_name) {
     Json::Value level(Json::objectValue);
-    level["valid"] = true; //TODO: por ahora hardcodeo esto, despues va a depender de los chequeos del editor
+    level["valid"] = isValid();
     level["length"] = getLength() - EMPTY_MARGIN;
     level["width"] = WIDTH;
     level["foreground"] = entities->toJson();
@@ -93,6 +93,12 @@ Level* Level::cleanCopy() {
 Level* Level::openCopy(string file) {
     return new Level(file);
 }
+
+bool Level::isValid() {
+    return entities->isValid();
+}
+
+
 
 
 

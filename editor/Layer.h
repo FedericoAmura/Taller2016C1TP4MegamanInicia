@@ -32,12 +32,17 @@ public:
     Json::Value toJson();
     uint getLength();
     uint getWidth();
+    virtual bool isValid();
 
 private:
-
+    //Validity functions
+    bool isSeiled();
+    bool hasBoss();
 
 protected:
     vector<vector <Entity*> >entities;
+
+    int countElementsWithId(uint floor, uint ceiling);
 };
 
 

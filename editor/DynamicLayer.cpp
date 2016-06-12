@@ -6,6 +6,13 @@
 #include <vector>
 #include <iostream>
 
+#define NPC_FLOOR 1000
+#define NPC_CEILING 1100
+#define MEGAMAN 9000
+#define BOSS_DOOR 4000
+#define BOSS_FLOOR 1100
+#define BOSS_CEILING 2000
+
 #define MIN_LEN 20
 
 
@@ -67,4 +74,27 @@ bool DynamicLayer::removeEntity(uint x, uint y) {
     bool res = Layer::removeEntity(x, y);
     adjust();
     return res;
+}
+
+bool DynamicLayer::isValid() {
+    return hasEnemy()
+           && hasBossDoor()
+           && hasFourPlayerSpawners()
+           && hasNoBoss();
+}
+
+bool DynamicLayer::hasEnemy() {
+    return countElementsWithId(NPC_FLOOR, NPC_CEILING) > 0;
+}
+
+bool DynamicLayer::hasFourPlayerSpawners() {
+    return countElementsWithId(MEGAMAN, MEGAMAN + 1) == 4;
+}
+
+bool DynamicLayer::hasBossDoor() {
+    return countElementsWithId(BOSS_DOOR, BOSS_DOOR + 1) == 4;
+}
+
+bool DynamicLayer::hasNoBoss() {
+    return countElementsWithId(BOSS_FLOOR, BOSS_CEILING) == 0;
 }

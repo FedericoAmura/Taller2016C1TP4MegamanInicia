@@ -31,6 +31,7 @@ public:
     bool addEntity(prototype_t prototype);
     bool removeEntity(uint x, uint y);
     uint getEntity(uint x, uint y);
+    bool isValid();
 
 protected:
     Layer* entities;

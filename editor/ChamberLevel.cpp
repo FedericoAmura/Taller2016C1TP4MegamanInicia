@@ -43,6 +43,11 @@ void ChamberLevel::toJson(string file_name) {
     in >> level;
     level["chamber"] = entities->toJson();
     ofstream out(file_name, ofstream::out);
+    //Validity
+    Json::Value valid = level["valid"];
+    if (valid.asBool()) {
+        level["valid"] = isValid();
+    }
     out << level;
     in.close();
     out.close();

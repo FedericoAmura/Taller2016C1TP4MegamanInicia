@@ -6,6 +6,9 @@
 #include "Layer.h"
 #include "Level.h"
 
+#define BOSS_FLOOR 1100
+#define BOSS_CEILING 2000
+
 #define WIDTH 15
 
 using std::runtime_error;
@@ -93,4 +96,56 @@ uint Layer::getLength() {
 uint Layer::getWidth() {
     return (uint) entities[0].size();
 }
+
+bool Layer::isValid() {
+    return isSeiled() && hasBoss();
+}
+
+int Layer::countElementsWithId(uint floor, uint ceiling) {
+    int count = 0;
+    for (uint i = 0; i != getLength(); ++i){
+        for (uint j = 0; j != getWidth(); ++j){
+            if (entities[i][j] != NULL) {
+                uint id = entities[i][j]->getId();
+                if (floor <= id && id < ceiling){
+                    count++;
+                }
+            }
+        }
+    }
+    return count;
+}
+
+bool Layer::isSeiled() {
+    uint last_column = getLength() - 1;
+    uint last_row = getWidth() - 1;
+    for (uint i = 0; i != getLength(); ++i){
+        for (uint j = 0; j != getWidth(); ++j){
+            if (i == 0 || i == last_column || j == 0 || j == last_row){
+                if (entities[i][j] == NULL) return false;
+            }
+        }
+    }
+    return true;
+}
+
+bool Layer::hasBoss() {
+    return countElementsWithId(BOSS_FLOOR, BOSS_CEILING) == 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
