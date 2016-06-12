@@ -23,7 +23,10 @@ jumpTime(json["jumpFreq"].asFloat()){
 	for (b2Fixture* f = body->GetFixtureList(); f; f = f->GetNext()){
 		changeFixtureFilter(f);
 	}
-	createJumpSensor(json["jumpSensor"]);
+	if(json["jumps"].asBool()){
+		jumpingSpriteId=json["jumpSpriteId"].asInt();
+		createJumpSensor(json["jumpSensor"]);
+	}
 }
 
 Enemy::~Enemy() {}

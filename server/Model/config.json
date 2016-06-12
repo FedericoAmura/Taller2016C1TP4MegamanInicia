@@ -60,6 +60,7 @@
 			"width": 	0.2,
 			"height": 	0.2
 		},
+		"jumpSpriteId":	9005,
 		"shapes":
 		[
 			{
@@ -102,15 +103,7 @@
 		"weaponId":		2006,
 		"JSpeed" :		0.0,
 		"life":			1.0,
-		"jumpFreq":		60.0,
-		"jumpSensor":
-		{
-			"type":		1,
-			"x":	 	0.0,
-			"y": 		0.0,
-			"width": 	0.1,
-			"height": 	0.1
-		},
+		"jumps":		false,
 		"shapes":
 		[
 			{
@@ -129,15 +122,7 @@
 		"weaponId":		2001,
 		"JSpeed" :		0.0,
 		"life":			1.0,
-		"jumpFreq":		60.0,
-		"jumpSensor":
-		{
-			"type":		1,
-			"x":	 	0.0,
-			"y": 		0.0,
-			"width": 	0.1,
-			"height": 	0.1
-		},
+		"jumps":		false,
 		"shapes":
 		[
 			{
@@ -156,15 +141,7 @@
 		"weaponId":		2006,
 		"JSpeed" :		15.0,
 		"life":			2.0,
-		"jumpFreq":		2.0,
-		"jumpSensor":
-		{
-			"type":		1,
-			"x":		0.0,
-			"y": 		-0.5,
-			"width": 	0.25,
-			"height": 	0.1
-		},
+		"jumps":		false,
 		"shapes":
 		[
 			{
@@ -183,6 +160,8 @@
 		"weaponId":		2006,
 		"JSpeed" :		15.0,
 		"life":			2.0,
+		"jumps":		true,
+		"jumpSpriteId":	1032,
 		"jumpFreq":		2.0,
 		"jumpSensor":
 		{
@@ -210,6 +189,8 @@
 		"weaponId":		2006,
 		"JSpeed" :		15.0,
 		"life":			20.0,
+		"jumps":		true,
+		"jumpSpriteId":	1104,
 		"jumpFreq":		2.0,
 		"jumpSensor":
 		{
@@ -237,6 +218,8 @@
 		"weaponId":		2006,
 		"JSpeed" :		15.0,
 		"life":			20.0,
+		"jumps":		true,
+		"jumpSpriteId":	1203,
 		"jumpFreq":		2.0,
 		"jumpSensor":
 		{
@@ -264,6 +247,8 @@
 		"weaponId":		2006,
 		"JSpeed" :		15.0,
 		"life":			20.0,
+		"jumps":		true,
+		"jumpSpriteId":	1306,
 		"jumpFreq":		2.0,
 		"jumpSensor":
 		{
@@ -291,6 +276,8 @@
 		"weaponId":		2006,
 		"JSpeed" :		15.0,
 		"life":			20.0,
+		"jumps":		true,
+		"jumpSpriteId":	1402,
 		"jumpFreq":		2.0,
 		"jumpSensor":
 		{
@@ -318,6 +305,8 @@
 		"weaponId":		2006,
 		"JSpeed" :		15.0,
 		"life":			20.0,
+		"jumps":		true,
+		"jumpSpriteId":	1504,
 		"jumpFreq":		2.0,
 		"jumpSensor":
 		{
@@ -398,7 +387,7 @@
 		"bulletId":	2004,
 		"speed":
 		{
-			"x":	2.0,
+			"x":	4.0,
 			"y":	0.0
 		},
 		"shapes":
@@ -419,7 +408,7 @@
 		"bulletId":	2006,
 		"speed":
 		{
-			"x":	2.0,
+			"x":	4.0,
 			"y":	0.0
 		},
 		"shapes":

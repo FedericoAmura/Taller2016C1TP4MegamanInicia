@@ -31,10 +31,14 @@ protected:
 	Stat<uint> life;
 	bool dead;
 	int direction;
-	bool hasFlipped;
+	bool spriteChanged;
 
-	void jump();
-	void createJumpSensor(Json::Value jSensor);
+	bool wasJumping;
+	int jumpingSpriteId;
+	bool isJumping();
+	void jump();//todo maybe jumps should be only abailable for some
+
+	void createJumpSensor(Json::Value jSensor);//todo maybe better sensor?
 	virtual void changeFixtureFilter(b2Fixture* f)=0;
 public:
 	bool canJump;
@@ -49,6 +53,7 @@ public:
 	bool isDead();
 	virtual void registerIn(MyLevel* level);
 	virtual void redrawForClients(Game* game,MyLevel* level,bool checkChanges);
+	virtual int getSpriteId();
 };
 
 #endif /* SERVER_MODEL_CHARACTER_H_ */

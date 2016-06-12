@@ -50,7 +50,7 @@ public:
 	static void resetIds();
 	const b2Vec2& getPos();
 	int getId();
-	int getSpriteId();
+	virtual int getSpriteId();
 	virtual bool changed();
 	virtual void collideWith(LevelObject* obj);
 	virtual void stopCollidingWith(LevelObject* obj);

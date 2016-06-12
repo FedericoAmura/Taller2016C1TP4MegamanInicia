@@ -25,6 +25,7 @@ laddersTouching(0){
 	for (b2Fixture* f = body->GetFixtureList(); f; f = f->GetNext()){
 		changeFixtureFilter(f);
 	}
+	jumpingSpriteId=json["jumpSpriteId"].asInt();
 	createJumpSensor(json["jumpSensor"]);
 	myWeapon->setOwner(FRIENDLY);
 }
@@ -74,7 +75,7 @@ void Megaman::changeKeyState(uint keyState){
 		vel.x=-hSpeed;
 		if(direction!=LEFT){
 			direction=LEFT;
-			hasFlipped=true;
+			spriteChanged=true;
 		}
 	}else{
 		if(!right)
@@ -84,7 +85,7 @@ void Megaman::changeKeyState(uint keyState){
 		vel.x=hSpeed;
 		if(direction!=RIGHT){
 			direction=RIGHT;
-			hasFlipped=true;
+			spriteChanged=true;
 		}
 	}else{
 		if(!left)

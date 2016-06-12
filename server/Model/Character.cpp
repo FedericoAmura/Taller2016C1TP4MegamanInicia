@@ -22,13 +22,15 @@ level(lvl),
 life(json["life"].asInt()),
 dead(false),
 direction(LEFT),
-hasFlipped(false),
+spriteChanged(false),
+wasJumping(false),
 canJump(false){
 	body->SetType(b2_dynamicBody);
 	body->SetFixedRotation(true);
 	body->SetBullet(true);
 	jSpeed=json["JSpeed"].asFloat();
 	myWeapon= new Weapon(json["weaponId"].asInt(),level,ENEMY);
+	jumpingSpriteId=spriteId;
 }
 
 Character::~Character() {
@@ -71,6 +73,13 @@ void Character::kill() {
 /*informs the weapon of the time step*/
 void Character::tick(float time){
 	myWeapon->tick(time);
+	if(!wasJumping && this->isJumping()){
+		wasJumping=true;
+		spriteChanged=true;
+	}else if(wasJumping && !this->isJumping()){
+		wasJumping=false;
+		spriteChanged=true;
+	}
 }
 
 /*damages by 1, independent of bullet, redefine for dif behaviour*/
@@ -101,10 +110,24 @@ void Character::registerIn(MyLevel* level) {
 void Character::redrawForClients(Game* game, MyLevel* level,
 		bool checkChanges) {
 	LevelObject::redrawForClients(game,level,checkChanges);
-	if(hasFlipped){
-		hasFlipped=false;
+	if(spriteChanged){
+		spriteChanged=false;
 		std::stringstream msj;
 		msj<<REDRAW<<" "<<getId()<<" "<<getSpriteId()<<" "<<direction;
 		game->notify(new MessageSent(msj.str(),0));
 	}
+}
+
+bool Character::isJumping() {
+	if(body->GetLinearVelocity().y!=0){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+int Character::getSpriteId() {
+	if(this->isJumping())
+		return jumpingSpriteId;
+	return spriteId;
 }
