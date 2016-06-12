@@ -14,16 +14,16 @@ using Gtk::TargetEntry;
 
 WorkspaceEventManager::WorkspaceEventManager(Workspace* workspace)
     : workspace(workspace) {
-        add(*workspace);
-        workspace->show();
-        signal_button_press_event()
-                .connect(sigc::mem_fun(*this, &WorkspaceEventManager::on_button_press));
-        signal_drag_data_received()
-                .connect(sigc::mem_fun(*this, &WorkspaceEventManager::on_drag_data_received));
-        signal_selection().connect(sigc::mem_fun(*this, &WorkspaceEventManager::on_selection));
-        something_selected = false;
-        input_selection = 0;
-    }
+    add(*workspace);
+    workspace->show();
+    signal_button_press_event()
+            .connect(sigc::mem_fun(*this, &WorkspaceEventManager::on_button_press));
+    signal_drag_data_received()
+            .connect(sigc::mem_fun(*this, &WorkspaceEventManager::on_drag_data_received));
+    signal_selection().connect(sigc::mem_fun(*this, &WorkspaceEventManager::on_selection));
+    something_selected = false;
+    input_selection = 0;
+}
 
 bool WorkspaceEventManager::on_button_press(GdkEventButton* event) {
     const int screen_width = workspace->getScreenWidth();

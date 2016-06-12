@@ -4,6 +4,7 @@
 
 #include "DynamicLayer.h"
 #include <vector>
+#include <iostream>
 
 #define MIN_LEN 20
 
@@ -23,18 +24,20 @@ void DynamicLayer::enlarge(int this_much) {
 
 void DynamicLayer::shorten(int this_much) {
     //shortens layer by 1 if last two columns are empty
-    if (getLength() - EMPTY_MARGIN <= MIN_LEN) {
-        return;
-    }
+    int margin = std::min(EMPTY_MARGIN, this_much);
     for (int i = 0; i < this_much; ++i){
+        if (getLength() - margin < MIN_LEN) {
+            return;
+        }
         //popped vectors are guaranteed to be empty
         entities.pop_back();
+        --margin;
     }
 }
 
 int DynamicLayer::getAdjustmentNeeded() {
     int empty_columns = 0;
-    for (uint i = getLength() - 1; i > MIN_LEN; --i){
+    for (uint i = getLength() - 1; i >= MIN_LEN - EMPTY_MARGIN; --i){
         for (uint j = 0; j < getWidth(); ++j){
             if (entities[i][j] != NULL){
                 return EMPTY_MARGIN - empty_columns;

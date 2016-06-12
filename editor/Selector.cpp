@@ -34,10 +34,10 @@ Selector::Selector() {
             IconEntry(MET_VULNERABLE, sprites.get(MET_VULNERABLE), "Met"),
             IconEntry(SNIPER_ATTACK, sprites.get(SNIPER_ATTACK), "Sniper"),
             IconEntry(JUMPING_SNIPER, sprites.get(JUMPING_SNIPER), "Jumping Sniper"),
-            IconEntry(BOMBMAN_ATTACK, sprites.get(BOMBMAN_ATTACK), "Bombman"),
-            IconEntry(FIREMAN_CAST_0, sprites.get(FIREMAN_CAST_0), "Fireman"),
-            IconEntry(MAGNETMAN_IDLE, sprites.get(MAGNETMAN_IDLE), "Magnetman"),
-            IconEntry(SPARKMAN_IDLE, sprites.get(SPARKMAN_IDLE), "Sparkman")
+            //IconEntry(BOMBMAN_ATTACK, sprites.get(BOMBMAN_ATTACK), "Bombman"),
+            //IconEntry(FIREMAN_CAST_0, sprites.get(FIREMAN_CAST_0), "Fireman"),
+            //IconEntry(MAGNETMAN_IDLE, sprites.get(MAGNETMAN_IDLE), "Magnetman"),
+            //IconEntry(SPARKMAN_IDLE, sprites.get(SPARKMAN_IDLE), "Sparkman")
     };
     tiles.fill(tile_entries, ICON_WIDTH, ICON_WIDTH);
     mobs.fill(mob_entries, ICON_WIDTH, ICON_WIDTH);

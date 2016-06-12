@@ -9,7 +9,6 @@ BackgroundComboBox::BackgroundComboBox(SpriteDispenser& sprites) {
     m_refTreeModel = Gtk::ListStore::create(columns);
     set_model(m_refTreeModel);
 
-    //Fill the ComboBox's Tree Model:
     Gtk::TreeModel::Row row = *(m_refTreeModel->append());
     row[columns.m_col_filepath] = sprites.get(SNOW);
     row[columns.m_col_img] = Gdk::Pixbuf::create_from_file(sprites.get(SNOW))
@@ -47,15 +46,6 @@ BackgroundComboBox::BackgroundComboBox(SpriteDispenser& sprites) {
 
     pack_start(columns.m_col_img);
     pack_start(columns.m_col_name);
-
-    /*
-    set_cell_data_func(m_cell, sigc::mem_fun(*this, &ExampleWindow::on_cell_data_extra));
-    pack_start(m_cell);*/
-
-    /*
-    //Connect signal handler:
-    m_Combo.signal_changed().connect( sigc::mem_fun(*this, &ExampleWindow::on_combo_changed) );
-     */
 
     show_all_children();
 }

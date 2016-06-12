@@ -8,7 +8,6 @@
 #include "../entities.h"
 
 #define SIZE_TRANSFORM 15.5
-#define EDGE 2
 
 typedef Glib::RefPtr<Gdk::Pixbuf> Pixbuf;
 typedef drawing_map_t::iterator p_iter;
