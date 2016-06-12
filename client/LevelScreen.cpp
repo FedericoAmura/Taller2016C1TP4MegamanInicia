@@ -8,8 +8,10 @@
 #include "LevelScreen.h"
 
 #include <gdkmm/general.h>
-#include <cstdlib>
-#include <iostream>
+#include <algorithm>
+#include <cmath>
+#include <cstdio>
+#include <map>
 #include <string>
 
 #include "../common/MegamanBeginsConstants.h"
@@ -18,19 +20,37 @@
 typedef unsigned int uint;
 
 LevelScreen::LevelScreen(MegamanClientModel& model) :
-				model(model) {
+	model(model) {
 	double tileWidth = ceil((double)Gdk::screen_width()/(double)TILES_HORIZONTAL);
 	double tileHeight = ceil((double)Gdk::screen_height()/(double)TILES_VERTICAL);
 	tileSize = std::max(tileHeight,tileWidth);
 
-	//TODO Dibujamos el fondo del nivel, despues se va a pasar al modelo como el fondo
-	levelBackground.setImage("../images/background1.jpg",Gdk::screen_width(),Gdk::screen_height(),false);
-	put(levelBackground,0,0);
+	blackBackground.setImage("../sprites/level/background/city.png",Gdk::screen_width(),Gdk::screen_height(),false);
+	put(blackBackground,0,0);
+}
+
+LevelScreen::~LevelScreen() {
 }
 
 void LevelScreen::startLevel() {
 	//Refresco la pantalla cada 15 milisegundos (>60fps)
 	updateScreenConn = Glib::signal_timeout().connect(sigc::mem_fun(*this,&LevelScreen::update),15);
+}
+
+void LevelScreen::stopLevel() {
+	DrawablesIterator iter = model.getDrawables().drawablesIterator();
+	for (int i = 0; i < model.getDrawables().size(); ++i) {
+		Drawable* drawable = (*iter).second;
+		if (drawable != nullptr) {
+			drawable->setCoordinates(TILES_HORIZONTAL,TILES_VERTICAL);
+			drawable->setChanged(true);
+			drawable->setIsDrawed(false);
+			remove(drawable->getImage());
+		}
+		++iter;
+	}
+	model.getDrawables().clear();
+	updateScreenConn.disconnect();
 }
 
 bool LevelScreen::update() {
@@ -62,22 +82,8 @@ bool LevelScreen::update() {
 	return true;
 }
 
-void LevelScreen::stopLevel() {
-	DrawablesIterator iter = model.getDrawables().drawablesIterator();
-	for (int i = 0; i < model.getDrawables().size(); ++i) {
-		Drawable* drawable = (*iter).second;
-		if (drawable != nullptr) {
-			drawable->setCoordinates(TILES_HORIZONTAL,TILES_VERTICAL);
-			drawable->setChanged(true);
-			drawable->setIsDrawed(false);
-			remove(drawable->getImage());
-		}
-		++iter;
-	}
-	model.getDrawables().clear();
-	updateScreenConn.disconnect();
-}
-
-LevelScreen::~LevelScreen() {
+void LevelScreen::setBackground(std::string levelId) {
+	//levelBackground.setImage("../sprites/level/background/city.png",tileSize,tileSize,false);
+	//put(levelBackground,0,0);
 }
 

@@ -42,7 +42,6 @@ public:
 	void showScreen(std::string childrenName);
 	void connectModel();
 	void disconnectModel();
-	void cleanLevelScreen();
 
 private:
 	bool on_key_press_event(GdkEventKey* key_event);

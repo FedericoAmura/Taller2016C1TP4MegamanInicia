@@ -17,7 +17,6 @@
 class CreditsScreen : public Gtk::Fixed {
 private:
 	Drawing creditsBackground;
-	Gtk::Label credits;
 	Gtk::Button backButton;
 
 public:

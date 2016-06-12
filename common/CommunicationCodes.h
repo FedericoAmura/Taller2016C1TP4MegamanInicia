@@ -20,7 +20,15 @@
 #define SOUND 5
 #define START_LEVEL_SCREEN 6
 #define BACK_TO_LEVEL_SELECTION 7
-#define END_CURRENT 9 //PARA DECIR QUE TERMINO EL ENVIO, EJ: DIBUJAR TODOS LOS SPRITES
+#define LIFE_STATUS 8
+#define LEVEL_STATUS 9
+
+//LEVEL CODES
+#define MAGNETMAN 1001
+#define SPARKMAN 1002
+#define RINGMAN 1003
+#define FIREMAN 1004
+#define BOMBMAN 1005
 
 //KEYBOARD_STATE codes
 /* Ver MegamanBeginsConstants-KEY IDS para los Ids de cada tecla
@@ -31,11 +39,6 @@
  * */
 
 //SELECT_LEVEL codes
-#define MAGNETMAN 1001
-#define SPARKMAN 1002
-#define RINGMAN 1003
-#define FIREMAN 1004
-#define BOMBMAN 1005
 /* Se manda el codigo del nivel elegido por el cliente
  * formato: "SELECT_LEVEL levelCode\n"
  * ej: "2 1005\n" es seleccionar nivel BOMBMAN
@@ -99,10 +102,16 @@
  * ej: "7\n" y el cliente cambia al modo seleccion de nivel
  * */
 
-//END_CURRENT codes
-/* TODO NOT YET IMPLEMENTED
- * formato: "END_CURRENT\n"
- * ej: "9\n"
+//LIFE_STATUS codes
+/* Se manda para notificar el cambio de estado de salud de un jefe (0) o un jugador(1-4)
+ * formato: "LIFE_STATUS idPersonaje porcentajeSalud\n"
+ * ej: "8 0 25\n" para indicar que el jefe esta al 25% de su salud
+ * */
+
+//LEVEL_STATUS codes
+/* Se manda para notificar el estado de los niveles, es decir, cuando se los gana
+ * formato: "LEVEL_STATUS levelCode estado\n"
+ * ej: "9 1002 1\n" para indicar que se le gano(1) a SparkMan(1002)
  * */
 
 #endif /* SRC_COMMUNICATIONCODES_H_ */

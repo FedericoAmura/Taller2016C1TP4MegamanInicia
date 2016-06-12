@@ -22,16 +22,19 @@ class LevelScreen : public Gtk::Fixed {
 private:
 	MegamanClientModel& model;
 	sigc::connection updateScreenConn;
+	Drawing blackBackground;
 	Drawing levelBackground;
 	double tileSize;
 
 public:
 	LevelScreen(MegamanClientModel& model);
+	virtual ~LevelScreen();
+
 	void startLevel();
 	void stopLevel();
 	bool update();
-	bool keyPress();
-	virtual ~LevelScreen();
+
+	void setBackground(std::string levelId);
 };
 
 #endif /* SRC_LEVELSCREEN_H_ */

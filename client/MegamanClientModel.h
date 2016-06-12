@@ -23,10 +23,13 @@ typedef sigc::signal<void,std::string> StringSignal;
 class MegamanClientModel : public Thread {
 private:
 	Socket* serverProxy;
+	std::string clientNumber;
+	std::map<int,bool> levelsStatus;
 	Drawables drawables;
 	SpriteDispenser sprites;
 	bool recibirServer;
 	StringSignal windowChangeSignal;
+	StringSignal backgroundSignal;
 
 public:
 	MegamanClientModel();
@@ -36,8 +39,10 @@ public:
 	void run();	//updateFromServer();
 
 	StringSignal changeScreenSignal();
+	StringSignal setBackgroundSignal();
 
 	void connectServer(std::string ip, std::string port);
+	std::string getClientNumer();
 	void disconnectServer();
 
 	void serverSendLevelSelected(int levelCode);

@@ -55,6 +55,8 @@ levelScreen(model) {
 	Gtk::Button &bombManButton = levelSelectorScreen.getBombManButton();
 	bombManButton.signal_clicked().connect(sigc::bind<int>(sigc::mem_fun(model,&MegamanClientModel::serverSendLevelSelected),BOMBMAN));
 
+	//Conecto senal del modelo para definir el fondo del nivel
+	model.setBackgroundSignal().connect(sigc::mem_fun(levelScreen,&LevelScreen::setBackground));
 	//Conecto senal del modelo para cambiar las ventanas
 	model.changeScreenSignal().connect(sigc::mem_fun(*this,&ClientWindow::showScreen));
 
@@ -72,11 +74,18 @@ ClientWindow::~ClientWindow() {
 }
 
 void ClientWindow::showScreen(std::string childrenName) {
+	Glib::RefPtr<Gdk::Cursor> cursor;
 	screenContainer.set_visible_child(childrenName);
-	if (childrenName == LEVEL_SCREEN_NAME)
+	if (childrenName == LEVEL_SCREEN_NAME) {
 		levelScreen.startLevel();
-	else
+		cursor = Gdk::Cursor::create(Gdk::BLANK_CURSOR);
+	} else {
 		levelScreen.stopLevel();
+		cursor = Gdk::Cursor::create(Gdk::ARROW);
+	}
+
+	Glib::RefPtr<Gdk::Window> window = get_window();
+	if (window) window->set_cursor(cursor);
 }
 
 void ClientWindow::connectModel() {

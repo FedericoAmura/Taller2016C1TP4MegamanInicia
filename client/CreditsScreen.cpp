@@ -13,10 +13,8 @@ CreditsScreen::CreditsScreen() {
 	const int width = Gdk::screen_width();
 	const int height = Gdk::screen_height();
 
-	creditsBackground.setImage("../images/creditsbackground.jpg",width,height,false);
+	creditsBackground.setImage("../sprites/level/background/creditsbackground.png",width,height,false);
 	put(creditsBackground,0,0);
-	credits.set_label("Creditos\nMegaman Inicia\nTaller TP4");
-	put(credits,0.6*width,0.2*height);
 	backButton.set_label("Back");
 	put(backButton,0.05*width,0.05*height);
 }

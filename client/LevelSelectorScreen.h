@@ -21,7 +21,7 @@ private:
 	MegamanClientModel& model;
 	Gtk::VBox megamanContainer;
 	Gtk::Button exitButton;
-	Drawing megaManIcon;
+	Gtk::Label dataLabel;
 	Drawing magnetManIcon;
 	Gtk::Button magnetManButton;
 	Drawing sparkManIcon;
@@ -35,13 +35,17 @@ private:
 
 public:
 	LevelSelectorScreen(MegamanClientModel& model);
+	virtual ~LevelSelectorScreen();
+
 	Gtk::Button& getDisconnectButton();
 	Gtk::Button& getMagnetManButton();
 	Gtk::Button& getSparkManButton();
 	Gtk::Button& getRingManButton();
 	Gtk::Button& getFireManButton();
 	Gtk::Button& getBombManButton();
-	virtual ~LevelSelectorScreen();
+
+private:
+	void fillText();
 };
 
 #endif /* SRC_LEVELSELECTORSCREEN_H_ */

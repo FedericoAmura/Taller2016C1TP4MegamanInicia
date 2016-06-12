@@ -16,7 +16,7 @@ ConnectionScreen::ConnectionScreen(MegamanClientModel& model) :
 	const int height = Gdk::screen_height();
 
 	//Dibujamos el fondo de la pantalla de inicio
-	connectionBackground.setImage("../images/introbackground.jpg",width,height,false);
+	connectionBackground.setImage("../sprites/level/background/introbackground.jpg",width,height,false);
 	put(connectionBackground,0,0);
 
 	//Armo la box para la vinculacion
@@ -25,8 +25,8 @@ ConnectionScreen::ConnectionScreen(MegamanClientModel& model) :
 	serverAddress.set_max_length(15);
 	serverPort.set_placeholder_text("Server Port");
 	serverPort.set_max_length(5);
-	//serverAddress.set_text("127.0.0.1");	//TODO asi ya lo tengo escrito
-	//serverPort.set_text("4321");			//TODO asi ya lo tengo escrito
+	serverAddress.set_text("127.0.0.1");	//TODO asi ya lo tengo escrito
+	serverPort.set_text("4321");			//TODO asi ya lo tengo escrito
 	serverButton.set_label("Connect");
 	connectionContainer.set_spacing(8);
 	connectionContainer.add(serverAddress);

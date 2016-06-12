@@ -15,8 +15,14 @@
 #include "../common/CommunicationCodes.h"
 
 MegamanClientModel::MegamanClientModel() :
-serverProxy(nullptr) {
+	serverProxy(nullptr),
+	clientNumber("0") {
 	recibirServer = false;
+	levelsStatus[MAGNETMAN] = false;
+	levelsStatus[SPARKMAN] = false;
+	levelsStatus[RINGMAN] = false;
+	levelsStatus[FIREMAN] = false;
+	levelsStatus[BOMBMAN] = false;
 }
 
 MegamanClientModel::~MegamanClientModel() {
@@ -33,49 +39,50 @@ void MegamanClientModel::run() {
 		if (message.length() == 0) continue;
 		//std::cout << message << std::endl;	//DEBUG
 		std::stringstream ss(message);
-		std::string commandString;
-		ss >> commandString;
-		int command = atoi(commandString.c_str());
+		int commandString; ss >> commandString;
 
-		switch (command) {
+		switch (commandString) {
 		case HELLO:
-			std::cout << "Server connected" << std::endl;
+			{
+			std::string playerNumber; ss >> playerNumber;
+			clientNumber = playerNumber;
+			}
 			break;
 		case DRAW:
 			{
-			std::string idDrawable; ss >> idDrawable;
-			std::string idDrawing; ss >> idDrawing;
-			std::string flipped; ss >> flipped;
+			int idDrawable; ss >> idDrawable;
+			int idDrawing; ss >> idDrawing;
+			int flipped; ss >> flipped;
 			double xDrawable; ss >> xDrawable;
 			double yDrawable; ss >> yDrawable;
-			Drawable* drawable = drawables.getDrawable(atoi(idDrawable.c_str()));
+			Drawable* drawable = drawables.getDrawable(idDrawable);
 			if (drawable == nullptr) {
 				drawable = new Drawable();
 			}
-			uint id = (uint)atoi(idDrawing.c_str());
-			drawable->setImage(id, sprites.get(id),sprites.getWidth(id),sprites.getHeight(id),atoi(flipped.c_str()));
+			uint id = (uint)idDrawing;
+			drawable->setImage(id, sprites.get(id),sprites.getWidth(id),sprites.getHeight(id),flipped);
 			drawable->setCoordinates(xDrawable,yDrawable);
-			drawables.setDrawable(atoi(idDrawable.c_str()),drawable);
+			drawables.setDrawable(idDrawable,drawable);
 			}
 			break;
 		case REDRAW:
 			{
-			std::string idDrawable; ss >> idDrawable;
-			std::string idDrawing; ss >> idDrawing;
-			std::string flipped; ss >> flipped;
-			Drawable* drawable = drawables.getDrawable(atoi(idDrawable.c_str()));
+			int idDrawable; ss >> idDrawable;
+			int idDrawing; ss >> idDrawing;
+			int flipped; ss >> flipped;
+			Drawable* drawable = drawables.getDrawable(idDrawable);
 			if (drawable == nullptr) continue;
-			uint id = (uint)atoi(idDrawing.c_str());
-			drawable->setImage(id, sprites.get(id),sprites.getWidth(id),sprites.getHeight(id),atoi(flipped.c_str()));
+			uint id = (uint)idDrawing;
+			drawable->setImage(id, sprites.get(id),sprites.getWidth(id),sprites.getHeight(id),flipped);
 			drawable->setChanged(true);
 			}
 			break;
 		case MOVE:
 			{
-			std::string idDrawable; ss >> idDrawable;
+			int idDrawable; ss >> idDrawable;
 			double xDrawable; ss >> xDrawable;
 			double yDrawable; ss >> yDrawable;
-			Drawable* drawable = drawables.getDrawable(atoi(idDrawable.c_str()));
+			Drawable* drawable = drawables.getDrawable(idDrawable);
 			if (drawable == nullptr) continue;
 			drawable->setCoordinates(xDrawable,yDrawable);
 			drawable->setChanged(true);
@@ -83,8 +90,8 @@ void MegamanClientModel::run() {
 			break;
 		case KILL:
 			{
-			std::string idDrawable; ss >> idDrawable;
-			Drawable* drawable = drawables.getDrawable(atoi(idDrawable.c_str()));
+			int idDrawable; ss >> idDrawable;
+			Drawable* drawable = drawables.getDrawable(idDrawable);
 			if (drawable == nullptr) continue;
 			//TODO Por ahora lo dibujamos arafue
 			drawable->setCoordinates(TILES_HORIZONTAL,TILES_VERTICAL);
@@ -98,13 +105,24 @@ void MegamanClientModel::run() {
 			}
 			break;
 		case START_LEVEL_SCREEN:
+			{
+			std::string idLevel; ss >> idLevel;
+			backgroundSignal.emit(idLevel);
 			windowChangeSignal.emit(LEVEL_SCREEN_NAME);
+			}
 			break;
 		case BACK_TO_LEVEL_SELECTION:
 			windowChangeSignal.emit(LEVEL_SELECTOR_SCREEN_NAME);
 			break;
-		case END_CURRENT:
-			//do nothing
+		case LIFE_STATUS:
+			std::cout << "Cambio la vida de alguien" << std::endl;
+			break;
+		case LEVEL_STATUS:
+			{
+			int idLevel; ss >> idLevel;
+			bool levelStatus; ss >> levelStatus;
+			levelsStatus[idLevel] = levelStatus;
+			}
 			break;
 		default:
 			{
@@ -121,10 +139,18 @@ StringSignal MegamanClientModel::changeScreenSignal() {
 	return windowChangeSignal;
 }
 
+StringSignal MegamanClientModel::setBackgroundSignal() {
+	return backgroundSignal;
+}
+
 void MegamanClientModel::connectServer(std::string ip, std::string port) {
 	serverProxy = new Socket(ip, port);
 	recibirServer = true;
 	this->start();
+}
+
+std::string MegamanClientModel::getClientNumer() {
+	return clientNumber;
 }
 
 void MegamanClientModel::disconnectServer() {
@@ -136,6 +162,7 @@ void MegamanClientModel::disconnectServer() {
 		serverProxy->cerrar();
 		delete(serverProxy);
 		serverProxy = nullptr;
+		clientNumber = "0";
 	}
 }
 
