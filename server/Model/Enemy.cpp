@@ -91,6 +91,7 @@ FlyingEnemy::FlyingEnemy(b2World* w,
 		const b2Vec2& pos,
 		MyLevel* lvl)
 :Enemy(w,json,pos,lvl){
+	hSpeed=json["HSpeed"].asFloat();
 	body->SetGravityScale(0);
 }
 
@@ -99,7 +100,12 @@ FlyingEnemy::~FlyingEnemy() {}
 /*calls base class tick, and tires to move towards players*/
 void FlyingEnemy::tick(float time){
 	Enemy::tick(time);
-	//todo move towards a megaman
+	b2Vec2 speed=body->GetLinearVelocity();;
+	if(direction==LEFT)
+		speed.x=-hSpeed;
+	else
+		speed.x=hSpeed;
+	body->SetLinearVelocity(speed);
 }
 
 /************************************************************/

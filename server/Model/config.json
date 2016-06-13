@@ -122,6 +122,7 @@
 		"id":			1010,
 		"weaponId":		2001,
 		"JSpeed" :		0.0,
+		"HSpeed":		3.0,
 		"life":			1.0,
 		"jumps":		false,
 		"shapes":
