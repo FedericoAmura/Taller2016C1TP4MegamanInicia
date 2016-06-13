@@ -77,12 +77,13 @@ void EditorMainWindow::on_combo_changed() {
 }
 
 bool EditorMainWindow::on_key_press_event(GdkEventKey *key_event) {
+    Gtk::Widget::on_key_press_event(key_event);
     guint keyVal = key_event->keyval;
     if (keyVal == GDK_KEY_Delete) {
         main_manager.on_delete();
         chamber_manager.on_delete();
     };
-    return true;
+    return false;
 }
 
 EditorMainWindow::~EditorMainWindow() {
