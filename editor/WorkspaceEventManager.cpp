@@ -6,6 +6,7 @@
 #include "WorkspaceEventManager.h"
 
 #define NO_SELECTION 0
+#define SIDE 25
 
 typedef const Glib::RefPtr<Gdk::DragContext> DragContext;
 typedef const Gtk::SelectionData SelectData;
@@ -71,10 +72,13 @@ void WorkspaceEventManager::on_drag_data_received(DragContext&, int x, int y,
     workspace->addElement(xint, yint, id);
 }
 
+void WorkspaceEventManager::setDraggable(std::vector<Gtk::TargetEntry>& list_targets) {
+    drag_source_set(list_targets);
+}
+
 void WorkspaceEventManager::setDroppable(vector<TargetEntry>& list_targets) {
     this->list_targets = list_targets;
     drag_dest_set(list_targets);
-
 }
 
 bool WorkspaceEventManager::on_selection(uint id) {
@@ -96,8 +100,40 @@ void WorkspaceEventManager::on_switch_page(Gtk::Widget*, guint) {
     //is updated whilst obscured.
     workspace->hide();
     something_selected = false;
+    m_signal_selection.emit(NO_SELECTION);
     workspace->show();
 }
+
+void WorkspaceEventManager::on_drag_data_get(const Glib::RefPtr<Gdk::DragContext>&,
+                                             Gtk::SelectionData &selection_data,
+                                             guint, guint) {
+    if (something_selected){
+        uint id = workspace->getId(
+                std::get<0>(selection),
+                std::get<1>(selection));
+        selection_data.set_text(std::to_string(id));
+        workspace->removeEntity(
+                std::get<0>(selection),
+                std::get<1>(selection));
+    }
+}
+
+void WorkspaceEventManager::on_drag_begin(const Glib::RefPtr<Gdk::DragContext>& context) {
+    if (something_selected){
+        uint id = workspace->getId(
+                std::get<0>(selection),
+                std::get<1>(selection));
+        context->set_icon(Gdk::Pixbuf::create_from_file(sprites.get(id),SIDE,SIDE,0), SIDE, SIDE);
+    }
+}
+
+
+
+
+
+
+
+
 
 
 

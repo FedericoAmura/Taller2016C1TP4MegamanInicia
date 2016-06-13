@@ -59,6 +59,8 @@ EditorMainWindow::EditorMainWindow(Workspace* main, Workspace* chamber)
     //Drag and drop activation
     std::vector<Gtk::TargetEntry> list_targets;
     list_targets.push_back(Gtk::TargetEntry("STRING"));
+    main_manager.setDraggable(list_targets);
+    chamber_manager.setDraggable(list_targets);
     main_manager.setDroppable(list_targets);
     chamber_manager.setDroppable(list_targets);
     selector.setDraggable(list_targets);

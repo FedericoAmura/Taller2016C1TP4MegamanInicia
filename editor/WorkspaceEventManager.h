@@ -18,6 +18,7 @@ class WorkspaceEventManager : public Gtk::EventBox {
 public:
     WorkspaceEventManager(Workspace* workspace);
     ~WorkspaceEventManager();
+    void setDraggable(std::vector<Gtk::TargetEntry>& listTargets);
     void setDroppable(std::vector<Gtk::TargetEntry>& listTargets);
     type_signal_selection signal_selection();
     void on_delete();
@@ -26,6 +27,7 @@ public:
 
 private:
     Workspace* workspace;
+    SpriteDispenser sprites;
     bool something_selected;
     pair<uint, uint> selection;
     vector<Gtk::TargetEntry> list_targets;
@@ -36,6 +38,10 @@ protected:
 
     //handlers
     bool on_button_press(GdkEventButton* event);
+    void on_drag_begin(const Glib::RefPtr<Gdk::DragContext>& context);
+    void on_drag_data_get(
+            const Glib::RefPtr<Gdk::DragContext>&,
+            Gtk::SelectionData& selection_data, guint, guint);
     void on_drag_data_received(
             const Glib::RefPtr<Gdk::DragContext>& context, int x, int y,
             const Gtk::SelectionData& selection_data, guint info, guint time);
