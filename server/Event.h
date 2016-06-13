@@ -66,12 +66,17 @@ public:
 };
 
 /*************************************************************/
+#define EXIT 0
+#define LOST -1
+#define WON 1
 
 class LevelFinished: public Event{
 	int condition;
+	int levelId;
 public:
-	explicit LevelFinished(int condition);
+	explicit LevelFinished(int condition, int id);
 	virtual ~LevelFinished();
 	int getCondition();
+	int getLevelId();
 };
 #endif /* SERVER_EVENT_H_ */

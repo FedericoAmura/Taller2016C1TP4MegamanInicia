@@ -33,4 +33,11 @@ public:
 	virtual ~FlyingEnemy();
 	void tick(float time);
 };
+
+class Boss: public Enemy{
+public:
+	Boss(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl);
+	virtual ~Boss();
+	virtual void kill();
+};
 #endif /* SERVER_MODEL_ENEMY_H_ */

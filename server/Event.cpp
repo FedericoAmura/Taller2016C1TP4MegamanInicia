@@ -70,12 +70,18 @@ int ConnectionEnded::getClient() {
 }
 
 /***************************************************/
-LevelFinished::LevelFinished(int condition): condition(condition) {
-	id=5;
+LevelFinished::LevelFinished(int condition,int id)
+: condition(condition),
+  levelId(id){
+	this->id=5;
 }
 
 LevelFinished::~LevelFinished() {}
 
 int LevelFinished::getCondition() {
 	return condition;
+}
+
+int LevelFinished::getLevelId(){
+	return levelId;
 }

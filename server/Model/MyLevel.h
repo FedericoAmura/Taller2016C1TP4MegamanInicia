@@ -75,10 +75,11 @@ class MyLevel: public Thread{
 	float windowHeight;
 	b2Vec2 windowPos;
 	Metadata* metadata;
+	int id;
 
 public:
 	bool bossEncounter;
-	explicit MyLevel(Game* j,std::string lvlFileName, Metadata* metadata);
+	explicit MyLevel(Game* j,std::string lvlFileName, Metadata* metadata,int id);
 	virtual ~MyLevel();
 	void run();
 	void stop();
@@ -95,6 +96,7 @@ public:
 	void addMegaman(Megaman* newMegaman);
 	void addCharacter(Character* newCharacter);
 	void addObject(LevelObject* newObject);
+	void win();
 
 };
 

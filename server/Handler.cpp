@@ -47,7 +47,7 @@ void RecvMessage::handle(Event* e){
 		uint keyState;
 		msj>>keyState;
 		if(keyState & KEY_ESC_ID)
-			game->stopLevel();
+			game->notify(new LevelFinished(EXIT,0));
 		else
 			game->movePlayer(keyState,procedencia);
 		break;
@@ -87,7 +87,13 @@ FinishLevel::FinishLevel(Game* j):Handler(j) {}
 FinishLevel::~FinishLevel() {}
 
 void FinishLevel::handle(Event* e) {
-	//LevelFinished* event= (LevelFinished*)e;
-	//event->getCondition();
+	LevelFinished* event= (LevelFinished*)e;
+	LOG(INFO)<<"level finished: "<<event->getLevelId()
+			<<" state: "<<event->getCondition();
+	if(event->getCondition()==WON){
+		std::stringstream msj;
+		msj<<LEVEL_STATUS<<" "<<event->getLevelId();
+		game->notify(new MessageSent(msj.str(),0));
+	}
 	game->stopLevel();
 }

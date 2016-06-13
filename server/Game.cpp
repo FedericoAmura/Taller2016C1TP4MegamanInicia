@@ -45,7 +45,6 @@ Game::~Game() {
 
 /*Starts event loop. Finishes when stop() is called*/
 void Game::run(){
-	//todo initialize certain things here
 	LOG(INFO)<<"loop eventos juego iniciado";
 	while(isntStopped()){
 		Event* e=eventQueue.pop();
@@ -160,7 +159,7 @@ void Game::selectLevel(int levelId, int client){
 		}
 		}//end switch
 		try{
-			MyLevel* lvl=new MyLevel(this,levelFilePath,&metadata);
+			MyLevel* lvl=new MyLevel(this,levelFilePath,&metadata,levelId);
 			level= lvl;//to avoid asigning invalid in case of error
 			level->start();
 			std::stringstream msg;
@@ -184,7 +183,6 @@ MyLevel* Game::getLevel(){
 /*stops,joins, and destroys level.
  * post:level is set to null*/
 void Game::stopLevel(){
-	//todo send lost,won,exited
 	if(levelChosen()){
 		if(level->isRunning()){
 			LOG(INFO)<<"cerrando nivel";
@@ -200,7 +198,6 @@ void Game::stopLevel(){
 }
 
 /*moves the corresponding player*/
-//todo move more than one megaman
 void Game::movePlayer(uint keyState, int source) {
 	if(levelChosen()){
 		//todo change hardcode

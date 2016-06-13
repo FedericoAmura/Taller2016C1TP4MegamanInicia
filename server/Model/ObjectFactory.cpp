@@ -68,6 +68,9 @@ LevelObject* ObjectFactory::createObject(ObjectInfo* info) {
 		//todo more enemies? or shield is from json
 		if(id==BUMBY_0){
 			newObject = new FlyingEnemy(world, config[idAsString], pos,level);
+		}else if(id==BOSS_BOMBMAN || id==BOSS_SPARKMAN ||
+				id==BOSS_MAGNETMAN || id==BOSS_RINGMAN || id==BOSS_FIREMAN){
+			newObject = new Boss(world, config[idAsString], pos,level);
 		}else{
 			newObject = new Enemy(world, config[idAsString], pos,level);
 		}

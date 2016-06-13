@@ -41,12 +41,13 @@
 #define OFFSET 0.1
 #define BOSS_CHAMBER_OFFSET 10
 
-MyLevel::MyLevel(Game* j,std::string lvlFileName,Metadata* metadata)
+MyLevel::MyLevel(Game* j,std::string lvlFileName,Metadata* metadata,int id)
 :world(b2Vec2(0,-10)),
  running(false),
  game(j),
  factory(&world,this),
  metadata(metadata),
+ id(id),
  bossEncounter(false){
 	LevelObject::resetIds();
 	boundaries=nullptr;
@@ -239,7 +240,7 @@ void MyLevel::run(){
 			//if no megamans left exit
 			if(allMegamansDead()){
 				LOG(INFO)<<"all megamans dead";
-				game->notify(new LevelFinished(-1));
+				game->notify(new LevelFinished(LOST,id));
 				this->stop();
 			}
 			usleep(timeStep* 1000000 );
@@ -461,4 +462,8 @@ void MyLevel::addObject(LevelObject* newObject) {
 		msj<<" 0 "<<posToString(newObject->getPos());
 		game->notify(new MessageSent(msj.str(),0));
 	}
+}
+
+void MyLevel::win() {
+	game->notify(new LevelFinished(WON,id));
 }
