@@ -12,9 +12,14 @@
 			"id" : 4119,
 			"x" : 6,
 			"y" : 5
+		},
+		{
+			"id" : 4000,
+			"x" : 10,
+			"y" : 4
 		}
 	],
-	"length" : 21,
-	"valid" : true,
+	"length" : 12,
+	"valid" : false,
 	"width" : 15
 }

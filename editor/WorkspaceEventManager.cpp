@@ -95,6 +95,7 @@ void WorkspaceEventManager::on_switch_page(Gtk::Widget*, guint) {
     //Otherwise there can be bugs when the workspace
     //is updated whilst obscured.
     workspace->hide();
+    something_selected = false;
     workspace->show();
 }
 

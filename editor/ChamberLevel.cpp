@@ -4,6 +4,7 @@
 
 #include "ChamberLevel.h"
 #include "../entities.h"
+#include "../common/MegamanBeginsConstants.h"
 #include <sstream>
 #include <fstream>
 #include <iostream>
@@ -27,7 +28,7 @@ ChamberLevel::ChamberLevel(string json_file) {
     background_file = background.asString();
     //Chamber tiles
     Json::Value elements = level_json["chamber"];
-    entities = new Layer(27); //TODO sacar de header
+    entities = new Layer(TILES_HORIZONTAL);
     for (v_iter it = elements.begin(); it != elements.end(); ++it) {
         prototype_t p;
         p.x = (*it)["x"].asUInt();
@@ -47,30 +48,33 @@ void ChamberLevel::toJson(string file_name) {
     //Validity
     Json::Value valid = level["valid"];
     if (valid.asBool()) {
+        bool chamber_valid = isValid();
         level["valid"] = isValid();
-        uint boss_id = entities->getBossId();
-        string boss_name;
-        switch (boss_id) {
-            case (BOSS_BOMBMAN) :
-                boss_name = "Bombman";
-                break;
-            case (BOSS_FIREMAN):
-                boss_name = "Fireman";
-                break;
-            case (BOSS_SPARKMAN) :
-                boss_name = "Sparkman";
-                break;
-            case (BOSS_RINGMAN) :
-                boss_name = "Ringman";
-                break;
-            case (BOSS_MAGNETMAN) :
-                boss_name = "Magnetman";
-                break;
-            default:
-                throw std::runtime_error(
-                        "Level with no boss is labeled as valid");
+        if (chamber_valid){
+            uint boss_id = entities->getBossId();
+            string boss_name;
+            switch (boss_id) {
+                case (BOSS_BOMBMAN) :
+                    boss_name = "Bombman";
+                    break;
+                case (BOSS_FIREMAN):
+                    boss_name = "Fireman";
+                    break;
+                case (BOSS_SPARKMAN) :
+                    boss_name = "Sparkman";
+                    break;
+                case (BOSS_RINGMAN) :
+                    boss_name = "Ringman";
+                    break;
+                case (BOSS_MAGNETMAN) :
+                    boss_name = "Magnetman";
+                    break;
+                default:
+                    throw std::runtime_error(
+                            "Level with no boss is labeled as valid");
+            }
+            level["Boss"] = boss_name;
         }
-        level["Boss"] = boss_name;
     }
     out << level;
     in.close();

@@ -48,6 +48,7 @@ private:
 
     //Signal handlers:
     void on_combo_changed();
+    bool on_key_press_event(GdkEventKey* key_event);
 };
 
 

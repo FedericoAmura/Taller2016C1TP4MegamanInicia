@@ -74,5 +74,16 @@ void EditorMainWindow::on_combo_changed() {
     chamber->setBackground(background_combo.getSelected());
 }
 
+bool EditorMainWindow::on_key_press_event(GdkEventKey *key_event) {
+    guint keyVal = key_event->keyval;
+    if (keyVal == GDK_KEY_Delete) {
+        main_manager.on_delete();
+        chamber_manager.on_delete();
+    };
+    return true;
+}
+
+
+
 
 
