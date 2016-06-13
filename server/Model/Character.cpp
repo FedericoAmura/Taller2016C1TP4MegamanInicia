@@ -15,6 +15,7 @@
 #include "Weapon.h"
 #include "../../common/CommunicationCodes.h"
 #include "../Game.h"
+#include "../Event.h"
 
 Character::Character(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl):
 LevelObject(w,json,pos,MEGAMAN_IDLE_0),

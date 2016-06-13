@@ -10,20 +10,20 @@
 
 #include "Character.h"
 #include "Stat.h"
+#include "../Metadata.h"
 
 class Megaman: public Character {
 	float hSpeed;
 	float climbSpeed;
-	uint livesRemaining;
+	ClientData* clientData;
 	b2Vec2 spawnPoint;
 	Stat<float> inmuneTime;//seconds
 	int climbingSpriteId;
 	bool wasClimbing;
-	int ownerId;
-	bool lifeChanged;
 
 	void changeFixtureFilter(b2Fixture* f);
 	virtual bool isJumping();
+	void informClientLifeChange();
 
 public:
 	uint laddersTouching;
@@ -40,9 +40,10 @@ public:
 	void changeKeyState(uint keyState);
 	void heal(uint amount);
 	void charge(uint amount);
+	void addLife();
 	virtual void registerIn(MyLevel* level);
 	virtual int getSpriteId();
-	void assignOwner(int ownerId);
+	void assignOwner(ClientData* clientData);
 	virtual void redrawForClients(Game* game,MyLevel* level,bool checkChanges);
 };
 

@@ -22,6 +22,7 @@
 #include "MyContactListener.h"
 #include "ObjectFactory.h"
 #include "Spawner.h"
+#include "../Metadata.h"
 
 class BossDoor;
 class ObjectInfo;
@@ -73,11 +74,11 @@ class MyLevel: public Thread{
 	float windowWidth;
 	float windowHeight;
 	b2Vec2 windowPos;
-	uint numOfClients;
+	Metadata* metadata;
 
 public:
 	bool bossEncounter;
-	explicit MyLevel(Game* j,std::string lvlFileName, uint numberOfClients);
+	explicit MyLevel(Game* j,std::string lvlFileName, Metadata* metadata);
 	virtual ~MyLevel();
 	void run();
 	void stop();

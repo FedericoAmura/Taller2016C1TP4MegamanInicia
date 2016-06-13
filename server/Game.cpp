@@ -10,16 +10,18 @@
 #include "Model/MyLevel.h"
 #include "../common/CommunicationCodes.h"
 #include "../common/MegamanBeginsConstants.h"
+#include "Metadata.h"
 
 #define TIMEOUT 10000
 
 /*creates game with server as communications*/
-Game::Game(Server* server):
-goOn(true),
+Game::Game(Server* server)
+:goOn(true),
 server(server),
 manager(this),
 level(nullptr),
-firstClient(-1) {
+firstClient(-1),
+metadata(this){
 	manager.setHandler(1,new AcceptConnection(this));
 	manager.setHandler(2,new RecvMessage(this));
 	manager.setHandler(3,new SendMessage(this));
@@ -89,6 +91,7 @@ void Game::addClient(int descriptor){
 		msj<<HELLO<<" "<<clients.size();
 		this->notify(new MessageSent(msj.str(),descriptor));
 		clientNum[descriptor]=clients.size();
+		metadata.addClient(descriptor,clientNum[descriptor]);
 		LOG(INFO)<<"Cliente conectado nro: "
 				<<clients.size()<<" descriptor: "<<descriptor;
 	}
@@ -118,6 +121,7 @@ void Game::removeClient(int descriptor) {
 		clients.erase(it);
 		LOG(INFO)<<"cliente desconectado, id:"<<descriptor;
 	}
+	//todo remove from metadata, possibly through level
 	if(clients.empty())
 		stopLevel();
 }
@@ -156,7 +160,7 @@ void Game::selectLevel(int levelId, int client){
 		}
 		}//end switch
 		try{
-			MyLevel* lvl=new MyLevel(this,levelFilePath,clients.size());
+			MyLevel* lvl=new MyLevel(this,levelFilePath,&metadata);
 			level= lvl;//to avoid asigning invalid in case of error
 			level->start();
 			std::stringstream msg;

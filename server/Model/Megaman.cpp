@@ -14,17 +14,16 @@
 #include "../../common/MegamanBeginsConstants.h"
 #include "../../common/CommunicationCodes.h"
 #include "../Game.h"
+#include "../Event.h"
 
 Megaman::Megaman(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl):
 Character(w,json,pos,lvl),
 hSpeed(json["HSpeed"].asFloat()),
 climbSpeed(json["ClimbSpeed"].asFloat()),
-livesRemaining(3),
+clientData(nullptr),
 spawnPoint(pos),
 inmuneTime(json["inmuneTime"].asFloat()),
 wasClimbing(false),
-ownerId(0),
-lifeChanged(false),
 laddersTouching(0){
 	//set filters
 	for (b2Fixture* f = body->GetFixtureList(); f; f = f->GetNext()){
@@ -106,24 +105,24 @@ void Megaman::changeKeyState(uint keyState){
  * else he gets removed*/
 void Megaman::kill() {
 	//LOG(INFO)<<"inmune time left: "<<inmuneTime.getCurrent();
-	if(inmuneTime.getCurrent()==0 && !dead){
-		LOG(INFO)<<"megaman murio,vidas restantes: "
-				<<livesRemaining;
+	if(inmuneTime.getCurrent()==0 && !dead && clientData){
 		inmuneTime.maxOut();
-		if(livesRemaining>=1){
-			livesRemaining--;
+		if(clientData->getLives().getCurrent()>=1){
+			clientData->getLives().dec(1);
 			level->respawn(this);
 			dead=true;
 		}else{
 			dead=true;
 		}
+		LOG(INFO)<<"megaman murio,vidas restantes: "
+				<<clientData->getLives().getCurrent();
 	}
 }
 
 /*warning: do not call from inside world step or contact listener
  * sends megaman to his assigned spawning point*/
 void Megaman::spawn() {
-	if(livesRemaining>0 || !dead){
+	if(clientData->getLives().getCurrent()>0 || !dead){
 		dead=false;
 		body->SetTransform(spawnPoint,0);
 	}
@@ -161,12 +160,21 @@ void Megaman::tick(float time) {
 	inmuneTime.dec(time);
 }
 
+void Megaman::informClientLifeChange() {
+	Game* game = clientData->getGame();
+	std::stringstream msj;
+	int percentage =
+			(int) ((((float) (life.getCurrent())) / life.getMax() * 100));
+	msj << LIFE_STATUS << " " << clientData->getClientNumber() << " "
+			<< percentage;
+	game->notify(new MessageSent(msj.str(), clientData->getDescriptor()));
+}
+
 /* increases enegry by amount*/
 void Megaman::heal(uint amount) {
 	this->life.inc(amount);
-	lifeChanged=true;
 	LOG(INFO)<<objectId<<" healed, life left: "<<life.getCurrent();
-
+	informClientLifeChange();
 }
 
 /* increases charge by amount*/
@@ -180,8 +188,8 @@ void Megaman::damage(Bullet* bullet) {
 	if(inmuneTime.getCurrent()==0){
 		Character::damage(bullet);
 		inmuneTime.maxOut();
-		lifeChanged=true;
 	}
+	informClientLifeChange();
 }
 
 /*changes the spwan point*/
@@ -210,17 +218,17 @@ int Megaman::getSpriteId() {
 		return spriteId;
 }
 
-void Megaman::assignOwner(int ownerId) {
-	this->ownerId=ownerId;
+void Megaman::assignOwner(ClientData* clientData) {
+	this->clientData=clientData;
+}
+
+/*adds a life*/
+void Megaman::addLife() {
+	if(clientData && !dead)
+		clientData->getLives().inc(1);
 }
 
 /*redraws as a character, then send life satatus*/
 void Megaman::redrawForClients(Game* game, MyLevel* level, bool checkChanges) {
 	Character::redrawForClients(game,level,checkChanges);
-	if(lifeChanged){
-		lifeChanged=false;
-		std::stringstream msj;
-		msj<<LIFE_STATUS<<" "<<ownerId<<" "<<life.getCurrent();
-		game->notify(new MessageSent(msj.str(),0));
-	}
 }

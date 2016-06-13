@@ -36,6 +36,9 @@ public:
 	T getCurrent(){
 		return current;
 	}
+	T getMax(){
+		return max;
+	}
 };
 
 #endif /* SERVER_MODEL_STAT_H_ */

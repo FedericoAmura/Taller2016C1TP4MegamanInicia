@@ -18,6 +18,7 @@
 #include "Observer.h"
 #include "../common/Thread.h"
 #include "ThreadQueue.h"
+#include "Metadata.h"
 class Server;//forward declaration
 
 class Game:public Thread,public Observer{
@@ -32,6 +33,7 @@ class Game:public Thread,public Observer{
 	std::map<int,Socket*> clients;
 	int firstClient;
 	std::map<int,int> clientNum;
+	Metadata metadata;
 
 public:
 	explicit Game(Server* server);

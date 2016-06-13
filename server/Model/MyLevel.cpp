@@ -32,6 +32,7 @@
 #include "Bullet.h"
 #include "Obstacle.h"
 #include "Items.h"
+#include "../Metadata.h"
 
 #define COFIG_FILE "../server/Model/config.json"
 #define IGNORE 0
@@ -40,12 +41,12 @@
 #define OFFSET 0.1
 #define BOSS_CHAMBER_OFFSET 10
 
-MyLevel::MyLevel(Game* j,std::string lvlFileName,uint numberOfClients)
+MyLevel::MyLevel(Game* j,std::string lvlFileName,Metadata* metadata)
 :world(b2Vec2(0,-10)),
  running(false),
  game(j),
  factory(&world,this),
- numOfClients(numberOfClients),
+ metadata(metadata),
  bossEncounter(false){
 	LevelObject::resetIds();
 	boundaries=nullptr;
@@ -431,10 +432,13 @@ void MyLevel::megamanAtDoor(BossDoor* door) {
 /* adds megaman to megaman tracker if theres space, deletes him if not
  * then adds him as character*/
 void MyLevel::addMegaman(Megaman* newMegaman) {
-	if(megamans.size()<numOfClients){
-		megamans[megamans.size()+1]=newMegaman;
-		addCharacter(newMegaman);
-		newMegaman->assignOwner(megamans.size());
+	if(megamans.size()<(uint)metadata->getNumberOfClients()){
+		ClientData* clientData=metadata->getClient(megamans.size()+1);
+		if(clientData){
+			megamans[megamans.size()+1]=newMegaman;
+			addCharacter(newMegaman);
+			newMegaman->assignOwner(clientData);
+		}
 	}else{
 		delete newMegaman;
 	}
