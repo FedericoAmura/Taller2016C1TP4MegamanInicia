@@ -386,13 +386,7 @@ void MyLevel::moveScreen() {
 
 		createBoundaries();
 		spawn();//create new characters and restores spawners outside
-		std::map<int,Character*>::iterator characterIt=characters.begin();
-		for(; characterIt!=characters.end(); characterIt++){
-			Character* character=characterIt->second;
-			if( !posInWindow(character->getPos()) ){
-				character->kill();
-			}
-		}
+
 		redrawForClient(false);
 	}
 }

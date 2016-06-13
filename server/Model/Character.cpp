@@ -81,6 +81,8 @@ void Character::tick(float time){
 		wasJumping=false;
 		spriteChanged=true;
 	}
+	if(!level->posInWindow(this->getPos()))
+		this->kill();
 }
 
 /*damages by 1, independent of bullet, redefine for dif behaviour*/
@@ -110,12 +112,14 @@ void Character::registerIn(MyLevel* level) {
 
 void Character::redrawForClients(Game* game, MyLevel* level,
 		bool checkChanges) {
-	LevelObject::redrawForClients(game,level,checkChanges);
-	if(spriteChanged){
-		spriteChanged=false;
-		std::stringstream msj;
-		msj<<REDRAW<<" "<<getId()<<" "<<getSpriteId()<<" "<<direction;
-		game->notify(new MessageSent(msj.str(),0));
+	if(!dead){
+		LevelObject::redrawForClients(game,level,checkChanges);
+		if(spriteChanged){
+			spriteChanged=false;
+			std::stringstream msj;
+			msj<<REDRAW<<" "<<getId()<<" "<<getSpriteId()<<" "<<direction;
+			game->notify(new MessageSent(msj.str(),0));
+		}
 	}
 }
 
