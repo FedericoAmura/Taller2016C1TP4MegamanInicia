@@ -434,6 +434,7 @@ void MyLevel::addMegaman(Megaman* newMegaman) {
 	if(megamans.size()<numOfClients){
 		megamans[megamans.size()+1]=newMegaman;
 		addCharacter(newMegaman);
+		newMegaman->assignOwner(megamans.size());
 	}else{
 		delete newMegaman;
 	}

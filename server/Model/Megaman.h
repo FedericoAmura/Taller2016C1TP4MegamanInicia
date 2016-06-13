@@ -19,6 +19,8 @@ class Megaman: public Character {
 	Stat<float> inmuneTime;//seconds
 	int climbingSpriteId;
 	bool wasClimbing;
+	int ownerId;
+	bool lifeChanged;
 
 	void changeFixtureFilter(b2Fixture* f);
 	virtual bool isJumping();
@@ -40,6 +42,8 @@ public:
 	void charge(uint amount);
 	virtual void registerIn(MyLevel* level);
 	virtual int getSpriteId();
+	void assignOwner(int ownerId);
+	virtual void redrawForClients(Game* game,MyLevel* level,bool checkChanges);
 };
 
 #endif /* SERVER_MODEL_MEGAMAN_H_ */

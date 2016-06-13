@@ -7,13 +7,13 @@
 
 #include "Character.h"
 
-#include "../entities.h"
+#include "../../entities.h"
 #include "LevelObject.h"
 #include "MyLevel.h"
 #include <glog/logging.h>
 #include "Bullet.h"
 #include "Weapon.h"
-#include "../common/CommunicationCodes.h"
+#include "../../common/CommunicationCodes.h"
 #include "../Game.h"
 
 Character::Character(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl):

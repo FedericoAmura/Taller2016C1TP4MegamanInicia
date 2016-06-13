@@ -51,8 +51,8 @@
 		"ClimbSpeed":	3.0,
 		"climbSpriteId":9010,
 		"JSpeed" :		25.0,
-		"inmuneTime":	1.0,
-		"life":			20.0,
+		"inmuneTime":	0.5,
+		"life":			10.0,
 		"jumpSpriteId":	9005,
 		"jumpSensor":
 		{

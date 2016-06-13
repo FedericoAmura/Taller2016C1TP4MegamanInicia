@@ -7,11 +7,13 @@
 
 #include "Megaman.h"
 #include "Character.h"
-#include "../entities.h"
+#include "../../entities.h"
 #include <glog/logging.h>
 #include "MyLevel.h"
 #include "Weapon.h"
-#include "../common/MegamanBeginsConstants.h"
+#include "../../common/MegamanBeginsConstants.h"
+#include "../../common/CommunicationCodes.h"
+#include "../Game.h"
 
 Megaman::Megaman(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl):
 Character(w,json,pos,lvl),
@@ -21,6 +23,8 @@ livesRemaining(3),
 spawnPoint(pos),
 inmuneTime(json["inmuneTime"].asFloat()),
 wasClimbing(false),
+ownerId(0),
+lifeChanged(false),
 laddersTouching(0){
 	//set filters
 	for (b2Fixture* f = body->GetFixtureList(); f; f = f->GetNext()){
@@ -160,7 +164,9 @@ void Megaman::tick(float time) {
 /* increases enegry by amount*/
 void Megaman::heal(uint amount) {
 	this->life.inc(amount);
+	lifeChanged=true;
 	LOG(INFO)<<objectId<<" healed, life left: "<<life.getCurrent();
+
 }
 
 /* increases charge by amount*/
@@ -174,6 +180,7 @@ void Megaman::damage(Bullet* bullet) {
 	if(inmuneTime.getCurrent()==0){
 		Character::damage(bullet);
 		inmuneTime.maxOut();
+		lifeChanged=true;
 	}
 }
 
@@ -201,4 +208,19 @@ int Megaman::getSpriteId() {
 		return climbingSpriteId;
 	else
 		return spriteId;
+}
+
+void Megaman::assignOwner(int ownerId) {
+	this->ownerId=ownerId;
+}
+
+/*redraws as a character, then send life satatus*/
+void Megaman::redrawForClients(Game* game, MyLevel* level, bool checkChanges) {
+	Character::redrawForClients(game,level,checkChanges);
+	if(lifeChanged){
+		lifeChanged=false;
+		std::stringstream msj;
+		msj<<LIFE_STATUS<<" "<<ownerId<<" "<<life.getCurrent();
+		game->notify(new MessageSent(msj.str(),0));
+	}
 }
