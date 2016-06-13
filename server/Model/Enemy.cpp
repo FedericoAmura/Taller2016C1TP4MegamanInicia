@@ -15,6 +15,7 @@
 #include "LevelObject.h"
 #include "MyLevel.h"
 #include "ObjectInfo.h"
+#include "Megaman.h"
 
 Enemy::Enemy(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl)
 :Character(w,json,pos,lvl),
@@ -61,6 +62,20 @@ void Enemy::changeFixtureFilter(b2Fixture* f) {
 
 /*calls base class tick, tries to jump, and shoot*/
 void Enemy::tick(float time) {
+	Megaman* nearest=level->getNearestMegaman(this->getPos());
+	b2Vec2 diference=nearest->getPos();
+	diference-=this->getPos();
+	if(diference.x<=0){
+		if(direction!=LEFT){
+			direction=LEFT;
+			spriteChanged=true;
+		}
+	}else{
+		if(direction!=RIGHT){
+			direction=RIGHT;
+			spriteChanged=true;
+		}
+	}
 	Character::tick(time);
 	jumpTime.dec(time);
 	if(jumpTime.getCurrent()==0){

@@ -97,6 +97,7 @@ public:
 	void addCharacter(Character* newCharacter);
 	void addObject(LevelObject* newObject);
 	void win();
+	Megaman* getNearestMegaman(const b2Vec2& pos);
 
 };
 

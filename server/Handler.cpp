@@ -92,7 +92,7 @@ void FinishLevel::handle(Event* e) {
 			<<" state: "<<event->getCondition();
 	if(event->getCondition()==WON){
 		std::stringstream msj;
-		msj<<LEVEL_STATUS<<" "<<event->getLevelId();
+		msj<<LEVEL_STATUS<<" "<<event->getLevelId()<<" 1";
 		game->notify(new MessageSent(msj.str(),0));
 	}
 	game->stopLevel();

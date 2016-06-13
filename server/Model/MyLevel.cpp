@@ -467,3 +467,22 @@ void MyLevel::addObject(LevelObject* newObject) {
 void MyLevel::win() {
 	game->notify(new LevelFinished(WON,id));
 }
+
+/*get the nearest megaman or nullptr if they are too far away*/
+Megaman* MyLevel::getNearestMegaman(const b2Vec2& pos) {
+	Megaman* nearest=nullptr;
+	b2Vec2 distance(pos.x,1000);
+	b2Vec2 temp;
+	std::map<int,Megaman*>::iterator megIt=megamans.begin();
+	for(; megIt!=megamans.end(); megIt++){
+		temp.x=(*megIt).second->getPos().x;
+		temp.y=(*megIt).second->getPos().y;
+		temp-=pos;
+		if(temp.LengthSquared()<=distance.LengthSquared()){
+			distance.x=(*megIt).second->getPos().x;
+			distance.y=(*megIt).second->getPos().y;
+			nearest=(*megIt).second;
+		}
+	}
+	return nearest;
+}
