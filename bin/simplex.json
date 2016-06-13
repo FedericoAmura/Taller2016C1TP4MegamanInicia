@@ -1,4 +1,5 @@
 {
+	"Boss" : "Bombman",
 	"background" : "../sprites/level/background/valley.png",
 	"chamber" : 
 	[

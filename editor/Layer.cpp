@@ -133,6 +133,23 @@ bool Layer::hasBoss() {
     return countElementsWithId(BOSS_FLOOR, BOSS_CEILING) == 1;
 }
 
+uint Layer::getBossId() {
+    uint possible_id;
+    for (uint i = 0; i != getLength(); ++i){
+        for (uint j = 0; j != getWidth(); ++j){
+            if (entities[i][j] != NULL) {
+                possible_id = entities[i][j]->getId();
+                if (BOSS_FLOOR <= possible_id && possible_id <= BOSS_CEILING){
+                    return possible_id;
+                }
+            }
+        }
+    }
+    return 0;
+}
+
+
+
 
 
 

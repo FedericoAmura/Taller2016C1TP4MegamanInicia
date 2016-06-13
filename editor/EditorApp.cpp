@@ -177,7 +177,7 @@ void EditorApp::on_menu_file_save_as() {
     int result = open.run();
     switch(result) {
         case(Gtk::RESPONSE_OK): {
-            open_file_name = open.get_filename();
+            open_file_name = open.get_filename() + ".json";
             on_menu_file_save();
             break;
         } case(Gtk::RESPONSE_CANCEL): {

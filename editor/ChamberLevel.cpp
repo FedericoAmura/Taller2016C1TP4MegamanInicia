@@ -3,6 +3,7 @@
 //
 
 #include "ChamberLevel.h"
+#include "../entities.h"
 #include <sstream>
 #include <fstream>
 #include <iostream>
@@ -47,6 +48,29 @@ void ChamberLevel::toJson(string file_name) {
     Json::Value valid = level["valid"];
     if (valid.asBool()) {
         level["valid"] = isValid();
+        uint boss_id = entities->getBossId();
+        string boss_name;
+        switch (boss_id) {
+            case (BOSS_BOMBMAN) :
+                boss_name = "Bombman";
+                break;
+            case (BOSS_FIREMAN):
+                boss_name = "Fireman";
+                break;
+            case (BOSS_SPARKMAN) :
+                boss_name = "Sparkman";
+                break;
+            case (BOSS_RINGMAN) :
+                boss_name = "Ringman";
+                break;
+            case (BOSS_MAGNETMAN) :
+                boss_name = "Magnetman";
+                break;
+            default:
+                throw std::runtime_error(
+                        "Level with no boss is labeled as valid");
+        }
+        level["Boss"] = boss_name;
     }
     out << level;
     in.close();

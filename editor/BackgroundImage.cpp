@@ -26,3 +26,9 @@ void BackgroundImage::setSize(const int width, const int height) {
     set_size_request(width, height);
 }
 
+int BackgroundImage::getLength() {
+    return image->get_width();
+}
+
+
+

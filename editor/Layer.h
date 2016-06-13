@@ -33,6 +33,7 @@ public:
     uint getLength();
     uint getWidth();
     virtual bool isValid();
+    uint getBossId();
 
 private:
     //Validity functions

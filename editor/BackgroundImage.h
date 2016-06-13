@@ -13,9 +13,11 @@ private:
 
 public:
     explicit BackgroundImage() {};
+    BackgroundImage(const BackgroundImage&){}
     void setSize(const int width, const int height);
     void setImage(const std::string &path, const int width, const int height);
     virtual ~BackgroundImage() {};
+    int getLength();
 
 protected:
     bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;

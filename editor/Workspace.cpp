@@ -99,12 +99,14 @@ void Workspace::replaceLevel(string file) {
 
 void Workspace::refresh() {
     string background_file = level->getBackgroundFile();
+    /*
     if (background_file != "") {
         background.setImage(background_file,
                             screen_width * level->getLength(),
                             screen_width * level->getWidth());
-        background.show();
+        //background.show();
     }
+     */
     for (uint i = 0; i < level->getLength() ; ++i){
         for (uint j = 0; j < level->getWidth() ; ++j){
             uint id = level->getEntity(i, j);
