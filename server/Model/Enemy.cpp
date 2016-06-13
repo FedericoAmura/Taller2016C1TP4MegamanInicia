@@ -31,20 +31,19 @@ jumpTime(json["jumpFreq"].asFloat()){
 
 Enemy::~Enemy() {}
 
-ObjectInfo* Enemy::chooseDrop() {
-	int id;
-	//todo get chances and choose randomly
-	id=BIG_ENERGY;
+/*drops an item, note:chances are at item class*/
+ObjectInfo* Enemy::drop() {
+	int id=ITEM;
 	ObjectInfo* drop=new ObjectInfo(id,body->GetPosition());
 	return drop;
 }
 
+/*attempts to drop an item and then calls base class kill*/
 void Enemy::kill() {
 	if(!dead){
-		ObjectInfo* drop=chooseDrop();
-		if(drop!=nullptr){
-			LOG(INFO)<<"dropped item: "<<drop->getId();
-			level->newObject(drop);
+		ObjectInfo* dropInfo=drop();
+		if(dropInfo!=nullptr){
+			level->newObject(dropInfo);
 		}
 	}
 	Character::kill();
@@ -60,6 +59,7 @@ void Enemy::changeFixtureFilter(b2Fixture* f) {
 	f->SetFriction(1);
 }
 
+/*calls base class tick, tries to jump, and shoot*/
 void Enemy::tick(float time) {
 	Character::tick(time);
 	jumpTime.dec(time);
@@ -80,6 +80,7 @@ Enemy(w,json,pos,lvl){
 
 FlyingEnemy::~FlyingEnemy() {}
 
+/*calls base class tick, and tires to move towards players*/
 void FlyingEnemy::tick(float time){
 	Enemy::tick(time);
 	//todo move towards a megaman

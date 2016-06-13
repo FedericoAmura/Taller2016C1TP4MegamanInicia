@@ -21,6 +21,8 @@ class ObjectFactory {
 	b2World* world;
 	MyLevel* level;
 
+	std::string idToStr(int id);
+
 public:
 	ObjectFactory(b2World* w, MyLevel* lvl);
 	virtual ~ObjectFactory();

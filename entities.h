@@ -110,6 +110,7 @@
 #define SPARKMAN_GENKIDAMA 2010
 
 //Items
+#define ITEM 3000
 #define BIG_ENERGY 3001 //los sprites de esto no son los correctos, despues lo arreglo
 #define SMALL_ENERGY 3002
 #define BIG_PLASMA 3003

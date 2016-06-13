@@ -10,11 +10,13 @@
 
 #include "../../json/json.h"
 #include "LevelObject.h"
+#include <map>
 
 class b2Fixture;
 class MyLevel;
 
 class Item: public LevelObject {
+	static std::map<float,int> dropTable;
 protected:
 	bool removed;
 	MyLevel* level;
@@ -23,6 +25,8 @@ public:
 	Item(b2World* w,Json::Value& json,const b2Vec2& pos,int id,MyLevel* lvl);
 	virtual ~Item();
 	virtual void collideWith(LevelObject* object);
+	static void initializeDropTable(Json::Value& config);
+	static int chooseDrop();
 };
 
 class EnergyItem: public Item{

@@ -27,10 +27,16 @@ struct b2Vec2;
 #define COFIG_FILE "../server/Model/config.json"
 
 ObjectFactory::ObjectFactory(b2World* w, MyLevel* lvl):
-						world(w),
-						level(lvl){}
+								world(w),
+								level(lvl){}
 
 ObjectFactory::~ObjectFactory() {}
+
+std::string ObjectFactory::idToStr(int id) {
+	std::stringstream converter;
+	converter << id;
+	return converter.str();
+}
 
 LevelObject* ObjectFactory::createObject(ObjectInfo* info) {
 	Json::Value config;
@@ -44,9 +50,7 @@ LevelObject* ObjectFactory::createObject(ObjectInfo* info) {
 	int objectType=(int)id/1000;
 	bool created=false;
 	LevelObject* newObject;
-	std::stringstream converter;
-	converter<<id;
-	std::string idAsString=converter.str();
+	std::string idAsString=idToStr(id);
 	switch(objectType){
 	case 9:{
 		//create megaman
@@ -80,12 +84,17 @@ LevelObject* ObjectFactory::createObject(ObjectInfo* info) {
 		break;
 	}
 	case 3:{
-		created=true;
-		if(id==BIG_ENERGY || id==SMALL_ENERGY)
+		id= Item::chooseDrop();
+		idAsString=idToStr(id);
+		if(id){
+			created=true;
+			LOG(INFO)<<"random drop, id: "<<id;
+		}
+		if((id==BIG_ENERGY || id==SMALL_ENERGY)&& created)
 			newObject= new EnergyItem(world,config[idAsString],pos,id,level);
-		if(id==BIG_PLASMA || id==SMALL_PLASMA)
+		if((id==BIG_PLASMA || id==SMALL_PLASMA)&& created)
 			newObject= new PlasmaItem(world,config[idAsString],pos,id,level);
-		if(id==LIFE)
+		if((id==LIFE)&& created)
 			newObject= new LifeItem(world,config[idAsString],pos,id,level);
 		break;
 	}

@@ -19,7 +19,7 @@ class Enemy: public Character {
 protected:
 	Stat<float> jumpTime;
 	void changeFixtureFilter(b2Fixture* f);
-	ObjectInfo* chooseDrop();
+	ObjectInfo* drop();
 public:
 	Enemy(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl);
 	virtual ~Enemy();

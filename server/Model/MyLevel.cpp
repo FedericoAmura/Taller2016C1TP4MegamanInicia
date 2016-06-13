@@ -31,6 +31,7 @@
 #include "ObjectInfo.h"
 #include "Bullet.h"
 #include "Obstacle.h"
+#include "Items.h"
 
 #define COFIG_FILE "../server/Model/config.json"
 #define IGNORE 0
@@ -39,13 +40,13 @@
 #define OFFSET 0.1
 #define BOSS_CHAMBER_OFFSET 10
 
-MyLevel::MyLevel(Game* j,std::string lvlFileName,uint numberOfClients):
-world(b2Vec2(0,-10)),
-running(false),
-game(j),
-factory(&world,this),
-numOfClients(numberOfClients),
-bossEncounter(false){
+MyLevel::MyLevel(Game* j,std::string lvlFileName,uint numberOfClients)
+:world(b2Vec2(0,-10)),
+ running(false),
+ game(j),
+ factory(&world,this),
+ numOfClients(numberOfClients),
+ bossEncounter(false){
 	LevelObject::resetIds();
 	boundaries=nullptr;
 	world.SetContinuousPhysics(true);
@@ -55,6 +56,9 @@ bossEncounter(false){
 	/*abro configuraciones*/
 	Json::Value config_json;
 	fileToJson(COFIG_FILE,config_json);
+
+	Item::initializeDropTable(config_json);
+
 	/*cargo nivel*/
 	Json::Value level_json;
 	fileToJson(lvlFileName,level_json);
@@ -77,7 +81,8 @@ bossEncounter(false){
 		b2Vec2 pos=jsonPosToWorldPos((*it)["x"].asInt(),
 				(*it)["y"].asInt());
 		ObjectInfo info(id,pos);
-		if(id/1000 ==1){
+		int objectType=id/1000;
+		if( objectType==1){
 			addSpawner(id,pos);
 		}else{
 			createObject(&info);
@@ -92,7 +97,8 @@ bossEncounter(false){
 				(*chamberIt)["x"].asInt()+worldWidth+BOSS_CHAMBER_OFFSET,
 				(*chamberIt)["y"].asInt());
 		ObjectInfo info(id,pos);
-		if(id/1000 ==1){
+		int objectType=id/1000;
+		if( objectType==1){
 			addSpawner(id,pos);
 		}else{
 			createObject(&info);
