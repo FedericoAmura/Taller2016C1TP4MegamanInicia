@@ -123,7 +123,8 @@ void WorkspaceEventManager::on_drag_begin(const Glib::RefPtr<Gdk::DragContext>& 
         uint id = workspace->getId(
                 std::get<0>(selection),
                 std::get<1>(selection));
-        context->set_icon(Gdk::Pixbuf::create_from_file(sprites.get(id),SIDE,SIDE,0), SIDE, SIDE);
+        context->set_icon(Gdk::Pixbuf::create_from_file(sprites.get(id),SIDE,SIDE,0),
+                          SIDE, SIDE);
     }
 }
 

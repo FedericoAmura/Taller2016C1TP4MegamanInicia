@@ -28,9 +28,7 @@ void Workspace::resize() {
 }
 
 Workspace::~Workspace() {
-    for (p_iter it = drawings.begin(); it != drawings.end(); ++it){
-        delete it->second;
-    }
+    clean();
     delete level;
 }
 

@@ -85,6 +85,13 @@ bool EditorMainWindow::on_key_press_event(GdkEventKey *key_event) {
     return true;
 }
 
+EditorMainWindow::~EditorMainWindow() {
+    delete main;
+    delete chamber;
+}
+
+
+
 
 
 

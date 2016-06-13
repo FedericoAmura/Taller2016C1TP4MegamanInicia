@@ -22,6 +22,7 @@
 class EditorMainWindow : public Gtk::ApplicationWindow {
 public:
     EditorMainWindow(Workspace* main, Workspace* chamber);
+    ~EditorMainWindow();
 
 private:
     SpriteDispenser sprites;

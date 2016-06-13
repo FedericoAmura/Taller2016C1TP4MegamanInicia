@@ -9,6 +9,7 @@
 #include <giomm.h>
 #include <gtkmm/dialog.h>
 #include <gtkmm/filechooserdialog.h>
+#include <gtkmm/aboutdialog.h>
 
 #define MAIN_WINDOW 0
 
@@ -78,7 +79,7 @@ void EditorApp::on_startup() {
                     "      <section>"
                     "        <item>"
                     "          <attribute name='label' translatable='yes'>_About</attribute>"
-                    "          <attribute name='action'>win.about</attribute>"
+                    "          <attribute name='action'>app.about</attribute>"
                     "        </item>"
                     "      </section>"
                     "    </submenu>"
@@ -99,6 +100,23 @@ void EditorApp::on_startup() {
     } else {
         set_menubar(gmenu);
     }
+
+    //About
+    about.set_program_name("Megaman Begins - Level Editor");
+    about.set_logo(Gdk::Pixbuf::create_from_file("../sprites/items/life.png"));
+    about.set_comments("This is a tool for level creation and editing "
+                               "for \nMegaman Begins.\n The full game can be found "
+                               "in our");
+
+    about.set_website("https://github.com/FedericoAmura/Taller2016C1TP4MegamanInicia");
+    about.set_website_label("Github");
+    std::vector<Glib::ustring> list_authors;
+    list_authors.push_back("Marcos Vrljicak");
+    list_authors.push_back("Federico Amura");
+    list_authors.push_back("Lucas Nicolas Dominguez");
+    about.set_authors(list_authors);
+    about.signal_response().connect(
+            sigc::mem_fun(*this, &EditorApp::on_about_dialog_response) );
 }
 
 void EditorApp::on_activate() {
@@ -189,7 +207,8 @@ void EditorApp::on_menu_file_save_as() {
 }
 
 void EditorApp::on_menu_help_about() {
-    //TODO
+    about.set_transient_for(*win);
+    about.show();
 }
 
 void EditorApp::on_menu_file_quit() {
@@ -200,6 +219,11 @@ void EditorApp::on_menu_file_quit() {
     }
 }
 
-
+void EditorApp::on_about_dialog_response(int response_id) {
+    if((response_id == Gtk::RESPONSE_CLOSE) ||
+       (response_id == Gtk::RESPONSE_CANCEL) ) {
+        about.hide();
+    }
+}
 
 

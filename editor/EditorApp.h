@@ -11,6 +11,7 @@
 #include "Level.h"
 #include "EditorMainWindow.h"
 #include <string>
+#include <gtkmm/aboutdialog.h>
 
 using std::string;
 
@@ -31,6 +32,8 @@ private:
     Glib::RefPtr<Gtk::Builder> builder;
     string open_file_name;
 
+    Gtk::AboutDialog about;
+
     Workspace* main_ws;
     Workspace* chamber_ws;
 
@@ -44,6 +47,7 @@ private:
     void on_menu_file_save_as();
     void on_menu_file_quit();
     void on_menu_help_about();
+    void on_about_dialog_response(int response_id);
 
 
 };
