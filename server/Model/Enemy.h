@@ -14,6 +14,8 @@
 
 class b2Fixture;
 class ObjectInfo;
+class Game;
+class MyLevel;
 
 class Enemy: public Character {
 protected:
@@ -33,12 +35,15 @@ public:
 	FlyingEnemy(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl);
 	virtual ~FlyingEnemy();
 	void tick(float time);
+	bool isJumping();
 };
 
 class Boss: public Enemy{
+	bool lifeChanged;
 public:
 	Boss(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl);
 	virtual ~Boss();
 	virtual void kill();
+	virtual void redrawForClients(Game* game,MyLevel* level,bool checkChanges);
 };
 #endif /* SERVER_MODEL_ENEMY_H_ */

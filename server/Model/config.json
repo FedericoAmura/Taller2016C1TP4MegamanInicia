@@ -23,7 +23,7 @@
 				{
 					"type":		4,
 					"X1":		27.0,
-					"Y1":		16.0,
+					"Y1":		15.0,
 					"X2":		0.0,
 					"Y2":		15.0
 				},
@@ -40,10 +40,10 @@
 	"megaman":
 	{
 		"weaponId":		2004,
-		"HSpeed" : 		10.0,
+		"HSpeed" : 		5.0,
 		"ClimbSpeed":	3.0,
 		"climbSpriteId":9010,
-		"JSpeed" :		25.0,
+		"JSpeed" :		15.0,
 		"inmuneTime":	0.5,
 		"life":			10.0,
 		"jumpSpriteId":	9005,
@@ -94,7 +94,7 @@
 	"1022":
 	{
 		"id":			1022,
-		"weaponId":		2006,
+		"weaponId":		2005,
 		"JSpeed" :		0.0,
 		"life":			1.0,
 		"jumps":		false,
@@ -181,7 +181,7 @@
 	"1100":
 	{
 		"id":			1102,
-		"weaponId":		2006,
+		"weaponId":		2010,
 		"JSpeed" :		15.0,
 		"life":			20.0,
 		"jumps":		true,
@@ -210,7 +210,7 @@
 	"1200":
 	{
 		"id":			1202,
-		"weaponId":		2006,
+		"weaponId":		2009,
 		"JSpeed" :		15.0,
 		"life":			20.0,
 		"jumps":		true,
@@ -239,7 +239,7 @@
 	"1300":
 	{
 		"id":			1305,
-		"weaponId":		2006,
+		"weaponId":		2008,
 		"JSpeed" :		15.0,
 		"life":			20.0,
 		"jumps":		true,
@@ -268,7 +268,7 @@
 	"1400":
 	{
 		"id":			1401,
-		"weaponId":		2006,
+		"weaponId":		2007,
 		"JSpeed" :		15.0,
 		"life":			20.0,
 		"jumps":		true,
@@ -297,7 +297,7 @@
 	"1500":
 	{
 		"id":			1502,
-		"weaponId":		2006,
+		"weaponId":		2002,
 		"JSpeed" :		15.0,
 		"life":			20.0,
 		"jumps":		true,
@@ -374,7 +374,26 @@
 				}
 		]
 	},
-	
+	"2002":
+	{
+		"damage":	1,
+		"cooldown":	2.0,
+		"bulletId":	2002,
+		"speed":
+		{
+			"x":	3.0,
+			"y":	0.0
+		},
+		"shapes":
+		[
+				{
+					"type":		2,
+					"radius":	0.1,
+					"X":		0.0,
+					"Y":		0.0
+				}
+		]
+	},
 	"2004":
 	{
 		"damage":	1,
@@ -395,12 +414,91 @@
 				}
 		]
 	},
-	
+	"2005":
+	{
+		"damage":	1,
+		"cooldown":	2.0,
+		"bulletId":	2005,
+		"speed":
+		{
+			"x":	4.0,
+			"y":	0.0
+		},
+		"shapes":
+		[
+				{
+					"type":		2,
+					"radius":	0.1,
+					"X":		0.0,
+					"Y":		0.0
+				}
+		]
+	},
 	"2006":
 	{
 		"damage":	1,
 		"cooldown":	2.0,
 		"bulletId":	2006,
+		"speed":
+		{
+			"x":	4.0,
+			"y":	0.0
+		},
+		"shapes":
+		[
+				{
+					"type":		2,
+					"radius":	0.1,
+					"X":		0.0,
+					"Y":		0.0
+				}
+		]
+	},
+	"2007":
+	{
+		"damage":	2,
+		"cooldown":	3.0,
+		"bulletId":	2007,
+		"speed":
+		{
+			"x":	4.0,
+			"y":	0.0
+		},
+		"shapes":
+		[
+				{
+					"type":		2,
+					"radius":	0.1,
+					"X":		0.0,
+					"Y":		0.0
+				}
+		]
+	},
+	"2009":
+	{
+		"damage":	1,
+		"cooldown":	2.0,
+		"bulletId":	2009,
+		"speed":
+		{
+			"x":	4.0,
+			"y":	0.0
+		},
+		"shapes":
+		[
+				{
+					"type":		2,
+					"radius":	0.1,
+					"X":		0.0,
+					"Y":		0.0
+				}
+		]
+	},
+	"2010":
+	{
+		"damage":	2,
+		"cooldown":	3.0,
+		"bulletId":	2009,
 		"speed":
 		{
 			"x":	4.0,

@@ -188,6 +188,18 @@ bool Game::levelChosen() {
 		return true;
 }
 
+void Game::resetClientLives() {
+	int numOfClients=this->metadata.getNumberOfClients();
+	for(int i=1; i<=numOfClients; i++){
+		ClientData* client=metadata.getClient(i);
+		if(client){
+			client->getLives().inc(1);
+			client->getLives().inc(1);
+			client->getLives().inc(1);
+		}
+	}
+}
+
 vector<string> Game::findFilesInDir(const string& folder) {
 	//Aca estoy harcodeando el resultado de la funcion,
 	//en principio tendria que abrir la carpeta, chequear que haya

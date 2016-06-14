@@ -57,6 +57,7 @@ public:
 	void addClient(int descriptor);
 	void sendTo(std::string data, int destino);
 	void removeClient(int descriptor);
+	void resetClientLives();
 
 private:
 	bool isntStopped();

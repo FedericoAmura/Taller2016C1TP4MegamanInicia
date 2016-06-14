@@ -114,6 +114,9 @@ void Megaman::kill() {
 		}else{
 			dead=true;
 		}
+		std::stringstream killMsg;
+		killMsg<<KILL<<" "<<getId();
+		clientData->getGame()->notify(new MessageSent(killMsg.str(),0));
 		LOG(INFO)<<"megaman murio,vidas restantes: "
 				<<clientData->getLives().getCurrent();
 	}
@@ -164,7 +167,7 @@ void Megaman::informClientLifeChange() {
 	Game* game = clientData->getGame();
 	std::stringstream msj;
 	int percentage =
-			(int) ((((float) (life.getCurrent())) / life.getMax() * 100));
+			(int) ((((float) life.getCurrent())) / life.getMax() * 100);
 	msj << LIFE_STATUS << " " << clientData->getClientNumber() << " "
 			<< percentage;
 	game->notify(new MessageSent(msj.str(), clientData->getDescriptor()));
@@ -220,6 +223,7 @@ int Megaman::getSpriteId() {
 
 void Megaman::assignOwner(ClientData* clientData) {
 	this->clientData=clientData;
+	informClientLifeChange();
 }
 
 /*adds a life*/

@@ -16,6 +16,9 @@
 #include "MyLevel.h"
 #include "ObjectInfo.h"
 #include "Megaman.h"
+#include "../../common/CommunicationCodes.h"
+#include "../Game.h"
+#include "../Event.h"
 
 Enemy::Enemy(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl)
 :Character(w,json,pos,lvl),
@@ -108,9 +111,13 @@ void FlyingEnemy::tick(float time){
 	body->SetLinearVelocity(speed);
 }
 
+bool FlyingEnemy::isJumping() {
+	return false;
+}
 /************************************************************/
 Boss::Boss(b2World* w, Json::Value& json, const b2Vec2& pos, MyLevel* lvl)
-:Enemy(w,json,pos,lvl) {}
+:Enemy(w,json,pos,lvl),
+ lifeChanged(true){}
 
 Boss::~Boss() {}
 
@@ -118,3 +125,17 @@ Boss::~Boss() {}
 void Boss::kill() {
 	level->win();
 }
+
+void Boss::redrawForClients(Game* game, MyLevel* level, bool checkChanges) {
+	Character::redrawForClients(game,level,checkChanges);
+	if(!dead && lifeChanged){
+		lifeChanged=false;
+		std::stringstream msj;
+		int percentage =
+				(int) ((((float) (life.getCurrent())) / life.getMax() * 100));
+		msj << LIFE_STATUS << " 0 "	<< percentage;
+		game->notify(new MessageSent(msj.str(), 0));
+	}
+}
+
+

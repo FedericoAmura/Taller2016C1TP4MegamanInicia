@@ -95,5 +95,9 @@ void FinishLevel::handle(Event* e) {
 		msj<<LEVEL_STATUS<<" "<<event->getLevelId()<<" 1";
 		game->notify(new MessageSent(msj.str(),0));
 	}
+	if(event->getCondition()==LOST){
+		//todo inform of loss
+		game->resetClientLives();
+	}
 	game->stopLevel();
 }
