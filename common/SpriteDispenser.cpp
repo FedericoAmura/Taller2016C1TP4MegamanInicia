@@ -94,15 +94,15 @@ SpriteDispenser::SpriteDispenser() {
 	paths[BOMBMAN_JUMP_FRONT] = BSS_PATH + "bombman/bombman_jump_ahead.png";
 	paths[BOMBMAN_JUMP_BACK] = BSS_PATH + "bombman/bombman_jump_back.png";
 	//FireMan
-	paths[FIREMAN_CAST_0] = BSS_PATH + "fireman.json/fireman_cast0.png";
-	paths[FIREMAN_CAST_1] = BSS_PATH + "fireman.json/fireman_cast1.png";
-	paths[FIREMAN_IDLE_0] = BSS_PATH + "fireman.json/fireman_idle.png";
-	paths[FIREMAN_IDLE_1] = BSS_PATH + "fireman.json/fireman_idle1.png";
-	paths[FIREMAN_JUMP] = BSS_PATH + "fireman.json/fireman_jump.png";
-	paths[FIREMAN_RUN_0] = BSS_PATH + "fireman.json/fireman_run0.png";
-	paths[FIREMAN_RUN_1] = BSS_PATH + "fireman.json/fireman_run1.png";
-	paths[FIREMAN_RUN_2] = BSS_PATH + "fireman.json/fireman_run2.png";
-	paths[FIREMAN_RUN_3] = BSS_PATH + "fireman.json/fireman_run3.png";
+	paths[FIREMAN_CAST_0] = BSS_PATH + "fireman/fireman_cast0.png";
+	paths[FIREMAN_CAST_1] = BSS_PATH + "fireman/fireman_cast1.png";
+	paths[FIREMAN_IDLE_0] = BSS_PATH + "fireman/fireman_idle.png";
+	paths[FIREMAN_IDLE_1] = BSS_PATH + "fireman/fireman_idle1.png";
+	paths[FIREMAN_JUMP] = BSS_PATH + "fireman/fireman_jump.png";
+	paths[FIREMAN_RUN_0] = BSS_PATH + "fireman/fireman_run0.png";
+	paths[FIREMAN_RUN_1] = BSS_PATH + "fireman/fireman_run1.png";
+	paths[FIREMAN_RUN_2] = BSS_PATH + "fireman/fireman_run2.png";
+	paths[FIREMAN_RUN_3] = BSS_PATH + "fireman/fireman_run3.png";
 	//MagnetMan
 	paths[MAGNETMAN_ATTACK] = BSS_PATH + "magnetman/magnetman_attack.png";
 	paths[MAGNETMAN_CELEBRATE] = BSS_PATH + "magnetman/magnetman_celebrate.png";
