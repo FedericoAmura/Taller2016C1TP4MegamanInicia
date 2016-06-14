@@ -133,24 +133,24 @@ void Game::selectLevel(int levelId, int client){
 		LOG(INFO)<<"level seleccionado: "<<levelId;
 		std::string levelFilePath;
 		switch(levelId){
-		case 1001:{
-			levelFilePath="../levels/basic0.json";
+		case MAGNETMAN:{
+			levelFilePath="../levels/magnetman.json";
 			break;
 		}
-		case 1002:{
-			levelFilePath="../levels/basic0.json";
+		case SPARKMAN:{
+			levelFilePath="../levels/sparkman.json";
 			break;
 		}
-		case 1003:{
-			levelFilePath="../levels/basic1.json";
+		case RINGMAN:{
+			levelFilePath="../levels/ringman.json";
 			break;
 		}
-		case 1004:{
-			levelFilePath="../levels/basic2.json";
+		case FIREMAN:{
+			levelFilePath="../levels/fireman.json";
 			break;
 		}
-		case 1005:{
-			levelFilePath="../bin/simplex.json";
+		case BOMBMAN:{
+			levelFilePath="../levels/bombman.json";
 			break;
 		}
 		default:{
