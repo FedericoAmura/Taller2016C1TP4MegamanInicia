@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <cmath>
 #include <cstdio>
+#include <iostream>
 #include <map>
 #include <string>
 
@@ -24,6 +25,9 @@ LevelScreen::LevelScreen(MegamanClientModel& model) :
 	double tileWidth = ceil((double)Gdk::screen_width()/(double)TILES_HORIZONTAL);
 	double tileHeight = ceil((double)Gdk::screen_height()/(double)TILES_VERTICAL);
 	tileSize = std::max(tileHeight,tileWidth);
+
+	model.changeHealthSignal().connect(sigc::mem_fun(*this,&LevelScreen::setHealth));
+	model.changeBackgroundSignal().connect(sigc::mem_fun(*this,&LevelScreen::setBackground));
 
 	blackBackground.setImage("../sprites/level/background/city.png",Gdk::screen_width(),Gdk::screen_height(),false);
 	put(blackBackground,0,0);
@@ -82,8 +86,13 @@ bool LevelScreen::update() {
 	return true;
 }
 
+void LevelScreen::setHealth(int id, int health) {
+	//Armo un widget para la salud y lo dibujo
+	std::cout << "Cambio la vida de " << id << " a " << health << "%"<< std::endl;
+}
+
 void LevelScreen::setBackground(std::string levelId) {
-	//levelBackground.setImage("../sprites/level/background/city.png",tileSize,tileSize,false);
+	//levelBackground.setImage("../sprites/level/background/rock.png",Gdk::screen_width(),Gdk::screen_height(),false);
 	//put(levelBackground,0,0);
 }
 

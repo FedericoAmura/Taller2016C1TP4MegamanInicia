@@ -18,6 +18,8 @@
 #include "../common/Thread.h"
 #include "../common/SpriteDispenser.h"
 
+typedef sigc::signal<void> Signal;
+typedef sigc::signal<void,int,int> DoubleIntSignal;
 typedef sigc::signal<void,std::string> StringSignal;
 
 class MegamanClientModel : public Thread {
@@ -28,8 +30,10 @@ private:
 	Drawables drawables;
 	SpriteDispenser sprites;
 	bool recibirServer;
+	Signal gameStatusChangeSignal;
+	DoubleIntSignal healthChangeSignal;
 	StringSignal windowChangeSignal;
-	StringSignal backgroundSignal;
+	StringSignal backgroundChangeSignal;
 
 public:
 	MegamanClientModel();
@@ -38,11 +42,14 @@ public:
 	Drawables& getDrawables();
 	void run();	//updateFromServer();
 
+	Signal changeGameStatusSignal();
+	DoubleIntSignal changeHealthSignal();
 	StringSignal changeScreenSignal();
-	StringSignal setBackgroundSignal();
+	StringSignal changeBackgroundSignal();
 
 	void connectServer(std::string ip, std::string port);
 	std::string getClientNumer();
+	bool getLevelStatus(int idLevel);
 	void disconnectServer();
 
 	void serverSendLevelSelected(int levelCode);

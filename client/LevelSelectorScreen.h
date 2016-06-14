@@ -38,11 +38,6 @@ public:
 	virtual ~LevelSelectorScreen();
 
 	Gtk::Button& getDisconnectButton();
-	Gtk::Button& getMagnetManButton();
-	Gtk::Button& getSparkManButton();
-	Gtk::Button& getRingManButton();
-	Gtk::Button& getFireManButton();
-	Gtk::Button& getBombManButton();
 
 private:
 	void fillText();

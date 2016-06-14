@@ -16,8 +16,8 @@
 
 MegamanClientModel::MegamanClientModel() :
 	serverProxy(nullptr),
-	clientNumber("0") {
-	recibirServer = false;
+	clientNumber("0"),
+	recibirServer(false) {
 	levelsStatus[MAGNETMAN] = false;
 	levelsStatus[SPARKMAN] = false;
 	levelsStatus[RINGMAN] = false;
@@ -44,8 +44,8 @@ void MegamanClientModel::run() {
 		switch (commandString) {
 		case HELLO:
 			{
-			std::string playerNumber; ss >> playerNumber;
-			clientNumber = playerNumber;
+			ss >> clientNumber;
+			gameStatusChangeSignal.emit();
 			}
 			break;
 		case DRAW:
@@ -107,15 +107,20 @@ void MegamanClientModel::run() {
 		case START_LEVEL_SCREEN:
 			{
 			std::string idLevel; ss >> idLevel;
-			backgroundSignal.emit(idLevel);
+			backgroundChangeSignal.emit(idLevel);
 			windowChangeSignal.emit(LEVEL_SCREEN_NAME);
 			}
 			break;
 		case BACK_TO_LEVEL_SELECTION:
+			gameStatusChangeSignal.emit();
 			windowChangeSignal.emit(LEVEL_SELECTOR_SCREEN_NAME);
 			break;
 		case LIFE_STATUS:
-			std::cout << "Cambio la vida de alguien" << std::endl;
+			{
+			int id; ss >> id;
+			int health; ss >> health;
+			healthChangeSignal.emit(id, health);
+			}
 			break;
 		case LEVEL_STATUS:
 			{
@@ -135,12 +140,20 @@ void MegamanClientModel::run() {
 	}
 }
 
+Signal MegamanClientModel::changeGameStatusSignal() {
+	return gameStatusChangeSignal;
+}
+
+DoubleIntSignal MegamanClientModel::changeHealthSignal() {
+	return healthChangeSignal;
+}
+
 StringSignal MegamanClientModel::changeScreenSignal() {
 	return windowChangeSignal;
 }
 
-StringSignal MegamanClientModel::setBackgroundSignal() {
-	return backgroundSignal;
+StringSignal MegamanClientModel::changeBackgroundSignal() {
+	return backgroundChangeSignal;
 }
 
 void MegamanClientModel::connectServer(std::string ip, std::string port) {
@@ -151,6 +164,10 @@ void MegamanClientModel::connectServer(std::string ip, std::string port) {
 
 std::string MegamanClientModel::getClientNumer() {
 	return clientNumber;
+}
+
+bool MegamanClientModel::getLevelStatus(int idLevel) {
+	return levelsStatus[idLevel];
 }
 
 void MegamanClientModel::disconnectServer() {

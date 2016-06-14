@@ -29,7 +29,7 @@ levelScreen(model) {
 	add_events(Gdk::KEY_RELEASE_MASK);
 	updateKeyboardConn = Glib::signal_timeout().connect(sigc::mem_fun(*this,&ClientWindow::updateKeyboard),100);
 
-	//Conecto senales de la pantalla de coneccion
+	//Conecto senales de la pantalla de coneccion para el cambio de pantalla
 	Gtk::Button &connServerButton = connectionScreen.getServerButton();
 	connServerButton.signal_clicked().connect(sigc::mem_fun(*this,&ClientWindow::connectModel));
 	Gtk::Button &connCreditsButton = connectionScreen.getCreditsButton();
@@ -41,22 +41,10 @@ levelScreen(model) {
 	Gtk::Button &credBackButton = creditsScreen.getBackButton();
 	credBackButton.signal_clicked().connect(sigc::bind<std::string>(sigc::mem_fun(*this,&ClientWindow::showScreen),CONNECTION_SCREEN_NAME));
 
-	//Conecto senales para notificar al server de eleccion del nivel
+	//Conecto senales para salir de la pantalla de seleccion de nivel
 	Gtk::Button &disconnectButton = levelSelectorScreen.getDisconnectButton();
 	disconnectButton.signal_clicked().connect(sigc::mem_fun(*this,&ClientWindow::disconnectModel));
-	Gtk::Button &magnetManButton = levelSelectorScreen.getMagnetManButton();
-	magnetManButton.signal_clicked().connect(sigc::bind<int>(sigc::mem_fun(model,&MegamanClientModel::serverSendLevelSelected),MAGNETMAN));
-	Gtk::Button &sparkManButton = levelSelectorScreen.getSparkManButton();
-	sparkManButton.signal_clicked().connect(sigc::bind<int>(sigc::mem_fun(model,&MegamanClientModel::serverSendLevelSelected),SPARKMAN));
-	Gtk::Button &ringManButton = levelSelectorScreen.getRingManButton();
-	ringManButton.signal_clicked().connect(sigc::bind<int>(sigc::mem_fun(model,&MegamanClientModel::serverSendLevelSelected),RINGMAN));
-	Gtk::Button &fireManButton = levelSelectorScreen.getFireManButton();
-	fireManButton.signal_clicked().connect(sigc::bind<int>(sigc::mem_fun(model,&MegamanClientModel::serverSendLevelSelected),FIREMAN));
-	Gtk::Button &bombManButton = levelSelectorScreen.getBombManButton();
-	bombManButton.signal_clicked().connect(sigc::bind<int>(sigc::mem_fun(model,&MegamanClientModel::serverSendLevelSelected),BOMBMAN));
 
-	//Conecto senal del modelo para definir el fondo del nivel
-	model.setBackgroundSignal().connect(sigc::mem_fun(levelScreen,&LevelScreen::setBackground));
 	//Conecto senal del modelo para cambiar las ventanas
 	model.changeScreenSignal().connect(sigc::mem_fun(*this,&ClientWindow::showScreen));
 

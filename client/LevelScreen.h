@@ -34,6 +34,7 @@ public:
 	void stopLevel();
 	bool update();
 
+	void setHealth(int id, int health);
 	void setBackground(std::string levelId);
 };
 
