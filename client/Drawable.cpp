@@ -71,3 +71,7 @@ bool Drawable::getChanged() {
 	return changed;
 }
 
+void Drawable::setPercent(int percent) {
+	drawing.setPercent(percent);
+}
+

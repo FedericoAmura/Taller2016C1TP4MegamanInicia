@@ -11,11 +11,16 @@
 class Drawing : public Gtk::DrawingArea {
 private:
 	Glib::RefPtr<Gdk::Pixbuf> image;
+	int width;
+	int height;
+	int percent;
 
 public:
 	explicit Drawing();
-	void setImage(const std::string &path, const int width, const int height, bool flip = false);
 	virtual ~Drawing();
+
+	void setImage(const std::string &path, const int width, const int height, bool flip = false);
+	void setPercent(int percent);
 
 protected:
 	bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;

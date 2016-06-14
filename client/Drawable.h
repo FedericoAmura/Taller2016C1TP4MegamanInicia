@@ -39,6 +39,7 @@ public:
 	void setChanged(bool modified);
 	bool isDrawed();
 	bool getChanged();
+	void setPercent(int percent);
 
 
 private:

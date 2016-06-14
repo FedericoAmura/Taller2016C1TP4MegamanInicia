@@ -22,6 +22,7 @@ class LevelScreen : public Gtk::Fixed {
 private:
 	MegamanClientModel& model;
 	sigc::connection updateScreenConn;
+	Drawing playerHealth;
 	Drawing blackBackground;
 	Drawing levelBackground;
 	double tileSize;
@@ -33,9 +34,6 @@ public:
 	void startLevel();
 	void stopLevel();
 	bool update();
-
-	void setHealth(int id, int health);
-	void setBackground(std::string levelId);
 };
 
 #endif /* SRC_LEVELSCREEN_H_ */

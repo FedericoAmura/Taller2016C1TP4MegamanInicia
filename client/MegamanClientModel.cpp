@@ -73,7 +73,7 @@ void MegamanClientModel::run() {
 			Drawable* drawable = drawables.getDrawable(idDrawable);
 			if (drawable == nullptr) continue;
 			uint id = (uint)idDrawing;
-			drawable->setImage(id, sprites.get(id),sprites.getWidth(id),sprites.getHeight(id),flipped);
+			drawable->setImage(id,sprites.get(id),sprites.getWidth(id),sprites.getHeight(id),flipped);
 			drawable->setChanged(true);
 			}
 			break;
@@ -106,8 +106,14 @@ void MegamanClientModel::run() {
 			break;
 		case START_LEVEL_SCREEN:
 			{
-			std::string idLevel; ss >> idLevel;
-			backgroundChangeSignal.emit(idLevel);
+			int idLevel; ss >> idLevel;
+			/*idLevel += 6000;
+			Drawable* drawable = new Drawable();
+			drawable->setImage(7000,sprites.get(idLevel),sprites.getWidth(idLevel),sprites.getHeight(idLevel),false);
+			drawable->setCoordinates(0,0);
+			drawables.setDrawable(7000,drawable);*/
+
+			backgroundChangeSignal.emit("");
 			windowChangeSignal.emit(LEVEL_SCREEN_NAME);
 			}
 			break;
@@ -117,9 +123,17 @@ void MegamanClientModel::run() {
 			break;
 		case LIFE_STATUS:
 			{
-			int id; ss >> id;
+			int player; ss >> player;
 			int health; ss >> health;
-			healthChangeSignal.emit(id, health);
+			Drawable* drawable = drawables.getDrawable(8000);
+			if (drawable == nullptr) {
+				drawable = new Drawable();
+			}
+			drawable->setImage(8000,sprites.get(8000),sprites.getWidth(8000),sprites.getHeight(8000),false);
+			if (player) drawable->setCoordinates(1,2);
+			else drawable->setCoordinates(TILES_HORIZONTAL-1,2);
+			drawable->setPercent(health);
+			drawables.setDrawable(8000,drawable);
 			}
 			break;
 		case LEVEL_STATUS:

@@ -175,4 +175,7 @@
 #define SPOOKY 7004
 #define SNOW 7005
 
+//HEALTH BAR
+#define HEALTH_BAR 8000
+
 #endif //MEGAMAN_ENTITIES_H

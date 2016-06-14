@@ -26,10 +26,7 @@ LevelScreen::LevelScreen(MegamanClientModel& model) :
 	double tileHeight = ceil((double)Gdk::screen_height()/(double)TILES_VERTICAL);
 	tileSize = std::max(tileHeight,tileWidth);
 
-	model.changeHealthSignal().connect(sigc::mem_fun(*this,&LevelScreen::setHealth));
-	model.changeBackgroundSignal().connect(sigc::mem_fun(*this,&LevelScreen::setBackground));
-
-	blackBackground.setImage("../sprites/level/background/city.png",Gdk::screen_width(),Gdk::screen_height(),false);
+	blackBackground.setImage("../sprites/level/background/rock.png",Gdk::screen_width(),Gdk::screen_height(),false);
 	put(blackBackground,0,0);
 }
 
@@ -63,7 +60,8 @@ bool LevelScreen::update() {
 		Drawable* drawable = (*iter).second;
 		if (drawable != nullptr) {
 			//Saco los megamanes y enemigos para siempre redibujarlos y asi tenerlos al frente
-			if ((drawable->getSpriteId()>=(uint)9000 || drawable->getSpriteId()<(uint)2000) && drawable->isDrawed()) {
+			uint spriteID = drawable->getSpriteId();
+			if ((spriteID>=(uint)9000 || spriteID<(uint)2000) && drawable->isDrawed()) {
 				remove(drawable->getImage());
 				drawable->setIsDrawed(false);
 				drawable->setChanged(true);
@@ -84,15 +82,5 @@ bool LevelScreen::update() {
 		++iter;
 	}
 	return true;
-}
-
-void LevelScreen::setHealth(int id, int health) {
-	//Armo un widget para la salud y lo dibujo
-	std::cout << "Cambio la vida de " << id << " a " << health << "%"<< std::endl;
-}
-
-void LevelScreen::setBackground(std::string levelId) {
-	//levelBackground.setImage("../sprites/level/background/rock.png",Gdk::screen_width(),Gdk::screen_height(),false);
-	//put(levelBackground,0,0);
 }
 

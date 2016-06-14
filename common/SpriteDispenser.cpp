@@ -142,6 +142,9 @@ SpriteDispenser::SpriteDispenser() {
     paths[SPOOKY] = BCK_PATH + "spooky.png";
     paths[ROCK] = BCK_PATH + "rock.png";
     paths[VALLEY] = BCK_PATH + "valley.png";
+    //Health Bar
+    paths[HEALTH_BAR] = (string) IMG_PATH + "/HealthBar.png";
+
 
 	//SIZES
 	heigths[MEGAMAN_IDLE_0] = tileSize*1.0;//tileSide*1.5625;
@@ -251,6 +254,14 @@ SpriteDispenser::SpriteDispenser() {
 	heigths[SPARKMAN_PREPARE_1_ATTACK_2] = tileSize*1.0;
 	heigths[SPARKMAN_PREPARE_2_ATTACK_1] = tileSize*1.0;
 	heigths[SPARKMAN_PREPARE_2_ATTACK_2] = tileSize*1.0;
+	//Backgrounds
+	heigths[CITY] = tileSize*TILES_VERTICAL;
+    heigths[SNOW] = tileSize*TILES_VERTICAL;
+    heigths[SPOOKY] = tileSize*TILES_VERTICAL;
+    heigths[ROCK] = tileSize*TILES_VERTICAL;
+    heigths[VALLEY] = tileSize*TILES_VERTICAL;
+    //Health Bar
+    heigths[HEALTH_BAR] = tileSize*2;
 
 	//WIDTHS
 	widths[MEGAMAN_IDLE_0] = tileSize*1.0;//tileSide*1.625;
@@ -360,6 +371,14 @@ SpriteDispenser::SpriteDispenser() {
 	widths[SPARKMAN_PREPARE_1_ATTACK_2] = tileSize*1.0;
 	widths[SPARKMAN_PREPARE_2_ATTACK_1] = tileSize*1.0;
 	widths[SPARKMAN_PREPARE_2_ATTACK_2] = tileSize*1.0;
+	//Backgrounds
+	widths[CITY] = tileSize*TILES_HORIZONTAL;
+	widths[SNOW] = tileSize*TILES_HORIZONTAL;
+	widths[SPOOKY] = tileSize*TILES_HORIZONTAL;
+	widths[ROCK] = tileSize*TILES_HORIZONTAL;
+	widths[VALLEY] = tileSize*TILES_HORIZONTAL;
+    //Health Bar
+	widths[HEALTH_BAR] = tileSize*0.5;
 }
 
 string SpriteDispenser::get(uint id) {
