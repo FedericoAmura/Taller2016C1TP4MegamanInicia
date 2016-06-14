@@ -132,32 +132,7 @@ void Game::selectLevel(int levelId, int client){
 	if((!levelChosen())&&(client==firstClient)){
 		LOG(INFO)<<"level seleccionado: "<<levelId;
 		std::string levelFilePath;
-		switch(levelId){
-		case MAGNETMAN:{
-			levelFilePath="../levels/magnetman.json";
-			break;
-		}
-		case SPARKMAN:{
-			levelFilePath="../levels/sparkman.json";
-			break;
-		}
-		case RINGMAN:{
-			levelFilePath="../levels/ringman.json";
-			break;
-		}
-		case FIREMAN:{
-			levelFilePath="../levels/fireman.json";
-			break;
-		}
-		case BOMBMAN:{
-			levelFilePath="../levels/bombman.json";
-			break;
-		}
-		default:{
-			levelFilePath="../levels/basic0.json";
-			break;
-		}
-		}//end switch
+		levelFilePath = getLevelFiles("")[levelId];
 		try{
 			MyLevel* lvl=new MyLevel(this,levelFilePath,&metadata,levelId);
 			level= lvl;//to avoid asigning invalid in case of error
@@ -212,5 +187,38 @@ bool Game::levelChosen() {
 	else
 		return true;
 }
+
+vector<string> Game::findFilesInDir(const string& folder) {
+	//Aca estoy harcodeando el resultado de la funcion,
+	//en principio tendria que abrir la carpeta, chequear que haya
+	//5 archivos json, y meterlos en el vector.
+	vector<string> files;
+	files.push_back("../levels/magnetman.json");
+	files.push_back("../levels/sparkman.json");
+	files.push_back("../levels/ringman.json");
+	files.push_back("../levels/fireman.json");
+	files.push_back("../levels/bombman.json");
+	return files;
+}
+
+map<uint, string> Game::getLevelFiles(const string &folder) {
+	//Denuevo, hardcodeo como deberia ser el resultado de esta funcion
+	//con los mapas que tenemos ahora, para establecer la estructura de
+	//la logica del cargado de mapas. En realidad tiene que abrir los archivos,
+	//fijarse a que boss corresponden (mirando el compo "boss" del json), y
+	//ponerlos en el map con su id.
+	vector<string> files = findFilesInDir(folder);
+	map<uint, string> levelFiles;
+	levelFiles[MAGNETMAN] = files[0];
+	levelFiles[SPARKMAN] = files[1];
+	levelFiles[RINGMAN] = files[2];
+	levelFiles[FIREMAN] = files[3];
+	levelFiles[BOMBMAN] = files[4];
+	return levelFiles;
+}
+
+
+
+
 
 

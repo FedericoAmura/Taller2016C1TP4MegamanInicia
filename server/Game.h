@@ -9,6 +9,7 @@
 #define SERVER_GAME_H_
 
 #include <map>
+#include <vector>
 #include <string>
 
 #include "Event.h"
@@ -19,6 +20,11 @@
 #include "../common/Thread.h"
 #include "ThreadQueue.h"
 #include "Metadata.h"
+
+using std::map;
+using std::vector;
+using std::string;
+
 class Server;//forward declaration
 
 class Game:public Thread,public Observer{
@@ -51,8 +57,11 @@ public:
 	void addClient(int descriptor);
 	void sendTo(std::string data, int destino);
 	void removeClient(int descriptor);
+
 private:
 	bool isntStopped();
+	vector<string> findFilesInDir(const string& folder);
+	map<uint, string> getLevelFiles(const string& folder);
 };
 
 #endif /* SERVER_GAME_H_ */
