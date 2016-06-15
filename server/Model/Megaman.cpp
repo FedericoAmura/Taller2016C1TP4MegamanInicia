@@ -127,6 +127,7 @@ void Megaman::kill() {
 void Megaman::spawn() {
 	if(clientData->getLives().getCurrent()>0 || !dead){
 		dead=false;
+		life.maxOut();
 		body->SetTransform(spawnPoint,0);
 	}
 }
@@ -166,8 +167,8 @@ void Megaman::tick(float time) {
 void Megaman::informClientLifeChange() {
 	Game* game = clientData->getGame();
 	std::stringstream msj;
-	int percentage =
-			(int) ((((float) life.getCurrent())) / life.getMax() * 100);
+	int percentage =life.getCurrent()*100;
+	percentage/=life.getMax();
 	msj << LIFE_STATUS << " " << clientData->getClientNumber() << " "
 			<< percentage;
 	game->notify(new MessageSent(msj.str(), clientData->getDescriptor()));

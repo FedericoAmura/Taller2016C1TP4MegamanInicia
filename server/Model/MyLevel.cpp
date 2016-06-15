@@ -127,6 +127,10 @@ MyLevel::~MyLevel() {
 	for(;spawnerIt!=spawners.end();spawnerIt++){
 		delete (*spawnerIt);
 	}
+	while(!toCreate.empty()){
+		delete toCreate.front();
+		toCreate.pop();
+	}
 }
 
 /*retruns new object if id has config, nullptr if not*/

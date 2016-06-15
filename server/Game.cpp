@@ -54,6 +54,7 @@ void Game::run(){
 	while(isntStopped()){
 		Event* e=eventQueue.pop();
 		manager.handle(e);
+		delete e;
 	}
 	LOG(INFO)<<"loop eventos juego finalizado";
 }

@@ -15,7 +15,12 @@
 HandlerCoordinator::HandlerCoordinator(Observer* juego):game(juego){
 }
 
-HandlerCoordinator::~HandlerCoordinator() {}
+HandlerCoordinator::~HandlerCoordinator() {
+	std::map<int,Handler*>::iterator handlerIt=handlers.begin();
+	for(; handlerIt!=handlers.end(); handlerIt++){
+		delete handlerIt->second;
+	}
+}
 
 /*aniade handler para el id de evento. Si ya existe lo reemplaza*/
 void HandlerCoordinator::setHandler(int id, Handler* handler){
@@ -34,7 +39,6 @@ void HandlerCoordinator::handle(Event*e){
 	if(handler!=handlers.end()){
 		try{
 			(handler->second)->handle(e);
-			delete e;
 		}catch(std::runtime_error& err){
 			//if event handler fails I record but dont blow up
 			LOG(ERROR)<<err.what();

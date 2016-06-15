@@ -28,7 +28,7 @@ protected:
 	float jSpeed;
 	MyLevel* level;
 	Weapon* myWeapon;
-	Stat<uint> life;
+	Stat<int> life;
 	bool dead;
 	int direction;
 	bool spriteChanged;
