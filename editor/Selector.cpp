@@ -42,8 +42,10 @@ Selector::Selector() {
     };
     tiles.fill(tile_entries, ICON_WIDTH, ICON_WIDTH);
     mobs.fill(mob_entries, ICON_WIDTH, ICON_WIDTH);
-    append_page(m_TilesView, m_TilesLabel);
-    append_page(m_MobsView, m_MobsLabel);
+    append_page(m_TilesScrolled, m_TilesLabel);
+    append_page(m_MobsScrolled, m_MobsLabel);
+    m_TilesScrolled.add(m_TilesView);
+    m_MobsScrolled.add(m_MobsView);
     show();
     show_all_children(true);
 }
