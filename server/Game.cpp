@@ -3,6 +3,9 @@
 #include <string>
 #include <sstream>
 #include <unistd.h>
+#include <dirent.h>
+#include <fstream>
+#include <iostream>
 
 #include "Game.h"
 #include "Handler.h"
@@ -13,6 +16,8 @@
 #include "Metadata.h"
 
 #define TIMEOUT 10000
+#define NUMBER_OF_LEVELS 5
+#define LVL_DIR "../levels/"
 
 /*creates game with server as communications*/
 Game::Game(Server* server)
@@ -132,7 +137,7 @@ void Game::selectLevel(int levelId, int client){
 	if((!levelChosen())&&(client==firstClient)){
 		LOG(INFO)<<"level seleccionado: "<<levelId;
 		std::string levelFilePath;
-		levelFilePath = getLevelFiles("")[levelId];
+		levelFilePath = LVL_DIR + getLevelFiles()[levelId];
 		try{
 			MyLevel* lvl=new MyLevel(this,levelFilePath,&metadata,levelId);
 			level= lvl;//to avoid asigning invalid in case of error
@@ -200,32 +205,62 @@ void Game::resetClientLives() {
 	}
 }
 
-vector<string> Game::findFilesInDir(const string& folder) {
-	//Aca estoy harcodeando el resultado de la funcion,
-	//en principio tendria que abrir la carpeta, chequear que haya
-	//5 archivos json, y meterlos en el vector.
+vector<string> Game::findFilesInDir() {
 	vector<string> files;
-	files.push_back("../levels/magnetman.json");
-	files.push_back("../levels/sparkman.json");
-	files.push_back("../levels/ringman.json");
-	files.push_back("../levels/fireman.json");
-	files.push_back("../levels/bombman.json");
+	system("ls ../levels/ > available_levels");
+	std::ifstream f;
+	string line;
+	f.open ("available_levels");
+	uint count = 0;
+	if (f.is_open()) {
+		while(getline (f, line)) {
+			if (line.find(".json") == std::string::npos) continue;
+			++count;
+            files.push_back(line);
+		}
+		f.close();
+	}
+	if (count != NUMBER_OF_LEVELS) {
+        throw std::runtime_error(
+                "There must be exactly five valid level files"
+                        " in the levels folder.");
+    }
 	return files;
 }
 
-map<uint, string> Game::getLevelFiles(const string &folder) {
-	//Denuevo, hardcodeo como deberia ser el resultado de esta funcion
-	//con los mapas que tenemos ahora, para establecer la estructura de
-	//la logica del cargado de mapas. En realidad tiene que abrir los archivos,
-	//fijarse a que boss corresponden (mirando el compo "boss" del json), y
-	//ponerlos en el map con su id.
-	vector<string> files = findFilesInDir(folder);
+map<uint, string> Game::getLevelFiles() {
+	vector<string> files = findFilesInDir();
 	map<uint, string> levelFiles;
-	levelFiles[MAGNETMAN] = files[0];
-	levelFiles[SPARKMAN] = files[1];
-	levelFiles[RINGMAN] = files[2];
-	levelFiles[FIREMAN] = files[3];
-	levelFiles[BOMBMAN] = files[4];
+	for (uint i = 0; i != files.size(); ++i){
+        //Open File
+        string filename = LVL_DIR + files[i];
+        std::ifstream in(filename);
+        Json::Value level_json;
+        in >> level_json;
+        bool valid = level_json["valid"].asBool();
+        if (!valid) {
+            throw std::runtime_error(
+                    "Level file " + filename + " is not valid.");
+        } else {
+            string boss = level_json["Boss"].asString();
+            if (boss == "Bombman"){
+                levelFiles[BOMBMAN] = filename;
+            } else if (boss == "Magnetman"){
+                levelFiles[MAGNETMAN] = filename;
+            } else if (boss == "Sparkman"){
+                levelFiles[SPARKMAN] = filename;
+            } else if (boss == "Ringman"){
+                levelFiles[RINGMAN] = filename;
+            } else if (boss == "Fireman"){
+                levelFiles[FIREMAN] = filename;
+            } else {
+                throw std::runtime_error("Invalid level file "
+                                         + files[i]
+                                         + " marked as valid.");
+            }
+        }
+        in.close();
+    }
 	return levelFiles;
 }
 

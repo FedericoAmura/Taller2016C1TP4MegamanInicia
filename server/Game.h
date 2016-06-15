@@ -61,8 +61,8 @@ public:
 
 private:
 	bool isntStopped();
-	vector<string> findFilesInDir(const string& folder);
-	map<uint, string> getLevelFiles(const string& folder);
+	vector<string> findFilesInDir();
+	map<uint, string> getLevelFiles();
 };
 
 #endif /* SERVER_GAME_H_ */
