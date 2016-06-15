@@ -12,7 +12,8 @@
 #define CLIENT_DISCONNECTED 99
 
 //OPERATION CODES server->client
-#define HELLO 0//para confirmar conexion
+#define HELLO 0
+#define CLIENTS_CONNECTED 10
 #define DRAW 1
 #define REDRAW 2
 #define MOVE 3
@@ -53,7 +54,13 @@
 //HELLO codes
 /* se manda seguido del numero de jugador asignado
  * formato: "HELLO numCliente\n"
- * ej: "0 1\n" hola, sos el cliente 1
+ * ej: "0 1\n" Sos el cliente 1
+ * */
+
+//CLIENTS_CONNECTED codes
+/* se manda seguido de la cantidad de jugadores conectados
+ * formato: "CLIENTS_CONNECTED numClientes\n"
+ * ej: "10 3\n" hay 3 clientes conectados
  * */
 
 //DRAW codes

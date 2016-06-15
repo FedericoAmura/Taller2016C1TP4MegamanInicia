@@ -17,6 +17,7 @@
 MegamanClientModel::MegamanClientModel() :
 	serverProxy(nullptr),
 	clientNumber("0"),
+	clientsConnected(0),
 	recibirServer(false) {
 	levelsStatus[MAGNETMAN] = false;
 	levelsStatus[SPARKMAN] = false;
@@ -48,6 +49,11 @@ void MegamanClientModel::run() {
 			gameStatusChangeSignal.emit();
 			}
 			break;
+		case CLIENTS_CONNECTED:
+			{
+			ss >> clientsConnected;
+			gameStatusChangeSignal.emit();
+			}
 		case DRAW:
 			{
 			int idDrawable; ss >> idDrawable;
@@ -107,13 +113,12 @@ void MegamanClientModel::run() {
 		case START_LEVEL_SCREEN:
 			{
 			int idLevel; ss >> idLevel;
-			/*idLevel += 6000;
+			/* queda asi hasta que el background se dibuje en background
+			idLevel += 6000;
 			Drawable* drawable = new Drawable();
 			drawable->setImage(7000,sprites.get(idLevel),sprites.getWidth(idLevel),sprites.getHeight(idLevel),false);
 			drawable->setCoordinates(0,0);
 			drawables.setDrawable(7000,drawable);*/
-
-			backgroundChangeSignal.emit("");
 			windowChangeSignal.emit(LEVEL_SCREEN_NAME);
 			}
 			break;
@@ -158,16 +163,8 @@ Signal MegamanClientModel::changeGameStatusSignal() {
 	return gameStatusChangeSignal;
 }
 
-DoubleIntSignal MegamanClientModel::changeHealthSignal() {
-	return healthChangeSignal;
-}
-
 StringSignal MegamanClientModel::changeScreenSignal() {
 	return windowChangeSignal;
-}
-
-StringSignal MegamanClientModel::changeBackgroundSignal() {
-	return backgroundChangeSignal;
 }
 
 void MegamanClientModel::connectServer(std::string ip, std::string port) {

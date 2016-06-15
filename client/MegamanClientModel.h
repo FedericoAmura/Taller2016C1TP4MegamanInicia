@@ -19,21 +19,19 @@
 #include "../common/SpriteDispenser.h"
 
 typedef sigc::signal<void> Signal;
-typedef sigc::signal<void,int,int> DoubleIntSignal;
 typedef sigc::signal<void,std::string> StringSignal;
 
 class MegamanClientModel : public Thread {
 private:
 	Socket* serverProxy;
 	std::string clientNumber;
+	int clientsConnected;
 	std::map<int,bool> levelsStatus;
 	Drawables drawables;
 	SpriteDispenser sprites;
 	bool recibirServer;
 	Signal gameStatusChangeSignal;
-	DoubleIntSignal healthChangeSignal;
 	StringSignal windowChangeSignal;
-	StringSignal backgroundChangeSignal;
 
 public:
 	MegamanClientModel();
@@ -43,9 +41,7 @@ public:
 	void run();	//updateFromServer();
 
 	Signal changeGameStatusSignal();
-	DoubleIntSignal changeHealthSignal();
 	StringSignal changeScreenSignal();
-	StringSignal changeBackgroundSignal();
 
 	void connectServer(std::string ip, std::string port);
 	std::string getClientNumer();
