@@ -53,6 +53,7 @@ void MegamanClientModel::run() {
 			{
 			ss >> clientsConnected;
 			gameStatusChangeSignal.emit();
+			break;
 			}
 		case DRAW:
 			{

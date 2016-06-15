@@ -22,11 +22,11 @@
 /*creates game with server as communications*/
 Game::Game(Server* server)
 :goOn(true),
-server(server),
-manager(this),
-level(nullptr),
-firstClient(-1),
-metadata(this){
+ server(server),
+ manager(this),
+ level(nullptr),
+ firstClient(-1),
+ metadata(this){
 	manager.setHandler(1,new AcceptConnection(this));
 	manager.setHandler(2,new RecvMessage(this));
 	manager.setHandler(3,new SendMessage(this));
@@ -92,9 +92,12 @@ void Game::addClient(int descriptor){
 			firstClient=descriptor;
 		}
 		clients[descriptor]=nuevoCliente;
-		std::stringstream msj;
-		msj<<HELLO<<" "<<clients.size();
-		this->notify(new MessageSent(msj.str(),descriptor));
+		std::stringstream mensajeNumeroClient;
+		mensajeNumeroClient<<HELLO<<" "<<clients.size();
+		this->notify(new MessageSent(mensajeNumeroClient.str(),descriptor));
+		std::stringstream mensajeCantConectados;
+		mensajeCantConectados<<CLIENTS_CONNECTED<<" "<<clients.size();
+		this->notify(new MessageSent(mensajeCantConectados.str(),0));
 		clientNum[descriptor]=clients.size();
 		metadata.addClient(descriptor,clientNum[descriptor]);
 		LOG(INFO)<<"Cliente conectado nro: "
@@ -217,15 +220,15 @@ vector<string> Game::findFilesInDir() {
 		while(getline (f, line)) {
 			if (line.find(".json") == std::string::npos) continue;
 			++count;
-            files.push_back(line);
+			files.push_back(line);
 		}
 		f.close();
 	}
 	if (count != NUMBER_OF_LEVELS) {
-        throw std::runtime_error(
-                "There must be exactly five valid level files"
-                        " in the levels folder.");
-    }
+		throw std::runtime_error(
+				"There must be exactly five valid level files"
+				" in the levels folder.");
+	}
 	return files;
 }
 
@@ -233,35 +236,35 @@ map<uint, string> Game::getLevelFiles() {
 	vector<string> files = findFilesInDir();
 	map<uint, string> levelFiles;
 	for (uint i = 0; i != files.size(); ++i){
-        //Open File
-        string filename = LVL_DIR + files[i];
-        std::ifstream in(filename);
-        Json::Value level_json;
-        in >> level_json;
-        bool valid = level_json["valid"].asBool();
-        if (!valid) {
-            throw std::runtime_error(
-                    "Level file " + filename + " is not valid.");
-        } else {
-            string boss = level_json["Boss"].asString();
-            if (boss == "Bombman"){
-                levelFiles[BOMBMAN] = filename;
-            } else if (boss == "Magnetman"){
-                levelFiles[MAGNETMAN] = filename;
-            } else if (boss == "Sparkman"){
-                levelFiles[SPARKMAN] = filename;
-            } else if (boss == "Ringman"){
-                levelFiles[RINGMAN] = filename;
-            } else if (boss == "Fireman"){
-                levelFiles[FIREMAN] = filename;
-            } else {
-                throw std::runtime_error("Invalid level file "
-                                         + files[i]
-                                         + " marked as valid.");
-            }
-        }
-        in.close();
-    }
+		//Open File
+		string filename = LVL_DIR + files[i];
+		std::ifstream in(filename);
+		Json::Value level_json;
+		in >> level_json;
+		bool valid = level_json["valid"].asBool();
+		if (!valid) {
+			throw std::runtime_error(
+					"Level file " + filename + " is not valid.");
+		} else {
+			string boss = level_json["Boss"].asString();
+			if (boss == "Bombman"){
+				levelFiles[BOMBMAN] = filename;
+			} else if (boss == "Magnetman"){
+				levelFiles[MAGNETMAN] = filename;
+			} else if (boss == "Sparkman"){
+				levelFiles[SPARKMAN] = filename;
+			} else if (boss == "Ringman"){
+				levelFiles[RINGMAN] = filename;
+			} else if (boss == "Fireman"){
+				levelFiles[FIREMAN] = filename;
+			} else {
+				throw std::runtime_error("Invalid level file "
+						+ files[i]
+								+ " marked as valid.");
+			}
+		}
+		in.close();
+	}
 	return levelFiles;
 }
 
