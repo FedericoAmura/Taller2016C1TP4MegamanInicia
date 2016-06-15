@@ -16,20 +16,30 @@
 #include "MegamanClientModel.h"
 #include "../common/Drawing.h"
 
-class LevelSelectorScreen : public Gtk::Grid {
+class LevelSelectorScreen : public Gtk::HBox {
 private:
 	MegamanClientModel& model;
-	Gtk::VBox megamanContainer;
-	Gtk::Button exitButton;
-	Gtk::Label dataLabel;
-	Drawing magnetManIcon;
-	Gtk::Button magnetManButton;
-	Drawing sparkManIcon;
-	Gtk::Button sparkManButton;
-	Drawing ringManIcon;
-	Gtk::Button ringManButton;
+	Gtk::VBox firstColumn;
 	Drawing fireManIcon;
 	Gtk::Button fireManButton;
+	Drawing ringManIcon;
+	Gtk::Button ringManButton;
+
+	Gtk::VBox secondColumn;
+	Drawing header;
+	Gtk::Label instructionLabel;
+	Drawing magnetManIcon;
+	Gtk::Button magnetManButton;
+	Gtk::Label dataLabel;
+	Gtk::HBox players;
+	Drawing megaman1;
+	Drawing megaman2;
+	Gtk::Button exitButton;
+
+
+	Gtk::VBox thirdColumn;
+	Drawing sparkManIcon;
+	Gtk::Button sparkManButton;
 	Drawing bombManIcon;
 	Gtk::Button bombManButton;
 
@@ -40,7 +50,7 @@ public:
 	Gtk::Button& getDisconnectButton();
 
 private:
-	void fillText();
+	void fillStatus();
 };
 
 #endif /* SRC_LEVELSELECTORSCREEN_H_ */

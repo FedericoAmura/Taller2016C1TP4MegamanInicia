@@ -2,7 +2,7 @@
 	"world":
 	{
 		"windowWidth":	27.0,
-		"windowHeight":	15.0,
+		"windowHeight":	14.0,
 		"gravity":		-40.0,
 		"width" :		95.0,
 		"height" :		95.0,
@@ -18,19 +18,19 @@
 					"X1":		27.0,
 					"Y1":		0.0,
 					"X2":		27.0,
-					"Y2":		15.0
+					"Y2":		14.0
 				},
 				{
 					"type":		4,
 					"X1":		27.0,
-					"Y1":		15.0,
+					"Y1":		14.0,
 					"X2":		0.0,
-					"Y2":		15.0
+					"Y2":		14.0
 				},
 				{
 					"type":		4,
 					"X1":		0.0,
-					"Y1":		15.0,
+					"Y1":		14.0,
 					"X2":		0.0,
 					"Y2":		0.0
 				}
@@ -43,9 +43,9 @@
 		"HSpeed" : 		5.0,
 		"ClimbSpeed":	3.0,
 		"climbSpriteId":9010,
-		"JSpeed" :		15.0,
+		"JSpeed" :		20.0,
 		"inmuneTime":	0.5,
-		"life":			10.0,
+		"life":			30.0,
 		"jumpSpriteId":	9005,
 		"jumpSensor":
 		{
