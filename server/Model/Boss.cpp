@@ -7,6 +7,9 @@
 #include "../Event.h"
 #include "../Game.h"
 
+#define IDLE_DISTANCE 10
+#define ATTACKING_DISTANCE IDLE_DISTANCE
+
 Boss::Boss(b2World* w, Json::Value& json, const b2Vec2& pos, MyLevel* lvl)
         : Enemy(w, json, pos, lvl),
           lifeChanged(true){
@@ -21,7 +24,7 @@ void Boss::kill() {
 void Boss::redrawForClients(Game* game, MyLevel* level, bool checkChanges) {
 	Character::redrawForClients(game, level, checkChanges);
 	if(!dead && lifeChanged){
-		lifeChanged=false;
+		lifeChanged = false;
 		std::stringstream msj;
 		int percentage =
 				(int) ((((float) (life.getCurrent())) / life.getMax() * 100));
@@ -29,33 +32,33 @@ void Boss::redrawForClients(Game* game, MyLevel* level, bool checkChanges) {
 		game->notify(new MessageSent(msj.str(), 0));
 	}
 }
-/*
-void Boss::jump() {
-    Megaman* nearest = level->getNearestMegaman(this->getPos());
-    b2Vec2 difference = nearest->getPos();
-    difference -= this->getPos();
-    if (difference.x <= 0){
-        if (direction != LEFT){
-            direction = LEFT;
-            spriteChanged = true;
-        }
-        hSpeed = -hSpeed;
-    } else {
-        if (direction != RIGHT){
-            direction = RIGHT;
-            spriteChanged = true;
-        }
-    }
-    if(canJump){
-        b2Vec2 vel = body->GetLinearVelocity();
-        vel.x = hSpeed;
-        vel.y = jSpeed;
-        body->SetLinearVelocity(vel);
+
+void Boss::executeJump(float time) {
+    jumpTime.dec(time);
+    if (jumpTime.getCurrent() == 0){
+        jump();
+        jumpTime.maxOut();
     }
 }
 
 void Boss::tick(float time) {
-    Enemy::tick(time);
-    jump();
+    setAim();
+    Character::tick(time);
+    executeJump(time);
+    shoot();
 }
-*/
+
+void Boss::jump() {
+    b2Vec2 vel = body->GetLinearVelocity();
+    b2Vec2 aim = setAim();
+    if (float (aim.x) * hSpeed < 0) hSpeed = -hSpeed;
+    vel.x = hSpeed;
+    vel.y = jSpeed;
+    body->SetLinearVelocity(vel);
+}
+
+
+
+
+
+

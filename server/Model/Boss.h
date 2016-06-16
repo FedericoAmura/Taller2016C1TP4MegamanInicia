@@ -11,14 +11,15 @@
 class Boss: public Enemy {
 	bool lifeChanged;
 	float hSpeed;
+    void executeJump(float time);
+    virtual void jump();
 
 public:
 	Boss(b2World* w, Json::Value& json, const b2Vec2& pos, MyLevel* lvl);
 	virtual ~Boss() { }
 	virtual void kill();
 	virtual void redrawForClients(Game* game, MyLevel* level, bool checkChanges);
-	//void jump();
-	//void tick(float time);
+    void tick(float time);
 };
 
 #endif //MEGAMAN_BOSS_H

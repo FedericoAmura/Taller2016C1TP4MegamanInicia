@@ -9,8 +9,6 @@
 #include "Enemy.h"
 
 class FlyingEnemy: public Enemy {
-	float hSpeed;
-
 public:
 	FlyingEnemy(b2World* w, Json::Value& json, const b2Vec2& pos, MyLevel* lvl);
 	virtual ~FlyingEnemy() {}

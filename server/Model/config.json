@@ -182,8 +182,8 @@
 	{
 		"id":			1102,
 		"weaponId":		2010,
-		"JSpeed" :		15.0,
-		"HSpeed":		3.0,
+		"JSpeed" :		20.0,
+		"HSpeed":		1.5,
 		"life":			20.0,
 		"jumps":		true,
 		"jumpSpriteId":	1104,
@@ -271,7 +271,7 @@
 	{
 		"id":			1401,
 		"weaponId":		2009,
-		"JSpeed" :		15.0,
+		"JSpeed" :		20.0,
 		"HSpeed":		3.0,
 		"life":			20.0,
 		"jumps":		true,
@@ -301,8 +301,8 @@
 	{
 		"id":			1502,
 		"weaponId":		2002,
-		"JSpeed" :		15.0,
-		"HSpeed":		3.0,
+		"JSpeed" :		20.0,
+		"HSpeed":		7.0,
 		"life":			20.0,
 		"jumps":		true,
 		"jumpSpriteId":	1504,

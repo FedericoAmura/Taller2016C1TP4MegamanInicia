@@ -20,13 +20,15 @@ class MyLevel;
 class Enemy: public Character {
 protected:
     bool idle;
+    float hSpeed;
     clock_t idle_begin;
     clock_t idle_elapsed;
-    void executeIdle(float time, int idle_time);
 	Stat<float> jumpTime;
 	void changeFixtureFilter(b2Fixture* f);
+    virtual void jump();
 	ObjectInfo* drop();
     b2Vec2 setAim();
+    void executeIdle(float time, int idle_time);
     void executeJump(float time);
 
 public:
