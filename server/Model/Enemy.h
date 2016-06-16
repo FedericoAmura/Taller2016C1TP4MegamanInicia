@@ -28,7 +28,7 @@ protected:
     virtual void jump();
 	ObjectInfo* drop();
     b2Vec2 setAim();
-    void executeIdle(float time, int idle_time);
+    void executeIdle(float time, float idle_time);
     void executeJump(float time);
 
 public:

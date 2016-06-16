@@ -101,9 +101,9 @@ void Enemy::executeJump(float time) {
     }
 }
 
-void Enemy::executeIdle(float time, int idle_time) {
+void Enemy::executeIdle(float time, float idle_time) {
     idle_elapsed = clock();
-    if (float(idle_elapsed - idle_begin) / CLOCKS_PER_SEC > idle_time){
+    if (float(idle_elapsed - idle_begin)/CLOCKS_PER_SEC > idle_time){
         idle = false;
     }
     Character::tick(time);
