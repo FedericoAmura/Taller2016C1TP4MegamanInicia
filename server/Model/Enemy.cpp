@@ -21,7 +21,6 @@
 #include "../Game.h"
 #include "../Event.h"
 
-#define IDLE_TIME 0.05
 
 Enemy::Enemy(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl)
 :Character(w,json,pos,lvl),
@@ -30,7 +29,7 @@ Enemy::Enemy(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl)
 	for (b2Fixture* f = body->GetFixtureList(); f; f = f->GetNext()){
 		changeFixtureFilter(f);
 	}
-	if(json["jumps"].asBool()){
+	if (json["jumps"].asBool()){
 		jumpingSpriteId=json["jumpSpriteId"].asInt();
 		createJumpSensor(json["jumpSensor"]);
 	}
@@ -91,80 +90,8 @@ void Enemy::tick(float time) {
 	shoot();
 }
 
-/************************************************************/
-FlyingEnemy::FlyingEnemy(b2World* w,
-						 Json::Value& json,
-						 const b2Vec2& pos,
-						 MyLevel* lvl) : Enemy(w, json, pos, lvl){
-    isIdle = false;
-	hSpeed = json["HSpeed"].asFloat();
-	body->SetGravityScale(0);
-}
-
-/*calls base class tick, and tires to move towards players*/
-void FlyingEnemy::tick(float time){
-    if (isIdle) {
-        idle_elapsed = clock();
-        if (float(idle_elapsed - idle_begin) / CLOCKS_PER_SEC > IDLE_TIME){
-            isIdle = false;
-        }
-        Character::tick(time);
-        shoot();
-    } else {
-        Megaman* nearest = level->getNearestMegaman(this->getPos());
-        b2Vec2 diference = nearest->getPos();
-        diference -= this->getPos();
-        b2Vec2 speed = body->GetLinearVelocity();
-        if (diference.x <= 0){
-            if (direction != LEFT){
-                direction = LEFT;
-                spriteChanged = true;
-            }
-            speed.x = -hSpeed;
-        } else {
-            if (direction != RIGHT){
-                direction = RIGHT;
-                spriteChanged = true;
-            }
-            speed.x = hSpeed;
-        }
-        if (abs(diference.x) < 1) {
-            isIdle = true;
-            idle_begin = clock();
-        }
-        Character::tick(time);
-        body->SetLinearVelocity(speed);
-        if (abs(diference.x) < 3){
-            shoot();
-        }
-    }
-}
-
-bool FlyingEnemy::isJumping() {
-	return false;
-}
 
 
-/************************************************************/
-Boss::Boss(b2World* w, Json::Value& json, const b2Vec2& pos, MyLevel* lvl)
-        : Enemy(w, json, pos, lvl),
-          lifeChanged(true){}
 
-/*when boss dies the game is won*/
-void Boss::kill() {
-	level->win();
-}
-
-void Boss::redrawForClients(Game* game, MyLevel* level, bool checkChanges) {
-	Character::redrawForClients(game, level, checkChanges);
-	if(!dead && lifeChanged){
-		lifeChanged=false;
-		std::stringstream msj;
-		int percentage =
-				(int) ((((float) (life.getCurrent())) / life.getMax() * 100));
-		msj << LIFE_STATUS << " 0 "	<< percentage;
-		game->notify(new MessageSent(msj.str(), 0));
-	}
-}
 
 

@@ -17,13 +17,12 @@
 
 #define COFIG_FILE "../server/Model/config.json"
 
-Weapon::Weapon(int id,MyLevel* lvl,int group):
-level(lvl),
-weaponId(id),
-groupBits(group),
-cooldown(getJson()["cooldown"].asFloat()){}
+Weapon::Weapon(int id, MyLevel* lvl, int group)
+		: level(lvl),
+		  weaponId(id),
+		  groupBits(group),
+		  cooldown(getJson()["cooldown"].asFloat()) {}
 
-Weapon::~Weapon() {}
 
 /*gets the jason value for the particular weapon*/
 Json::Value Weapon::getJson() {

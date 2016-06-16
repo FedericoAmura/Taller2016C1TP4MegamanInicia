@@ -22,6 +22,7 @@ protected:
 	Stat<float> jumpTime;
 	void changeFixtureFilter(b2Fixture* f);
 	ObjectInfo* drop();
+
 public:
 	Enemy(b2World* w, Json::Value& json, const b2Vec2& pos, MyLevel* lvl);
 	virtual ~Enemy();
@@ -29,24 +30,4 @@ public:
 	virtual void kill();
 };
 
-class FlyingEnemy: public Enemy {
-	float hSpeed;
-    bool isIdle;
-    clock_t idle_begin;
-    clock_t idle_elapsed;
-public:
-	FlyingEnemy(b2World* w, Json::Value& json, const b2Vec2& pos, MyLevel* lvl);
-	virtual ~FlyingEnemy() {}
-	void tick(float time);
-	bool isJumping();
-};
-
-class Boss: public Enemy {
-	bool lifeChanged;
-public:
-	Boss(b2World* w, Json::Value& json, const b2Vec2& pos, MyLevel* lvl);
-	virtual ~Boss() {}
-	virtual void kill();
-	virtual void redrawForClients(Game* game, MyLevel* level, bool checkChanges);
-};
 #endif /* SERVER_MODEL_ENEMY_H_ */

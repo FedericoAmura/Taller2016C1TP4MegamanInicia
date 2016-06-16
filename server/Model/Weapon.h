@@ -24,9 +24,9 @@ protected:
 	Stat<float> cooldown;
 	Json::Value getJson();
 public:
-	Weapon(int id,MyLevel* lvl,int group);
-	virtual ~Weapon();
-	virtual void shoot(const b2Vec2& pos,int direction);
+	Weapon(int id, MyLevel* lvl, int group);
+	virtual ~Weapon(){}
+	virtual void shoot(const b2Vec2& pos, int direction);
 	void setOwner(int16 group);
 	void tick(float time);
 };

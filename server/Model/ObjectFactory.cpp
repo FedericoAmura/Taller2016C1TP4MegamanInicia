@@ -21,6 +21,8 @@
 #include "Megaman.h"
 #include "Obstacle.h"
 #include "MyLevel.h"
+#include "FlyingEnemy.h"
+#include "Boss.h"
 
 struct b2Vec2;
 

@@ -46,7 +46,7 @@ add_executable(client ${CLIENT_SOURCE_FILES} ${COMMON_SOURCE_FILES})
 #files en carpeta server, de forma recursiva(incluye archivos de carpetas adentro de la carpeta)
 FILE(GLOB_RECURSE SERVER_SOURCE_FILES server/*)
 #ejecutable server
-add_executable(server ${SERVER_SOURCE_FILES} ${COMMON_SOURCE_FILES} jsoncpp.cpp json/json-forwards.h json/json.h)
+add_executable(server ${SERVER_SOURCE_FILES} ${COMMON_SOURCE_FILES} jsoncpp.cpp json/json-forwards.h json/json.h server/Model/Boss.cpp server/Model/Boss.h server/Model/FlyingEnemy.cpp server/Model/FlyingEnemy.h)
 
 #linkeos
 target_link_libraries(editor ${GTKMM_LIBRARIES} )

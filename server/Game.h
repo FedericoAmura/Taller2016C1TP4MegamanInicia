@@ -27,7 +27,7 @@ using std::string;
 
 class Server;//forward declaration
 
-class Game:public Thread,public Observer{
+class Game: public Thread, public Observer{
 	Mutex goOnMutex;
 	bool goOn;
 	Server* server;

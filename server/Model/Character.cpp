@@ -30,7 +30,7 @@ Character::Character(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl
 	body->SetFixedRotation(true);
 	body->SetBullet(true);
 	jSpeed=json["JSpeed"].asFloat();
-	myWeapon= new Weapon(json["weaponId"].asInt(),level,ENEMY);
+	myWeapon= new Weapon(json["weaponId"].asInt(), level, ENEMY);
 	jumpingSpriteId=spriteId;
 }
 

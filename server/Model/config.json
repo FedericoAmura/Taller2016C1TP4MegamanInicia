@@ -183,6 +183,7 @@
 		"id":			1102,
 		"weaponId":		2010,
 		"JSpeed" :		15.0,
+		"HSpeed":		3.0,
 		"life":			20.0,
 		"jumps":		true,
 		"jumpSpriteId":	1104,
@@ -235,12 +236,13 @@
 			}
 		]
 	},
-	
+
 	"1300":
 	{
 		"id":			1305,
-		"weaponId":		2008,
+		"weaponId":		2009,
 		"JSpeed" :		15.0,
+		"HSpeed":		3.0,
 		"life":			20.0,
 		"jumps":		true,
 		"jumpSpriteId":	1306,
@@ -252,7 +254,7 @@
 			"y": 		-0.5,
 			"width": 	0.25,
 			"height": 	0.1
-		},		
+		},
 		"shapes":
 		[
 			{
@@ -268,8 +270,9 @@
 	"1400":
 	{
 		"id":			1401,
-		"weaponId":		2007,
+		"weaponId":		2009,
 		"JSpeed" :		15.0,
+		"HSpeed":		3.0,
 		"life":			20.0,
 		"jumps":		true,
 		"jumpSpriteId":	1402,
@@ -299,6 +302,7 @@
 		"id":			1502,
 		"weaponId":		2002,
 		"JSpeed" :		15.0,
+		"HSpeed":		3.0,
 		"life":			20.0,
 		"jumps":		true,
 		"jumpSpriteId":	1504,

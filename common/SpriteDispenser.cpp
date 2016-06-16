@@ -64,12 +64,11 @@ SpriteDispenser::SpriteDispenser() {
 	paths[MEGAMAN_WEAPON] = WEP_PATH + "megaman_weapon.png";
 	paths[MET_WEAPON] = WEP_PATH + "met_weapon.png";
 	paths[SNIPER_WEAPON] = WEP_PATH + "sniper_weapon.png";
-	paths[RINGMAN_WEAPON] = WEP_PATH + " ringman_weapon0.png";
+	paths[RINGMAN_WEAPON] = WEP_PATH + " ringman_weapon1.png";
 	paths[MAGNETMAN_WEAPON] = WEP_PATH + "magnetman_weapon.png";
 	paths[SPARKMAN_SPARKS] = WEP_PATH + "sparkman_weapon1_0.png";
 	paths[SPARKMAN_GENKIDAMA] = WEP_PATH + "sparkman_weapon2_0.png";
 	//Items
-	//todo los sprites de esto no son los correctos, despues lo arreglo??
 	paths[BIG_ENERGY] = ITM_PATH + "big_energy_capsule.png";
 	paths[SMALL_ENERGY] = ITM_PATH + "small_energy_capsule.png";
 	paths[BIG_PLASMA] = ITM_PATH + "big_plasma_capsule.png";
@@ -181,7 +180,6 @@ SpriteDispenser::SpriteDispenser() {
 	heigths[SPARKMAN_SPARKS] = tileSize*0.2;
 	heigths[SPARKMAN_GENKIDAMA] =tileSize*0.2;
 	//Items
-	//todo los sprites de esto no son los correctos, despues lo arreglo??
 	heigths[BIG_ENERGY] = tileSize*0.2;
 	heigths[SMALL_ENERGY] = tileSize*0.2;
 	heigths[BIG_PLASMA] = tileSize*0.2;
@@ -199,9 +197,9 @@ SpriteDispenser::SpriteDispenser() {
 	//Mobs
 	heigths[BUMBY_0] = tileSize*1.0;
 	heigths[BUMBY_1] = tileSize*1.0;
-	heigths[MET_HIDDEN] = tileSize*1.0;
-	heigths[MET_TRANSITION] = tileSize*1.0;
-	heigths[MET_VULNERABLE] = tileSize*1.0;
+	heigths[MET_HIDDEN] = tileSize*0.5;
+	heigths[MET_TRANSITION] = tileSize*0.5;
+	heigths[MET_VULNERABLE] = tileSize*0.5;
 	heigths[SNIPER_ATTACK] = tileSize*1.0;
 	heigths[SNIPER_DEFEND] = tileSize*1.0;
 	heigths[SNIPER_JUMP] = tileSize*1.0;
@@ -301,7 +299,6 @@ SpriteDispenser::SpriteDispenser() {
 	widths[SPARKMAN_SPARKS] = tileSize*0.2;
 	widths[SPARKMAN_GENKIDAMA] =tileSize*0.2;
 	//Items
-	//todo los sprites de esto no son los correctos, despues lo arreglo??
 	widths[BIG_ENERGY] = tileSize*0.2;
 	widths[SMALL_ENERGY] = tileSize*0.2;
 	widths[BIG_PLASMA] = tileSize*0.2;
