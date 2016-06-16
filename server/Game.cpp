@@ -209,11 +209,11 @@ void Game::resetClientLives() {
 	}
 }
 
-vector<string> Game::findFilesInDir() {
-	vector<string> files;
+std::vector<std::string> Game::findFilesInDir() {
+	std::vector<std::string> files;
 	system("ls ../levels/ > available_levels");
 	std::ifstream f;
-	string line;
+	std::string line;
 	f.open ("available_levels");
 	uint count = 0;
 	if (f.is_open()) {
@@ -232,12 +232,12 @@ vector<string> Game::findFilesInDir() {
 	return files;
 }
 
-map<uint, string> Game::getLevelFiles() {
-	vector<string> files = findFilesInDir();
-	map<uint, string> levelFiles;
+std::map<uint, std::string> Game::getLevelFiles() {
+	std::vector<std::string> files = findFilesInDir();
+	std::map<uint, std::string> levelFiles;
 	for (uint i = 0; i != files.size(); ++i){
 		//Open File
-		string filename = LVL_DIR + files[i];
+		std::string filename = LVL_DIR + files[i];
 		std::ifstream in(filename);
 		Json::Value level_json;
 		in >> level_json;
@@ -246,7 +246,7 @@ map<uint, string> Game::getLevelFiles() {
 			throw std::runtime_error(
 					"Level file " + filename + " is not valid.");
 		} else {
-			string boss = level_json["Boss"].asString();
+			std::string boss = level_json["Boss"].asString();
 			if (boss == "Bombman"){
 				levelFiles[BOMBMAN] = filename;
 			} else if (boss == "Magnetman"){
