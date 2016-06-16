@@ -74,12 +74,8 @@ model(model) {
 	magnetManButton.signal_clicked().connect(sigc::bind<int>(sigc::mem_fun(model,&MegamanClientModel::serverSendLevelSelected),MAGNETMAN));
 	secondColumn.add(magnetManButton);
 	//Status box
-	dataLabel.set_label("You are leader player\n");
+	dataLabel.set_label("");
 	secondColumn.add(dataLabel);
-	megaman1.setImage("../sprites/megaman pc/megaman_idle.png",imgWidth/4,imgWidth/4,false);
-	megaman2.setImage("../sprites/megaman pc/megaman_idle.png",imgWidth/4,imgWidth/4,false);
-	players.add(megaman1);
-	players.add(megaman2);
 	secondColumn.add(players);
 	model.changeGameStatusSignal().connect(sigc::mem_fun(*this,&LevelSelectorScreen::fillStatus));
 	//Exit button
@@ -112,6 +108,9 @@ model(model) {
 }
 
 LevelSelectorScreen::~LevelSelectorScreen() {
+	for (std::vector<Drawing*>::iterator it = playersAvatars.begin() ; it != playersAvatars.end(); ++it)
+		delete (*it);
+	playersAvatars.clear();
 }
 
 Gtk::Button& LevelSelectorScreen::getDisconnectButton() {
@@ -119,37 +118,32 @@ Gtk::Button& LevelSelectorScreen::getDisconnectButton() {
 }
 
 void LevelSelectorScreen::fillStatus() {
-//	std::string label = "\n";
-//	if ("1" == model.getClientNumer()) {
-//		label.append("You are the leader player\n");
-//		label.append("Select level to be played\n");
-//	} else {
-//		label.append("\nWait for player 1 to select level\n");
-//	}
-//	label.append(2,'\n');
-//	//MagnetMan
-//	label.append("MagnetMan: ");
-//	if (!model.getLevelStatus(MAGNETMAN)) label.append("not ");
-//	label.append("defeated\n");
-//	//SparkMan
-//	label.append("SparkMan: ");
-//	if (!model.getLevelStatus(SPARKMAN)) label.append("not ");
-//	label.append("defeated\n");
-//	//RingMan
-//	label.append("RingMan: ");
-//	if (!model.getLevelStatus(RINGMAN)) label.append("not ");
-//	label.append("defeated\n");
-//	//FireMan
-//	label.append("FireMan: ");
-//	if (!model.getLevelStatus(FIREMAN)) label.append("not ");
-//	label.append("defeated\n");
-//	//BombMan
-//	label.append("BombMan: ");
-//	if (!model.getLevelStatus(BOMBMAN)) label.append("not ");
-//	label.append("defeated\n");
-//	label.append(2,'\n');
-//	label.append("To disconnect and exit game press button below");
-//	label.append(2,'\n');
-//	dataLabel.set_label(label);
+	const int width = Gdk::screen_width();
+	const int height = Gdk::screen_height();
+	const int imgWidth = width/4;
+	const int imgHeight = height/3;
+
+	//Escribo si es o no el leader player
+	if ("1" == model.getClientNumber()) {
+		dataLabel.set_label("You are leader player\nSelect a level\n");
+	} else {
+		dataLabel.set_label("Wait for leader player\nto select a level\n");
+	}
+
+	//Pongo en gris los niveles ganados
+	if (model.getLevelStatus(MAGNETMAN)) magnetManIcon.setImage("../sprites/level/bossImages/MagnetManDefeated.png",imgWidth,imgHeight,false);
+	if (model.getLevelStatus(SPARKMAN)) sparkManIcon.setImage("../sprites/level/bossImages/SparkManDefeated.png",imgWidth,imgHeight,false);
+	if (model.getLevelStatus(RINGMAN)) ringManIcon.setImage("../sprites/level/bossImages/RingManDefeated.png",imgWidth,imgHeight,false);
+	if (model.getLevelStatus(FIREMAN)) fireManIcon.setImage("../sprites/level/bossImages/FireManDefeated.png",imgWidth,imgHeight,false);
+	if (model.getLevelStatus(BOMBMAN)) bombManIcon.setImage("../sprites/level/bossImages/BombManDefeated.png",imgWidth,imgHeight,false);
+
+	//Muestro megamanes segun cantidad de jugadores
+	for (int i = playersAvatars.size(); i < model.getClientsConnected(); ++i) {
+		Drawing* player = new Drawing;
+		player->setImage("../sprites/megaman pc/megaman_idle.png",imgWidth/4,imgWidth/4,false);
+		players.add(*player);
+		playersAvatars.push_back(player);
+		player->show();
+	}
 }
 

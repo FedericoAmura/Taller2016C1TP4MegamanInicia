@@ -19,6 +19,7 @@
 #define TLE_PATH (string) IMG_PATH + "/level/tiles/"
 #define WEP_PATH (string) IMG_PATH + "/weapons/"
 #define ITM_PATH (string) IMG_PATH + "/items/"
+#define MES_PATH (string) IMG_PATH + "/messages/"
 
 SpriteDispenser::SpriteDispenser() {
 	double tileWidth = ceil((double)Gdk::screen_width()/(double)TILES_HORIZONTAL)+1;
@@ -144,6 +145,9 @@ SpriteDispenser::SpriteDispenser() {
     paths[VALLEY] = BCK_PATH + "valley.png";
     //Health Bar
     paths[HEALTH_BAR] = (string) IMG_PATH + "/HealthBar.png";
+    //Messages
+    paths[GO] = MES_PATH + "go.png";
+    paths[LEVEL_OVER] = MES_PATH + "levelover.png";
 
 
 	//SIZES
@@ -262,6 +266,9 @@ SpriteDispenser::SpriteDispenser() {
     heigths[VALLEY] = tileSize*TILES_VERTICAL;
     //Health Bar
     heigths[HEALTH_BAR] = tileSize*2;
+    //Messages
+    heigths[GO] = tileSize*3.0;
+    heigths[LEVEL_OVER] = tileSize*3.0;
 
 	//WIDTHS
 	widths[MEGAMAN_IDLE_0] = tileSize*1.0;//tileSide*1.625;
@@ -379,6 +386,9 @@ SpriteDispenser::SpriteDispenser() {
 	widths[VALLEY] = tileSize*TILES_HORIZONTAL;
     //Health Bar
 	widths[HEALTH_BAR] = tileSize*0.5;
+    //Messages
+	widths[GO] = tileSize*4.0;
+	widths[LEVEL_OVER] = tileSize*10.0;
 }
 
 string SpriteDispenser::get(uint id) {

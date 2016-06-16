@@ -44,12 +44,16 @@ public:
 	StringSignal changeScreenSignal();
 
 	void connectServer(std::string ip, std::string port);
-	std::string getClientNumer();
+	std::string getClientNumber();
+	int getClientsConnected();
 	bool getLevelStatus(int idLevel);
 	void disconnectServer();
 
 	void serverSendLevelSelected(int levelCode);
 	void serverSendKeyboard(int keyboardState);
+
+private:
+	bool backToLevelSelectionSignal();
 };
 
 #endif /* SRC_MEGAMANCLIENTMODEL_H_ */

@@ -7,6 +7,8 @@
 
 #include "Drawables.h"
 
+#include "../common/MegamanBeginsConstants.h"
+
 Drawables::Drawables() {
 }
 
@@ -43,5 +45,14 @@ void Drawables::clear() {
 Drawable* Drawables::getDrawable(int ID) {
 	Lock l(m);
 	return drawableContainer[ID];
+}
+
+bool Drawables::removeDrawable(int ID) {
+	Lock l(m);
+	Drawable* drawable = drawableContainer[ID];
+	if (drawable == nullptr) return false;
+	drawable->setCoordinates(TILES_HORIZONTAL,TILES_VERTICAL);
+	drawable->setChanged(true);
+	return false;
 }
 

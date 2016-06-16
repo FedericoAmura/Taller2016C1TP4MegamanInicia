@@ -22,9 +22,10 @@ class LevelScreen : public Gtk::Fixed {
 private:
 	MegamanClientModel& model;
 	sigc::connection updateScreenConn;
-	Drawing playerHealth;
+	Gtk::Fixed background;
+	Gtk::Fixed terrain;
+	Gtk::Fixed foreground;
 	Drawing blackBackground;
-	Drawing levelBackground;
 	double tileSize;
 
 public:

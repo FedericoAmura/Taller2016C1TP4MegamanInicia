@@ -7,12 +7,14 @@
 
 #include "MegamanClientModel.h"
 
-#include <cstdlib>
+#include <gdkmm/general.h>
+#include <glibmm/main.h>
 #include <iostream>
 
-#include "WindowNames.h"
-#include "../common/MegamanBeginsConstants.h"
 #include "../common/CommunicationCodes.h"
+#include "../common/MegamanBeginsConstants.h"
+#include "../entities.h"
+#include "WindowNames.h"
 
 MegamanClientModel::MegamanClientModel() :
 	serverProxy(nullptr),
@@ -53,8 +55,8 @@ void MegamanClientModel::run() {
 			{
 			ss >> clientsConnected;
 			gameStatusChangeSignal.emit();
-			break;
 			}
+			break;
 		case DRAW:
 			{
 			int idDrawable; ss >> idDrawable;
@@ -98,11 +100,7 @@ void MegamanClientModel::run() {
 		case KILL:
 			{
 			int idDrawable; ss >> idDrawable;
-			Drawable* drawable = drawables.getDrawable(idDrawable);
-			if (drawable == nullptr) continue;
-			//TODO Por ahora lo dibujamos arafue
-			drawable->setCoordinates(TILES_HORIZONTAL,TILES_VERTICAL);
-			drawable->setChanged(true);
+			drawables.removeDrawable(idDrawable);
 			}
 			break;
 		case SOUND:
@@ -114,32 +112,58 @@ void MegamanClientModel::run() {
 		case START_LEVEL_SCREEN:
 			{
 			int idLevel; ss >> idLevel;
-			/* queda asi hasta que el background se dibuje en background
 			idLevel += 6000;
-			Drawable* drawable = new Drawable();
-			drawable->setImage(7000,sprites.get(idLevel),sprites.getWidth(idLevel),sprites.getHeight(idLevel),false);
+			//Seteo fondo
+			Drawable* drawable = drawables.getDrawable(idLevel);
+			if (drawable == nullptr) {
+				drawable = new Drawable();
+			}
+			drawable->setImage(idLevel,sprites.get(idLevel),sprites.getWidth(idLevel),sprites.getHeight(idLevel),false);
 			drawable->setCoordinates(0,0);
-			drawables.setDrawable(7000,drawable);*/
+			drawables.setDrawable(idLevel,drawable);
+			//Muestro el "GO"
+			drawable = drawables.getDrawable(GO);
+			if (drawable == nullptr) {
+				drawable = new Drawable();
+			}
+			drawable->setImage(GO,sprites.get(GO),sprites.getWidth(GO),sprites.getHeight(GO),false);
+			drawable->setCoordinates(10.5,5);
+			drawables.setDrawable(GO,drawable);
 			windowChangeSignal.emit(LEVEL_SCREEN_NAME);
+			//Lo saco en un segundo
+			Glib::signal_timeout().connect(sigc::bind<int>(sigc::mem_fun(drawables,&Drawables::removeDrawable),GO),1000);
 			}
 			break;
 		case BACK_TO_LEVEL_SELECTION:
+			{
 			gameStatusChangeSignal.emit();
-			windowChangeSignal.emit(LEVEL_SELECTOR_SCREEN_NAME);
+			//Muestro el "LEVEL OVER"
+			Drawable* drawable = drawables.getDrawable(LEVEL_OVER);
+			if (drawable == nullptr) {
+				drawable = new Drawable();
+			}
+			drawable->setImage(LEVEL_OVER,sprites.get(LEVEL_OVER),sprites.getWidth(LEVEL_OVER),sprites.getHeight(LEVEL_OVER),false);
+			drawable->setCoordinates(7.5,5);
+			drawables.setDrawable(LEVEL_OVER,drawable);
+			//Lo saco en un segundo
+			Glib::signal_timeout().connect(sigc::bind<int>(sigc::mem_fun(drawables,&Drawables::removeDrawable),LEVEL_OVER),1000);
+			//Hago el cambio de pantalla en un segundo
+			Glib::signal_timeout().connect(sigc::mem_fun(*this,&MegamanClientModel::backToLevelSelectionSignal),1000);
+			}
 			break;
 		case LIFE_STATUS:
 			{
 			int player; ss >> player;
 			int health; ss >> health;
-			Drawable* drawable = drawables.getDrawable(8000);
+			Drawable* drawable = drawables.getDrawable(HEALTH_BAR);
 			if (drawable == nullptr) {
 				drawable = new Drawable();
 			}
-			drawable->setImage(8000,sprites.get(8000),sprites.getWidth(8000),sprites.getHeight(8000),false);
+			drawable->setImage(HEALTH_BAR,sprites.get(HEALTH_BAR),sprites.getWidth(HEALTH_BAR),sprites.getHeight(HEALTH_BAR),false);
 			if (player) drawable->setCoordinates(1,2);
 			else drawable->setCoordinates(TILES_HORIZONTAL-1,2);
 			drawable->setPercent(health);
-			drawables.setDrawable(8000,drawable);
+			drawables.setDrawable(HEALTH_BAR,drawable);
 			}
 			break;
 		case LEVEL_STATUS:
@@ -174,8 +198,12 @@ void MegamanClientModel::connectServer(std::string ip, std::string port) {
 	this->start();
 }
 
-std::string MegamanClientModel::getClientNumer() {
+std::string MegamanClientModel::getClientNumber() {
 	return clientNumber;
+}
+
+int MegamanClientModel::getClientsConnected() {
+	return clientsConnected;
 }
 
 bool MegamanClientModel::getLevelStatus(int idLevel) {
@@ -214,5 +242,10 @@ void MegamanClientModel::serverSendKeyboard(int keyCode) {
 		mensaje.append("\n");
 		serverProxy->enviar(mensaje);
 	}
+}
+
+bool MegamanClientModel::backToLevelSelectionSignal() {
+	windowChangeSignal.emit(LEVEL_SELECTOR_SCREEN_NAME);
+	return false;
 }
 

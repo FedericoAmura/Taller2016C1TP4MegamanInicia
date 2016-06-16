@@ -26,8 +26,11 @@ LevelScreen::LevelScreen(MegamanClientModel& model) :
 	double tileHeight = ceil((double)Gdk::screen_height()/(double)TILES_VERTICAL);
 	tileSize = std::max(tileHeight,tileWidth);
 
-	blackBackground.setImage("../sprites/level/background/rock.png",Gdk::screen_width(),Gdk::screen_height(),false);
-	put(blackBackground,0,0);
+	blackBackground.setImage("../sprites/level/background/blackBackground.png",Gdk::screen_width(),Gdk::screen_height(),false);
+	background.put(blackBackground,0,0);
+	put(background,0,0);
+	put(terrain,0,0);
+	put(foreground,0,0);
 }
 
 LevelScreen::~LevelScreen() {
@@ -39,14 +42,21 @@ void LevelScreen::startLevel() {
 }
 
 void LevelScreen::stopLevel() {
+	Gtk::Fixed* layer;
 	DrawablesIterator iter = model.getDrawables().drawablesIterator();
 	for (int i = 0; i < model.getDrawables().size(); ++i) {
 		Drawable* drawable = (*iter).second;
 		if (drawable != nullptr) {
+			uint spriteID = drawable->getSpriteId();
+			//Consigo el layer
+			if (spriteID>=7000 && spriteID<8000) layer = &background;
+			else if (spriteID>=4000 && spriteID<6000) layer = &terrain;
+			else layer = &foreground;
+			//Lo borro
 			drawable->setCoordinates(TILES_HORIZONTAL,TILES_VERTICAL);
 			drawable->setChanged(true);
 			drawable->setIsDrawed(false);
-			remove(drawable->getImage());
+			layer->remove(drawable->getImage());
 		}
 		++iter;
 	}
@@ -55,24 +65,24 @@ void LevelScreen::stopLevel() {
 }
 
 bool LevelScreen::update() {
+	Gtk::Fixed* layer;
 	DrawablesIterator iter = model.getDrawables().drawablesIterator();
 	for (int i = 0; i < model.getDrawables().size(); ++i) {
 		Drawable* drawable = (*iter).second;
 		if (drawable != nullptr) {
-			//Saco los megamanes y enemigos para siempre redibujarlos y asi tenerlos al frente
 			uint spriteID = drawable->getSpriteId();
-			if ((spriteID>=(uint)9000 || spriteID<(uint)2000) && drawable->isDrawed()) {
-				remove(drawable->getImage());
-				drawable->setIsDrawed(false);
-				drawable->setChanged(true);
-			}
+			//Consigo el layer
+			if (spriteID>=7000 && spriteID<8000) layer = &background;
+			else if (spriteID>=4000 && spriteID<6000) layer = &terrain;
+			else layer = &foreground;
+			//Aplico operacion si cambio
 			if (drawable->getChanged()) {
 				int drawableX = (int) (drawable->getX()*tileSize+0.5);
 				int drawableY = (int) (drawable->getY()*tileSize+0.5);
-				if (drawable->isDrawed()) {
-					move(drawable->getImage(),drawableX,drawableY);
-				} else {
-					put(drawable->getImage(),drawableX,drawableY);
+				if (drawable->isDrawed()) {	//ya estaba dibujado, solo muevo
+					layer->move(drawable->getImage(),drawableX,drawableY);
+				} else {					//no esta dibujado, dibujo
+					layer->put(drawable->getImage(),drawableX,drawableY);
 					drawable->setIsDrawed(true);
 					drawable->getImage().show();
 				}

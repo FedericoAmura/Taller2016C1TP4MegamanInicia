@@ -32,8 +32,7 @@ private:
 	Gtk::Button magnetManButton;
 	Gtk::Label dataLabel;
 	Gtk::HBox players;
-	Drawing megaman1;
-	Drawing megaman2;
+	std::vector<Drawing*> playersAvatars;
 	Gtk::Button exitButton;
 
 

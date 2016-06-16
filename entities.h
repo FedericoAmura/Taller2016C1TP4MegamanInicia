@@ -178,4 +178,9 @@
 //HEALTH BAR
 #define HEALTH_BAR 8000
 
+//MESSAGES
+#define GO 8500
+#define LEVEL_OVER 8501
+
+
 #endif //MEGAMAN_ENTITIES_H

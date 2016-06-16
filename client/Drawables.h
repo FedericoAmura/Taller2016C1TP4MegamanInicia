@@ -28,6 +28,7 @@ public:
 	DrawablesIterator drawablesIterator();
 	void clear();
 	Drawable* getDrawable(int ID);
+	bool removeDrawable(int ID);
 	virtual ~Drawables();
 };
 
