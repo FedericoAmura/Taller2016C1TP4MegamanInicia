@@ -181,7 +181,7 @@
 	"1100":
 	{
 		"id":			1102,
-		"weaponId":		2010,
+		"weaponId":		2101,
 		"JSpeed" :		20.0,
 		"HSpeed":		1.5,
 		"life":			20.0,
@@ -240,7 +240,7 @@
 	"1300":
 	{
 		"id":			1305,
-		"weaponId":		2009,
+		"weaponId":		2008,
 		"JSpeed" :		15.0,
 		"HSpeed":		3.0,
 		"life":			20.0,
@@ -270,7 +270,7 @@
 	"1400":
 	{
 		"id":			1401,
-		"weaponId":		2009,
+		"weaponId":		2007,
 		"JSpeed" :		20.0,
 		"HSpeed":		3.0,
 		"life":			20.0,
@@ -378,6 +378,26 @@
 				}
 		]
 	},
+	"2101":
+	{
+		"damage":	5,
+		"cooldown":	2.0,
+		"bulletId":	2001,
+		"speed":
+		{
+			"x":	3.0,
+			"y":	0.0
+		},
+		"shapes":
+		[
+				{
+					"type":		2,
+					"radius":	0.1,
+					"X":		0.0,
+					"Y":		0.0
+				}
+		]
+	},
 	"2002":
 	{
 		"damage":	1,
@@ -463,6 +483,26 @@
 		"damage":	2,
 		"cooldown":	3.0,
 		"bulletId":	2007,
+		"speed":
+		{
+			"x":	4.0,
+			"y":	0.0
+		},
+		"shapes":
+		[
+				{
+					"type":		2,
+					"radius":	0.1,
+					"X":		0.0,
+					"Y":		0.0
+				}
+		]
+	},
+	"2008":
+	{
+		"damage":	1,
+		"cooldown":	2.0,
+		"bulletId":	2008,
 		"speed":
 		{
 			"x":	4.0,
