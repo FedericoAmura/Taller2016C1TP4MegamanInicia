@@ -8,6 +8,7 @@
 #include "Enemy.h"
 
 #include <glog/logging.h>
+#include <iostream>
 #include "../../Box2D/Box2D/Common/b2Math.h"
 #include "../../Box2D/Box2D/Dynamics/b2Body.h"
 #include "../../Box2D/Box2D/Dynamics/b2Fixture.h"
@@ -19,6 +20,8 @@
 #include "../../common/CommunicationCodes.h"
 #include "../Game.h"
 #include "../Event.h"
+
+#define IDLE_TIME 0.05
 
 Enemy::Enemy(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl)
 :Character(w,json,pos,lvl),
@@ -65,23 +68,23 @@ void Enemy::changeFixtureFilter(b2Fixture* f) {
 
 /*calls base class tick, tries to jump, and shoot*/
 void Enemy::tick(float time) {
-	Megaman* nearest=level->getNearestMegaman(this->getPos());
-	b2Vec2 diference=nearest->getPos();
-	diference-=this->getPos();
-	if(diference.x<=0){
-		if(direction!=LEFT){
-			direction=LEFT;
-			spriteChanged=true;
+	Megaman* nearest = level->getNearestMegaman(this->getPos());
+	b2Vec2 diference = nearest->getPos();
+	diference -= this->getPos();
+	if (diference.x <= 0){
+		if (direction != LEFT){
+			direction = LEFT;
+			spriteChanged = true;
 		}
-	}else{
-		if(direction!=RIGHT){
-			direction=RIGHT;
-			spriteChanged=true;
+	} else {
+		if (direction != RIGHT){
+			direction = RIGHT;
+			spriteChanged = true;
 		}
 	}
 	Character::tick(time);
 	jumpTime.dec(time);
-	if(jumpTime.getCurrent()==0){
+	if (jumpTime.getCurrent() == 0){
 		jump();
 		jumpTime.maxOut();
 	}
@@ -90,36 +93,62 @@ void Enemy::tick(float time) {
 
 /************************************************************/
 FlyingEnemy::FlyingEnemy(b2World* w,
-		Json::Value& json,
-		const b2Vec2& pos,
-		MyLevel* lvl)
-:Enemy(w,json,pos,lvl){
-	hSpeed=json["HSpeed"].asFloat();
+						 Json::Value& json,
+						 const b2Vec2& pos,
+						 MyLevel* lvl) : Enemy(w, json, pos, lvl){
+    isIdle = false;
+	hSpeed = json["HSpeed"].asFloat();
 	body->SetGravityScale(0);
 }
 
-FlyingEnemy::~FlyingEnemy() {}
-
 /*calls base class tick, and tires to move towards players*/
 void FlyingEnemy::tick(float time){
-	Enemy::tick(time);
-	b2Vec2 speed=body->GetLinearVelocity();;
-	if(direction==LEFT)
-		speed.x=-hSpeed;
-	else
-		speed.x=hSpeed;
-	body->SetLinearVelocity(speed);
+    if (isIdle) {
+        idle_elapsed = clock();
+        if (float(idle_elapsed - idle_begin) / CLOCKS_PER_SEC > IDLE_TIME){
+            isIdle = false;
+        }
+        Character::tick(time);
+        shoot();
+    } else {
+        Megaman* nearest = level->getNearestMegaman(this->getPos());
+        b2Vec2 diference = nearest->getPos();
+        diference -= this->getPos();
+        b2Vec2 speed = body->GetLinearVelocity();
+        if (diference.x <= 0){
+            if (direction != LEFT){
+                direction = LEFT;
+                spriteChanged = true;
+            }
+            speed.x = -hSpeed;
+        } else {
+            if (direction != RIGHT){
+                direction = RIGHT;
+                spriteChanged = true;
+            }
+            speed.x = hSpeed;
+        }
+        if (abs(diference.x) < 1) {
+            isIdle = true;
+            idle_begin = clock();
+        }
+        Character::tick(time);
+        body->SetLinearVelocity(speed);
+        if (abs(diference.x) < 5){
+            shoot();
+        }
+    }
 }
 
 bool FlyingEnemy::isJumping() {
 	return false;
 }
+
+
 /************************************************************/
 Boss::Boss(b2World* w, Json::Value& json, const b2Vec2& pos, MyLevel* lvl)
-:Enemy(w,json,pos,lvl),
- lifeChanged(true){}
-
-Boss::~Boss() {}
+        : Enemy(w, json, pos, lvl),
+          lifeChanged(true){}
 
 /*when boss dies the game is won*/
 void Boss::kill() {
@@ -127,7 +156,7 @@ void Boss::kill() {
 }
 
 void Boss::redrawForClients(Game* game, MyLevel* level, bool checkChanges) {
-	Character::redrawForClients(game,level,checkChanges);
+	Character::redrawForClients(game, level, checkChanges);
 	if(!dead && lifeChanged){
 		lifeChanged=false;
 		std::stringstream msj;

@@ -19,8 +19,8 @@ class Bullet;
 class MyLevel;//forward declaration
 
 enum _direction{
-	LEFT= 0,
-	RIGHT= 1,
+	LEFT = 0,
+	RIGHT = 1,
 };
 
 class Character: public LevelObject {
@@ -36,7 +36,7 @@ protected:
 	bool wasJumping;
 	int jumpingSpriteId;
 	virtual bool isJumping();
-	void jump();//todo maybe jumps should be only abailable for some
+	void jump();//todo maybe jumps should be only available for some
 
 	void createJumpSensor(Json::Value jSensor);//todo maybe better sensor?
 	virtual void changeFixtureFilter(b2Fixture* f)=0;

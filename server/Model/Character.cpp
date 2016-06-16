@@ -17,15 +17,15 @@
 #include "../Game.h"
 #include "../Event.h"
 
-Character::Character(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl):
-LevelObject(w,json,pos,MEGAMAN_IDLE_0),
-level(lvl),
-life(json["life"].asInt()),
-dead(false),
-direction(LEFT),
-spriteChanged(false),
-wasJumping(false),
-canJump(false){
+Character::Character(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl)
+		: LevelObject(w,json,pos,MEGAMAN_IDLE_0),
+		  level(lvl),
+		  life(json["life"].asInt()),
+		  dead(false),
+		  direction(LEFT),
+		  spriteChanged(false),
+		  wasJumping(false),
+		  canJump(false){
 	body->SetType(b2_dynamicBody);
 	body->SetFixedRotation(true);
 	body->SetBullet(true);
@@ -49,7 +49,7 @@ void Character::createJumpSensor(Json::Value jSensor){
 	sensorFixDef.shape = &polygonShape;
 	sensorFixDef.density = 0.01;
 	sensorFixDef.isSensor = true;
-	sensorFixDef.filter.maskBits=BOUNDARIES;//only detects floor (or walls)
+	sensorFixDef.filter.maskBits = BOUNDARIES;//only detects floor (or walls)
 	b2Fixture* jumpSensor = body->CreateFixture(&sensorFixDef);
 	jumpSensor->SetUserData((void*)JUMPSENSOR);//to recognize sensor
 }
@@ -74,28 +74,28 @@ void Character::kill() {
 /*informs the weapon of the time step*/
 void Character::tick(float time){
 	myWeapon->tick(time);
-	if(!wasJumping && this->isJumping()){
-		wasJumping=true;
-		spriteChanged=true;
-	}else if(wasJumping && !this->isJumping()){
+	if (!wasJumping && this->isJumping()){
+		wasJumping = true;
+		spriteChanged = true;
+	} else if (wasJumping && !this->isJumping()){
 		wasJumping=false;
 		spriteChanged=true;
 	}
-	if(!level->posInWindow(this->getPos()))
+	if (!level->posInWindow(this->getPos()))
 		this->kill();
 }
 
 /*damages by 1, independent of bullet, redefine for dif behaviour*/
 void Character::damage(Bullet* bullet) {
 	life.dec(bullet->getDamage());
-	LOG(INFO)<<"id: "<<this->getId()<<" life left "<<life.getCurrent();
-	if(life.getCurrent()==0)
+	LOG(INFO) <<"id: "<< this->getId() << " life left " << life.getCurrent();
+	if (life.getCurrent()==0)
 		this->kill();
 }
 
 /*fires the weapon currently held*/
 void Character::shoot() {
-	myWeapon->shoot(body->GetPosition(),direction);
+	myWeapon->shoot(body->GetPosition(), direction);
 }
 
 int Character::getDirection() {
