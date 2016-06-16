@@ -134,7 +134,7 @@ void FlyingEnemy::tick(float time){
         }
         Character::tick(time);
         body->SetLinearVelocity(speed);
-        if (abs(diference.x) < 5){
+        if (abs(diference.x) < 3){
             shoot();
         }
     }
