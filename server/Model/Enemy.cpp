@@ -25,6 +25,7 @@
 Enemy::Enemy(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl)
 :Character(w,json,pos,lvl),
  jumpTime(json["jumpFreq"].asFloat()){
+    idle = false;
 	spriteId=json["id"].asInt();
 	for (b2Fixture* f = body->GetFixtureList(); f; f = f->GetNext()){
 		changeFixtureFilter(f);
@@ -69,11 +70,7 @@ void Enemy::changeFixtureFilter(b2Fixture* f) {
 void Enemy::tick(float time) {
 	setAim();
 	Character::tick(time);
-	jumpTime.dec(time);
-	if (jumpTime.getCurrent() == 0){
-		jump();
-		jumpTime.maxOut();
-	}
+	executeJump(time);
 	shoot();
 }
 
@@ -94,6 +91,29 @@ b2Vec2 Enemy::setAim() {
     }
     return difference;
 }
+
+void Enemy::executeJump(float time) {
+    jumpTime.dec(time);
+    if (jumpTime.getCurrent() == 0){
+        jump();
+        jumpTime.maxOut();
+    }
+}
+
+void Enemy::executeIdle(float time, int idle_time) {
+    idle_elapsed = clock();
+    if (float(idle_elapsed - idle_begin) / CLOCKS_PER_SEC > idle_time){
+        idle = false;
+    }
+    Character::tick(time);
+    shoot();
+}
+
+
+
+
+
+
 
 
 

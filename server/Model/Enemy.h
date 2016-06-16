@@ -19,10 +19,15 @@ class MyLevel;
 
 class Enemy: public Character {
 protected:
+    bool idle;
+    clock_t idle_begin;
+    clock_t idle_elapsed;
+    void executeIdle(float time, int idle_time);
 	Stat<float> jumpTime;
 	void changeFixtureFilter(b2Fixture* f);
 	ObjectInfo* drop();
     b2Vec2 setAim();
+    void executeJump(float time);
 
 public:
 	Enemy(b2World* w, Json::Value& json, const b2Vec2& pos, MyLevel* lvl);

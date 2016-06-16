@@ -16,27 +16,21 @@ FlyingEnemy::FlyingEnemy(b2World* w,
                          Json::Value& json,
                          const b2Vec2& pos,
                          MyLevel* lvl) : Enemy(w, json, pos, lvl){
-    isIdle = false;
     hSpeed = json["HSpeed"].asFloat();
     body->SetGravityScale(0);
 }
 
 /*calls base class tick, and tires to move towards players*/
 void FlyingEnemy::tick(float time){
-    if (isIdle) {
-        idle_elapsed = clock();
-        if (float(idle_elapsed - idle_begin) / CLOCKS_PER_SEC > IDLE_TIME){
-            isIdle = false;
-        }
-        Character::tick(time);
-        shoot();
+    if (idle) {
+        executeIdle(time, IDLE_TIME);
     } else {
         b2Vec2 speed = body->GetLinearVelocity();
         speed.x = hSpeed;
         if (direction == LEFT) speed = -speed;
         b2Vec2 aim = setAim();
         if (abs(aim.x) < IDLE_DISTANCE) {
-            isIdle = true;
+            idle = true;
             idle_begin = clock();
         }
         Character::tick(time);
