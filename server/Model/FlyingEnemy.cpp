@@ -30,32 +30,18 @@ void FlyingEnemy::tick(float time){
         }
         Character::tick(time);
         shoot();
-
     } else {
-        Megaman* nearest = level->getNearestMegaman(this->getPos());
-        b2Vec2 difference = nearest->getPos();
-        difference -= this->getPos();
         b2Vec2 speed = body->GetLinearVelocity();
-        if (difference.x <= 0){
-            if (direction != LEFT){
-                direction = LEFT;
-                spriteChanged = true;
-            }
-            speed.x = -hSpeed;
-        } else {
-            if (direction != RIGHT){
-                direction = RIGHT;
-                spriteChanged = true;
-            }
-            speed.x = hSpeed;
-        }
-        if (abs(difference.x) < IDLE_DISTANCE) {
+        speed.x = hSpeed;
+        if (direction == LEFT) speed = -speed;
+        b2Vec2 aim = setAim();
+        if (abs(aim.x) < IDLE_DISTANCE) {
             isIdle = true;
             idle_begin = clock();
         }
         Character::tick(time);
         body->SetLinearVelocity(speed);
-        if (abs(difference.x) < ATTACKING_DISTANCE){
+        if (abs(aim.x) < ATTACKING_DISTANCE){
             shoot();
         }
     }

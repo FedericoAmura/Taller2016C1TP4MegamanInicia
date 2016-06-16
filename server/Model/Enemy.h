@@ -22,6 +22,7 @@ protected:
 	Stat<float> jumpTime;
 	void changeFixtureFilter(b2Fixture* f);
 	ObjectInfo* drop();
+    b2Vec2 setAim();
 
 public:
 	Enemy(b2World* w, Json::Value& json, const b2Vec2& pos, MyLevel* lvl);
