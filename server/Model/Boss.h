@@ -11,6 +11,9 @@
 class Boss: public Enemy {
 	bool lifeChanged;
 	float hSpeed;
+    float walking_time;
+    float jumping_time;
+    float attacking_time;
     void elapse(float transition_time, std::string next_state);
     void executeJump(float time, float jump_time);
     void executeWalk(float time, b2Vec2& aim);

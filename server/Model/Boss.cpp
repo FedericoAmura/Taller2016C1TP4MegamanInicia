@@ -16,6 +16,9 @@ Boss::Boss(b2World* w, Json::Value& json, const b2Vec2& pos, MyLevel* lvl)
           lifeChanged(true){
     setState("#jumping");
     hSpeed = json["HSpeed"].asFloat();
+    walking_time = json["walking time"].asFloat();
+    jumping_time = json["jumping time"].asFloat();
+    attacking_time = json["attacking time"].asFloat();
 }
 
 /*when boss dies the game is won*/
@@ -41,14 +44,13 @@ void Boss::tick(float time) {
     b2Vec2 aim = setAim();
     Character::tick(time);
     if (state == "#jumping"){
-        executeJump(time, 0.05);
+        executeJump(time, jumping_time);
         shoot();
     } else if (state == "#walking") {
-        executeWalk(0.05, aim);
+        executeWalk(walking_time, aim);
     } else if (state == "#attacking") {
-        executeAttack(0.05);
+        executeAttack(attacking_time);
     }
-
 }
 
 void Boss::jump() {
