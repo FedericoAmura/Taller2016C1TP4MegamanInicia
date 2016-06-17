@@ -50,13 +50,13 @@ Game::~Game() {
 
 /*Starts event loop. Finishes when stop() is called*/
 void Game::run(){
-	LOG(INFO)<<"loop eventos juego iniciado";
+	DLOG(INFO)<<"loop eventos juego iniciado";
 	while(isntStopped()){
 		Event* e=eventQueue.pop();
 		manager.handle(e);
 		delete e;
 	}
-	LOG(INFO)<<"loop eventos juego finalizado";
+	DLOG(INFO)<<"loop eventos juego finalizado";
 }
 
 /*sends event to event loop*/
@@ -127,7 +127,7 @@ void Game::removeClient(int descriptor) {
 	if(it!=clients.end()){
 		delete it->second;
 		clients.erase(it);
-		LOG(INFO)<<"cliente desconectado, id:"<<descriptor;
+		DLOG(INFO)<<"cliente desconectado, id:"<<descriptor;
 	}
 	//todo remove from metadata, possibly through level
 	if(clients.empty())
@@ -169,11 +169,11 @@ MyLevel* Game::getLevel(){
 void Game::stopLevel(){
 	if(levelChosen()){
 		if(level->isRunning()){
-			LOG(INFO)<<"cerrando nivel";
+			DLOG(INFO)<<"cerrando nivel";
 			level->stop();
 			level->join();
 		}
-		LOG(INFO)<<"destruyendo nivel";
+		DLOG(INFO)<<"destruyendo nivel";
 		delete level;
 		level=nullptr;
 		std::string levelExitMsg="7";
@@ -184,7 +184,6 @@ void Game::stopLevel(){
 /*moves the corresponding player*/
 void Game::movePlayer(uint keyState, int source) {
 	if(levelChosen()){
-		//todo change hardcode
 		getLevel()->changeKeyState(keyState,clientNum[source]);
 	}
 }

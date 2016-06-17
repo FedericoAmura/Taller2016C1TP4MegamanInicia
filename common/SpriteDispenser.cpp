@@ -64,7 +64,7 @@ SpriteDispenser::SpriteDispenser() {
 	paths[MEGAMAN_WEAPON] = WEP_PATH + "megaman_weapon.png";
 	paths[MET_WEAPON] = WEP_PATH + "met_weapon.png";
 	paths[SNIPER_WEAPON] = WEP_PATH + "sniper_weapon.png";
-	paths[RINGMAN_WEAPON] = WEP_PATH + " ringman_weapon1.png";
+	paths[RINGMAN_WEAPON] = WEP_PATH + "ringman_weapon1.png";
 	paths[MAGNETMAN_WEAPON] = WEP_PATH + "magnetman_weapon.png";
 	paths[SPARKMAN_SPARKS] = WEP_PATH + "sparkman_weapon1_0.png";
 	paths[SPARKMAN_GENKIDAMA] = WEP_PATH + "sparkman_weapon2_0.png";

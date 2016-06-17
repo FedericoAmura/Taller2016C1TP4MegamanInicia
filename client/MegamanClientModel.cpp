@@ -10,6 +10,7 @@
 #include <gdkmm/general.h>
 #include <glibmm/main.h>
 #include <iostream>
+#include <glog/logging.h>
 
 #include "../common/CommunicationCodes.h"
 #include "../common/MegamanBeginsConstants.h"
@@ -40,7 +41,7 @@ void MegamanClientModel::run() {
 	while (recibirServer) {
 		std::string message = serverProxy->recibirHasta('\n');
 		if (message.length() == 0) continue;
-		//std::cout << message << std::endl;	//DEBUG
+		DLOG(INFO)<<"Mensaje recibido: "<< message;	//DEBUG
 		std::stringstream ss(message);
 		int commandString; ss >> commandString;
 
