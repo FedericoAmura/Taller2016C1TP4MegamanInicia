@@ -28,6 +28,7 @@ private:
 	int clientsConnected;
 	std::map<int,bool> levelsStatus;
 	Drawables drawables;
+	sigc::connection cicleDrawablesConn;
 	SpriteDispenser sprites;
 	bool recibirServer;
 	Signal gameStatusChangeSignal;
@@ -48,6 +49,7 @@ public:
 	int getClientsConnected();
 	bool getLevelStatus(int idLevel);
 	void disconnectServer();
+	bool cicleDrawables();
 
 	void serverSendLevelSelected(int levelCode);
 	void serverSendKeyboard(int keyboardState);

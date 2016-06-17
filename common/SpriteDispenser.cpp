@@ -151,8 +151,8 @@ SpriteDispenser::SpriteDispenser() {
 
 	//SIZES
 	heigths[MEGAMAN_IDLE_0] = tileSize*1.0;//tileSide*1.5625;
-	heigths[MEGAMAN_IDLE_1] = tileSize*1.5625;
-	heigths[MEGAMAN_IDLE_2] = tileSize*1.5625;
+	heigths[MEGAMAN_IDLE_1] = tileSize*1.0;
+	heigths[MEGAMAN_IDLE_2] = tileSize*1.0;
 	heigths[MEGAMAN_ATTACK] = tileSize*1.0;
 	heigths[MEGAMAN_ATTACK_CLIMB] = tileSize*1.0;
 	heigths[MEGAMAN_ATTACK_JUMP] = tileSize*1.0;
@@ -169,22 +169,22 @@ SpriteDispenser::SpriteDispenser() {
 	heigths[MEGAMAN_RUN_2] = tileSize*1.0;
 	heigths[MEGAMAN_SWIPE] = tileSize*1.0;
 	//weapons
-	heigths[BOMB] = tileSize*0.2;
-	heigths[FIREMAN_FLAME] = tileSize*0.2;
-	heigths[MEGAMAN_FLAME] = tileSize*0.2;
-	heigths[MEGAMAN_WEAPON] = tileSize*0.2;
-	heigths[MET_WEAPON] = tileSize*0.2;
-	heigths[SNIPER_WEAPON] = tileSize*0.2;
-	heigths[RINGMAN_WEAPON] = tileSize*0.2;
-	heigths[MAGNETMAN_WEAPON] = tileSize*0.2;
-	heigths[SPARKMAN_SPARKS] = tileSize*0.2;
-	heigths[SPARKMAN_GENKIDAMA] =tileSize*0.2;
+	heigths[BOMB] = tileSize*0.25;
+	heigths[FIREMAN_FLAME] = tileSize*0.25;
+	heigths[MEGAMAN_FLAME] = tileSize*0.25;
+	heigths[MEGAMAN_WEAPON] = tileSize*0.25;
+	heigths[MET_WEAPON] = tileSize*0.25;
+	heigths[SNIPER_WEAPON] = tileSize*0.25;
+	heigths[RINGMAN_WEAPON] = tileSize*0.25;
+	heigths[MAGNETMAN_WEAPON] = tileSize*0.25;
+	heigths[SPARKMAN_SPARKS] = tileSize*0.25;
+	heigths[SPARKMAN_GENKIDAMA] =tileSize*0.25;
 	//Items
-	heigths[BIG_ENERGY] = tileSize*0.2;
-	heigths[SMALL_ENERGY] = tileSize*0.2;
-	heigths[BIG_PLASMA] = tileSize*0.2;
-	heigths[SMALL_PLASMA] = tileSize*0.2;
-	heigths[LIFE] = tileSize*0.2;
+	heigths[BIG_ENERGY] = tileSize*0.5;
+	heigths[SMALL_ENERGY] = tileSize*0.5;
+	heigths[BIG_PLASMA] = tileSize*0.5;
+	heigths[SMALL_PLASMA] = tileSize*0.5;
+	heigths[LIFE] = tileSize*0.5;
 	//tiles
 	heigths[BOSS_DOOR] = tileSize*1.0;
 	heigths[CABLE_EDGE_0] = tileSize*1.0;
@@ -197,9 +197,9 @@ SpriteDispenser::SpriteDispenser() {
 	//Mobs
 	heigths[BUMBY_0] = tileSize*1.0;
 	heigths[BUMBY_1] = tileSize*1.0;
-	heigths[MET_HIDDEN] = tileSize*0.5;
-	heigths[MET_TRANSITION] = tileSize*0.5;
-	heigths[MET_VULNERABLE] = tileSize*0.5;
+	heigths[MET_HIDDEN] = tileSize*1.0;
+	heigths[MET_TRANSITION] = tileSize*1.0;
+	heigths[MET_VULNERABLE] = tileSize*1.0;
 	heigths[SNIPER_ATTACK] = tileSize*1.0;
 	heigths[SNIPER_DEFEND] = tileSize*1.0;
 	heigths[SNIPER_JUMP] = tileSize*1.0;
@@ -270,8 +270,8 @@ SpriteDispenser::SpriteDispenser() {
 
 	//WIDTHS
 	widths[MEGAMAN_IDLE_0] = tileSize*1.0;//tileSide*1.625;
-	widths[MEGAMAN_IDLE_1] = tileSize*1.625;
-	widths[MEGAMAN_IDLE_2] = tileSize*1.625;
+	widths[MEGAMAN_IDLE_1] = tileSize*1.0;
+	widths[MEGAMAN_IDLE_2] = tileSize*1.0;
 	widths[MEGAMAN_ATTACK] = tileSize*1.0;
 	widths[MEGAMAN_ATTACK_CLIMB] = tileSize*1.0;
 	widths[MEGAMAN_ATTACK_JUMP] = tileSize*1.0;
@@ -288,22 +288,22 @@ SpriteDispenser::SpriteDispenser() {
 	widths[MEGAMAN_RUN_2] = tileSize*1.0;
 	widths[MEGAMAN_SWIPE] = tileSize*1.0;
 	//weapons
-	widths[BOMB] = tileSize*0.2;
-	widths[FIREMAN_FLAME] = tileSize*0.2;
-	widths[MEGAMAN_FLAME] = tileSize*0.2;
-	widths[MEGAMAN_WEAPON] = tileSize*0.2;
-	widths[MET_WEAPON] = tileSize*0.2;
-	widths[SNIPER_WEAPON] = tileSize*0.2;
-	widths[RINGMAN_WEAPON] = tileSize*0.2;
-	widths[MAGNETMAN_WEAPON] = tileSize*0.2;
-	widths[SPARKMAN_SPARKS] = tileSize*0.2;
-	widths[SPARKMAN_GENKIDAMA] =tileSize*0.2;
+	widths[BOMB] = tileSize*0.25;
+	widths[FIREMAN_FLAME] = tileSize*0.25;
+	widths[MEGAMAN_FLAME] = tileSize*0.25;
+	widths[MEGAMAN_WEAPON] = tileSize*0.25;
+	widths[MET_WEAPON] = tileSize*0.25;
+	widths[SNIPER_WEAPON] = tileSize*0.25;
+	widths[RINGMAN_WEAPON] = tileSize*0.25;
+	widths[MAGNETMAN_WEAPON] = tileSize*0.25;
+	widths[SPARKMAN_SPARKS] = tileSize*0.25;
+	widths[SPARKMAN_GENKIDAMA] =tileSize*0.25;
 	//Items
-	widths[BIG_ENERGY] = tileSize*0.2;
-	widths[SMALL_ENERGY] = tileSize*0.2;
-	widths[BIG_PLASMA] = tileSize*0.2;
-	widths[SMALL_PLASMA] = tileSize*0.2;
-	widths[LIFE] = tileSize*0.2;
+	widths[BIG_ENERGY] = tileSize*0.5;
+	widths[SMALL_ENERGY] = tileSize*0.5;
+	widths[BIG_PLASMA] = tileSize*0.5;
+	widths[SMALL_PLASMA] = tileSize*0.5;
+	widths[LIFE] = tileSize*0.5;
 	//tiles
 	widths[BOSS_DOOR] = tileSize*1.0;
 	widths[CABLE_EDGE_0] = tileSize*1.0;

@@ -56,7 +56,7 @@ void LevelScreen::stopLevel() {
 			drawable->setCoordinates(TILES_HORIZONTAL,TILES_VERTICAL);
 			drawable->setChanged(true);
 			drawable->setIsDrawed(false);
-			layer->remove(drawable->getImage());
+			try {layer->remove(drawable->getImage());}catch(...){}
 		}
 		++iter;
 	}
@@ -80,11 +80,13 @@ bool LevelScreen::update() {
 				int drawableX = (int) (drawable->getX()*tileSize+0.5);
 				int drawableY = (int) (drawable->getY()*tileSize+0.5);
 				if (drawable->isDrawed()) {	//ya estaba dibujado, solo muevo
-					layer->move(drawable->getImage(),drawableX,drawableY);
+					try{layer->move(drawable->getImage(),drawableX,drawableY);}catch(...){}
 				} else {					//no esta dibujado, dibujo
-					layer->put(drawable->getImage(),drawableX,drawableY);
-					drawable->setIsDrawed(true);
-					drawable->getImage().show();
+					try{
+						layer->put(drawable->getImage(),drawableX,drawableY);
+						drawable->setIsDrawed(true);
+						drawable->getImage().show();
+					}catch(...){}
 				}
 				drawable->setChanged(false);
 			}

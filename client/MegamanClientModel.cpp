@@ -115,13 +115,13 @@ void MegamanClientModel::run() {
 			int idLevel; ss >> idLevel;
 			idLevel += 6000;
 			//Seteo fondo
-			Drawable* drawable = drawables.getDrawable(idLevel);
+			Drawable* drawable = drawables.getDrawable(-10);
 			if (drawable == nullptr) {
 				drawable = new Drawable();
 			}
 			drawable->setImage(idLevel,sprites.get(idLevel),sprites.getWidth(idLevel),sprites.getHeight(idLevel),false);
 			drawable->setCoordinates(0,0);
-			drawables.setDrawable(idLevel,drawable);
+			drawables.setDrawable(-10,drawable);
 			//Muestro el "GO"
 			drawable = drawables.getDrawable(GO);
 			if (drawable == nullptr) {
@@ -129,10 +129,12 @@ void MegamanClientModel::run() {
 			}
 			drawable->setImage(GO,sprites.get(GO),sprites.getWidth(GO),sprites.getHeight(GO),false);
 			drawable->setCoordinates(10.5,5);
-			drawables.setDrawable(GO,drawable);
+			drawables.setDrawable(-1,drawable);
 			windowChangeSignal.emit(LEVEL_SCREEN_NAME);
 			//Lo saco en un segundo
-			Glib::signal_timeout().connect(sigc::bind<int>(sigc::mem_fun(drawables,&Drawables::removeDrawable),GO),1000);
+			Glib::signal_timeout().connect(sigc::bind<int>(sigc::mem_fun(drawables,&Drawables::removeDrawable),-1),1000);
+			//Empiezo a ciclar los drawables que sea posible
+			cicleDrawablesConn = Glib::signal_timeout().connect(sigc::mem_fun(*this,&MegamanClientModel::cicleDrawables),300);
 			}
 			break;
 		case BACK_TO_LEVEL_SELECTION:
@@ -146,6 +148,8 @@ void MegamanClientModel::run() {
 			drawable->setImage(LEVEL_OVER,sprites.get(LEVEL_OVER),sprites.getWidth(LEVEL_OVER),sprites.getHeight(LEVEL_OVER),false);
 			drawable->setCoordinates(7.5,5);
 			drawables.setDrawable(LEVEL_OVER,drawable);
+			//Dejo de ciclar los drawables
+			cicleDrawablesConn.disconnect();
 			//Lo saco en un segundo
 			Glib::signal_timeout().connect(sigc::bind<int>(sigc::mem_fun(drawables,&Drawables::removeDrawable),LEVEL_OVER),1000);
 			//Hago el cambio de pantalla en un segundo
@@ -222,6 +226,62 @@ void MegamanClientModel::disconnectServer() {
 		serverProxy = nullptr;
 		clientNumber = "0";
 	}
+}
+
+bool MegamanClientModel::cicleDrawables() {
+	//Recorro los drawables y redibujo al siguiente de la secuencia de haberlo
+	DrawablesIterator iter = drawables.drawablesIterator();
+	for (int i = 0; i < drawables.size(); ++i) {
+		Drawable* drawable = (*iter).second;
+		if (drawable != nullptr) {
+			uint spriteID = drawable->getSpriteId();
+			bool cicled = false;
+			bool flipped = drawable->getFlipped();
+			//Cambio el sprite por el siguiente
+			switch (spriteID) {
+			case MEGAMAN_IDLE_0:
+				spriteID = MEGAMAN_IDLE_1;
+				cicled = true;
+				break;
+			case MEGAMAN_IDLE_1:
+				spriteID = MEGAMAN_IDLE_2;
+				cicled = true;
+				break;
+			case MEGAMAN_IDLE_2:
+				spriteID = MEGAMAN_IDLE_0;
+				cicled = true;
+				break;
+			case MEGAMAN_CLIMB:
+				flipped = !flipped;
+				cicled = true;
+				break;
+			case BUMBY_0:
+				spriteID = BUMBY_1;
+				cicled = true;
+				break;
+			case BUMBY_1:
+				spriteID = BUMBY_0;
+				cicled = true;
+				break;
+			case FIREMAN_IDLE_0:
+				spriteID = FIREMAN_IDLE_1;
+				cicled = true;
+				break;
+			case FIREMAN_IDLE_1:
+				spriteID = FIREMAN_IDLE_0;
+				cicled = true;
+				break;
+			default:
+				break;
+			}
+			if (cicled) {
+				drawable->setImage(spriteID,sprites.get(spriteID),sprites.getWidth(spriteID),sprites.getHeight(spriteID),flipped);
+				drawable->setChanged(true);
+			}
+		}
+		++iter;
+	}
+	return true;
 }
 
 void MegamanClientModel::serverSendLevelSelected(int levelCode) {

@@ -13,6 +13,7 @@ Drawable::Drawable() :
 	spriteId(0),
 	posX(0.0),
 	posY(0.0),
+	flipped(false),
 	drawed(false),
 	changed(true) {
 }
@@ -22,6 +23,7 @@ Drawable::~Drawable() {
 
 void Drawable::setImage(uint spriteId, std::string ruta, int width, int height, bool flip) {
 	this->spriteId = spriteId;
+	this->flipped = flip;
 	Lock l(m);
 	drawing.setImage(ruta, width, height, flip);
 }
@@ -49,6 +51,11 @@ double Drawable::getX() {
 double Drawable::getY() {
 	Lock l(m);
 	return posY;
+}
+
+bool Drawable::getFlipped() {
+	Lock l(m);
+	return flipped;
 }
 
 void Drawable::setIsDrawed(bool isDrawed) {

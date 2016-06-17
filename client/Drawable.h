@@ -20,6 +20,7 @@ private:
 	uint spriteId;
 	double posX;
 	double posY;
+	bool flipped;
 	bool drawed;		//indica si el drawable ya fue dibujado en un container
 	bool changed;		//indica si el drawable deberia (re)dibujarse
 
@@ -34,6 +35,7 @@ public:
 	Drawing& getImage();
 	double getX();
 	double getY();
+	bool getFlipped();
 
 	void setIsDrawed(bool isDrawed);
 	void setChanged(bool modified);
