@@ -63,10 +63,7 @@ void Boss::jump() {
 }
 
 void Boss::executeJump(float time, float jump_time) {
-    timer_elapsed = clock();
-    if (float(timer_elapsed - timer_begin)/CLOCKS_PER_SEC > jump_time){
-        setState("#walking");
-    }
+    elapse(jump_time, "#walking");
     jumpTime.dec(time);
     if (jumpTime.getCurrent() == 0){
         jump();
@@ -77,10 +74,7 @@ void Boss::executeJump(float time, float jump_time) {
 }
 
 void Boss::executeWalk(float walk_time, b2Vec2& aim) {
-    timer_elapsed = clock();
-    if (float(timer_elapsed - timer_begin)/CLOCKS_PER_SEC > walk_time){
-        setState("#attacking");
-    }
+    elapse(walk_time, "#attacking");
     b2Vec2 vel = body->GetLinearVelocity();
     if (float (aim.x) * hSpeed < 0) hSpeed = -hSpeed;
     vel.x = hSpeed;
@@ -88,12 +82,18 @@ void Boss::executeWalk(float walk_time, b2Vec2& aim) {
 }
 
 void Boss::executeAttack(float attack_time) {
-    timer_elapsed = clock();
+    elapse(attack_time, "#jumping");
     shoot();
-    if (float(timer_elapsed - timer_begin)/CLOCKS_PER_SEC > attack_time){
-        setState("#jumping");
+}
+
+void Boss::elapse(float transition_time, std::string next_state) {
+    timer_elapsed = clock();
+    if (float(timer_elapsed - timer_begin)/CLOCKS_PER_SEC > transition_time){
+        setState(next_state);
     }
 }
+
+
 
 
 
