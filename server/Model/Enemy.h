@@ -19,10 +19,11 @@ class MyLevel;
 
 class Enemy: public Character {
 protected:
-    bool idle;
+    std::string state;
     float hSpeed;
-    clock_t idle_begin;
-    clock_t idle_elapsed;
+    clock_t timer_begin;
+    clock_t timer_elapsed;
+    void setState(std::string new_state);
 	Stat<float> jumpTime;
 	void changeFixtureFilter(b2Fixture* f);
     virtual void jump();

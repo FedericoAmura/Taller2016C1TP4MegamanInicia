@@ -11,6 +11,7 @@
 #include "LevelObject.h"
 #include "MyLevel.h"
 #include <glog/logging.h>
+#include <iostream>
 #include "Bullet.h"
 #include "Weapon.h"
 #include "../../common/CommunicationCodes.h"

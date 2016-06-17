@@ -11,7 +11,9 @@
 class Boss: public Enemy {
 	bool lifeChanged;
 	float hSpeed;
-    void executeJump(float time);
+    void executeJump(float time, float jump_time);
+    void executeWalk(float time, b2Vec2& aim);
+    void executeAttack(float time);
     virtual void jump();
 
 public:

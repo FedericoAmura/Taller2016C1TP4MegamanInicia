@@ -22,7 +22,7 @@ FlyingEnemy::FlyingEnemy(b2World* w,
 
 /*calls base class tick, and tires to move towards players*/
 void FlyingEnemy::tick(float time){
-    if (idle) {
+    if (state == "#idle") {
         executeIdle(time, IDLE_TIME);
     } else {
         b2Vec2 speed = body->GetLinearVelocity();
@@ -30,8 +30,8 @@ void FlyingEnemy::tick(float time){
         if (direction == LEFT) speed = -speed;
         b2Vec2 aim = setAim();
         if (abs(aim.x) < IDLE_DISTANCE) {
-            idle = true;
-            idle_begin = clock();
+            state = "#idle";
+            timer_begin = clock();
         }
         Character::tick(time);
         body->SetLinearVelocity(speed);
