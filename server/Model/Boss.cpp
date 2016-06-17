@@ -44,10 +44,8 @@ void Boss::tick(float time) {
         executeJump(time, 0.05);
         shoot();
     } else if (state == "#walking") {
-        std::cout << "walking" << std::endl;
         executeWalk(0.05, aim);
     } else if (state == "#attacking") {
-        std::cout << "attacking" << std::endl;
         executeAttack(0.05);
     }
 
