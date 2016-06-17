@@ -397,7 +397,7 @@
 	"2101":
 	{
 		"damage":	5,
-		"cooldown":	2.0,
+		"cooldown":	1.0,
 		"bulletId":	2001,
 		"speed":
 		{
@@ -417,7 +417,7 @@
 	"2002":
 	{
 		"damage":	1,
-		"cooldown":	2.0,
+		"cooldown":	1.0,
 		"bulletId":	2002,
 		"speed":
 		{
@@ -536,12 +536,12 @@
 	},
 	"2009":
 	{
-		"damage":	1,
-		"cooldown":	2.0,
+		"damage":	4,
+		"cooldown":	0.5,
 		"bulletId":	2009,
 		"speed":
 		{
-			"x":	4.0,
+			"x":	8.0,
 			"y":	0.0
 		},
 		"shapes":
@@ -556,7 +556,7 @@
 	},
 	"2010":
 	{
-		"damage":	2,
+		"damage":	4,
 		"cooldown":	3.0,
 		"bulletId":	2009,
 		"speed":
