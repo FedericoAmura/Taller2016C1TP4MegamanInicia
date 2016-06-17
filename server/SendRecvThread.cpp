@@ -29,7 +29,6 @@ void SendThread::run(){
 		try{
 			socket->send((char*)mensaje.c_str(),mensaje.size());
 		}catch(std::exception& e){
-			LOG(ERROR) << e.what();
 			socket->shutdown();
 		}
 		//LOG(INFO)<<"enviado msg: "<<mensaje;
@@ -68,7 +67,6 @@ void RecvThread::run(){
 					socket->shutdown();
 				}
 			}catch(std::exception& e){
-				LOG(ERROR) << e.what();
 				continuar=false;
 				socket->shutdown();
 			}
