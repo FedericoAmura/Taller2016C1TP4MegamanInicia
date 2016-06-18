@@ -17,6 +17,9 @@
 #include "../entities.h"
 #include "WindowNames.h"
 
+#define BANNER -1
+#define BACKGROUND -10
+
 MegamanClientModel::MegamanClientModel() :
 	serverProxy(nullptr),
 	clientNumber("0"),
@@ -74,8 +77,7 @@ void MegamanClientModel::run() {
 					clientsDrawed++;
 				}
 			}
-			uint id = (uint)idDrawing;
-			drawable->setImage(id, sprites,flipped);
+			drawable->setImage(idDrawing, sprites,flipped);
 			drawable->setCoordinates(xDrawable,yDrawable);
 			drawables.setDrawable(idDrawable,drawable);
 			}
@@ -87,8 +89,7 @@ void MegamanClientModel::run() {
 			int flipped; ss >> flipped;
 			Drawable* drawable = drawables.getDrawable(idDrawable);
 			if (drawable == nullptr) continue;
-			uint id = (uint)idDrawing;
-			drawable->setImage(id,sprites,flipped);
+			drawable->setImage(idDrawing,sprites,flipped);
 			drawable->setChanged(true);
 			}
 			break;
@@ -121,24 +122,23 @@ void MegamanClientModel::run() {
 			int idLevel; ss >> idLevel;
 			idLevel += 6000;
 			//Seteo fondo
-			Drawable* drawable = drawables.getDrawable(-10);
+			Drawable* drawable = drawables.getDrawable(BACKGROUND);
 			if (drawable == nullptr) {
 				drawable = new Drawable();
 			}
 			drawable->setImage(idLevel,sprites,false);
 			drawable->setCoordinates(0,0);
-			drawables.setDrawable(-10,drawable);
+			drawables.setDrawable(BACKGROUND,drawable);
 			//Muestro el "GO"
-			drawable = drawables.getDrawable(GO);
-			if (drawable == nullptr) {
-				drawable = new Drawable();
-			}
+			drawable = drawables.getDrawable(BANNER);
+			if (drawable == nullptr) drawable = new Drawable();
+			else drawable->setChanged(true);
 			drawable->setImage(GO,sprites,false);
 			drawable->setCoordinates(10.5,5);
-			drawables.setDrawable(-1,drawable);
+			drawables.setDrawable(BANNER,drawable);
 			windowChangeSignal.emit(LEVEL_SCREEN_NAME);
 			//Lo saco en un segundo
-			Glib::signal_timeout().connect(sigc::bind<int>(sigc::mem_fun(drawables,&Drawables::removeDrawable),-1),1000);
+			Glib::signal_timeout().connect(sigc::bind<int>(sigc::mem_fun(drawables,&Drawables::removeDrawable),BANNER),1000);
 			//Empiezo a ciclar los drawables que sea posible
 			cicleDrawablesConn = Glib::signal_timeout().connect(sigc::mem_fun(*this,&MegamanClientModel::cicleDrawables),300);
 			}
@@ -147,17 +147,16 @@ void MegamanClientModel::run() {
 			{
 			gameStatusChangeSignal.emit();
 			//Muestro el "LEVEL OVER"
-			Drawable* drawable = drawables.getDrawable(LEVEL_OVER);
-			if (drawable == nullptr) {
-				drawable = new Drawable();
-			}
+			Drawable* drawable = drawables.getDrawable(BANNER);
+			if (drawable == nullptr) drawable = new Drawable();
+			else drawable->setChanged(true);
 			drawable->setImage(LEVEL_OVER,sprites,false);
 			drawable->setCoordinates(7.5,5);
-			drawables.setDrawable(LEVEL_OVER,drawable);
+			drawables.setDrawable(BANNER,drawable);
 			//Dejo de ciclar los drawables
 			cicleDrawablesConn.disconnect();
 			//Lo saco en un segundo
-			Glib::signal_timeout().connect(sigc::bind<int>(sigc::mem_fun(drawables,&Drawables::removeDrawable),LEVEL_OVER),1000);
+			Glib::signal_timeout().connect(sigc::bind<int>(sigc::mem_fun(drawables,&Drawables::removeDrawable),BANNER),1000);
 			//Hago el cambio de pantalla en un segundo
 			Glib::signal_timeout().connect(sigc::mem_fun(*this,&MegamanClientModel::backToLevelSelectionSignal),1000);
 			}
@@ -167,9 +166,8 @@ void MegamanClientModel::run() {
 			int player; ss >> player;
 			int health; ss >> health;
 			Drawable* drawable = drawables.getDrawable(HEALTH_BAR);
-			if (drawable == nullptr) {
-				drawable = new Drawable();
-			}
+			if (drawable == nullptr) drawable = new Drawable();
+			else drawable->setChanged(true);
 			drawable->setImage(HEALTH_BAR,sprites,false);
 			if (player) drawable->setCoordinates(1,2);
 			else drawable->setCoordinates(TILES_HORIZONTAL-1,2);
@@ -240,7 +238,7 @@ bool MegamanClientModel::cicleDrawables() {
 	for (int i = 0; i < drawables.size(); ++i) {
 		Drawable* drawable = (*iter).second;
 		if (drawable != nullptr) {
-			uint spriteID = drawable->getSpriteId();
+			int spriteID = drawable->getSpriteId();
 			bool cicled = false;
 			bool flipped = drawable->getFlipped();
 			//Cambio el sprite por el siguiente

@@ -18,8 +18,6 @@
 #include "../common/MegamanBeginsConstants.h"
 #include "Drawables.h"
 
-typedef unsigned int uint;
-
 LevelScreen::LevelScreen(MegamanClientModel& model) :
 	model(model) {
 	double tileWidth = ceil((double)Gdk::screen_width()/(double)TILES_HORIZONTAL);
@@ -47,7 +45,7 @@ void LevelScreen::stopLevel() {
 	for (int i = 0; i < model.getDrawables().size(); ++i) {
 		Drawable* drawable = (*iter).second;
 		if (drawable != nullptr) {
-			uint spriteID = drawable->getSpriteId();
+			int spriteID = drawable->getSpriteId();
 			//Consigo el layer
 			if (spriteID>=7000 && spriteID<8000) layer = &background;
 			else if (spriteID>=4000 && spriteID<6000) layer = &terrain;
@@ -70,7 +68,7 @@ bool LevelScreen::update() {
 	for (int i = 0; i < model.getDrawables().size(); ++i) {
 		Drawable* drawable = (*iter).second;
 		if (drawable != nullptr) {
-			uint spriteID = drawable->getSpriteId();
+			int spriteID = drawable->getSpriteId();
 			//Consigo el layer
 			if (spriteID>=7000 && spriteID<8000) layer = &background;
 			else if (spriteID>=4000 && spriteID<6000) layer = &terrain;

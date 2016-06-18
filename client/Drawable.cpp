@@ -9,7 +9,7 @@
 
 #include <iostream>
 
-Drawable::Drawable(uint offset) :
+Drawable::Drawable(int offset) :
 	imageId(0),
 	offset(offset),
 	posX(0.0),
@@ -22,7 +22,7 @@ Drawable::Drawable(uint offset) :
 Drawable::~Drawable() {
 }
 
-void Drawable::setImage(uint spriteId, SpriteDispenser &dispenser, bool flip) {
+void Drawable::setImage(int spriteId, SpriteDispenser &dispenser, bool flip) {
 	imageId = spriteId;
 	flipped = flip;
 	Lock l(m);
@@ -35,7 +35,7 @@ void Drawable::setCoordinates(double x, double y) {
 	posY = y;
 }
 
-uint Drawable::getSpriteId() {
+int Drawable::getSpriteId() {
 	return imageId;
 }
 

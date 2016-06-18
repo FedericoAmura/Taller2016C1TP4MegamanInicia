@@ -14,14 +14,12 @@
 #include "../common/Drawing.h"
 #include "../common/SpriteDispenser.h"
 
-typedef unsigned int uint;
-
 class Drawable {
 private:
 	Drawing drawing;
 	Mutex m;
-	uint imageId;
-	uint offset;
+	int imageId;
+	int offset;
 	double posX;
 	double posY;
 	bool flipped;
@@ -29,13 +27,13 @@ private:
 	bool changed;		//indica si el drawable deberia (re)dibujarse
 
 public:
-	Drawable(uint offset = 0);
+	Drawable(int offset = 0);
 	virtual ~Drawable();
 
-	void setImage(uint spriteId, SpriteDispenser &dispenser, bool flip);
+	void setImage(int spriteId, SpriteDispenser &dispenser, bool flip);
 	void setCoordinates(double x, double y);
 
-	uint getSpriteId();
+	int getSpriteId();
 	Drawing& getImage();
 	double getX();
 	double getY();
