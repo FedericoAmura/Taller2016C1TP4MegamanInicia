@@ -100,6 +100,9 @@ void MegamanClientModel::run() {
 			double yDrawable; ss >> yDrawable;
 			Drawable* drawable = drawables.getDrawable(idDrawable);
 			if (drawable == nullptr) continue;
+			int idDrawing = drawable->getSpriteId();
+			if (idDrawing>=MEGAMAN_IDLE_0 && idDrawing<=MEGAMAN_IDLE_2)
+				drawable->setImage(MEGAMAN_RUN_0,sprites,drawable->getFlipped());
 			drawable->setCoordinates(xDrawable,yDrawable);
 			drawable->setChanged(true);
 			}
@@ -123,9 +126,8 @@ void MegamanClientModel::run() {
 			idLevel += 6000;
 			//Seteo fondo
 			Drawable* drawable = drawables.getDrawable(BACKGROUND);
-			if (drawable == nullptr) {
-				drawable = new Drawable();
-			}
+			if (drawable == nullptr) drawable = new Drawable();
+			else drawable->setChanged(true);
 			drawable->setImage(idLevel,sprites,false);
 			drawable->setCoordinates(0,0);
 			drawables.setDrawable(BACKGROUND,drawable);
@@ -252,6 +254,18 @@ bool MegamanClientModel::cicleDrawables() {
 				cicled = true;
 				break;
 			case MEGAMAN_IDLE_2:
+				spriteID = MEGAMAN_IDLE_0;
+				cicled = true;
+				break;
+			case MEGAMAN_RUN_0:
+				spriteID = MEGAMAN_RUN_1;
+				cicled = true;
+				break;
+			case MEGAMAN_RUN_1:
+				spriteID = MEGAMAN_RUN_2;
+				cicled = true;
+				break;
+			case MEGAMAN_RUN_2:
 				spriteID = MEGAMAN_IDLE_0;
 				cicled = true;
 				break;
