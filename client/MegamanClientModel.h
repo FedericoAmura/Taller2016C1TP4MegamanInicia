@@ -18,6 +18,7 @@
 #include "../common/Thread.h"
 #include "../common/SpriteDispenser.h"
 
+typedef unsigned int uint;
 typedef sigc::signal<void> Signal;
 typedef sigc::signal<void,std::string> StringSignal;
 
@@ -28,6 +29,7 @@ private:
 	int clientsConnected;
 	std::map<int,bool> levelsStatus;
 	Drawables drawables;
+	uint clientsDrawed;
 	sigc::connection cicleDrawablesConn;
 	SpriteDispenser sprites;
 	bool recibirServer;

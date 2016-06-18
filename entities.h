@@ -14,7 +14,7 @@
  *
  */
 
-//PC
+//PC1
 #define MEGAMAN_IDLE_0 9000
 #define MEGAMAN_IDLE_1 9001
 #define MEGAMAN_IDLE_2 9002

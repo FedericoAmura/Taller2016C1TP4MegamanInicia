@@ -12,12 +12,16 @@
 
 #include "../common/Thread.h"
 #include "../common/Drawing.h"
+#include "../common/SpriteDispenser.h"
+
+typedef unsigned int uint;
 
 class Drawable {
 private:
 	Drawing drawing;
 	Mutex m;
-	uint spriteId;
+	uint imageId;
+	uint offset;
 	double posX;
 	double posY;
 	bool flipped;
@@ -25,10 +29,10 @@ private:
 	bool changed;		//indica si el drawable deberia (re)dibujarse
 
 public:
-	Drawable();
+	Drawable(uint offset = 0);
 	virtual ~Drawable();
 
-	void setImage(uint spriteId, std::string ruta, int width, int height, bool flip);
+	void setImage(uint spriteId, SpriteDispenser &dispenser, bool flip);
 	void setCoordinates(double x, double y);
 
 	uint getSpriteId();

@@ -27,7 +27,7 @@ SpriteDispenser::SpriteDispenser() {
 	tileSize = std::max(tileHeight,tileWidth);
 
 	//PATHS
-	//megaman
+	//megaman1
 	paths[MEGAMAN_IDLE_0] = (string) IMG_PATH + "/megaman pc/megaman_idle.png";
 	paths[MEGAMAN_IDLE_1] = (string) IMG_PATH + "/megaman pc/megaman_idle1.png";
 	paths[MEGAMAN_IDLE_2] = (string) IMG_PATH + "/megaman pc/megaman_idle2.png";
@@ -46,6 +46,63 @@ SpriteDispenser::SpriteDispenser() {
 	paths[MEGAMAN_RUN_1] = (string) IMG_PATH + "/megaman pc/megaman_run1.png";
 	paths[MEGAMAN_RUN_2] = (string) IMG_PATH + "/megaman pc/megaman_run2.png";
 	paths[MEGAMAN_SWIPE] = (string) IMG_PATH + "/megaman pc/megaman_swipe.png";
+	//megaman2
+	paths[MEGAMAN_IDLE_0+100] = (string) IMG_PATH + "/megaman pc2/megaman_idle.png";
+	paths[MEGAMAN_IDLE_1+100] = (string) IMG_PATH + "/megaman pc2/megaman_idle1.png";
+	paths[MEGAMAN_IDLE_2+100] = (string) IMG_PATH + "/megaman pc2/megaman_idle2.png";
+	paths[MEGAMAN_ATTACK+100] = (string) IMG_PATH + "/megaman pc2/megaman_attack0.png";
+	paths[MEGAMAN_ATTACK_CLIMB+100] = (string) IMG_PATH + "/megaman pc2/megaman_attack_climbing.png";
+	paths[MEGAMAN_ATTACK_JUMP+100] = (string) IMG_PATH + "/megaman pc2/megaman_attack_jumping.png";
+	paths[MEGAMAN_ATTACK_RUN_0+100] = (string) IMG_PATH + "/megaman pc2/megaman_running.png";
+	paths[MEGAMAN_ATTACK_RUN_1+100] = (string) IMG_PATH + "/megaman pc2/megaman_running1.png";
+	paths[MEGAMAN_ATTACK_RUN_2+100] = (string) IMG_PATH + "/megaman pc2/megaman_running2.png";
+	paths[MEGAMAN_BOMB_THROW+100] = (string) IMG_PATH + "/megaman pc2/megaman_bomb_throw.png";
+	paths[MEGAMAN_CLIMB+100] = (string) IMG_PATH + "/megaman pc2/megaman_climb.png";
+	paths[MEGAMAN_CLIMB_TOP+100] = (string) IMG_PATH + "/megaman pc2/megaman_climb_ontop.png";
+	paths[MEGAMAN_FALL+100] = (string) IMG_PATH + "/megaman pc2/megaman_fall.png";
+	paths[MEGAMAN_JUMP+100] = (string) IMG_PATH + "/megaman pc2/megaman_jump.png";
+	paths[MEGAMAN_RUN_0+100] = (string) IMG_PATH + "/megaman pc2/megaman_run0.png";
+	paths[MEGAMAN_RUN_1+100] = (string) IMG_PATH + "/megaman pc2/megaman_run1.png";
+	paths[MEGAMAN_RUN_2+100] = (string) IMG_PATH + "/megaman pc2/megaman_run2.png";
+	paths[MEGAMAN_SWIPE+100] = (string) IMG_PATH + "/megaman pc2/megaman_swipe.png";
+	//megaman3
+	paths[MEGAMAN_IDLE_0+200] = (string) IMG_PATH + "/megaman pc3/megaman_idle.png";
+	paths[MEGAMAN_IDLE_1+200] = (string) IMG_PATH + "/megaman pc3/megaman_idle1.png";
+	paths[MEGAMAN_IDLE_2+200] = (string) IMG_PATH + "/megaman pc3/megaman_idle2.png";
+	paths[MEGAMAN_ATTACK+200] = (string) IMG_PATH + "/megaman pc3/megaman_attack0.png";
+	paths[MEGAMAN_ATTACK_CLIMB+200] = (string) IMG_PATH + "/megaman pc3/megaman_attack_climbing.png";
+	paths[MEGAMAN_ATTACK_JUMP+200] = (string) IMG_PATH + "/megaman pc3/megaman_attack_jumping.png";
+	paths[MEGAMAN_ATTACK_RUN_0+200] = (string) IMG_PATH + "/megaman pc3/megaman_running.png";
+	paths[MEGAMAN_ATTACK_RUN_1+200] = (string) IMG_PATH + "/megaman pc3/megaman_running1.png";
+	paths[MEGAMAN_ATTACK_RUN_2+200] = (string) IMG_PATH + "/megaman pc3/megaman_running2.png";
+	paths[MEGAMAN_BOMB_THROW+200] = (string) IMG_PATH + "/megaman pc3/megaman_bomb_throw.png";
+	paths[MEGAMAN_CLIMB+200] = (string) IMG_PATH + "/megaman pc3/megaman_climb.png";
+	paths[MEGAMAN_CLIMB_TOP+200] = (string) IMG_PATH + "/megaman pc3/megaman_climb_ontop.png";
+	paths[MEGAMAN_FALL+200] = (string) IMG_PATH + "/megaman pc3/megaman_fall.png";
+	paths[MEGAMAN_JUMP+200] = (string) IMG_PATH + "/megaman pc3/megaman_jump.png";
+	paths[MEGAMAN_RUN_0+200] = (string) IMG_PATH + "/megaman pc3/megaman_run0.png";
+	paths[MEGAMAN_RUN_1+200] = (string) IMG_PATH + "/megaman pc3/megaman_run1.png";
+	paths[MEGAMAN_RUN_2+200] = (string) IMG_PATH + "/megaman pc3/megaman_run2.png";
+	paths[MEGAMAN_SWIPE+200] = (string) IMG_PATH + "/megaman pc3/megaman_swipe.png";
+	//megaman4
+	paths[MEGAMAN_IDLE_0+300] = (string) IMG_PATH + "/megaman pc4/megaman_idle.png";
+	paths[MEGAMAN_IDLE_1+300] = (string) IMG_PATH + "/megaman pc4/megaman_idle1.png";
+	paths[MEGAMAN_IDLE_2+300] = (string) IMG_PATH + "/megaman pc4/megaman_idle2.png";
+	paths[MEGAMAN_ATTACK+300] = (string) IMG_PATH + "/megaman pc4/megaman_attack0.png";
+	paths[MEGAMAN_ATTACK_CLIMB+300] = (string) IMG_PATH + "/megaman pc4/megaman_attack_climbing.png";
+	paths[MEGAMAN_ATTACK_JUMP+300] = (string) IMG_PATH + "/megaman pc4/megaman_attack_jumping.png";
+	paths[MEGAMAN_ATTACK_RUN_0+300] = (string) IMG_PATH + "/megaman pc4/megaman_running.png";
+	paths[MEGAMAN_ATTACK_RUN_1+300] = (string) IMG_PATH + "/megaman pc4/megaman_running1.png";
+	paths[MEGAMAN_ATTACK_RUN_2+300] = (string) IMG_PATH + "/megaman pc4/megaman_running2.png";
+	paths[MEGAMAN_BOMB_THROW+300] = (string) IMG_PATH + "/megaman pc4/megaman_bomb_throw.png";
+	paths[MEGAMAN_CLIMB+300] = (string) IMG_PATH + "/megaman pc4/megaman_climb.png";
+	paths[MEGAMAN_CLIMB_TOP+300] = (string) IMG_PATH + "/megaman pc4/megaman_climb_ontop.png";
+	paths[MEGAMAN_FALL+300] = (string) IMG_PATH + "/megaman pc4/megaman_fall.png";
+	paths[MEGAMAN_JUMP+300] = (string) IMG_PATH + "/megaman pc4/megaman_jump.png";
+	paths[MEGAMAN_RUN_0+300] = (string) IMG_PATH + "/megaman pc4/megaman_run0.png";
+	paths[MEGAMAN_RUN_1+300] = (string) IMG_PATH + "/megaman pc4/megaman_run1.png";
+	paths[MEGAMAN_RUN_2+300] = (string) IMG_PATH + "/megaman pc4/megaman_run2.png";
+	paths[MEGAMAN_SWIPE+300] = (string) IMG_PATH + "/megaman pc4/megaman_swipe.png";
 	//tiles
 	paths[BOSS_DOOR] = TLE_PATH + "boss_door.png";
 	paths[CABLE_EDGE_0] = TLE_PATH + "cable_edge0.png";
@@ -388,9 +445,8 @@ SpriteDispenser::SpriteDispenser() {
 	widths[LEVEL_OVER] = tileSize*10.0;
 }
 
-string SpriteDispenser::get(uint id) {
-	Lock l(m);
-	string sprite = paths[id];
+string SpriteDispenser::get(uint id, uint offset) {
+	string sprite = paths[id+offset];
 	if (sprite == ""){
 		throw std::runtime_error("Requested invalid sprite");
 	} else {
@@ -399,7 +455,6 @@ string SpriteDispenser::get(uint id) {
 }
 
 double SpriteDispenser::getHeight(uint id) {
-	Lock l(m);
 	double size = heigths[id];
 	if (size == 0){
 		throw std::runtime_error("Requested invalid sprite");
@@ -409,7 +464,6 @@ double SpriteDispenser::getHeight(uint id) {
 }
 
 double SpriteDispenser::getWidth(uint id) {
-	Lock l(m);
 	double size = widths[id];
 	if (size == 0){
 		throw std::runtime_error("Requested invalid sprite");

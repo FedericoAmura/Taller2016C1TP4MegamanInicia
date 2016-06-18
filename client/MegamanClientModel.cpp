@@ -21,6 +21,7 @@ MegamanClientModel::MegamanClientModel() :
 	serverProxy(nullptr),
 	clientNumber("0"),
 	clientsConnected(0),
+	clientsDrawed(0),
 	recibirServer(false) {
 	levelsStatus[MAGNETMAN] = false;
 	levelsStatus[SPARKMAN] = false;
@@ -67,10 +68,14 @@ void MegamanClientModel::run() {
 			double yDrawable; ss >> yDrawable;
 			Drawable* drawable = drawables.getDrawable(idDrawable);
 			if (drawable == nullptr) {
-				drawable = new Drawable();
+				if (idDrawing<9000 || idDrawing>=10000) drawable = new Drawable();
+				else {
+					drawable = new Drawable(100*clientsDrawed);
+					clientsDrawed++;
+				}
 			}
 			uint id = (uint)idDrawing;
-			drawable->setImage(id, sprites.get(id),sprites.getWidth(id),sprites.getHeight(id),flipped);
+			drawable->setImage(id, sprites,flipped);
 			drawable->setCoordinates(xDrawable,yDrawable);
 			drawables.setDrawable(idDrawable,drawable);
 			}
@@ -83,7 +88,7 @@ void MegamanClientModel::run() {
 			Drawable* drawable = drawables.getDrawable(idDrawable);
 			if (drawable == nullptr) continue;
 			uint id = (uint)idDrawing;
-			drawable->setImage(id,sprites.get(id),sprites.getWidth(id),sprites.getHeight(id),flipped);
+			drawable->setImage(id,sprites,flipped);
 			drawable->setChanged(true);
 			}
 			break;
@@ -112,6 +117,7 @@ void MegamanClientModel::run() {
 			break;
 		case START_LEVEL_SCREEN:
 			{
+			clientsDrawed = 0;
 			int idLevel; ss >> idLevel;
 			idLevel += 6000;
 			//Seteo fondo
@@ -119,7 +125,7 @@ void MegamanClientModel::run() {
 			if (drawable == nullptr) {
 				drawable = new Drawable();
 			}
-			drawable->setImage(idLevel,sprites.get(idLevel),sprites.getWidth(idLevel),sprites.getHeight(idLevel),false);
+			drawable->setImage(idLevel,sprites,false);
 			drawable->setCoordinates(0,0);
 			drawables.setDrawable(-10,drawable);
 			//Muestro el "GO"
@@ -127,7 +133,7 @@ void MegamanClientModel::run() {
 			if (drawable == nullptr) {
 				drawable = new Drawable();
 			}
-			drawable->setImage(GO,sprites.get(GO),sprites.getWidth(GO),sprites.getHeight(GO),false);
+			drawable->setImage(GO,sprites,false);
 			drawable->setCoordinates(10.5,5);
 			drawables.setDrawable(-1,drawable);
 			windowChangeSignal.emit(LEVEL_SCREEN_NAME);
@@ -145,7 +151,7 @@ void MegamanClientModel::run() {
 			if (drawable == nullptr) {
 				drawable = new Drawable();
 			}
-			drawable->setImage(LEVEL_OVER,sprites.get(LEVEL_OVER),sprites.getWidth(LEVEL_OVER),sprites.getHeight(LEVEL_OVER),false);
+			drawable->setImage(LEVEL_OVER,sprites,false);
 			drawable->setCoordinates(7.5,5);
 			drawables.setDrawable(LEVEL_OVER,drawable);
 			//Dejo de ciclar los drawables
@@ -164,7 +170,7 @@ void MegamanClientModel::run() {
 			if (drawable == nullptr) {
 				drawable = new Drawable();
 			}
-			drawable->setImage(HEALTH_BAR,sprites.get(HEALTH_BAR),sprites.getWidth(HEALTH_BAR),sprites.getHeight(HEALTH_BAR),false);
+			drawable->setImage(HEALTH_BAR,sprites,false);
 			if (player) drawable->setCoordinates(1,2);
 			else drawable->setCoordinates(TILES_HORIZONTAL-1,2);
 			drawable->setPercent(health);
@@ -275,7 +281,7 @@ bool MegamanClientModel::cicleDrawables() {
 				break;
 			}
 			if (cicled) {
-				drawable->setImage(spriteID,sprites.get(spriteID),sprites.getWidth(spriteID),sprites.getHeight(spriteID),flipped);
+				drawable->setImage(spriteID,sprites,flipped);
 				drawable->setChanged(true);
 			}
 		}

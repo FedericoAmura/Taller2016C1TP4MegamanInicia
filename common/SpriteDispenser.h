@@ -17,11 +17,10 @@ using std::string;
 class SpriteDispenser {
 public:
     SpriteDispenser();
-    string get(uint id);
+    string get(uint id, uint offset = 0);
     double getHeight(uint id);
     double getWidth(uint id);
 private:
-	Mutex m;
     std::map<uint, string> paths;
     std::map<uint, double> heigths;
     std::map<uint, double> widths;

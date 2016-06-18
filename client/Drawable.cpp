@@ -9,8 +9,9 @@
 
 #include <iostream>
 
-Drawable::Drawable() :
-	spriteId(0),
+Drawable::Drawable(uint offset) :
+	imageId(0),
+	offset(offset),
 	posX(0.0),
 	posY(0.0),
 	flipped(false),
@@ -21,11 +22,11 @@ Drawable::Drawable() :
 Drawable::~Drawable() {
 }
 
-void Drawable::setImage(uint spriteId, std::string ruta, int width, int height, bool flip) {
-	this->spriteId = spriteId;
-	this->flipped = flip;
+void Drawable::setImage(uint spriteId, SpriteDispenser &dispenser, bool flip) {
+	imageId = spriteId;
+	flipped = flip;
 	Lock l(m);
-	drawing.setImage(ruta, width, height, flip);
+	drawing.setImage(dispenser.get(imageId,offset), dispenser.getWidth(imageId), dispenser.getHeight(imageId), flipped);
 }
 
 void Drawable::setCoordinates(double x, double y) {
@@ -35,7 +36,7 @@ void Drawable::setCoordinates(double x, double y) {
 }
 
 uint Drawable::getSpriteId() {
-	return spriteId;
+	return imageId;
 }
 
 Drawing& Drawable::getImage() {
