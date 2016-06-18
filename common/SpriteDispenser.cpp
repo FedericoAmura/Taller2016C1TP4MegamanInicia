@@ -28,24 +28,24 @@ SpriteDispenser::SpriteDispenser() {
 
 	//PATHS
 	//megaman1
-	paths[MEGAMAN_IDLE_0] = (string) IMG_PATH + "/megaman pc/megaman_idle.png";
-	paths[MEGAMAN_IDLE_1] = (string) IMG_PATH + "/megaman pc/megaman_idle1.png";
-	paths[MEGAMAN_IDLE_2] = (string) IMG_PATH + "/megaman pc/megaman_idle2.png";
-	paths[MEGAMAN_ATTACK] = (string) IMG_PATH + "/megaman pc/megaman_attack0.png";
-	paths[MEGAMAN_ATTACK_CLIMB] = (string) IMG_PATH + "/megaman pc/megaman_attack_climbing.png";
-	paths[MEGAMAN_ATTACK_JUMP] = (string) IMG_PATH + "/megaman pc/megaman_attack_jumping.png";
-	paths[MEGAMAN_ATTACK_RUN_0] = (string) IMG_PATH + "/megaman pc/megaman_running.png";
-	paths[MEGAMAN_ATTACK_RUN_1] = (string) IMG_PATH + "/megaman pc/megaman_running1.png";
-	paths[MEGAMAN_ATTACK_RUN_2] = (string) IMG_PATH + "/megaman pc/megaman_running2.png";
-	paths[MEGAMAN_BOMB_THROW] = (string) IMG_PATH + "/megaman pc/megaman_bomb_throw.png";
-	paths[MEGAMAN_CLIMB] = (string) IMG_PATH + "/megaman pc/megaman_climb.png";
-	paths[MEGAMAN_CLIMB_TOP] = (string) IMG_PATH + "/megaman pc/megaman_climb_ontop.png";
-	paths[MEGAMAN_FALL] = (string) IMG_PATH + "/megaman pc/megaman_fall.png";
-	paths[MEGAMAN_JUMP] = (string) IMG_PATH + "/megaman pc/megaman_jump.png";
-	paths[MEGAMAN_RUN_0] = (string) IMG_PATH + "/megaman pc/megaman_run0.png";
-	paths[MEGAMAN_RUN_1] = (string) IMG_PATH + "/megaman pc/megaman_run1.png";
-	paths[MEGAMAN_RUN_2] = (string) IMG_PATH + "/megaman pc/megaman_run2.png";
-	paths[MEGAMAN_SWIPE] = (string) IMG_PATH + "/megaman pc/megaman_swipe.png";
+	paths[MEGAMAN_IDLE_0] = (string) IMG_PATH + "/megaman pc1/megaman_idle.png";
+	paths[MEGAMAN_IDLE_1] = (string) IMG_PATH + "/megaman pc1/megaman_idle1.png";
+	paths[MEGAMAN_IDLE_2] = (string) IMG_PATH + "/megaman pc1/megaman_idle2.png";
+	paths[MEGAMAN_ATTACK] = (string) IMG_PATH + "/megaman pc1/megaman_attack0.png";
+	paths[MEGAMAN_ATTACK_CLIMB] = (string) IMG_PATH + "/megaman pc1/megaman_attack_climbing.png";
+	paths[MEGAMAN_ATTACK_JUMP] = (string) IMG_PATH + "/megaman pc1/megaman_attack_jumping.png";
+	paths[MEGAMAN_ATTACK_RUN_0] = (string) IMG_PATH + "/megaman pc1/megaman_running.png";
+	paths[MEGAMAN_ATTACK_RUN_1] = (string) IMG_PATH + "/megaman pc1/megaman_running1.png";
+	paths[MEGAMAN_ATTACK_RUN_2] = (string) IMG_PATH + "/megaman pc1/megaman_running2.png";
+	paths[MEGAMAN_BOMB_THROW] = (string) IMG_PATH + "/megaman pc1/megaman_bomb_throw.png";
+	paths[MEGAMAN_CLIMB] = (string) IMG_PATH + "/megaman pc1/megaman_climb.png";
+	paths[MEGAMAN_CLIMB_TOP] = (string) IMG_PATH + "/megaman pc1/megaman_climb_ontop.png";
+	paths[MEGAMAN_FALL] = (string) IMG_PATH + "/megaman pc1/megaman_fall.png";
+	paths[MEGAMAN_JUMP] = (string) IMG_PATH + "/megaman pc1/megaman_jump.png";
+	paths[MEGAMAN_RUN_0] = (string) IMG_PATH + "/megaman pc1/megaman_run0.png";
+	paths[MEGAMAN_RUN_1] = (string) IMG_PATH + "/megaman pc1/megaman_run1.png";
+	paths[MEGAMAN_RUN_2] = (string) IMG_PATH + "/megaman pc1/megaman_run2.png";
+	paths[MEGAMAN_SWIPE] = (string) IMG_PATH + "/megaman pc1/megaman_swipe.png";
 	//megaman2
 	paths[MEGAMAN_IDLE_0+100] = (string) IMG_PATH + "/megaman pc2/megaman_idle.png";
 	paths[MEGAMAN_IDLE_1+100] = (string) IMG_PATH + "/megaman pc2/megaman_idle1.png";

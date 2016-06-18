@@ -140,7 +140,10 @@ void LevelSelectorScreen::fillStatus() {
 	//Muestro megamanes segun cantidad de jugadores
 	for (int i = playersAvatars.size(); i < model.getClientsConnected(); ++i) {
 		Drawing* player = new Drawing;
-		player->setImage("../sprites/megaman pc/megaman_idle.png",imgWidth/4,imgWidth/4,false);
+		std::string ruta = "../sprites/megaman pc";
+		ruta.append(std::to_string(i+1));
+		ruta.append("/megaman_idle.png");
+		player->setImage(ruta,imgWidth/4,imgWidth/4,false);
 		players.add(*player);
 		playersAvatars.push_back(player);
 		player->show();
