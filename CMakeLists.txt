@@ -41,7 +41,7 @@ FILE(GLOB COMMON_SOURCE_FILES common/*)
 #files client en carpeta client
 FILE(GLOB CLIENT_SOURCE_FILES client/*)
 #ejecutable client
-add_executable(client ${CLIENT_SOURCE_FILES} ${COMMON_SOURCE_FILES})
+add_executable(client ${CLIENT_SOURCE_FILES} ${COMMON_SOURCE_FILES} jsoncpp.cpp json/json-forwards.h json/json.h)
 
 #files en carpeta server, de forma recursiva(incluye archivos de carpetas adentro de la carpeta)
 FILE(GLOB_RECURSE SERVER_SOURCE_FILES server/*)

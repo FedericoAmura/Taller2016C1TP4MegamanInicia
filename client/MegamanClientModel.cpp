@@ -11,12 +11,15 @@
 #include <glibmm/main.h>
 #include <iostream>
 #include <glog/logging.h>
+#include <fstream>
 
 #include "../common/CommunicationCodes.h"
 #include "../common/MegamanBeginsConstants.h"
 #include "../entities.h"
+#include "../json/json.h"
 #include "WindowNames.h"
 
+#define LVL_DIR "../levels/"
 #define BANNER -1
 #define BACKGROUND -10
 
@@ -123,12 +126,22 @@ void MegamanClientModel::run() {
 			{
 			clientsDrawed = 0;
 			int idLevel; ss >> idLevel;
-			idLevel += 6000;
+			Json::Value level_json;
+			std::string filename = LVL_DIR;
+			if (idLevel==MAGNETMAN) filename.append("magnetman.json");
+			else if (idLevel==SPARKMAN) filename.append("sparkman.json");
+			else if (idLevel==RINGMAN) filename.append("ringman.json");
+			else if (idLevel==FIREMAN) filename.append("fireman.json");
+			else if (idLevel==BOMBMAN) filename.append("bombman.json");
+			std::ifstream configFile(filename);
+			configFile >> level_json;
+			std::string background = level_json["background"].asString();
 			//Seteo fondo
 			Drawable* drawable = drawables.getDrawable(BACKGROUND);
 			if (drawable == nullptr) drawable = new Drawable();
 			else drawable->setChanged(true);
-			drawable->setImage(idLevel,sprites,false);
+			drawable->setImage(CITY,sprites,false);	//Generico, despues lo cambiamos por el posta
+			drawable->getImage().setImage(level_json["background"].asString(),Gdk::screen_width(),Gdk::screen_height(),false);
 			drawable->setCoordinates(0,0);
 			drawables.setDrawable(BACKGROUND,drawable);
 			//Muestro el "GO"

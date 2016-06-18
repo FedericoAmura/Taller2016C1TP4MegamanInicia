@@ -21,23 +21,6 @@ model(model) {
 	const int imgHeight = height/3;
 	set_homogeneous();
 
-	/* TODO
-	 * pasar a 3 vbox con los niveles
-	 * que la del medio sea cartel megaman, nivel, status, boton salir chico
-	 * en status puedo poner megamanes de colores
-	 *
-	 *mensajes de READY, GANASTE PERDISTE O COSAS ASI
-	 *https://cooltext.com/Logo-Design-Gunmetal
-	 *
-	 * hacer que los drawables de megamanes se pongan con un segun caigan, se dibujen con colores segun eso
-	 * que caga tanto caminen o den pasos
-	 *
-	 * dividir levelscreen en 3 fixed
-	 * -background (fondo)
-	 * -middle (cosas del nivel)
-	 * -foreground (megamanes, vida y enemigos)
-	 */
-
 	//FIRST COLUMN
 	//RingMan
 	ringManIcon.setImage("../sprites/level/bossImages/RingMan.png",imgWidth,imgHeight,false);
