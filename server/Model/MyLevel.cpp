@@ -475,7 +475,7 @@ void MyLevel::win() {
 /*get the nearest megaman or nullptr if they are too far away*/
 Megaman* MyLevel::getNearestMegaman(const b2Vec2& pos) {
 	Megaman* nearest=nullptr;
-	b2Vec2 distance(pos.x,1000);
+	b2Vec2 distance(pos.x,100);
 	b2Vec2 temp;
 	std::map<int,Megaman*>::iterator megIt=megamans.begin();
 	for(; megIt!=megamans.end(); megIt++){

@@ -123,10 +123,12 @@ void Megaman::kill() {
 void Megaman::spawn() {
 	if(clientData->getLives().getCurrent()>0 || !dead){
 		body->SetTransform(spawnPoint,0);
-		dead=false;
-		life.maxOut();
+		if(dead) {
+			dead=false;
+			life.maxOut();
+			informClientLifeChange();
+		}
 		inmuneTime.maxOut();
-		informClientLifeChange();
 	}
 }
 

@@ -40,7 +40,6 @@ class Game: public Thread, public Observer{
 	std::map<int,Socket*> clients;
 	std::map<int,int> clientNum;
 	Metadata metadata;
-	std::queue<int> availableClientNumbers;
 
 public:
 	int firstClient;

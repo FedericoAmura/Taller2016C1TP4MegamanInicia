@@ -20,9 +20,9 @@ Metadata::~Metadata() {
 	}
 }
 
-void Metadata::addClient(int descriptor, int number) {
+void Metadata::addClient(int descriptor) {
 	Lock l(clientsMutex);
-	clientsData.push_back(new ClientData(descriptor,number,game));
+	clientsData.push_back(new ClientData(descriptor,clientsData.size()+1,game));
 }
 
 void Metadata::removeClient(int descriptor) {

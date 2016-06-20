@@ -22,7 +22,7 @@ class Metadata {
 public:
 	Metadata(Game* game);
 	virtual ~Metadata();
-	void addClient(int descriptor, int number);
+	void addClient(int descriptor);
 	void removeClient(int descriptor);
 	int getNumberOfClients();
 	ClientData* getClient(int number);

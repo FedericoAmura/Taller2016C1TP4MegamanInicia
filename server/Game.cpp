@@ -33,9 +33,6 @@ Game::Game(Server* server)
 	manager.setHandler(3,new SendMessage(this));
 	manager.setHandler(4,new DisconnectClient(this));
 	manager.setHandler(5,new FinishLevel(this));
-	for(int i =1; i<=MAX_CLIENTS; i++){
-		availableClientNumbers.push(i);
-	}
 }
 
 Game::~Game() {
@@ -86,7 +83,7 @@ bool Game::isntStopped(){
 void Game::addClient(int descriptor){
 	Socket* nuevoCliente= new Socket(descriptor,this);
 	Lock l(clientsMutex);
-	if (availableClientNumbers.empty() || levelChosen()) {
+	if (clients.size()==MAX_CLIENTS || levelChosen()) {
 		//rechazar
 		LOG(INFO)<<"Cliente rechazado";
 		std::stringstream mensajeChau;
@@ -94,15 +91,14 @@ void Game::addClient(int descriptor){
 		nuevoCliente->enviar(mensajeChau.str());
 		delete nuevoCliente;
 	}else{
-		int clientNumber = availableClientNumbers.front();
-		availableClientNumbers.pop();
-
-		nuevoCliente->iniciarComunicaciones();
-
 		if(clients.size()==0){
 			firstClient=descriptor;
 		}
+
+		metadata.addClient(descriptor);
 		clients[descriptor]=nuevoCliente;
+		int clientNumber= metadata.getClient(clients.size())->getClientNumber();
+		nuevoCliente->iniciarComunicaciones();
 
 		std::stringstream mensajeNumeroClient;
 		mensajeNumeroClient<<HELLO<<" "<<clientNumber ;
@@ -113,7 +109,6 @@ void Game::addClient(int descriptor){
 		this->notify(new MessageSent(mensajeCantConectados.str(),0));
 
 		clientNum[descriptor]=clientNumber ;
-		metadata.addClient(descriptor,clientNum[descriptor]);
 		LOG(INFO)<<"Cliente conectado nro: "
 				<<clientNumber<<" descriptor: "<<descriptor;
 	}
@@ -148,8 +143,12 @@ void Game::removeClient(int descriptor) {
 	}
 
 	metadata.removeClient(descriptor);
-	availableClientNumbers.push(clientNum[descriptor]);
 	clientNum.erase(descriptor);
+	for(int i=1; i<=metadata.getNumberOfClients(); i++){
+		ClientData* data=metadata.getClient(i);
+		clientNum[data->getDescriptor()]=
+				data->getClientNumber();
+	}
 
 	if(clients.empty()){
 		stopLevel();
