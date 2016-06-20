@@ -185,14 +185,16 @@ void MegamanClientModel::run() {
 			{
 			int player; ss >> player;
 			int health; ss >> health;
-			Drawable* drawable = drawables.getDrawable(HEALTH_BAR);
+			int id = HEALTH_BAR;
+			if (!player) id++;
+			Drawable* drawable = drawables.getDrawable(id);
 			if (drawable == nullptr) drawable = new Drawable();
 			else drawable->setChanged(true);
 			drawable->setImage(HEALTH_BAR,sprites,false);
 			if (player) drawable->setCoordinates(1,2);
 			else drawable->setCoordinates(TILES_HORIZONTAL-1,2);
 			drawable->setPercent(health);
-			drawables.setDrawable(HEALTH_BAR,drawable);
+			drawables.setDrawable(id,drawable);
 			}
 			break;
 		case LEVEL_STATUS:
