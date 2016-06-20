@@ -26,6 +26,7 @@ public:
 	virtual void kill();
 	virtual void redrawForClients(Game* game, MyLevel* level, bool checkChanges);
     void tick(float time);
+    virtual void damage(Bullet* bullet);
 };
 
 #endif //MEGAMAN_BOSS_H

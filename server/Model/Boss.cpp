@@ -38,7 +38,10 @@ void Boss::redrawForClients(Game* game, MyLevel* level, bool checkChanges) {
 	}
 }
 
-
+void Boss::damage(Bullet* bullet){
+	lifeChanged=true;
+	Character::damage(bullet);
+}
 
 void Boss::tick(float time) {
     b2Vec2 aim = setAim();
