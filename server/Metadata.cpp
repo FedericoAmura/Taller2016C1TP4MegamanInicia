@@ -35,6 +35,11 @@ void Metadata::removeClient(int descriptor) {
 			found=true;
 		}
 	}
+	if(found){
+		for(uint i=0; i<clientsData.size(); i++){
+			clientsData[i]->setClientNumber(i+1);
+		}
+	}
 }
 
 int Metadata::getNumberOfClients() {
@@ -75,4 +80,9 @@ Stat<int>& ClientData::getLives() {
 
 Game* ClientData::getGame() {
 	return game;
+}
+
+/*should only be used by metadata or game to notify change of number*/
+void ClientData::setClientNumber(int newNumber) {
+	clientNumber=newNumber;
 }

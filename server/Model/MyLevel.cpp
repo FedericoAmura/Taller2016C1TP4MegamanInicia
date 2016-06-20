@@ -373,7 +373,7 @@ void MyLevel::moveScreen() {
 	std::map<int,Megaman*>::iterator megIt=megamans.begin();
 	for(; megIt!=megamans.end(); megIt++){
 		Megaman* megaman=megIt->second;
-		inLeftZone= inLeftZone && ( megaman->getPos().x <
+		inLeftZone= inLeftZone && ( megaman->isDead() || megaman->getPos().x <
 				(windowPos.x + windowWidth* LEFT_ZONE_LIMIT) );
 	}
 	if (inLeftZone){
@@ -386,8 +386,8 @@ void MyLevel::moveScreen() {
 		megIt=megamans.begin();
 		for(; megIt!=megamans.end(); megIt++){
 			Megaman* megaman=megIt->second;
-			inRightZone= inRightZone && ( megaman->getPos().x >
-		(windowPos.x + windowWidth* RIGHT_ZONE_LIMIT) );
+			inRightZone= inRightZone && ( megaman->isDead() ||
+					megaman->getPos().x >(windowPos.x + windowWidth* RIGHT_ZONE_LIMIT) );
 		}
 		if (inRightZone){
 			windowPos.x+=windowWidth*(RIGHT_ZONE_LIMIT-LEFT_ZONE_LIMIT-OFFSET);
@@ -395,7 +395,7 @@ void MyLevel::moveScreen() {
 				windowPos.x=worldWidth-windowWidth;
 		}
 	}
-	if(inLeftZone||inRightZone){
+	if(inLeftZone || inRightZone){
 		LOG(INFO)<<"screen moved. new position: "<< std::fixed<<
 				std::setprecision(2)<<windowPos.x<<" "<<windowPos.y;
 
