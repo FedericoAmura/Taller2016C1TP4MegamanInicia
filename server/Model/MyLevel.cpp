@@ -487,7 +487,8 @@ Megaman* MyLevel::getNearestMegaman(const b2Vec2& pos) {
 		temp.x=(*megIt).second->getPos().x;
 		temp.y=(*megIt).second->getPos().y;
 		temp-=pos;
-		if(temp.LengthSquared()<=distance.LengthSquared()){
+		if(temp.LengthSquared()<=distance.LengthSquared()
+				&& !(*megIt).second->isDead()){
 			distance.x=(*megIt).second->getPos().x;
 			distance.y=(*megIt).second->getPos().y;
 			nearest=(*megIt).second;

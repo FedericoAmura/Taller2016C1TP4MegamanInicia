@@ -113,6 +113,7 @@ void Megaman::kill() {
 		}else{
 			dead=true;
 		}
+		body->SetTransform(spawnPoint,0);
 		std::stringstream killMsg;
 		killMsg<<KILL<<" "<<getId();
 		clientData->getGame()->notify(new MessageSent(killMsg.str(),0));

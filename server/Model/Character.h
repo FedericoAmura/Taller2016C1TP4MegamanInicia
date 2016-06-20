@@ -36,9 +36,9 @@ protected:
 	bool wasJumping;
 	int jumpingSpriteId;
 	virtual bool isJumping();
-	void jump();//todo maybe jumps should be only available for some
+	void jump();
 
-	void createJumpSensor(Json::Value jSensor);//todo maybe better sensor?
+	void createJumpSensor(Json::Value jSensor);
 	virtual void changeFixtureFilter(b2Fixture* f)=0;
 public:
 	bool canJump;
