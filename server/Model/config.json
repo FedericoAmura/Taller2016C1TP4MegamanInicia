@@ -285,7 +285,7 @@
 		"HSpeed":		3.0,
         "jumping time": 0.05,
         "attacking time": 0.1,
-        "walking time": 0.8,
+        "walking time": 0.1,
 		"life":			20.0,
 		"jumps":		true,
 		"jumpSpriteId":	1402,
