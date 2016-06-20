@@ -26,6 +26,7 @@ private:
 	Gtk::Fixed terrain;
 	Gtk::Fixed foreground;
 	Drawing blackBackground;
+	int offset;
 	double tileSize;
 
 public:

@@ -19,16 +19,17 @@
 #include "Drawables.h"
 
 LevelScreen::LevelScreen(MegamanClientModel& model) :
-	model(model) {
-	double tileWidth = ceil((double)Gdk::screen_width()/(double)TILES_HORIZONTAL);
-	double tileHeight = ceil((double)Gdk::screen_height()/(double)TILES_VERTICAL);
-	tileSize = std::max(tileHeight,tileWidth);
+	model(model),
+	offset(0) {
+	tileSize = (double)Gdk::screen_height()/(double)TILES_VERTICAL;
+
+	offset = (Gdk::screen_height()-tileSize*TILES_VERTICAL)/2;
 
 	blackBackground.setImage("../sprites/level/background/blackBackground.png",Gdk::screen_width(),Gdk::screen_height(),false);
 	background.put(blackBackground,0,0);
-	put(background,0,0);
-	put(terrain,0,0);
-	put(foreground,0,0);
+	put(background,0,offset);
+	put(terrain,0,offset);
+	put(foreground,0,offset);
 }
 
 LevelScreen::~LevelScreen() {

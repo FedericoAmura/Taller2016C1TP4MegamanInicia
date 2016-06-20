@@ -146,7 +146,8 @@ void MegamanClientModel::run() {
 			if (drawable == nullptr) drawable = new Drawable();
 			else drawable->setChanged(true);
 			drawable->setImage(CITY,sprites,false);	//Generico, despues lo cambiamos por el posta
-			drawable->getImage().setImage(level_json["background"].asString(),Gdk::screen_width(),Gdk::screen_height(),false);
+			int tileSize = (double)Gdk::screen_height()/(double)TILES_VERTICAL;
+			drawable->getImage().setImage(level_json["background"].asString(),tileSize*TILES_HORIZONTAL,tileSize*TILES_VERTICAL,false);
 			drawable->setCoordinates(0,0);
 			drawables.setDrawable(BACKGROUND,drawable);
 			//Muestro el "GO"
@@ -192,7 +193,7 @@ void MegamanClientModel::run() {
 			else drawable->setChanged(true);
 			drawable->setImage(HEALTH_BAR,sprites,false);
 			if (player) drawable->setCoordinates(1,2);
-			else drawable->setCoordinates(TILES_HORIZONTAL-1,2);
+			else drawable->setCoordinates(TILES_HORIZONTAL-1.5,2);
 			drawable->setPercent(health);
 			drawables.setDrawable(id,drawable);
 			}

@@ -22,9 +22,7 @@
 #define MES_PATH (string) IMG_PATH + "/messages/"
 
 SpriteDispenser::SpriteDispenser() {
-	double tileWidth = ceil((double)Gdk::screen_width()/(double)TILES_HORIZONTAL)+1;
-	double tileHeight = ceil((double)Gdk::screen_height()/(double)TILES_VERTICAL)+1;
-	tileSize = std::max(tileHeight,tileWidth);
+	tileSize = ceil((double)Gdk::screen_height()/(double)TILES_VERTICAL);
 
 	//PATHS
 	//megaman1
