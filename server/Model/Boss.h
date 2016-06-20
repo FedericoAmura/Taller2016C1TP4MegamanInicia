@@ -14,6 +14,7 @@ class Boss: public Enemy {
     float walking_time;
     float jumping_time;
     float attacking_time;
+	int punching_dmg;
     void elapse(float transition_time, std::string next_state);
     void executeJump(float time, float jump_time);
     void executeWalk(float time, b2Vec2& aim);

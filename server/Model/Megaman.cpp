@@ -187,15 +187,6 @@ void Megaman::charge(uint amount) {
 	LOG(INFO)<<objectId<<" charged by: "<<amount;
 }
 
-/* damages him*/
-void Megaman::damage(Bullet* bullet) {
-	if(inmuneTime.getCurrent()==0){
-		Character::damage(bullet);
-		inmuneTime.maxOut();
-	}
-	informClientLifeChange();
-}
-
 /*changes the spwan point*/
 void Megaman::setSpawnPos(b2Vec2& newPos) {
 	spawnPoint.x=newPos.x;

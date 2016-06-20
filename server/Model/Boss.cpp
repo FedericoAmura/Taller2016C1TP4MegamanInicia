@@ -10,6 +10,7 @@
 
 #define IDLE_DISTANCE 10
 #define ATTACKING_DISTANCE IDLE_DISTANCE
+#define PUNCH_DISTANCE 0.1
 
 Boss::Boss(b2World* w, Json::Value& json, const b2Vec2& pos, MyLevel* lvl)
         : Enemy(w, json, pos, lvl),
@@ -19,6 +20,7 @@ Boss::Boss(b2World* w, Json::Value& json, const b2Vec2& pos, MyLevel* lvl)
     walking_time = json["walking time"].asFloat();
     jumping_time = json["jumping time"].asFloat();
     attacking_time = json["attacking time"].asFloat();
+    punching_dmg = json["punching damage"].asInt();
 }
 
 /*when boss dies the game is won*/
@@ -82,6 +84,10 @@ void Boss::executeWalk(float walk_time, b2Vec2& aim) {
     if (float (aim.x) * hSpeed < 0) hSpeed = -hSpeed;
     vel.x = hSpeed;
     body->SetLinearVelocity(vel);
+    if (aim.x < PUNCH_DISTANCE) {
+        Megaman* m = level->getNearestMegaman(this->getPos());
+        m->damage(punching_dmg);
+    };
 }
 
 void Boss::executeAttack(float attack_time) {

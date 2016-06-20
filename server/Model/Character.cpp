@@ -88,10 +88,7 @@ void Character::tick(float time){
 
 /*damages by 1, independent of bullet, redefine for dif behaviour*/
 void Character::damage(Bullet* bullet) {
-	life.dec(bullet->getDamage());
-	LOG(INFO) <<"id: "<< this->getId() << " life left " << life.getCurrent();
-	if (life.getCurrent()==0)
-		this->kill();
+	this->damage(bullet->getDamage());
 }
 
 /*fires the weapon currently held*/
@@ -137,3 +134,11 @@ int Character::getSpriteId() {
 		return jumpingSpriteId;
 	return spriteId;
 }
+
+void Character::damage(int how_much) {
+	life.dec(how_much);
+	LOG(INFO) <<"id: "<< this->getId() << " life left " << life.getCurrent();
+	if (life.getCurrent()==0)
+		this->kill();
+}
+

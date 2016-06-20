@@ -32,7 +32,14 @@ public:
 	virtual ~Megaman();
 	void kill();
 	void tick(float time);
-	void damage(Bullet* bullet);
+	//void damage(Bullet* bullet);
+	void damage(int how_much) {
+		if(inmuneTime.getCurrent()==0){
+			Character::damage(how_much);
+			inmuneTime.maxOut();
+		}
+		informClientLifeChange();
+	}
 
 	void spawn();
 	void setSpawnPos(b2Vec2& newPos);

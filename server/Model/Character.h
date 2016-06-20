@@ -48,6 +48,7 @@ public:
 	virtual void kill();
 	virtual void tick(float time);//in seconds
 	virtual void damage(Bullet* bullet);
+	virtual void damage(int how_much);
 	void shoot();
 	int getDirection();//todo check and remove if unneccesary
 	bool isDead();
