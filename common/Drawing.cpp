@@ -28,7 +28,7 @@ bool Drawing::on_draw(const Cairo::RefPtr<Cairo::Context>& cr) {
 	try {
 		//Dibujo la imagen de fondo
 		cr->save();
-		Gdk::Cairo::set_source_pixbuf(cr,image);
+		try{Gdk::Cairo::set_source_pixbuf(cr,image);}catch(...){}
 		cr->paint();
 		cr->restore();
 

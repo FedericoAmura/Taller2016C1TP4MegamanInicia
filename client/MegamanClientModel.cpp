@@ -161,7 +161,7 @@ void MegamanClientModel::run() {
 			//Lo saco en un segundo
 			Glib::signal_timeout().connect(sigc::bind<int>(sigc::mem_fun(drawables,&Drawables::removeDrawable),BANNER),1000);
 			//Empiezo a ciclar los drawables que sea posible
-			cicleDrawablesConn = Glib::signal_timeout().connect(sigc::mem_fun(*this,&MegamanClientModel::cicleDrawables),300);
+			cicleDrawablesConn = Glib::signal_timeout().connect(sigc::mem_fun(*this,&MegamanClientModel::cicleDrawables),500);
 			}
 			break;
 		case BACK_TO_LEVEL_SELECTION:
