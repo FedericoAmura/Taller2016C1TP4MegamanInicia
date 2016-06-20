@@ -105,12 +105,12 @@ void MegamanClientModel::run() {
 			if (drawable == nullptr) continue;
 			int idDrawing = drawable->getSpriteId();
 			//Desplazo el drawable a uno de movimiento que empiece el ciclo
-			//Megaman
 			if (idDrawing>=MEGAMAN_IDLE_0 && idDrawing<=MEGAMAN_IDLE_2) drawable->setImage(MEGAMAN_RUN_0,sprites,drawable->getFlipped());
-			//Fireman
 			else if (idDrawing==FIREMAN_IDLE_0) drawable->setImage(FIREMAN_RUN_0,sprites,drawable->getFlipped());
-			//Ringman
 			else if (idDrawing==RINGMAN_IDLE) drawable->setImage(RINGMAN_RUN_0,sprites,drawable->getFlipped());
+			else if (idDrawing==MAGNETMAN_IDLE) drawable->setImage(MAGNETMAN_ATTACK,sprites,drawable->getFlipped());
+			else if (idDrawing==BOMBMAN_IDLE) drawable->setImage(BOMBMAN_JUMP_FRONT,sprites,drawable->getFlipped());
+			else if (idDrawing==SPARKMAN_IDLE) drawable->setImage(SPARKMAN_CAST_ATTACK_2,sprites,drawable->getFlipped());
 			drawable->setCoordinates(xDrawable,yDrawable);
 			drawable->setChanged(true);
 			}
@@ -232,6 +232,11 @@ void MegamanClientModel::connectServer(std::string ip, std::string port) {
 	serverProxy = new Socket(ip, port);
 	recibirServer = true;
 	this->start();
+	levelsStatus[MAGNETMAN] = false;
+	levelsStatus[SPARKMAN] = false;
+	levelsStatus[RINGMAN] = false;
+	levelsStatus[FIREMAN] = false;
+	levelsStatus[BOMBMAN] = false;
 }
 
 std::string MegamanClientModel::getClientNumber() {
@@ -308,6 +313,32 @@ bool MegamanClientModel::cicleDrawables() {
 				spriteID = BUMBY_0;
 				cicled = true;
 				break;
+			//Met
+			case MET_VULNERABLE:
+				spriteID = MET_HIDDEN;
+				cicled = true;
+				break;
+			case MET_HIDDEN:
+				spriteID = MET_VULNERABLE;
+				cicled = true;
+				break;
+			//Sniper
+			case SNIPER_ATTACK:
+				spriteID = SNIPER_VULNERABLE;
+				cicled = true;
+				break;
+			case SNIPER_VULNERABLE:
+				spriteID = SNIPER_ATTACK;
+				cicled = true;
+				break;
+			case SNIPER_JUMP:
+				spriteID = SNIPER_DEFEND;
+				cicled = true;
+				break;
+			case SNIPER_DEFEND:
+				spriteID = SNIPER_JUMP;
+				cicled = true;
+				break;
 			//Fireman
 			case FIREMAN_RUN_0:
 				spriteID = FIREMAN_RUN_1;
@@ -348,6 +379,45 @@ bool MegamanClientModel::cicleDrawables() {
 				break;
 			case RINGMAN_RUN_3:
 				spriteID = RINGMAN_IDLE;
+				cicled = true;
+				break;
+			//Ringman
+			case MAGNETMAN_ATTACK:
+				spriteID = MAGNETMAN_IDLE;
+				cicled = true;
+				break;
+			//Bombman
+			case BOMBMAN_JUMP_FRONT:
+				spriteID = BOMBMAN_IDLE;
+				cicled = true;
+				break;
+			case BOMBMAN_IDLE:
+				spriteID = BOMBMAN_JUGGLE;
+				cicled = true;
+				break;
+			case BOMBMAN_JUGGLE:
+				spriteID = BOMBMAN_IDLE;
+				cicled = true;
+				break;
+			//Sparkman
+			case SPARKMAN_CAST_ATTACK_2:
+				spriteID = SPARKMAN_IDLE;
+				cicled = true;
+				break;
+			case SPARKMAN_IDLE:
+				spriteID = SPARKMAN_PREPARE_0_ATTACK_1;
+				cicled = true;
+				break;
+			case SPARKMAN_PREPARE_0_ATTACK_1:
+				spriteID = SPARKMAN_CAST_ATTACK_1;
+				cicled = true;
+				break;
+			case SPARKMAN_CAST_ATTACK_1:
+				spriteID = SPARKMAN_PREPARE_1_ATTACK_1;
+				cicled = true;
+				break;
+			case SPARKMAN_PREPARE_1_ATTACK_1:
+				spriteID = SPARKMAN_IDLE;
 				cicled = true;
 				break;
 			default:
