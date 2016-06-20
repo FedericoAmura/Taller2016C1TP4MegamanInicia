@@ -76,8 +76,10 @@ void Enemy::tick(float time) {
 }
 
 b2Vec2 Enemy::setAim() {
+	b2Vec2 difference;
     Megaman* nearest = level->getNearestMegaman(this->getPos());
-    b2Vec2 difference = nearest->getPos();
+    if(nearest){
+    difference = nearest->getPos();
     difference -= this->getPos();
     if (difference.x <= 0){
         if (direction != LEFT){
@@ -89,6 +91,7 @@ b2Vec2 Enemy::setAim() {
             direction = RIGHT;
             spriteChanged = true;
         }
+    }
     }
     return difference;
 }
@@ -123,21 +126,5 @@ void Enemy::setState(std::string new_state) {
     state = new_state;
     timer_begin = clock();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

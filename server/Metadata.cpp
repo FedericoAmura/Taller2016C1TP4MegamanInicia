@@ -31,7 +31,7 @@ void Metadata::removeClient(int descriptor) {
 	std::vector<ClientData*>::iterator dataIt=clientsData.begin();
 	for(; dataIt!=clientsData.end() && !found; dataIt++){
 		if((*dataIt)->getDescriptor()==descriptor){
-			clientsData.erase(dataIt);
+			dataIt=clientsData.erase(dataIt);
 			found=true;
 		}
 	}
@@ -41,18 +41,17 @@ int Metadata::getNumberOfClients() {
 	return clientsData.size();
 }
 
-/*attempts to get the client by number, if it fails return nullptr*/
+/*attempts to get nth client , if it fails return nullptr*/
 ClientData* Metadata::getClient(int number) {
 	Lock l(clientsMutex);
-	bool found=false;
-	std::vector<ClientData*>::iterator dataIt=clientsData.begin();
-	for(; dataIt!=clientsData.end() && !found; dataIt++){
-		if((*dataIt)->getClientNumber()==number)
-			return (*dataIt);
+	if((uint)number>clientsData.size()){
+		return nullptr;
+	}else{
+		return clientsData[number-1];
 	}
-	return nullptr;
 }
 
+/***************************************************************/
 ClientData::ClientData(int desc, int number, Game* game)
 :descriptor(desc),
  clientNumber(number),

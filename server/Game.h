@@ -11,6 +11,7 @@
 #include <map>
 #include <vector>
 #include <string>
+#include <queue>
 
 #include "Event.h"
 #include "HandlerCoordinator.h"
@@ -37,11 +38,12 @@ class Game: public Thread, public Observer{
 
 	Mutex clientsMutex;
 	std::map<int,Socket*> clients;
-	int firstClient;
 	std::map<int,int> clientNum;
 	Metadata metadata;
+	std::queue<int> availableClientNumbers;
 
 public:
+	int firstClient;
 	explicit Game(Server* server);
 	virtual ~Game();
 	virtual void run();

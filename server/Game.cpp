@@ -18,6 +18,7 @@
 #define TIMEOUT 10000
 #define NUMBER_OF_LEVELS 5
 #define LVL_DIR "../levels/"
+#define MAX_CLIENTS 4
 
 /*creates game with server as communications*/
 Game::Game(Server* server)
@@ -25,13 +26,16 @@ Game::Game(Server* server)
  server(server),
  manager(this),
  level(nullptr),
- firstClient(-1),
- metadata(this){
+ metadata(this),
+ firstClient(-1){
 	manager.setHandler(1,new AcceptConnection(this));
 	manager.setHandler(2,new RecvMessage(this));
 	manager.setHandler(3,new SendMessage(this));
 	manager.setHandler(4,new DisconnectClient(this));
 	manager.setHandler(5,new FinishLevel(this));
+	for(int i =1; i<=MAX_CLIENTS; i++){
+		availableClientNumbers.push(i);
+	}
 }
 
 Game::~Game() {
@@ -82,26 +86,33 @@ bool Game::isntStopped(){
 void Game::addClient(int descriptor){
 	Socket* nuevoCliente= new Socket(descriptor,this);
 	Lock l(clientsMutex);
-	if(clients.size()>=4 || levelChosen()){
+	if (availableClientNumbers.empty() || levelChosen()) {
 		//rechazar
 		LOG(INFO)<<"Cliente rechazado";
 		delete nuevoCliente;
 	}else{
+		int clientNumber = availableClientNumbers.front();
+		availableClientNumbers.pop();
+
 		nuevoCliente->iniciarComunicaciones();
+
 		if(clients.size()==0){
 			firstClient=descriptor;
 		}
 		clients[descriptor]=nuevoCliente;
+
 		std::stringstream mensajeNumeroClient;
-		mensajeNumeroClient<<HELLO<<" "<<clients.size();
+		mensajeNumeroClient<<HELLO<<" "<<clientNumber ;
 		this->notify(new MessageSent(mensajeNumeroClient.str(),descriptor));
+
 		std::stringstream mensajeCantConectados;
-		mensajeCantConectados<<CLIENTS_CONNECTED<<" "<<clients.size();
+		mensajeCantConectados<<CLIENTS_CONNECTED<<" "<<clients.size() ;
 		this->notify(new MessageSent(mensajeCantConectados.str(),0));
-		clientNum[descriptor]=clients.size();
+
+		clientNum[descriptor]=clientNumber ;
 		metadata.addClient(descriptor,clientNum[descriptor]);
 		LOG(INFO)<<"Cliente conectado nro: "
-				<<clients.size()<<" descriptor: "<<descriptor;
+				<<clientNumber<<" descriptor: "<<descriptor;
 	}
 }
 
@@ -122,16 +133,34 @@ void Game::sendTo(std::string data, int destino){
 }
 
 void Game::removeClient(int descriptor) {
+	if(levelChosen())
+		level->removeClient(clientNum[descriptor]);
+
 	Lock l(clientsMutex);
 	std::map<int,Socket*>::iterator it=clients.find(descriptor);
 	if(it!=clients.end()){
 		delete it->second;
 		clients.erase(it);
-		DLOG(INFO)<<"cliente desconectado, id:"<<descriptor;
+		LOG(INFO)<<"cliente "<<clientNum[descriptor]<<" desconectado, id:"<<descriptor;
 	}
-	//todo remove from metadata, possibly through level
-	if(clients.empty())
+
+	metadata.removeClient(descriptor);
+	availableClientNumbers.push(clientNum[descriptor]);
+	clientNum.erase(descriptor);
+
+	if(clients.empty()){
 		stopLevel();
+	}else{
+		if(descriptor==firstClient){
+			firstClient=metadata.getClient(1)->getDescriptor();
+			std::stringstream mensajeNumeroClient;
+			mensajeNumeroClient<<HELLO<<" 1";
+			this->notify(new MessageSent(mensajeNumeroClient.str(),firstClient));
+		}
+		std::stringstream mensajeCantConectados;
+		mensajeCantConectados<<CLIENTS_CONNECTED<<" "<<clients.size() ;
+		this->notify(new MessageSent(mensajeCantConectados.str(),0));
+	}
 }
 /****************************************************/
 
@@ -266,9 +295,3 @@ std::map<uint, std::string> Game::getLevelFiles() {
 	}
 	return levelFiles;
 }
-
-
-
-
-
-

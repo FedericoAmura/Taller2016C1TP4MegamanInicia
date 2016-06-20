@@ -46,7 +46,7 @@ void RecvMessage::handle(Event* e){
 	case 1:/*key presed*/
 		uint keyState;
 		msj>>keyState;
-		if(keyState & KEY_ESC_ID)
+		if((keyState & KEY_ESC_ID)&& procedencia==game->firstClient)
 			game->notify(new LevelFinished(EXIT,0));
 		else
 			game->movePlayer(keyState,procedencia);

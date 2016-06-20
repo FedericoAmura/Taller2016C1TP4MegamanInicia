@@ -45,6 +45,7 @@ public:
 	virtual int getSpriteId();
 	void assignOwner(ClientData* clientData);
 	virtual void redrawForClients(Game* game,MyLevel* level,bool checkChanges);
+	void clientDisconnected();
 };
 
 #endif /* SERVER_MODEL_MEGAMAN_H_ */

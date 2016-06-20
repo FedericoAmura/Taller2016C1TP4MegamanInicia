@@ -104,7 +104,6 @@ void Megaman::changeKeyState(uint keyState){
 /*kills megaman. if he has lives remaining he's queued for respawn
  * else he gets removed*/
 void Megaman::kill() {
-	//LOG(INFO)<<"inmune time left: "<<inmuneTime.getCurrent();
 	if(inmuneTime.getCurrent()==0 && !dead && clientData){
 		inmuneTime.maxOut();
 		if(clientData->getLives().getCurrent()>=1){
@@ -128,6 +127,7 @@ void Megaman::spawn() {
 	if(clientData->getLives().getCurrent()>0 || !dead){
 		dead=false;
 		life.maxOut();
+		informClientLifeChange();
 		body->SetTransform(spawnPoint,0);
 	}
 }
@@ -236,4 +236,15 @@ void Megaman::addLife() {
 /*redraws as a character, then send life satatus*/
 void Megaman::redrawForClients(Game* game, MyLevel* level, bool checkChanges) {
 	Character::redrawForClients(game,level,checkChanges);
+}
+
+void Megaman::clientDisconnected() {
+	std::stringstream killMsg;
+	killMsg<<KILL<<" "<<getId();
+	clientData->getGame()->notify(new MessageSent(killMsg.str(),0));
+	while(clientData->getLives().getCurrent()>0){
+		clientData->getLives().dec(1);
+	}
+	dead=true;
+	level->remove(this);
 }

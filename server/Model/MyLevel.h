@@ -94,6 +94,7 @@ public:
 	std::string posToString(b2Vec2 pos);
 	void megamanAtDoor(BossDoor* door);
 	void addMegaman(Megaman* newMegaman);
+	void removeClient(int clientNumber);
 	void addCharacter(Character* newCharacter);
 	void addObject(LevelObject* newObject);
 	void win();

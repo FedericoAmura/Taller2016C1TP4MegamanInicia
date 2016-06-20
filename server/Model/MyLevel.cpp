@@ -212,6 +212,17 @@ void MyLevel::removeDead(){
 		//erase from characters tracker
 		if(characters.find(deadId)!=characters.end())
 			characters.erase(deadId);
+		//erase from megamans tracker
+		std::map<int,Megaman*>::iterator megIt=megamans.begin(),
+				deleteIt;
+		bool found=false;
+		for(; megIt!=megamans.end() && !found; megIt++){
+			if(megIt->second->getId()==deadId){
+				found=true;
+				deleteIt=megIt;
+			}
+		}
+		if(found) megamans.erase(deleteIt);
 		//delete the dead
 		delete dead;
 	}
@@ -434,7 +445,7 @@ void MyLevel::addMegaman(Megaman* newMegaman) {
 	if(megamans.size()<(uint)metadata->getNumberOfClients()){
 		ClientData* clientData=metadata->getClient(megamans.size()+1);
 		if(clientData){
-			megamans[megamans.size()+1]=newMegaman;
+			megamans[clientData->getClientNumber()]=newMegaman;
 			addCharacter(newMegaman);
 			newMegaman->assignOwner(clientData);
 		}
@@ -483,4 +494,11 @@ Megaman* MyLevel::getNearestMegaman(const b2Vec2& pos) {
 		}
 	}
 	return nearest;
+}
+
+void MyLevel::removeClient(int clientNumber) {
+	std::map<int,Megaman*>::iterator pos=megamans.find(clientNumber);
+	if(pos!=megamans.end()){
+		pos->second->clientDisconnected();
+	}
 }
