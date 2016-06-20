@@ -229,8 +229,11 @@ void Megaman::assignOwner(ClientData* clientData) {
 
 /*adds a life*/
 void Megaman::addLife() {
-	if(clientData && !dead)
+	if(clientData && !dead){
 		clientData->getLives().inc(1);
+		LOG(INFO)<<"megaman picked up life. lives left: "
+				<<clientData->getLives().getCurrent();
+	}
 }
 
 /*redraws as a character, then send life satatus*/

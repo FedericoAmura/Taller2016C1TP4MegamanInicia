@@ -31,7 +31,6 @@ void SendThread::run(){
 		}catch(std::exception& e){
 			socket->shutdown();
 		}
-		//LOG(INFO)<<"enviado msg: "<<mensaje;
 	}
 }
 

@@ -121,15 +121,15 @@ LifeItem::LifeItem(b2World* w,
 		Json::Value& json,
 		const b2Vec2& pos, int id,
 		MyLevel* lvl)
-:Item(w,json,pos,id,level){}
+:Item(w,json,pos,id,lvl){}
 
 LifeItem::~LifeItem() {}
 
 void LifeItem::collideWith(LevelObject* object) {
 	int objectType= object->getSpriteId()/1000;
 	if(!removed && objectType!=4 && objectType!=0){//not boundaries
-		//Megaman* megaman= (Megaman*) object;
-		//todo add life
+		Megaman* megaman= (Megaman*) object;
+		megaman->addLife();
 		Item::collideWith(object);
 	}
 }
