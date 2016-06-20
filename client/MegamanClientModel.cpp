@@ -104,8 +104,13 @@ void MegamanClientModel::run() {
 			Drawable* drawable = drawables.getDrawable(idDrawable);
 			if (drawable == nullptr) continue;
 			int idDrawing = drawable->getSpriteId();
-			if (idDrawing>=MEGAMAN_IDLE_0 && idDrawing<=MEGAMAN_IDLE_2)
-				drawable->setImage(MEGAMAN_RUN_0,sprites,drawable->getFlipped());
+			//Desplazo el drawable a uno de movimiento que empiece el ciclo
+			//Megaman
+			if (idDrawing>=MEGAMAN_IDLE_0 && idDrawing<=MEGAMAN_IDLE_2) drawable->setImage(MEGAMAN_RUN_0,sprites,drawable->getFlipped());
+			//Fireman
+			else if (idDrawing==FIREMAN_IDLE_0) drawable->setImage(FIREMAN_RUN_0,sprites,drawable->getFlipped());
+			//Ringman
+			else if (idDrawing==RINGMAN_IDLE) drawable->setImage(RINGMAN_RUN_0,sprites,drawable->getFlipped());
 			drawable->setCoordinates(xDrawable,yDrawable);
 			drawable->setChanged(true);
 			}
@@ -258,6 +263,7 @@ bool MegamanClientModel::cicleDrawables() {
 			bool flipped = drawable->getFlipped();
 			//Cambio el sprite por el siguiente
 			switch (spriteID) {
+			//Megaman
 			case MEGAMAN_IDLE_0:
 				spriteID = MEGAMAN_IDLE_1;
 				cicled = true;
@@ -286,6 +292,7 @@ bool MegamanClientModel::cicleDrawables() {
 				flipped = !flipped;
 				cicled = true;
 				break;
+			//Bumby
 			case BUMBY_0:
 				spriteID = BUMBY_1;
 				cicled = true;
@@ -294,12 +301,46 @@ bool MegamanClientModel::cicleDrawables() {
 				spriteID = BUMBY_0;
 				cicled = true;
 				break;
+			//Fireman
+			case FIREMAN_RUN_0:
+				spriteID = FIREMAN_RUN_1;
+				cicled = true;
+				break;
+			case FIREMAN_RUN_1:
+				spriteID = FIREMAN_RUN_2;
+				cicled = true;
+				break;
+			case FIREMAN_RUN_2:
+				spriteID = FIREMAN_RUN_3;
+				cicled = true;
+				break;
+			case FIREMAN_RUN_3:
+				spriteID = FIREMAN_IDLE_0;
+				cicled = true;
+				break;
 			case FIREMAN_IDLE_0:
 				spriteID = FIREMAN_IDLE_1;
 				cicled = true;
 				break;
 			case FIREMAN_IDLE_1:
 				spriteID = FIREMAN_IDLE_0;
+				cicled = true;
+				break;
+			//Ringman
+			case RINGMAN_RUN_0:
+				spriteID = RINGMAN_RUN_1;
+				cicled = true;
+				break;
+			case RINGMAN_RUN_1:
+				spriteID = RINGMAN_RUN_2;
+				cicled = true;
+				break;
+			case RINGMAN_RUN_2:
+				spriteID = RINGMAN_RUN_3;
+				cicled = true;
+				break;
+			case RINGMAN_RUN_3:
+				spriteID = RINGMAN_IDLE;
 				cicled = true;
 				break;
 			default:
