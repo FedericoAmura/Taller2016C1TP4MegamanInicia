@@ -45,13 +45,19 @@ void Weapon::shoot(const b2Vec2& pos, int direction){
 		if(direction==0){
 			speedVec.x=-1*speedVec.x;
 		}
-		BulletInfo* info= new BulletInfo(bulletId,pos,speedVec,groupBits);
+		BulletInfo* info = new BulletInfo(bulletId, pos, speedVec, groupBits);
 		level->newObject(info);
+		if (bulletId == MET_WEAPON){
+			//Modificacion de ultimo momento: Se considero preferible una modificacion
+			//rapida que una extensible.
+			speedVec.y = 1;
+			info = new BulletInfo(bulletId, pos, speedVec, groupBits);
+			level->newObject(info);
+			speedVec.y = -speedVec.y;
+			info = new BulletInfo(bulletId, pos, speedVec, groupBits);
+			level->newObject(info);
+		}
 		cooldown.maxOut();
-//		LOG(INFO)<<std::fixed<<std::setprecision(2)
-//				<<"firing bullet: "<<bulletId<<" at: "
-//				<<pos.x<<" "<<pos.y
-//				<<"	speed: "<<speedVec.x<<" "<<speedVec.y;
 	}
 }
 
