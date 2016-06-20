@@ -482,7 +482,7 @@
 	"2006": //Sniper Weapon
 	{
 		"damage":	1,
-		"cooldown":	1.5,
+		"cooldown":	0.5,
 		"bulletId":	2006,
 		"speed":
 		{
