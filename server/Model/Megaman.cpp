@@ -122,10 +122,11 @@ void Megaman::kill() {
  * sends megaman to his assigned spawning point*/
 void Megaman::spawn() {
 	if(clientData->getLives().getCurrent()>0 || !dead){
+		body->SetTransform(spawnPoint,0);
 		dead=false;
 		life.maxOut();
+		inmuneTime.maxOut();
 		informClientLifeChange();
-		body->SetTransform(spawnPoint,0);
 	}
 }
 
