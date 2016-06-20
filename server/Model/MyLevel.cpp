@@ -302,16 +302,11 @@ bool MyLevel::allMegamansDead() {
 /*respawns objects in respawn list*/
 void MyLevel::respawnAll() {
 	if(allMegamansDead()){
-		while(!toRespawn.empty()){
-			toRespawn.front()->spawn();
-			toRespawn.pop();
+		std::map<int,Megaman*>::iterator megIt=megamans.begin();
+		for(; megIt!=megamans.end(); megIt++){
+			(*megIt).second->spawn();
 		}
 	}
-}
-
-/*adds megaman to respawn list*/
-void MyLevel::respawn(Megaman* meg) {
-	toRespawn.push(meg);
 }
 
 /*informs all characters of the passage of a time step*/

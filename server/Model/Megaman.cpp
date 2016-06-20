@@ -108,7 +108,6 @@ void Megaman::kill() {
 		inmuneTime.maxOut();
 		if(clientData->getLives().getCurrent()>=1) {
 			clientData->getLives().dec(1);
-			level->respawn(this);
 		}
 		dead = true;
 		std::stringstream killMsg;

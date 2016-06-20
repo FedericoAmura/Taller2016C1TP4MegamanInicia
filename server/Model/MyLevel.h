@@ -54,7 +54,6 @@ class MyLevel: public Thread{
 
 	void redrawForClient(bool checkChanges=true);
 
-	std::queue<Megaman*> toRespawn;
 	void respawnAll();
 
 	std::map<int,Character*> characters;
@@ -87,7 +86,6 @@ public:
 	void changeKeyState(uint keyState, int client);
 
 	void remove(LevelObject* deadObject);
-	void respawn(Megaman* meg);
 	LevelObject* createObject(ObjectInfo* info);
 	void newObject(ObjectInfo* info);
 	bool posInWindow(const b2Vec2& pos);
