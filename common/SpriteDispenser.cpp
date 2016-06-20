@@ -111,6 +111,7 @@ SpriteDispenser::SpriteDispenser() {
 	paths[SPIKE] = TLE_PATH + "stone_spike.png";
 	paths[SKY_PLATFORM] = TLE_PATH + "sky_platform.png";
 	paths[BOSS_DOOR] = TLE_PATH + "boss_door.png";
+	paths[STONE_FLOOR] = TLE_PATH + "stone_floor.png";
 
 	//weapons
 	paths[BOMB] = WEP_PATH + "bombman_weapon.png";
@@ -249,6 +250,8 @@ SpriteDispenser::SpriteDispenser() {
 	heigths[STONE_LADDER] = tileSize*1.0;
 	heigths[SPIKE] = tileSize*1.0;
 	heigths[SKY_PLATFORM] = tileSize*1.0;
+	heigths[STONE_FLOOR] = tileSize*1.0;
+
 	//Mobs
 	heigths[BUMBY_0] = tileSize*1.0;
 	heigths[BUMBY_1] = tileSize*1.0;
@@ -368,6 +371,8 @@ SpriteDispenser::SpriteDispenser() {
 	widths[STONE_LADDER] = tileSize*1.0;
 	widths[SPIKE] = tileSize*1.0;
 	widths[SKY_PLATFORM] = tileSize*1.0;
+	widths[STONE_FLOOR] = tileSize*1.0;
+
 	//Mobs
 	widths[BUMBY_0] = tileSize*1.0;
 	widths[BUMBY_1] = tileSize*1.0;
