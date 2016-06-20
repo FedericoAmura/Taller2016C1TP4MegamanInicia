@@ -106,14 +106,11 @@ void Megaman::changeKeyState(uint keyState){
 void Megaman::kill() {
 	if(inmuneTime.getCurrent()==0 && !dead && clientData){
 		inmuneTime.maxOut();
-		if(clientData->getLives().getCurrent()>=1){
+		if(clientData->getLives().getCurrent()>=1) {
 			clientData->getLives().dec(1);
 			level->respawn(this);
-			dead=true;
-		}else{
-			dead=true;
 		}
-		body->SetTransform(spawnPoint,0);
+		dead = true;
 		std::stringstream killMsg;
 		killMsg<<KILL<<" "<<getId();
 		clientData->getGame()->notify(new MessageSent(killMsg.str(),0));
