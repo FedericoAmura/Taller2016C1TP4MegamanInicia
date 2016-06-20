@@ -26,7 +26,8 @@ Character::Character(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl
 		  direction(LEFT),
 		  spriteChanged(false),
 		  wasJumping(false),
-		  canJump(false){
+		  canJump(false),
+		  surfacesTouching(0){
 	body->SetType(b2_dynamicBody);
 	body->SetFixedRotation(true);
 	body->SetBullet(true);

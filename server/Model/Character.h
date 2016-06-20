@@ -32,7 +32,6 @@ protected:
 	bool dead;
 	int direction;
 	bool spriteChanged;
-
 	bool wasJumping;
 	int jumpingSpriteId;
 	virtual bool isJumping();
@@ -42,6 +41,7 @@ protected:
 	virtual void changeFixtureFilter(b2Fixture* f)=0;
 public:
 	bool canJump;
+	uint surfacesTouching;
 
 	Character(b2World* w,Json::Value& json,const b2Vec2& pos,MyLevel* lvl);
 	virtual ~Character();
