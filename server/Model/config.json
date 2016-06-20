@@ -91,7 +91,7 @@
 		]
 	},
 	
-	"1022":
+	"1022": //Met
 	{
 		"id":			1022,
 		"weaponId":		2005,
@@ -110,7 +110,7 @@
 		]
 	},
 	
-	"1010":
+	"1010": //Bumby
 	{
 		"id":			1010,
 		"weaponId":		2001,
@@ -130,7 +130,7 @@
 		]
 	},
 	
-	"1030":
+	"1030": //Sniper
 	{
 		"id":			1030,
 		"weaponId":		2006,
@@ -149,7 +149,7 @@
 		]
 	},
 	
-	"1040":
+	"1040": //Jumping Sniper
 	{
 		"id":			1040,
 		"weaponId":		2006,
@@ -178,7 +178,7 @@
 		]
 	},
 	
-	"1100":
+	"1100": //Bombman
 	{
 		"id":			1102,
 		"weaponId":		2101,
@@ -212,7 +212,7 @@
 		]
 	},
 	
-	"1200":
+	"1200": //Sparkman
 	{
 		"id":			1202,
 		"weaponId":		2009,
@@ -246,7 +246,7 @@
 		]
 	},
 
-	"1300":
+	"1300": //Magnetman
 	{
 		"id":			1305,
 		"weaponId":		2008,
@@ -280,7 +280,7 @@
 		]
 	},
 	
-	"1400":
+	"1400": //Ringman
 	{
 		"id":			1401,
 		"weaponId":		2007,
@@ -314,7 +314,7 @@
 		]
 	},
 	
-	"1500":
+	"1500": //Fireman
 	{
 		"id":			1502,
 		"weaponId":		2002,
@@ -379,7 +379,7 @@
 		]
 	},
 	
-	"2001":
+	"2001": //Bomb Bumby
 	{
 		"damage":	2,
 		"cooldown":	0.5,
@@ -399,7 +399,7 @@
 				}
 		]
 	},
-	"2101":
+	"2101": //Bomb Bombman
 	{
 		"damage":	5,
 		"cooldown":	1.0,
@@ -419,7 +419,7 @@
 				}
 		]
 	},
-	"2002":
+	"2002": //Fireman Flame
 	{
 		"damage":	1,
 		"cooldown":	1.0,
@@ -439,7 +439,7 @@
 				}
 		]
 	},
-	"2004":
+	"2004": //Megaman Beam
 	{
 		"damage":	1,
 		"cooldown":	0.25,
@@ -459,7 +459,7 @@
 				}
 		]
 	},
-	"2005":
+	"2005": //Met Weapon
 	{
 		"damage":	1,
 		"cooldown":	2.0,
@@ -479,10 +479,10 @@
 				}
 		]
 	},
-	"2006":
+	"2006": //Sniper Weapon
 	{
 		"damage":	1,
-		"cooldown":	2.0,
+		"cooldown":	1.5,
 		"bulletId":	2006,
 		"speed":
 		{
@@ -499,7 +499,7 @@
 				}
 		]
 	},
-	"2007":
+	"2007": //Ringman Ring
 	{
 		"damage":	2,
 		"cooldown":	3.0,
@@ -519,7 +519,7 @@
 				}
 		]
 	},
-	"2008":
+	"2008": //Magnetman Magnet
 	{
 		"damage":	1,
 		"cooldown":	2.0,
@@ -539,7 +539,7 @@
 				}
 		]
 	},
-	"2009":
+	"2009": //Sparkman Spark
 	{
 		"damage":	4,
 		"cooldown":	0.5,
@@ -559,7 +559,7 @@
 				}
 		]
 	},
-	"2010":
+	"2010": //Sparkman Genkidama
 	{
 		"damage":	4,
 		"cooldown":	3.0,
@@ -602,7 +602,7 @@
 			"chance":	0.05
 		}
 	],
-	"3001":
+	"3001": //Big Energy
 	{
 		"healAmount":	6,
 		"shapes":
@@ -616,7 +616,7 @@
 		]
 	},
 	
-	"3002":
+	"3002": //Small Energy
 	{
 		"healAmount":	2,
 		"shapes":
@@ -630,7 +630,7 @@
 		]
 	},
 	
-	"3003":
+	"3003": //Big Plasma
 	{
 		"chargeAmount":	6,
 		"shapes":
@@ -644,7 +644,7 @@
 		]
 	},
 	
-	"3004":
+	"3004": //Small Plasma
 	{
 		"chargeAmount":	2,
 		"shapes":
@@ -658,7 +658,7 @@
 		]
 	},
 	
-	"3005":
+	"3005": //Life
 	{
 		"shapes":
 		[
