@@ -89,6 +89,9 @@ void Game::addClient(int descriptor){
 	if (availableClientNumbers.empty() || levelChosen()) {
 		//rechazar
 		LOG(INFO)<<"Cliente rechazado";
+		std::stringstream mensajeChau;
+		mensajeChau<<SERVER_DISCONNECTED;
+		nuevoCliente->enviar(mensajeChau.str());
 		delete nuevoCliente;
 	}else{
 		int clientNumber = availableClientNumbers.front();
