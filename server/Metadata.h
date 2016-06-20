@@ -37,6 +37,7 @@ public:
 	ClientData(int desc, int number, Game* game);
 	virtual ~ClientData();
 	int getClientNumber();
+	void setClientNumber(int newNumber);
 	int getDescriptor();
 	Stat<int>& getLives();
 	Game* getGame();

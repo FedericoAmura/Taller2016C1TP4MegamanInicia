@@ -121,6 +121,11 @@ void LevelSelectorScreen::fillStatus() {
 	if (model.getLevelStatus(BOMBMAN)) bombManIcon.setImage("../sprites/level/bossImages/BombManDefeated.png",imgWidth,imgHeight,false);
 
 	//Muestro megamanes segun cantidad de jugadores
+	if (playersAvatars.size()!=(unsigned)model.getClientsConnected()) {
+		for (std::vector<Drawing*>::iterator it = playersAvatars.begin() ; it != playersAvatars.end(); ++it)
+			delete (*it);
+		playersAvatars.clear();
+	}
 	for (int i = playersAvatars.size(); i < model.getClientsConnected(); ++i) {
 		Drawing* player = new Drawing;
 		std::string ruta = "../sprites/megaman pc";
