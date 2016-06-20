@@ -113,6 +113,10 @@ void LevelSelectorScreen::fillStatus() {
 		dataLabel.set_label("Wait for leader player\nto select a level\n");
 	}
 
+	if (model.getLevelStatus(MAGNETMAN) && model.getLevelStatus(SPARKMAN) && model.getLevelStatus(RINGMAN)
+			&& model.getLevelStatus(FIREMAN) && model.getLevelStatus(BOMBMAN))
+		dataLabel.set_label("You defeated every enemy!!!\nCongratulations\n");
+
 	//Pongo en gris los niveles ganados
 	if (model.getLevelStatus(MAGNETMAN)) magnetManIcon.setImage("../sprites/level/bossImages/MagnetManDefeated.png",imgWidth,imgHeight,false);
 	if (model.getLevelStatus(SPARKMAN)) sparkManIcon.setImage("../sprites/level/bossImages/SparkManDefeated.png",imgWidth,imgHeight,false);
