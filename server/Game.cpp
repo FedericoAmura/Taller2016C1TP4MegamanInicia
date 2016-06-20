@@ -222,10 +222,7 @@ void Game::movePlayer(uint keyState, int source) {
 
 /*returns true if a level has alredy started*/
 bool Game::levelChosen() {
-	if(level==nullptr)
-		return false;
-	else
-		return true;
+	return !(level == nullptr);
 }
 
 void Game::resetClientLives() {
