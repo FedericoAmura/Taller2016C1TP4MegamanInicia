@@ -205,6 +205,10 @@ void MegamanClientModel::run() {
 			levelsStatus[idLevel] = levelStatus;
 			}
 			break;
+		case SERVER_DISCONNECTED:
+			disconnectServer();
+			windowChangeSignal.emit(CONNECTION_SCREEN_NAME);
+			break;
 		default:
 			{
 			std::string error = "No se entendio el mensaje: ";
