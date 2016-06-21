@@ -132,7 +132,7 @@ void Game::sendTo(std::string data, int destino){
 
 void Game::removeClient(int descriptor) {
 	if(levelChosen())
-		level->removeClient(clientNum[descriptor]);
+		level->removeClient(descriptor);
 
 	Lock l(clientsMutex);
 	std::map<int,Socket*>::iterator it=clients.find(descriptor);
@@ -215,7 +215,7 @@ void Game::stopLevel(){
 /*moves the corresponding player*/
 void Game::movePlayer(uint keyState, int source) {
 	if(levelChosen()){
-		getLevel()->changeKeyState(keyState,clientNum[source]);
+		getLevel()->changeKeyState(keyState,source);
 	}
 }
 

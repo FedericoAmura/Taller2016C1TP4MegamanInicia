@@ -18,6 +18,7 @@
 #include <map>
 #include <exception>	//catch
 #include <vector>
+#include <queue>
 #include <algorithm>    // std::find
 
 #include "../Event.h"
@@ -440,7 +441,7 @@ void MyLevel::addMegaman(Megaman* newMegaman) {
 	if(megamans.size()<(uint)metadata->getNumberOfClients()){
 		ClientData* clientData=metadata->getClient(megamans.size()+1);
 		if(clientData){
-			megamans[clientData->getClientNumber()]=newMegaman;
+			megamans[clientData->getDescriptor()]=newMegaman;
 			addCharacter(newMegaman);
 			newMegaman->assignOwner(clientData);
 		}
@@ -492,8 +493,8 @@ Megaman* MyLevel::getNearestMegaman(const b2Vec2& pos) {
 	return nearest;
 }
 
-void MyLevel::removeClient(int clientNumber) {
-	std::map<int,Megaman*>::iterator pos=megamans.find(clientNumber);
+void MyLevel::removeClient(int descriptor) {
+	std::map<int,Megaman*>::iterator pos=megamans.find(descriptor);
 	if(pos!=megamans.end()){
 		pos->second->clientDisconnected();
 	}
