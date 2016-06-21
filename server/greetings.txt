@@ -1,0 +1,23 @@
+
+
+___  ___                                       
+|  \/  |                                       
+| .  . | ___  __ _  __ _ _ __ ___   __ _ _ __  
+| |\/| |/ _ \/ _` |/ _` | '_ ` _ \ / _` | '_ \ 
+| |  | |  __/ (_| | (_| | | | | | | (_| | | | |
+\_|  |_/\___|\__, |\__,_|_| |_| |_|\__,_|_| |_|
+              __/ |                            
+             |___/                             
+
+
+Welcome to Megaman Begins server by:
+Nicolas Dominguez
+Marko Vrjilcak
+Federico Amura
+
+This app was built for academic purposes for the subject Taller De Programacion
+Of the Facultad de Ingenieria de Buenos Aires.
+
+Have Fun!
+
+Press 'q' to exit.
