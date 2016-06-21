@@ -97,6 +97,8 @@ void Workspace::replaceLevel(string file) {
 
 void Workspace::refresh() {
     string background_file = level->getBackgroundFile();
+    //La funcionalidad comentada fue desactivada para la entrega
+    //final ya que es defectuosa.
     /*
     if (background_file != "") {
         background.setImage(background_file,
