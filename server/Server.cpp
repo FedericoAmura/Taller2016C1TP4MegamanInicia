@@ -9,6 +9,7 @@
 #include <string>
 #include <queue>
 #include <glog/logging.h>
+#include <fstream>
 
 #include "Server.h"
 #include "AcceptConnections.h"
@@ -36,6 +37,7 @@ Server::~Server() {
 /*acepta clientes y maneja datos hasta ingresar q por entrada*/
 void Server::runServer() {
 	LOG(INFO)<<"server iniciado";
+	printAscciArt();
 	bool continuar=true;
 	do{
 		std::string entrada;
@@ -47,4 +49,27 @@ void Server::runServer() {
 	/*cierre*/
 	game.stop();
 	LOG(INFO)<<"server finalizado";
+}
+
+void Server::printAscciArt(){
+	std::ifstream reader ("../server/greetings.txt");
+	std::string art = getFileContents (reader);
+	std::cout << art << std::endl;
+	reader.close();
+}
+
+std::string Server::getFileContents (std::ifstream& file){
+	std::string lines = "";
+	if (file){
+		while (file.good ()){
+			std::string tempLine;
+			std::getline (file , tempLine);
+			tempLine += "\n";
+			lines += tempLine;
+		}
+		return lines;
+	}
+	else{
+		return "ERROR File does not exist.";
+	}
 }

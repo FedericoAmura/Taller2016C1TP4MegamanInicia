@@ -11,6 +11,8 @@
 #include "AcceptConnections.h"
 #include "Game.h"
 #include "ServerSocket.h"
+#include <string>
+#include <fstream>
 
 class Server {
 public:
@@ -22,6 +24,8 @@ private:
 	ServerSocket socket;
 	Game game;
 	AcceptConnections acceptor;
+	std::string getFileContents(std::ifstream& File);
+	void printAscciArt();
 };
 
 #endif /* SERVER_SERVER_H_ */
