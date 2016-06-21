@@ -84,7 +84,7 @@ void Boss::executeWalk(float walk_time, b2Vec2& aim) {
     if (float (aim.x) * hSpeed < 0) hSpeed = -hSpeed;
     vel.x = hSpeed;
     body->SetLinearVelocity(vel);
-    if (aim.x < PUNCH_DISTANCE) {
+    if (fabs(aim.x) < PUNCH_DISTANCE) {
         Megaman* m = level->getNearestMegaman(this->getPos());
         m->damage(punching_dmg);
     };

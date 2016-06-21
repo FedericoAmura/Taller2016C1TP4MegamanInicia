@@ -3,6 +3,7 @@
 #include <gdkmm/general.h> // set_source_pixbuf()
 #include <syslog.h>
 #include <exception>
+#include <iostream>
 
 Drawing::Drawing() :
 	width(0),
@@ -12,6 +13,7 @@ Drawing::Drawing() :
 
 void Drawing::setImage(const std::string &path, const int width, const int height, bool flip) {
 	image = Gdk::Pixbuf::create_from_file(path,width,height,0);
+	ruta = path;
 	if (!image) return;
 	if (flip) image = image->flip(true);
 	this->width = width;
@@ -24,6 +26,11 @@ Drawing::~Drawing() {
 
 bool Drawing::on_draw(const Cairo::RefPtr<Cairo::Context>& cr) {
 	if (!image) return false;
+
+	Gtk::Allocation allocation = get_allocation();
+	const int allocationWidth = allocation.get_width();
+	const int allocationHeight = allocation.get_height();
+	if (allocationWidth==0 || allocationHeight==0) return false;
 
 	try {
 		//Dibujo la imagen de fondo

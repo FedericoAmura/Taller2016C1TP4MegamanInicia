@@ -11,6 +11,7 @@
 class Drawing : public Gtk::DrawingArea {
 private:
 	Glib::RefPtr<Gdk::Pixbuf> image;
+	std::string ruta;
 	int width;
 	int height;
 	int percent;
