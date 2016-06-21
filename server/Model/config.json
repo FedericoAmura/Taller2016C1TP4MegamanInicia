@@ -134,7 +134,7 @@
 	{
 		"id":			1030,
 		"weaponId":		2006,
-		"JSpeed" :		15.0,
+		"JSpeed" :		0.0,
 		"life":			2.0,
 		"jumps":		false,
 		"shapes":

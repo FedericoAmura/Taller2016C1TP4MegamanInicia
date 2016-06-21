@@ -70,6 +70,6 @@ std::string Server::getFileContents (std::ifstream& file){
 		return lines;
 	}
 	else{
-		return "ERROR File does not exist.";
+		return "ERROR greetings file does not exist.";
 	}
 }
