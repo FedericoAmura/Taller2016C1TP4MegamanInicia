@@ -242,3 +242,7 @@ void Megaman::clientDisconnected() {
 	dead=true;
 	level->remove(this);
 }
+
+ClientData* Megaman::getOwner() {
+	return clientData;
+}

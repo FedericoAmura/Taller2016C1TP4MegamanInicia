@@ -51,6 +51,7 @@ public:
 	virtual void registerIn(MyLevel* level);
 	virtual int getSpriteId();
 	void assignOwner(ClientData* clientData);
+	ClientData* getOwner();
 	virtual void redrawForClients(Game* game,MyLevel* level,bool checkChanges);
 	void clientDisconnected();
 };
