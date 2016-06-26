@@ -45,178 +45,183 @@ Drawables& MegamanClientModel::getDrawables() {
 }
 
 void MegamanClientModel::run() {
-	while (recibirServer) {
-		std::string message = serverProxy->recibirHasta('\n');
-		if (message.length() == 0) continue;
-		DLOG(INFO)<<"Mensaje recibido: "<< message;	//DEBUG
-		std::stringstream ss(message);
-		int commandString; ss >> commandString;
+	try{
+		while (recibirServer) {
+			std::string message = serverProxy->recibirHasta('\n');
+			if (message.length() == 0) continue;
+			DLOG(INFO)<<"Mensaje recibido: "<< message;	//DEBUG
+			std::stringstream ss(message);
+			int commandString; ss >> commandString;
 
-		switch (commandString) {
-		case HELLO:
-			{
-			ss >> clientNumber;
-			gameStatusChangeSignal.emit();
-			}
-			break;
-		case CLIENTS_CONNECTED:
-			{
-			ss >> clientsConnected;
-			gameStatusChangeSignal.emit();
-			}
-			break;
-		case DRAW:
-			{
-			int idDrawable; ss >> idDrawable;
-			int idDrawing; ss >> idDrawing;
-			int flipped; ss >> flipped;
-			double xDrawable; ss >> xDrawable;
-			double yDrawable; ss >> yDrawable;
-			Drawable* drawable = drawables.getDrawable(idDrawable);
-			if (drawable == nullptr) {
-				if (idDrawing<9000 || idDrawing>=10000) drawable = new Drawable();
-				else {
-					drawable = new Drawable(100*clientsDrawed);
-					clientsDrawed++;
+			switch (commandString) {
+			case HELLO:
+				{
+				ss >> clientNumber;
+				gameStatusChangeSignal.emit();
 				}
+				break;
+			case CLIENTS_CONNECTED:
+				{
+				ss >> clientsConnected;
+				gameStatusChangeSignal.emit();
+				}
+				break;
+			case DRAW:
+				{
+				int idDrawable; ss >> idDrawable;
+				int idDrawing; ss >> idDrawing;
+				int flipped; ss >> flipped;
+				double xDrawable; ss >> xDrawable;
+				double yDrawable; ss >> yDrawable;
+				Drawable* drawable = drawables.getDrawable(idDrawable);
+				if (drawable == nullptr) {
+					if (idDrawing<9000 || idDrawing>=10000) drawable = new Drawable();
+					else {
+						drawable = new Drawable(100*clientsDrawed);
+						clientsDrawed++;
+					}
+				}
+				drawable->setImage(idDrawing, sprites,flipped);
+				drawable->setCoordinates(xDrawable,yDrawable);
+				drawables.setDrawable(idDrawable,drawable);
+				}
+				break;
+			case REDRAW:
+				{
+				int idDrawable; ss >> idDrawable;
+				int idDrawing; ss >> idDrawing;
+				int flipped; ss >> flipped;
+				Drawable* drawable = drawables.getDrawable(idDrawable);
+				if (drawable == nullptr) continue;
+				drawable->setImage(idDrawing,sprites,flipped);
+				drawable->setChanged(true);
+				}
+				break;
+			case MOVE:
+				{
+				int idDrawable; ss >> idDrawable;
+				double xDrawable; ss >> xDrawable;
+				double yDrawable; ss >> yDrawable;
+				Drawable* drawable = drawables.getDrawable(idDrawable);
+				if (drawable == nullptr) continue;
+				int idDrawing = drawable->getSpriteId();
+				//Desplazo el drawable a uno de movimiento que empiece el ciclo
+				if (idDrawing>=MEGAMAN_IDLE_0 && idDrawing<=MEGAMAN_IDLE_2) drawable->setImage(MEGAMAN_RUN_0,sprites,drawable->getFlipped());
+				else if (idDrawing==FIREMAN_IDLE_0) drawable->setImage(FIREMAN_RUN_0,sprites,drawable->getFlipped());
+				else if (idDrawing==RINGMAN_IDLE) drawable->setImage(RINGMAN_RUN_0,sprites,drawable->getFlipped());
+				else if (idDrawing==MAGNETMAN_IDLE) drawable->setImage(MAGNETMAN_ATTACK,sprites,drawable->getFlipped());
+				else if (idDrawing==BOMBMAN_IDLE) drawable->setImage(BOMBMAN_JUMP_FRONT,sprites,drawable->getFlipped());
+				else if (idDrawing==SPARKMAN_IDLE) drawable->setImage(SPARKMAN_CAST_ATTACK_2,sprites,drawable->getFlipped());
+				drawable->setCoordinates(xDrawable,yDrawable);
+				drawable->setChanged(true);
+				}
+				break;
+			case KILL:
+				{
+				int idDrawable; ss >> idDrawable;
+				drawables.removeDrawable(idDrawable);
+				}
+				break;
+			case SOUND:
+				{
+				std::string idSound; ss >> idSound;
+				std::cout << "Tendria que reproducir el sonido " << idSound << std::endl;
+				}
+				break;
+			case START_LEVEL_SCREEN:
+				{
+				clientsDrawed = 0;
+				int idLevel; ss >> idLevel;
+				Json::Value level_json;
+				std::string filename = LVL_DIR;
+				if (idLevel==MAGNETMAN) filename.append("magnetman.json");
+				else if (idLevel==SPARKMAN) filename.append("sparkman.json");
+				else if (idLevel==RINGMAN) filename.append("ringman.json");
+				else if (idLevel==FIREMAN) filename.append("fireman.json");
+				else if (idLevel==BOMBMAN) filename.append("bombman.json");
+				std::ifstream configFile(filename);
+				configFile >> level_json;
+				std::string background = level_json["background"].asString();
+				//Seteo fondo
+				Drawable* drawable = drawables.getDrawable(BACKGROUND);
+				if (drawable == nullptr) drawable = new Drawable();
+				else drawable->setChanged(true);
+				drawable->setImage(CITY,sprites,false);	//Generico, despues lo cambiamos por el posta
+				int tileSize = (double)Gdk::screen_height()/(double)TILES_VERTICAL;
+				drawable->getImage().setImage(level_json["background"].asString(),tileSize*TILES_HORIZONTAL,tileSize*TILES_VERTICAL,false);
+				drawable->setCoordinates(0,0);
+				drawables.setDrawable(BACKGROUND,drawable);
+				//Muestro el "GO"
+				drawable = drawables.getDrawable(BANNER);
+				if (drawable == nullptr) drawable = new Drawable();
+				else drawable->setChanged(true);
+				drawable->setImage(GO,sprites,false);
+				drawable->setCoordinates(10.5,5);
+				drawables.setDrawable(BANNER,drawable);
+				windowChangeSignal.emit(LEVEL_SCREEN_NAME);
+				//Lo saco en un segundo
+				Glib::signal_timeout().connect(sigc::bind<int>(sigc::mem_fun(drawables,&Drawables::removeDrawable),BANNER),1000);
+				//Empiezo a ciclar los drawables que sea posible
+				cicleDrawablesConn = Glib::signal_timeout().connect(sigc::mem_fun(*this,&MegamanClientModel::cicleDrawables),500);
+				}
+				break;
+			case BACK_TO_LEVEL_SELECTION:
+				{
+				gameStatusChangeSignal.emit();
+				//Muestro el "LEVEL OVER"
+				Drawable* drawable = drawables.getDrawable(BANNER);
+				if (drawable == nullptr) drawable = new Drawable();
+				else drawable->setChanged(true);
+				drawable->setImage(LEVEL_OVER,sprites,false);
+				drawable->setCoordinates(7.5,5);
+				drawables.setDrawable(BANNER,drawable);
+				//Dejo de ciclar los drawables
+				cicleDrawablesConn.disconnect();
+				//Lo saco en un segundo
+				Glib::signal_timeout().connect(sigc::bind<int>(sigc::mem_fun(drawables,&Drawables::removeDrawable),BANNER),1000);
+				//Hago el cambio de pantalla en un segundo
+				Glib::signal_timeout().connect(sigc::mem_fun(*this,&MegamanClientModel::backToLevelSelectionSignal),1000);
+				}
+				break;
+			case LIFE_STATUS:
+				{
+				int player; ss >> player;
+				int health; ss >> health;
+				int id = HEALTH_BAR;
+				if (!player) id++;
+				Drawable* drawable = drawables.getDrawable(id);
+				if (drawable == nullptr) drawable = new Drawable();
+				else drawable->setChanged(true);
+				drawable->setImage(HEALTH_BAR,sprites,false);
+				if (player) drawable->setCoordinates(1,2);
+				else drawable->setCoordinates(TILES_HORIZONTAL-1.5,2);
+				drawable->setPercent(health);
+				drawables.setDrawable(id,drawable);
+				}
+				break;
+			case LEVEL_STATUS:
+				{
+				int idLevel; ss >> idLevel;
+				bool levelStatus; ss >> levelStatus;
+				levelsStatus[idLevel] = levelStatus;
+				}
+				break;
+			case SERVER_DISCONNECTED:
+				disconnectServer();
+				windowChangeSignal.emit(CONNECTION_SCREEN_NAME);
+				break;
+			default:
+				{
+				std::string error = "No se entendio el mensaje: ";
+				std::cout << error << message << std::endl;
+				serverProxy->enviar(error + message);
+				}
+				break;
 			}
-			drawable->setImage(idDrawing, sprites,flipped);
-			drawable->setCoordinates(xDrawable,yDrawable);
-			drawables.setDrawable(idDrawable,drawable);
-			}
-			break;
-		case REDRAW:
-			{
-			int idDrawable; ss >> idDrawable;
-			int idDrawing; ss >> idDrawing;
-			int flipped; ss >> flipped;
-			Drawable* drawable = drawables.getDrawable(idDrawable);
-			if (drawable == nullptr) continue;
-			drawable->setImage(idDrawing,sprites,flipped);
-			drawable->setChanged(true);
-			}
-			break;
-		case MOVE:
-			{
-			int idDrawable; ss >> idDrawable;
-			double xDrawable; ss >> xDrawable;
-			double yDrawable; ss >> yDrawable;
-			Drawable* drawable = drawables.getDrawable(idDrawable);
-			if (drawable == nullptr) continue;
-			int idDrawing = drawable->getSpriteId();
-			//Desplazo el drawable a uno de movimiento que empiece el ciclo
-			if (idDrawing>=MEGAMAN_IDLE_0 && idDrawing<=MEGAMAN_IDLE_2) drawable->setImage(MEGAMAN_RUN_0,sprites,drawable->getFlipped());
-			else if (idDrawing==FIREMAN_IDLE_0) drawable->setImage(FIREMAN_RUN_0,sprites,drawable->getFlipped());
-			else if (idDrawing==RINGMAN_IDLE) drawable->setImage(RINGMAN_RUN_0,sprites,drawable->getFlipped());
-			else if (idDrawing==MAGNETMAN_IDLE) drawable->setImage(MAGNETMAN_ATTACK,sprites,drawable->getFlipped());
-			else if (idDrawing==BOMBMAN_IDLE) drawable->setImage(BOMBMAN_JUMP_FRONT,sprites,drawable->getFlipped());
-			else if (idDrawing==SPARKMAN_IDLE) drawable->setImage(SPARKMAN_CAST_ATTACK_2,sprites,drawable->getFlipped());
-			drawable->setCoordinates(xDrawable,yDrawable);
-			drawable->setChanged(true);
-			}
-			break;
-		case KILL:
-			{
-			int idDrawable; ss >> idDrawable;
-			drawables.removeDrawable(idDrawable);
-			}
-			break;
-		case SOUND:
-			{
-			std::string idSound; ss >> idSound;
-			std::cout << "Tendria que reproducir el sonido " << idSound << std::endl;
-			}
-			break;
-		case START_LEVEL_SCREEN:
-			{
-			clientsDrawed = 0;
-			int idLevel; ss >> idLevel;
-			Json::Value level_json;
-			std::string filename = LVL_DIR;
-			if (idLevel==MAGNETMAN) filename.append("magnetman.json");
-			else if (idLevel==SPARKMAN) filename.append("sparkman.json");
-			else if (idLevel==RINGMAN) filename.append("ringman.json");
-			else if (idLevel==FIREMAN) filename.append("fireman.json");
-			else if (idLevel==BOMBMAN) filename.append("bombman.json");
-			std::ifstream configFile(filename);
-			configFile >> level_json;
-			std::string background = level_json["background"].asString();
-			//Seteo fondo
-			Drawable* drawable = drawables.getDrawable(BACKGROUND);
-			if (drawable == nullptr) drawable = new Drawable();
-			else drawable->setChanged(true);
-			drawable->setImage(CITY,sprites,false);	//Generico, despues lo cambiamos por el posta
-			int tileSize = (double)Gdk::screen_height()/(double)TILES_VERTICAL;
-			drawable->getImage().setImage(level_json["background"].asString(),tileSize*TILES_HORIZONTAL,tileSize*TILES_VERTICAL,false);
-			drawable->setCoordinates(0,0);
-			drawables.setDrawable(BACKGROUND,drawable);
-			//Muestro el "GO"
-			drawable = drawables.getDrawable(BANNER);
-			if (drawable == nullptr) drawable = new Drawable();
-			else drawable->setChanged(true);
-			drawable->setImage(GO,sprites,false);
-			drawable->setCoordinates(10.5,5);
-			drawables.setDrawable(BANNER,drawable);
-			windowChangeSignal.emit(LEVEL_SCREEN_NAME);
-			//Lo saco en un segundo
-			Glib::signal_timeout().connect(sigc::bind<int>(sigc::mem_fun(drawables,&Drawables::removeDrawable),BANNER),1000);
-			//Empiezo a ciclar los drawables que sea posible
-			cicleDrawablesConn = Glib::signal_timeout().connect(sigc::mem_fun(*this,&MegamanClientModel::cicleDrawables),500);
-			}
-			break;
-		case BACK_TO_LEVEL_SELECTION:
-			{
-			gameStatusChangeSignal.emit();
-			//Muestro el "LEVEL OVER"
-			Drawable* drawable = drawables.getDrawable(BANNER);
-			if (drawable == nullptr) drawable = new Drawable();
-			else drawable->setChanged(true);
-			drawable->setImage(LEVEL_OVER,sprites,false);
-			drawable->setCoordinates(7.5,5);
-			drawables.setDrawable(BANNER,drawable);
-			//Dejo de ciclar los drawables
-			cicleDrawablesConn.disconnect();
-			//Lo saco en un segundo
-			Glib::signal_timeout().connect(sigc::bind<int>(sigc::mem_fun(drawables,&Drawables::removeDrawable),BANNER),1000);
-			//Hago el cambio de pantalla en un segundo
-			Glib::signal_timeout().connect(sigc::mem_fun(*this,&MegamanClientModel::backToLevelSelectionSignal),1000);
-			}
-			break;
-		case LIFE_STATUS:
-			{
-			int player; ss >> player;
-			int health; ss >> health;
-			int id = HEALTH_BAR;
-			if (!player) id++;
-			Drawable* drawable = drawables.getDrawable(id);
-			if (drawable == nullptr) drawable = new Drawable();
-			else drawable->setChanged(true);
-			drawable->setImage(HEALTH_BAR,sprites,false);
-			if (player) drawable->setCoordinates(1,2);
-			else drawable->setCoordinates(TILES_HORIZONTAL-1.5,2);
-			drawable->setPercent(health);
-			drawables.setDrawable(id,drawable);
-			}
-			break;
-		case LEVEL_STATUS:
-			{
-			int idLevel; ss >> idLevel;
-			bool levelStatus; ss >> levelStatus;
-			levelsStatus[idLevel] = levelStatus;
-			}
-			break;
-		case SERVER_DISCONNECTED:
-			disconnectServer();
-			windowChangeSignal.emit(CONNECTION_SCREEN_NAME);
-			break;
-		default:
-			{
-			std::string error = "No se entendio el mensaje: ";
-			std::cout << error << message << std::endl;
-			serverProxy->enviar(error + message);
-			}
-			break;
 		}
+	} catch (...) {
+		windowChangeSignal.emit(CONNECTION_SCREEN_NAME);
+		DLOG(INFO)<<"Exception";	//DEBUG
 	}
 }
 

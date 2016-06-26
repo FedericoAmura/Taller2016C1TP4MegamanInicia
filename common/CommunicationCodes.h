@@ -81,7 +81,7 @@
 
 //MOVE codes
 /* Se manda el id del dibujable, seguido de su posicion
- * formato: "MOVE id idSprite posX posY"
+ * formato: "MOVE id posX posY"
  * ej: "3 5 14 22\n" mover el dibujable 5 a pos X:14-Y:22
  * */
 

@@ -63,7 +63,7 @@ ClientWindow::~ClientWindow() {
 
 void ClientWindow::showScreen(std::string childrenName) {
 	Glib::RefPtr<Gdk::Cursor> cursor;
-	screenContainer.set_visible_child(childrenName);
+	screenContainer.set_visible_child(childrenName,Gtk::StackTransitionType::STACK_TRANSITION_TYPE_NONE);
 	if (childrenName == LEVEL_SCREEN_NAME) {
 		levelScreen.startLevel();
 		cursor = Gdk::Cursor::create(Gdk::BLANK_CURSOR);
